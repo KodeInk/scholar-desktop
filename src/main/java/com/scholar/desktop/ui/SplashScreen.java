@@ -5,6 +5,10 @@
  */
 package main.java.com.scholar.desktop.ui;
 
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 /**
  *
  * @author mover
@@ -27,17 +31,62 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        canvas3 = new java.awt.Canvas();
+        rightSidePanel = new javax.swing.JPanel();
+        leftSidePanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        setModalExclusionType(null);
+        setName("splashScreen"); // NOI18N
+        setUndecorated(true);
+        setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
+
+        rightSidePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout rightSidePanelLayout = new javax.swing.GroupLayout(rightSidePanel);
+        rightSidePanel.setLayout(rightSidePanelLayout);
+        rightSidePanelLayout.setHorizontalGroup(
+            rightSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        rightSidePanelLayout.setVerticalGroup(
+            rightSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        leftSidePanel.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        leftSidePanel.setName("sideScreen"); // NOI18N
+
+        javax.swing.GroupLayout leftSidePanelLayout = new javax.swing.GroupLayout(leftSidePanel);
+        leftSidePanel.setLayout(leftSidePanelLayout);
+        leftSidePanelLayout.setHorizontalGroup(
+            leftSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+        leftSidePanelLayout.setVerticalGroup(
+            leftSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 155, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(leftSidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rightSidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(leftSidePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rightSidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -73,11 +122,27 @@ public class SplashScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SplashScreen().setVisible(true);
+                SplashScreen screen = new SplashScreen();
+                screen.setVisible(true);
+                screen.getLeftSidePanel().setBackground(Color.red);
+
+               // ImageIcon icon = new ImageIcon(image);
+
             }
         });
     }
 
+    public JPanel getLeftSidePanel() {
+        return leftSidePanel;
+    }
+
+    public JPanel getRightSidePanel() {
+        return rightSidePanel;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Canvas canvas3;
+    private javax.swing.JPanel leftSidePanel;
+    private javax.swing.JPanel rightSidePanel;
     // End of variables declaration//GEN-END:variables
 }
