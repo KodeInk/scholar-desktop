@@ -36,6 +36,8 @@ public class DashboardScreen extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jSplitPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.W_RESIZE_CURSOR));
+
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
