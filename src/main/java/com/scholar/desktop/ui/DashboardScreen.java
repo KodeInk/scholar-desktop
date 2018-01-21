@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
@@ -318,6 +319,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setText("Manage Users");
+        jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel35MouseClicked(evt);
+            }
+        });
 
         jLabel36.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
@@ -490,6 +496,11 @@ public class DashboardScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+        // TODO add your handling code here:
+        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.USERS);
+    }//GEN-LAST:event_jLabel35MouseClicked
 
     /**
      * @param args the command line arguments

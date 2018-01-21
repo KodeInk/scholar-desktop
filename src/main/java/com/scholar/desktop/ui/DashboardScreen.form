@@ -776,6 +776,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Users"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel35MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel36">
                           <Properties>

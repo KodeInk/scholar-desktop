@@ -9,6 +9,7 @@ import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
+import main.java.com.scholar.desktop.ui.users.ManageUsers;
 
 /**
  *
@@ -32,10 +33,12 @@ public class DesktopSwitcher {
         switch (view.toString()) {
             case "OVERVIEW":
                 break;
+            case "USERS":
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers());
+                break;
             default:
-                dashboardScreen.setVisible(true);
-                dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
-                dashboardScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                // ManageUsers manageUsers = new ManageUsers();
+
                 break;
         }
 

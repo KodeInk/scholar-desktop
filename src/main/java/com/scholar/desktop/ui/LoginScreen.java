@@ -172,6 +172,10 @@ public class LoginScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DashboardScreen dashboardScreen = new DashboardScreen();
+                dashboardScreen.setVisible(true);
+                dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
+                dashboardScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
                 DesktopSwitcher.getInstance().showDashboard(dashboardScreen, DashboardViews.OTHERS);
             }
 
