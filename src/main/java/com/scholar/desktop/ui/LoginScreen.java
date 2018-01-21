@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
@@ -170,21 +171,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                DashboardScreen dashboardScreen = new DashboardScreen();
-//                dashboardScreen.setVisible(true);
-
                 DashboardScreen dashboardScreen = new DashboardScreen();
-                showDashboard(dashboardScreen);
+                DesktopSwitcher.getInstance().showDashboard(dashboardScreen, DashboardViews.OTHERS);
             }
 
-            public void showDashboard(DashboardScreen dashboardScreen) {
-                //  dashboardScreen.setLocation(400, 100);
-                dashboardScreen.setVisible(true);
-
-                dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
-
-                dashboardScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            }
         });
     }
 
