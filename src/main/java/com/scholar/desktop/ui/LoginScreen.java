@@ -174,7 +174,11 @@ public class LoginScreen extends javax.swing.JFrame {
 //                dashboardScreen.setVisible(true);
 
                 DashboardScreen dashboardScreen = new DashboardScreen();
-              //  dashboardScreen.setLocation(400, 100);
+                showDashboard(dashboardScreen);
+            }
+
+            public void showDashboard(DashboardScreen dashboardScreen) {
+                //  dashboardScreen.setLocation(400, 100);
                 dashboardScreen.setVisible(true);
 
                 dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
