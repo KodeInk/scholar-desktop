@@ -5,10 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui;
 
-import main.java.com.scholar.desktop.Application;
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,8 +17,44 @@ public class SplashScreen extends javax.swing.JFrame {
     /**
      * Creates new form SplashScreen
      */
+    JFrame frame = null;
     public SplashScreen() {
         initComponents();
+    }
+
+    public void InitLoginScreen() {
+        setVisible(false);
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+//                DashboardScreen dashboardScreen = new DashboardScreen();
+//                dashboardScreen.setVisible(true);
+
+                LoginScreen loginScreen = new LoginScreen();
+                loginScreen.setLocation(400, 100);
+                loginScreen.setVisible(true);
+
+                loginScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
+
+            }
+        });
     }
 
     /**
@@ -113,7 +147,8 @@ public class SplashScreen extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+       // System.exit(0);
+       
     }//GEN-LAST:event_jLabel1MouseClicked
 
 

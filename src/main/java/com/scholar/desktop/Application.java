@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop;
 
+import java.awt.Toolkit;
 import main.java.com.scholar.desktop.ui.SplashScreen;
 
 /**
@@ -17,6 +18,17 @@ public class Application {
         screen = new SplashScreen();
         screen.setVisible(true);
         screen.setLocation(250, 250);
+        screen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
+
+        try {
+            Thread.sleep(5000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        screen.InitLoginScreen();
+
     }
 
     public static void main(String[] args) {
