@@ -121,8 +121,9 @@ public class DashboardScreen extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jSplitPane1.setBackground(new java.awt.Color(255, 204, 204));
-        jSplitPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSplitPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jSplitPane1.setDividerLocation(200);
+        jSplitPane1.setDividerSize(2);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -130,11 +131,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 905, Short.MAX_VALUE)
+            .add(0, 910, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 498, Short.MAX_VALUE)
+            .add(0, 500, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
