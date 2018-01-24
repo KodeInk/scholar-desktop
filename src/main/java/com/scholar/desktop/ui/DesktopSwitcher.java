@@ -9,6 +9,7 @@ import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
+import main.java.com.scholar.desktop.ui.roles.ManageRoles;
 import main.java.com.scholar.desktop.ui.users.ManageUsers;
 
 /**
@@ -36,6 +37,11 @@ public class DesktopSwitcher {
             case "USERS":
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers());
                 break;
+
+            case "ROLES":
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRoles());
+                break;
+
             default:
                 // ManageUsers manageUsers = new ManageUsers();
 

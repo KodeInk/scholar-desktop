@@ -329,6 +329,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText("Manage Roles");
+        jLabel36.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel36MouseClicked(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -502,6 +507,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.USERS);
     }//GEN-LAST:event_jLabel35MouseClicked
+
+    private void jLabel36MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel36MouseClicked
+        // TODO add your handling code here:
+        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.ROLES);
+    }//GEN-LAST:event_jLabel36MouseClicked
 
     /**
      * @param args the command line arguments
