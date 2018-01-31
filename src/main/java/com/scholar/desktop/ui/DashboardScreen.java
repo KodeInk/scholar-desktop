@@ -251,6 +251,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Manage Grading");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 204, 102));
@@ -542,6 +547,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.SUBJECTS);
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        // TODO add your handling code here:
+        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.GRADING);
+    }//GEN-LAST:event_jLabel14MouseClicked
 
     /**
      * @param args the command line arguments

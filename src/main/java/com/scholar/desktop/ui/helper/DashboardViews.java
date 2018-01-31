@@ -10,7 +10,7 @@ package main.java.com.scholar.desktop.ui.helper;
  * @author mover
  */
 public enum DashboardViews {
-    OVERVIEW, USERS, ROLES, CLASSES, CURRICULUM, SUBJECTS, OTHERS;
+    OVERVIEW, USERS, ROLES, CLASSES, CURRICULUM, SUBJECTS, GRADING, OTHERS;
 
     public static final DashboardViews fromString(String text) {
         DashboardViews returnValue = OTHERS;
