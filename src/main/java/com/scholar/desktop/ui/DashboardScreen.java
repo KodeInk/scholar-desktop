@@ -286,6 +286,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Manage Departments");
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -572,6 +577,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
          DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.TERMS);
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        // TODO add your handling code here:
+         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.DEPARTMENTS);
+    }//GEN-LAST:event_jLabel19MouseClicked
 
     /**
      * @param args the command line arguments
