@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.ui;
 import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissions;
 import main.java.com.scholar.desktop.ui.departments.ManageDepartments;
 import main.java.com.scholar.desktop.ui.setup.classes.ManageClasses;
 import main.java.com.scholar.desktop.ui.setup.curriculum.ManageCurriculum;
@@ -79,6 +80,13 @@ public class DesktopSwitcher {
             case "STAFF":
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageStaff());
                 break;
+            case "ADMISSION":
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageAdmissions());
+                break;
+
+//            case "REGISTRATION":
+//                dashboardScreen.getjSplitPane1().setRightComponent(new ManageStaff());
+//                break;
 
 
 
