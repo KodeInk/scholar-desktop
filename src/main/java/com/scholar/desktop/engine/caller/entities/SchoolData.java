@@ -5,10 +5,67 @@
  */
 package main.java.com.scholar.desktop.engine.caller.entities;
 
+import java.util.Objects;
+
 /**
  *
- * @author mover
+ * @author mover 2/9/2018
  */
 public class SchoolData {
+
+    private String authentication;
+    private String schoolname;
+
+    public SchoolData() {
+    }
+
+    public String getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(String authentication) {
+        this.authentication = authentication;
+    }
+
+    public String getSchoolname() {
+        return schoolname;
+    }
+
+    public void setSchoolname(String schoolname) {
+        this.schoolname = schoolname;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.authentication);
+        hash = 71 * hash + Objects.hashCode(this.schoolname);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SchoolData other = (SchoolData) obj;
+        if (!Objects.equals(this.authentication, other.authentication)) {
+            return false;
+        }
+        return Objects.equals(this.schoolname, other.schoolname);
+    }
+
+    @Override
+    public String toString() {
+        return "SchoolData{" + "authentication=" + authentication + ", schoolname=" + schoolname + '}';
+    }
+
+
 
 }
