@@ -18,18 +18,20 @@ public class EngineCaller {
 
     private static final Logger LOG = Logger.getLogger(EngineCaller.class.getName());
 
-    private final String engine_url = System.getenv("ENGINE_URL");
-    private final String engine_port = System.getenv("ENGINE_PORT");
+    private static final String ENGINE_URL = System.getenv("ENGINE_URL");
+    private static final String ENGINE_PORT = System.getenv("ENGINE_PORT");
+    private static final String PROTOCOL = System.getenv("ENGINE_PROTOCOL");
+    private static final String URL = PROTOCOL + "://" + ENGINE_URL + ((ENGINE_PORT != null) ? ":" + ENGINE_PORT : "");
 
     public EngineCaller() {
     }
 
-    public String getEngine_url() {
-        return engine_url;
+    public String getENGINE_URL() {
+        return ENGINE_URL;
     }
 
-    public String getEngine_port() {
-        return engine_port;
+    public String getENGINE_PORT() {
+        return ENGINE_PORT;
     }
 
     private static Map getHeaderParameter(SchoolData schoolData) {
