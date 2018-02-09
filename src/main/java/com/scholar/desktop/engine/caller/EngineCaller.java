@@ -8,7 +8,7 @@ package main.java.com.scholar.desktop.engine.caller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-import sun.net.www.http.HttpClient;
+import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
 
 /**
  *
@@ -32,11 +32,11 @@ public class EngineCaller {
         return engine_port;
     }
 
-    private static Map getHeaderParameter() {
+    private static Map getHeaderParameter(SchoolData schoolData) {
         Map httpHeaders = new HashMap();
-//        httpHeaders.put("Authorization", tenantData.getAuthorization().startsWith("Basic") ? tenantData.getAuthorization() : "Basic " + tenantData.getAuthorization());
-//        httpHeaders.put("X-Mifos-Platform-TenantId", tenantData.getTenantId());
-//        httpHeaders.put("Content-Type", "application/json");
+        httpHeaders.put("Authorization", schoolData.getAuthentication());
+        httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
+        httpHeaders.put("Content-Type", "application/json");
         return httpHeaders;
     }
 
