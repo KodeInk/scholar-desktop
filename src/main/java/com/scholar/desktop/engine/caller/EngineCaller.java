@@ -55,7 +55,7 @@ public class EngineCaller {
             .hostnameVerifier(getHostnameVerifier())
             .build()
             .register(JacksonJsonProvider.class);
-
+    //ObjectMapperResolver
     public EngineCaller() {
 
     }
