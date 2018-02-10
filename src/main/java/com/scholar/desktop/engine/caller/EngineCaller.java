@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.engine.caller;
 
+import com.fasterxml.jackson.core.format.DataFormatDetector;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -31,6 +32,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
 import main.java.com.scholar.desktop.helper.Utilities;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 
 
@@ -51,7 +53,8 @@ public class EngineCaller {
             .newBuilder()
             .sslContext(getSSLContext())
             .hostnameVerifier(getHostnameVerifier())
-            .build();
+            .build()
+            .register(JacksonJsonProvider.class);
 
     public EngineCaller() {
 
