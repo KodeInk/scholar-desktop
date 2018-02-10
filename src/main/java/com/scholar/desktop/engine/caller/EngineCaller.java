@@ -114,6 +114,11 @@ public class EngineCaller {
         return httpHeaders;
     }
 
+    private static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
+        T returnValue = null;
+        return returnValue;
+    }
+
     public static <T> T post(String path, Map body, SchoolData schoolData, String logId) {
         return post(path, null, body, schoolData, null, logId);
     }
@@ -126,7 +131,7 @@ public class EngineCaller {
         return post(path, queryParameter, body, schoolData, null, logId);
     }
 
-    public static <T> T post(String path, Map queryParameter, Map body, Tenantdata tenantData, Class<T> responseType, String logId) {
+    public static <T> T post(String path, Map queryParameter, Map body, SchoolData tenantData, Class<T> responseType, String logId) {
         Map headerParameter = getHeaderParameter(tenantData);
         LOG.log(Level.INFO,
                 "{0} :: send request:\n"
@@ -223,16 +228,14 @@ public class EngineCaller {
     }
 
     private static WebTarget getTargetWithQueryParams(String path, Map<String, String> queryParams, String logId) {
-        return addQueryParamsToTarget(getTarget(path), queryParams, logId);
+        // return addQueryParamsToTarget(getTarget(path), queryParams, logId);
+        return null;
     }
 
     private static Invocation.Builder getBuilder(WebTarget target, String logId) {
         LOG.log(Level.INFO, "{0} :: uri: {1}", new Object[]{logId, target.getUri()});
-        return target.request(MediaType.APPLICATION_JSON_TYPE);
-    }
-
-    private static WebTarget getTargetWithQueryParams(String path, Map<String, String> queryParams, String logId) {
-        return addQueryParamsToTarget(getTarget(path), queryParams, logId);
+        // return target.request(MediaType.APPLICATION_JSON_TYPE);
+        return null;
     }
 
     private static WebTarget getTarget(String path) {
