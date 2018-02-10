@@ -114,9 +114,14 @@ public class EngineCaller {
         return httpHeaders;
     }
 
-    private static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
-        T returnValue = null;
-        return returnValue;
+    private static Client client = ClientBuilder.newClient();
+
+    public static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
+        return client.target(path)
+                .path("paramas")
+                .request(MediaType.APPLICATION_JSON)
+                .get(responseType);
+
     }
 
     public static <T> T post(String path, Map body, SchoolData schoolData, String logId) {
