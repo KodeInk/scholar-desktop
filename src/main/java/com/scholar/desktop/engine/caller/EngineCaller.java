@@ -25,6 +25,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.AbstractMultivaluedMap;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
@@ -56,8 +57,12 @@ public class EngineCaller {
             .build()
             .register(JacksonJsonProvider.class);
     //ObjectMapperResolver
-    public EngineCaller() {
+    private static Client client = null;
+    private static WebTarget target = null;
 
+    public EngineCaller() {
+        client = ClientBuilder.newClient();
+        target = client.target(URI);
     }
 
     public String getENGINE_URL() {
@@ -109,30 +114,55 @@ public class EngineCaller {
         return certs;
     }
 
-    private static Map getHeaderParameter(SchoolData schoolData) {
-        Map httpHeaders = new HashMap();
+//    private static Map getHeaderParameter(SchoolData schoolData) {
+//        Map httpHeaders = new HashMap();
+//        httpHeaders.put("Authorization", schoolData.getAuthentication());
+//        httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
+//        httpHeaders.put("Content-Type", "application/json");
+//        return httpHeaders;
+//    }
+
+    private static MultivaluedMap getHeaderParameter(SchoolData schoolData) {
+        MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
         httpHeaders.put("Authorization", schoolData.getAuthentication());
         httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
         httpHeaders.put("Content-Type", "application/json");
         return httpHeaders;
     }
 
-    private static Client client = ClientBuilder.newClient();
-
     public static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
-        return client.target(path)
-                .path("paramas")
+
+        return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
                 .get(responseType);
 
     }
 
+
     public static <T> T post(String path, Map body, SchoolData schoolData, String logId) {
-        return post(path, null, body, schoolData, null, logId);
+
+        target.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
+                .post(Entity.entity(body, MediaType.APPLICATION_JSON));
+
+        return null;
+
     }
 
     public static <T> T post(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
-        return post(path, null, body, schoolData, responseType, logId);
+
+        Map headerParameter = getHeaderParameter(schoolData);
+
+        return target.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
+                .post(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
+
+
     }
 
     public static <T> T post(String path, Map queryParameter, Map body, SchoolData schoolData, String logId) {
