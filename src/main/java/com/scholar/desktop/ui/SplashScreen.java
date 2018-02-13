@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 
 /**
  *
@@ -19,10 +20,16 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     JFrame frame = null;
     public SplashScreen() {
+        //  EngineCaller engineCaller = new EngineCaller();
+
         initComponents();
     }
 
+    /**
+     *
+     */
     public void InitLoginScreen() {
+
         setVisible(false);
 
         try {

@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop;
 
 import java.awt.Toolkit;
+import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.ui.SplashScreen;
 
 /**
@@ -32,8 +33,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-
-        Application application = new Application();
+        EngineCaller caller = new EngineCaller();
+        //  Application application = new Application();
         //todo: start splash screen ::
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
