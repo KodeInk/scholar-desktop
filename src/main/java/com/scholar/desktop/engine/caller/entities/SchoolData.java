@@ -19,18 +19,34 @@ public class SchoolData {
     public SchoolData() {
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthentication() {
         return authentication;
     }
 
+    /**
+     *
+     * @param authentication
+     */
     public void setAuthentication(String authentication) {
         this.authentication = authentication;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSchoolname() {
         return schoolname;
     }
 
+    /**
+     *
+     * @param schoolname
+     */
     public void setSchoolname(String schoolname) {
         this.schoolname = schoolname;
     }
@@ -63,7 +79,10 @@ public class SchoolData {
 
     @Override
     public String toString() {
-        return "SchoolData{" + "authentication=" + authentication + ", schoolname=" + schoolname + '}';
+        return "SchoolData{"
+                + "authentication=" + authentication
+                + ", schoolname=" + schoolname
+                + '}';
     }
 
 

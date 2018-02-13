@@ -33,8 +33,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        EngineCaller caller = new EngineCaller();
-        //  Application application = new Application();
+        Application application = new Application();
         //todo: start splash screen ::
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
