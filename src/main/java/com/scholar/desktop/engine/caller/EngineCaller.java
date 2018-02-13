@@ -114,13 +114,6 @@ public class EngineCaller {
         return certs;
     }
 
-//    private static Map getHeaderParameter(SchoolData schoolData) {
-//        Map httpHeaders = new HashMap();
-//        httpHeaders.put("Authorization", schoolData.getAuthentication());
-//        httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
-//        httpHeaders.put("Content-Type", "application/json");
-//        return httpHeaders;
-//    }
 
     private static MultivaluedMap getHeaderParameter(SchoolData schoolData) {
         MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
@@ -130,6 +123,15 @@ public class EngineCaller {
         return httpHeaders;
     }
 
+    /**
+     *
+     * @param <T>
+     * @param path
+     * @param queryParameter
+     * @param schoolData
+     * @param responseType
+     * @return
+     */
     public static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
 
         return target.path(path)
@@ -139,7 +141,15 @@ public class EngineCaller {
 
     }
 
-
+    /**
+     *
+     * @param <T>
+     * @param path
+     * @param body
+     * @param schoolData
+     * @param logId
+     * @return
+     */
     public static <T> T post(String path, Map body, SchoolData schoolData, String logId) {
 
         target.path(path)
@@ -152,9 +162,17 @@ public class EngineCaller {
 
     }
 
+    /**
+     *
+     * @param <T>
+     * @param path
+     * @param body
+     * @param schoolData
+     * @param responseType
+     * @param logId
+     * @return
+     */
     public static <T> T post(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
-
-        Map headerParameter = getHeaderParameter(schoolData);
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -165,119 +183,65 @@ public class EngineCaller {
 
     }
 
-    public static <T> T post(String path, Map queryParameter, Map body, SchoolData schoolData, String logId) {
-        return post(path, queryParameter, body, schoolData, null, logId);
-    }
+    /**
+     *
+     * @param <T>
+     * @param path
+     * @param body
+     * @param schoolData
+     * @param logId
+     * @return
+     */
+    public static <T> T put(String path, Map body, SchoolData schoolData, String logId) {
 
-    public static <T> T post(String path, Map queryParameter, Map body, SchoolData tenantData, Class<T> responseType, String logId) {
-        Map headerParameter = getHeaderParameter(tenantData);
-        LOG.log(Level.INFO,
-                "{0} :: send request:\n"
-                + "\tmethod         : {1}\n"
-                + "\tpath           : {2}\n"
-                + "\theader         : {3}\n"
-                + "\tquery parameter: {4}\n"
-                + "\tbody           : {5}\n"
-                + "\tresponse type  : {6}",
-                new Object[]{logId, "POST", path, Utilities.getParameterForLogging(headerParameter), Utilities.getParameterForLogging(queryParameter), Utilities.getParameterForLogging(body), responseType});
+        target.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
+                .put(Entity.entity(body, MediaType.APPLICATION_JSON));
 
-        Invocation.Builder builder = getBuilderWithHeadersAndQueryParams(path, headerParameter, queryParameter, logId);
-        Response response;
-        try {
-            response = builder.accept(MediaType.APPLICATION_JSON).post(Entity.json(body));
-        } catch (NotAuthorizedException e) {
-            //    throw new UnauthorizedException();
-        } catch (Exception e) {
-            //  LOG.log(Level.WARNING, "{0} :: cannot get response of POST request\n{1}", new Object[]{logId, Utilities.getStackTrace(e)});
-            throw e;
-        }
-
-        //   LOG.log(Level.INFO, "{0} :: response: {1}", new Object[]{logId, response});
-
-        T returnValue = null;
-        /* switch (response.getStatus()) {
-            case 200:
-                try {
-                    if (responseType != null) {
-                        returnValue = response.readEntity(responseType);
-                    } else {
-                        returnValue = null;
-                    }
-                } catch (Exception e) {
-                    LOG.log(Level.SEVERE, "{0} :: error while converting entity\n{1}", new Object[]{logId, Utilities.getStackTrace(e)});
-                    returnValue = null;
-                }
-                break;
-            case 204:
-                returnValue = null;
-            case 503:
-                returnValue = null;
-            case 403:
-                Utilities.throwAndReturnSanizedErrorMessages(response);
-            case 400:
-                Utilities.throwAndReturnSanizedErrorMessages(response);
-
-            default:
-                String result = response.readEntity(String.class);
-                throw new WebApplicationException(result, response.getStatus());
-        }
-         */
-
-//        if (responseType != null && responseType.isArray()) {
-//            LOG.log(Level.INFO, "{0} :: returnValue: {1}", new Object[]{logId, Arrays.toString((Object[]) returnValue)});
-//        } else {
-//            LOG.log(Level.INFO, "{0} :: returnValue: {1}", new Object[]{logId, returnValue});
-//        }
-
-        return returnValue;
-    }
-
-    private static Invocation.Builder getBuilderWithQueryParams(String path, Map<String, String> queryParams, String logId) {
-        WebTarget target = getTargetWithQueryParams(path, queryParams, logId);
-        Invocation.Builder builder = getBuilder(target, logId);
-        return builder.accept(MediaType.APPLICATION_JSON_TYPE);
-    }
-
-    private static Invocation.Builder getBuilderWithHeadersAndQueryParams(String path, MultivaluedMap<String, Object> headers, Map<String, String> queryParams, String logId) {
-        Invocation.Builder builder = getBuilderWithQueryParams(path, queryParams, logId);
-        return getBuilderWithHeaders(builder, headers, logId);
-    }
-
-    private static Invocation.Builder getBuilderWithHeadersAndQueryParams(String path, Map<String, Object> headerParameter, Map queryParameter, String logId) {
-        MultivaluedHashMap<String, Object> multivaluedHeaderParameter = new MultivaluedHashMap<>();
-
-        if (headerParameter != null && !headerParameter.isEmpty()) {
-            headerParameter.keySet().stream().forEach((key) -> {
-                multivaluedHeaderParameter.add(key, headerParameter.get(key));
-            });
-        }
-
-        return getBuilderWithHeadersAndQueryParams(path, multivaluedHeaderParameter, queryParameter, logId);
-    }
-
-    private static Invocation.Builder getBuilderWithHeaders(Invocation.Builder builder, MultivaluedMap<String, Object> headers, String logId) {
-        if (headers == null) {
-            headers = new MultivaluedHashMap<>();
-        }
-        if (!headers.containsKey("Content-Type")) {
-            headers.add("Content-Type", "application/json");
-        }
-        return builder.headers(headers);
-    }
-
-    private static WebTarget getTargetWithQueryParams(String path, Map<String, String> queryParams, String logId) {
-        // return addQueryParamsToTarget(getTarget(path), queryParams, logId);
         return null;
+
     }
 
-    private static Invocation.Builder getBuilder(WebTarget target, String logId) {
-        LOG.log(Level.INFO, "{0} :: uri: {1}", new Object[]{logId, target.getUri()});
-        // return target.request(MediaType.APPLICATION_JSON_TYPE);
-        return null;
+    /**
+     *
+     * @param <T>
+     * @param path
+     * @param body
+     * @param schoolData
+     * @param responseType
+     * @param logId
+     * @return
+     */
+    public static <T> T put(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
+
+        return target.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
+                .put(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
+
     }
 
-    private static WebTarget getTarget(String path) {
-        return HTTPS_CLIENT.target(UriBuilder.fromUri(URI).build()).path(path);
+    /**
+     *
+     * @param path
+     * @param body
+     * @param schoolData
+     * @param logId
+     */
+    public static void delete(String path, Map body, SchoolData schoolData, String logId) {
+
+        target.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .headers(getHeaderParameter(schoolData))
+                .delete();
     }
+
+
+
+
 
 }
