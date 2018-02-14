@@ -6,8 +6,10 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
@@ -26,8 +28,12 @@ public class UserAPI {
         return EngineCaller.post("user/v1/", (Map) user, schoolData, UserResponse.class, logId);
     }
 
-    public AuthenticationResponse login(_login login, SchoolData schoolData, String logId) {
+    public static AuthenticationResponse login(_login login, SchoolData schoolData, String logId) {
         return EngineCaller.post("user/v1/login", (Map) login, schoolData, AuthenticationResponse.class, logId);
+    }
+
+    public static Response deactivateAccount(Integer user_id, SchoolData schoolData, String logId) {
+        return EngineCaller.post("user/v1/deactivate/" + user_id, null, schoolData, Response.class, logId);
     }
 
 }
