@@ -140,8 +140,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="USERNAMEFIELD">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="USERNAME" noResource="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="PASSWORDFIELD">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="PASSWORD" noResource="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="LOGINBUTTON">
               <Properties>
