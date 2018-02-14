@@ -36,4 +36,9 @@ public class UserAPI {
         return EngineCaller.post("user/v1/deactivate/" + user_id, null, schoolData, Response.class, logId);
     }
 
+    public static Response activateAccount(Integer user_id, SchoolData schoolData, String logId) {
+        return EngineCaller.post("user/v1/activate/" + user_id, null, schoolData, Response.class, logId);
+    }
+
+
 }
