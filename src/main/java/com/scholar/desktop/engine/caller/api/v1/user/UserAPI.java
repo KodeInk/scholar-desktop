@@ -6,8 +6,11 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
 
 /**
@@ -17,10 +20,8 @@ import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
 public class UserAPI {
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
 
-    public static GetUserResponse create(_Us, SchoolData schoolData, String logId) throws IOException {
-        
-        EngineCaller.post("user/v1/", body, schoolData, responseType, logId)
-        return EngineCaller.get("users/" + userId, tenantdata, GetUserResponse.class, logId);
+    public static UserResponse create(_User user, SchoolData schoolData, String logId) throws IOException {
+        return EngineCaller.post("user/v1/", (Map) user, schoolData, UserResponse.class, logId);
     }
 
 }
