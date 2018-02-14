@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller.api.v1.accounts.response;
+package main.java.com.scholar.desktop.engine.caller.api.v1.user.response;
 
 import java.util.Arrays;
 import java.util.Objects;
