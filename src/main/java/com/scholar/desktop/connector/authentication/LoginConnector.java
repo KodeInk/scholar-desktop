@@ -5,11 +5,13 @@
  */
 package main.java.com.scholar.desktop.connector.authentication;
 
-import static com.sun.glass.ui.Cursor.setVisible;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
+import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.DashboardScreen;
 import main.java.com.scholar.desktop.ui.DesktopSwitcher;
 import main.java.com.scholar.desktop.ui.LoginScreen;
@@ -64,6 +66,15 @@ public class LoginConnector {
             return false;
         }
         //todo: send to  Fill in the pojo
+        _login login = new _login();
+        login.setPassword(password);
+        login.setUsername(Username);
+
+        //todo: how are we getting this using configuration files :: 
+        SchoolData data = new SchoolData();
+        data.setSchoolname("movers");
+
+
         //todo: send to API
         //todo: based on response choose destinaction to go
 
