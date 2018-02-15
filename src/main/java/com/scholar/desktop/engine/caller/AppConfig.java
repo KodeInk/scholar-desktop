@@ -42,9 +42,7 @@ public class AppConfig {
             DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(configuration_file);
 
-        } catch (SAXException ex) {
-            Logger.getLogger(AppConfig.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (SAXException | IOException ex) {
             Logger.getLogger(AppConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
