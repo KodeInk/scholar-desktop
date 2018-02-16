@@ -47,6 +47,8 @@ public class EngineCaller {
 
     private static EngineCaller instance;
 
+    private SchoolData schoolData;
+
     /**
      *
      * @param schoolData
@@ -60,6 +62,8 @@ public class EngineCaller {
 
         client = ClientBuilder.newClient();
         target = client.target(URI);
+
+        this.schoolData = schoolData;
 
         System.out.println("URI  ::::::::::::::; " + URI);
     }
