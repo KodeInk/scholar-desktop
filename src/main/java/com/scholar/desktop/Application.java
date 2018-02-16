@@ -6,6 +6,10 @@
 package main.java.com.scholar.desktop;
 
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import main.java.com.scholar.desktop.engine.caller.AppConfig;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.ui.SplashScreen;
 
@@ -33,13 +37,16 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Application application = new Application();
-        //todo: start splash screen ::
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+        try {
+            String path = "C:\\scholar\\configuration\\scholar.xml";
+            AppConfig.getInstance().readFile(path);
+            //Application application = new Application();
+            //todo: start splash screen ::
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+             */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
@@ -56,9 +63,9 @@ public class Application {
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
 //            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-        //</editor-fold>
+//</editor-fold>
 
-        /* Create and display the form */
+            /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
 //                SplashScreen screen = new SplashScreen();
@@ -78,6 +85,9 @@ public class Application {
 //                // ImageIcon icon = new ImageIcon(image);
 //            }
 //        });
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 }
