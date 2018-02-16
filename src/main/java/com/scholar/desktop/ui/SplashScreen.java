@@ -6,8 +6,15 @@
 package main.java.com.scholar.desktop.ui;
 
 import java.awt.Toolkit;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.xml.parsers.ParserConfigurationException;
+import main.java.com.scholar.desktop.config.AppConfig;
+import main.java.com.scholar.desktop.config.entities.SchoolConfig;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -30,8 +37,8 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public void InitLoginScreen() {
 
+        List<SchoolConfig> appConfig = AppConfig.loadConfiguration();
         setVisible(false);
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -48,13 +55,12 @@ public class SplashScreen extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                DashboardScreen dashboardScreen = new DashboardScreen();
 //                dashboardScreen.setVisible(true);
 
-                LoginScreen loginScreen = new LoginScreen();
+                LoginScreen loginScreen = new LoginScreen(appConfig);
                 loginScreen.setLocation(400, 100);
                 loginScreen.setVisible(true);
 

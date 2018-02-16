@@ -29,10 +29,10 @@ import org.xml.sax.SAXException;
  */
 public class AppConfig {
 
-    private File configuration_file;
+    private static File configuration_file;
 
     //todo: this is bound to change in the future to be read from the embedded database
-    private String path = "C:\\scholar\\configuration\\scholar.xml";
+    private static String path = "C:\\scholar\\configuration\\scholar.xml";
 
     private static AppConfig instance;
 
@@ -46,7 +46,7 @@ public class AppConfig {
         return instance;
     }
 
-    public Document readFile(String filePath) throws ParserConfigurationException {
+    private static Document readFile(String filePath) throws ParserConfigurationException {
         try {
             configuration_file = new File(filePath);
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -64,7 +64,7 @@ public class AppConfig {
         return null;
     }
 
-    public List<SchoolConfig> convertSchoolData(Document doc) {
+    private static List<SchoolConfig> convertSchoolData(Document doc) {
 
         List<SchoolConfig> configs = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class AppConfig {
 
                 SchoolConfig config = new SchoolConfig();
                 String name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
-                config.setName(eElement.getAttribute("NAME"));
+                config.setName(name);
                 System.out.println("\nCurrent ATTRIBUTE :" + name);
                 Engine engine = new Engine();
                 NodeList engine_list = eElement.getElementsByTagName("ENGINE");
@@ -107,5 +107,18 @@ public class AppConfig {
         }
 
         return configs;
+    }
+
+    public static List<SchoolConfig> loadConfiguration() {
+        try {
+            //todo: read path from database : 
+            Document document = readFile(path);
+            List<SchoolConfig> configs = convertSchoolData(document);
+
+            return configs;
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(AppConfig.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }
