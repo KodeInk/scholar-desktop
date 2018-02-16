@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import main.java.com.scholar.desktop.config.entities.Engine;
+import main.java.com.scholar.desktop.config.entities.SchoolConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -69,7 +71,13 @@ public class AppConfig {
                 System.out.println("\nCurrent Element :" + node.getNodeName());
                 Element eElement = (Element) node;
 
-                SchoolData data = new SchoolData();
+                SchoolConfig config = new SchoolConfig();
+                config.setName(eElement.getAttribute("NAME"));
+
+                Engine engine = new Engine();
+                engine.setUrl(eElement.getAttribute("URL"));
+                engine.setPort(eElement.getAttribute("PORT"));
+                engine.setProtocol(eElement.getAttribute("PROTOCOL"));
             }
         }
     }
