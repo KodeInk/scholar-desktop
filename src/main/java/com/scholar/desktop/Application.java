@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import main.java.com.scholar.desktop.config.AppConfig;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.ui.SplashScreen;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -44,7 +45,9 @@ public class Application {
             ITS CREATED AT TENANT SETUP ;
              */
             String path = "C:\\scholar\\configuration\\scholar.xml";
-            AppConfig.getInstance().readFile(path);
+            Document document = AppConfig.getInstance().readFile(path);
+            AppConfig.getInstance().convertSchoolData(document);
+
             //Application application = new Application();
             //todo: start splash screen ::
             /* Set the Nimbus look and feel */

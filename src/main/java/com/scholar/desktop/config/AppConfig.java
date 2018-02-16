@@ -35,6 +35,7 @@ public class AppConfig {
     private String path = "C:\\scholar\\configuration\\scholar.xml";
 
     private static AppConfig instance;
+
     public AppConfig() {
     }
 
@@ -44,7 +45,6 @@ public class AppConfig {
         }
         return instance;
     }
-
 
     public Document readFile(String filePath) throws ParserConfigurationException {
         try {
@@ -67,7 +67,9 @@ public class AppConfig {
     public List<SchoolConfig> convertSchoolData(Document doc) {
 
         List<SchoolConfig> configs = new ArrayList<>();
-                  
+
+        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
         NodeList config_list = doc.getElementsByTagName("SCHOLAR");
         System.out.println("-------------------------------");
         if (config_list.getLength() > 0) {
@@ -77,12 +79,26 @@ public class AppConfig {
                 Element eElement = (Element) node;
 
                 SchoolConfig config = new SchoolConfig();
+                String name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
                 config.setName(eElement.getAttribute("NAME"));
-
+                System.out.println("\nCurrent ATTRIBUTE :" + name);
                 Engine engine = new Engine();
-                engine.setUrl(eElement.getAttribute("URL"));
-                engine.setPort(eElement.getAttribute("PORT"));
-                engine.setProtocol(eElement.getAttribute("PROTOCOL"));
+                NodeList engine_list = eElement.getElementsByTagName("ENGINE");
+
+                Node node1 = engine_list.item(0);
+                Element eElement1 = (Element) node1;
+
+                String url = eElement1.getElementsByTagName("URL").item(0).getTextContent();
+                engine.setUrl(url);
+                System.out.println("\nCurrent ATTRIBUTE :" + url);
+
+                String port = eElement1.getElementsByTagName("PORT").item(0).getTextContent();
+                engine.setPort(port);
+                System.out.println("\nCurrent ATTRIBUTE :" + port);
+
+                String protocol = eElement.getElementsByTagName("PROTOCOL").item(0).getTextContent();
+                engine.setProtocol(protocol);
+                System.out.println("\nCurrent ATTRIBUTE :" + protocol);
 
                 config.setEngine(engine);
 
