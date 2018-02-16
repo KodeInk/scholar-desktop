@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -58,11 +59,12 @@ public class AppConfig {
     }
 
     public void convertSchoolData(Document doc) {
-        NodeList config_list = doc.getElementsByTagName("CONFIGURATION");
+        NodeList config_list = doc.getElementsByTagName("SCHOLAR");
         System.out.println("-------------------------------");
         if (config_list.getLength() > 0) {
             for (int tmp = 0; tmp < config_list.getLength(); tmp++) {
-
+                Node node = config_list.item(tmp);
+                System.out.println("\nCurrent Element :" + node.getNodeName());
             }
         }
     }
