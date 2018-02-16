@@ -180,7 +180,19 @@ public class LoginScreen extends javax.swing.JFrame {
 
         SchoolData schoolData = new SchoolData();        
         String school_name = jComboBox1.getSelectedItem().toString();
-        schoolData.setSchoolname(school_name);
+
+
+        for (SchoolConfig config : configs) {
+            if(config.getName().equalsIgnoreCase(school_name)){
+                schoolData.setEngine(config.getEngine());
+                schoolData.setSchoolname(school_name);
+            }
+        }
+
+        if (schoolData.getSchoolname() == null) {
+            JOptionPane.showMessageDialog(null, "School Name does not exist");
+        }
+
 
         LoginConnector.getInstance(schoolData).login(Username, String.valueOf(Password), this);
         //todo: init dashboard
