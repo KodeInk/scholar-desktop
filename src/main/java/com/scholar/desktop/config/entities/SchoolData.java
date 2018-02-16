@@ -15,6 +15,7 @@ public class SchoolData {
 
     private String authentication;
     private String schoolname;
+    private Engine engine;
 
 
     public SchoolData() {
@@ -44,6 +45,7 @@ public class SchoolData {
         return schoolname;
     }
 
+
     /**
      *
      * @param schoolname
@@ -52,11 +54,28 @@ public class SchoolData {
         this.schoolname = schoolname;
     }
 
+    /**
+     *
+     * @return
+     */
+    public Engine getEngine() {
+        return engine;
+    }
+
+    /**
+     *
+     * @param engine
+     */
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.authentication);
-        hash = 71 * hash + Objects.hashCode(this.schoolname);
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.authentication);
+        hash = 31 * hash + Objects.hashCode(this.schoolname);
+        hash = 31 * hash + Objects.hashCode(this.engine);
         return hash;
     }
 
@@ -75,8 +94,12 @@ public class SchoolData {
         if (!Objects.equals(this.authentication, other.authentication)) {
             return false;
         }
-        return Objects.equals(this.schoolname, other.schoolname);
+        if (!Objects.equals(this.schoolname, other.schoolname)) {
+            return false;
+        }
+        return Objects.equals(this.engine, other.engine);
     }
+
 
     @Override
     public String toString() {

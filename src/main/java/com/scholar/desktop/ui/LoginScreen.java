@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.AppConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolConfig;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.connector.authentication.LoginConnector;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
@@ -176,8 +177,12 @@ public class LoginScreen extends javax.swing.JFrame {
         //todo: verify login
         String Username = USERNAMEFIELD.getText();
         char[] Password = PASSWORDFIELD.getPassword();
-        
-        LoginConnector.getInstance().login(Username, String.valueOf(Password),this);
+
+        SchoolData schoolData = new SchoolData();        
+        String school_name = jComboBox1.getSelectedItem().toString();
+        schoolData.setSchoolname(school_name);
+
+        LoginConnector.getInstance(schoolData).login(Username, String.valueOf(Password), this);
         //todo: init dashboard
        
     }//GEN-LAST:event_LOGINBUTTONActionPerformed

@@ -27,19 +27,19 @@ public class LoginConnector {
 
     private static LoginConnector instance;
 
-    /**
-     *
-     */
-    public LoginConnector() {
+    private SchoolData schoolData;
+
+    public LoginConnector(SchoolData schoolData) {
+        this.schoolData = schoolData;
     }
 
     /**
      *
      * @return
      */
-    public static LoginConnector getInstance() {
+    public static LoginConnector getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new LoginConnector();
+            instance = new LoginConnector(schoolData);
         }
         return instance;
 
