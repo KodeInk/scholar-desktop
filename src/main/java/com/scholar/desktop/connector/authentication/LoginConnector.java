@@ -27,7 +27,7 @@ public class LoginConnector {
 
     private static LoginConnector instance;
 
-    private SchoolData schoolData;
+    private final SchoolData schoolData;
 
     public LoginConnector(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -69,11 +69,6 @@ public class LoginConnector {
         _login login = new _login();
         login.setPassword(password);
         login.setUsername(Username);
-
-        //todo: how are we getting this using configuration files :: 
-        SchoolData data = new SchoolData();
-        data.setSchoolname("movers");
-
 
         //todo: send to API
         //todo: based on response choose destinaction to go

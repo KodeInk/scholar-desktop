@@ -22,20 +22,34 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
  */
 public class UserAPI {
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
+    private SchoolData schoolData;
+    private UserAPI instance;
 
-    public static UserResponse create(_User user, SchoolData schoolData, String logId) throws IOException {
+    public UserAPI(SchoolData schoolData) {
+        this.schoolData = schoolData;
+    }
+
+    private UserAPI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new UserAPI(schoolData);
+        }
+
+        return instance;
+    }
+
+    public UserResponse create(_User user, SchoolData schoolData, String logId) throws IOException {
         return EngineCaller.post("user/v1/", (Map) user, schoolData, UserResponse.class, logId);
     }
 
-    public static AuthenticationResponse login(_login login, SchoolData schoolData, String logId) {
+    public AuthenticationResponse login(_login login, SchoolData schoolData, String logId) {
         return EngineCaller.post("user/v1/login", (Map) login, schoolData, AuthenticationResponse.class, logId);
     }
 
-    public static Response deactivateAccount(Integer user_id, SchoolData schoolData, String logId) {
+    public Response deactivateAccount(Integer user_id, SchoolData schoolData, String logId) {
         return EngineCaller.post("user/v1/deactivate/" + user_id, null, schoolData, Response.class, logId);
     }
 
-    public static Response activateAccount(Integer user_id, SchoolData schoolData, String logId) {
+    public Response activateAccount(Integer user_id, SchoolData schoolData, String logId) {
         return EngineCaller.post("user/v1/activate/" + user_id, null, schoolData, Response.class, logId);
     }
 

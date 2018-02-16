@@ -36,23 +36,40 @@ public class EngineCaller {
 
     private static final Logger LOG = Logger.getLogger(EngineCaller.class.getName());
 
-    private static final String ENGINE_URL = System.getenv("ENGINE_URL");
-    private static final String ENGINE_PORT = System.getenv("ENGINE_PORT");
-    private static final String ENGINE_PROTOCOL = System.getenv("ENGINE_PROTOCOL");
-    private static final String URI = ENGINE_PROTOCOL + "://" + ENGINE_URL + ((ENGINE_PORT != null) ? ":" + ENGINE_PORT : "");
+    private static String ENGINE_URL;
+    private static String ENGINE_PORT;
+    private static String ENGINE_PROTOCOL;
+    private static String URI;
 
     //ObjectMapperResolver
     private static Client client = null;
     private static WebTarget target = null;
 
+    private static EngineCaller instance;
+
     /**
      *
+     * @param schoolData
      */
-    public EngineCaller() {
+    public EngineCaller(SchoolData schoolData) {
+
+        ENGINE_URL = schoolData.getEngine().getUrl();
+        ENGINE_PORT = schoolData.getEngine().getPort();
+        ENGINE_PROTOCOL = schoolData.getEngine().getProtocol();
+        URI = ENGINE_PROTOCOL + "://" + ENGINE_URL + ((ENGINE_PORT != null && !ENGINE_PORT.isEmpty()) ? ":" + ENGINE_PORT : "");
+
         client = ClientBuilder.newClient();
         target = client.target(URI);
 
         System.out.println("URI  ::::::::::::::; " + URI);
+    }
+
+    public static EngineCaller getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new EngineCaller(schoolData);
+        }
+        return instance;
+
     }
 
     /**
