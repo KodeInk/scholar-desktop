@@ -64,6 +64,11 @@ public class EngineCaller {
         System.out.println("URI  ::::::::::::::; " + URI);
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static EngineCaller getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new EngineCaller(schoolData);
@@ -93,7 +98,7 @@ public class EngineCaller {
      * @param schoolData
      * @return
      */
-    public static MultivaluedMap getHeaderParameter(SchoolData schoolData) {
+    public MultivaluedMap getHeaderParameter(SchoolData schoolData) {
         MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
         httpHeaders.put("Authorization", schoolData.getAuthentication());
         httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
@@ -110,7 +115,7 @@ public class EngineCaller {
      * @param responseType
      * @return
      */
-    public static <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
+    public <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -128,7 +133,7 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public static <T> T post(String path, Map body, SchoolData schoolData, String logId) {
+    public <T> T post(String path, Map body, SchoolData schoolData, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -150,7 +155,7 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public static <T> T post(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
+    public <T> T post(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -170,7 +175,7 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public static <T> T put(String path, Map body, SchoolData schoolData, String logId) {
+    public <T> T put(String path, Map body, SchoolData schoolData, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -192,7 +197,7 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public static <T> T put(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
+    public <T> T put(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -209,7 +214,7 @@ public class EngineCaller {
      * @param schoolData
      * @param logId
      */
-    public static void delete(String path, Map body, SchoolData schoolData, String logId) {
+    public void delete(String path, Map body, SchoolData schoolData, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
