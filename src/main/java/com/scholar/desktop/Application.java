@@ -38,6 +38,11 @@ public class Application {
 
     public static void main(String[] args) {
         try {
+            //todo: get the path of the configuration file :
+            /*
+            SUGGESTIONS : U WILL ADD IT AS PART OF THE EMBEDED DB:
+            ITS CREATED AT TENANT SETUP ;
+             */
             String path = "C:\\scholar\\configuration\\scholar.xml";
             AppConfig.getInstance().readFile(path);
             //Application application = new Application();

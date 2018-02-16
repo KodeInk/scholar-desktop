@@ -10,6 +10,8 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,7 +64,10 @@ public class AppConfig {
         return null;
     }
 
-    public void convertSchoolData(Document doc) {
+    public List<SchoolConfig> convertSchoolData(Document doc) {
+
+        List<SchoolConfig> configs = new ArrayList<>();
+                  
         NodeList config_list = doc.getElementsByTagName("SCHOLAR");
         System.out.println("-------------------------------");
         if (config_list.getLength() > 0) {
@@ -78,7 +83,13 @@ public class AppConfig {
                 engine.setUrl(eElement.getAttribute("URL"));
                 engine.setPort(eElement.getAttribute("PORT"));
                 engine.setProtocol(eElement.getAttribute("PROTOCOL"));
+
+                config.setEngine(engine);
+
+                configs.add(config);
             }
         }
+
+        return configs;
     }
 }
