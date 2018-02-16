@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<CONFIGURATION>
+<SCHOLAR>
+	<NAME>MOVERS ANDTE </NAME>
+	<ENGINE>
+		<URL>localhost</URL>
+		<PORT>6789</PORT>
+		<PROTOCOL>http</PROTOCOL>
+	</ENGINE>
+</SCHOLAR>
+
+<SCHOLAR>
+	<NAME> ABAIEAT </NAME>
+	<ENGINE>
+		<URL>localhost</URL>
+		<PORT>6789</PORT>
+		<PROTOCOL>http</PROTOCOL>
+	</ENGINE>
+</SCHOLAR>
+
+
+</CONFIGURATION>
