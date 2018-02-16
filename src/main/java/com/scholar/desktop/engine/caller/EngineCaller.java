@@ -23,7 +23,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
-import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 

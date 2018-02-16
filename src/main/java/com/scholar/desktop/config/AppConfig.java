@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller;
+package main.java.com.scholar.desktop.config;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -65,6 +67,9 @@ public class AppConfig {
             for (int tmp = 0; tmp < config_list.getLength(); tmp++) {
                 Node node = config_list.item(tmp);
                 System.out.println("\nCurrent Element :" + node.getNodeName());
+                Element eElement = (Element) node;
+
+                SchoolData data = new SchoolData();
             }
         }
     }

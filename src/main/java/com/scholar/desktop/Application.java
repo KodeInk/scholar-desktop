@@ -9,7 +9,7 @@ import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
-import main.java.com.scholar.desktop.engine.caller.AppConfig;
+import main.java.com.scholar.desktop.config.AppConfig;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.ui.SplashScreen;
 

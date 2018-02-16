@@ -14,7 +14,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
-import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *

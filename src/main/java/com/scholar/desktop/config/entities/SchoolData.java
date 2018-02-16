@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller.entities;
+package main.java.com.scholar.desktop.config.entities;
 
 import java.util.Objects;
 
@@ -15,6 +15,7 @@ public class SchoolData {
 
     private String authentication;
     private String schoolname;
+
 
     public SchoolData() {
     }

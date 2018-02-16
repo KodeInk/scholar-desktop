@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
-import main.java.com.scholar.desktop.engine.caller.entities.SchoolData;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.DashboardScreen;
 import main.java.com.scholar.desktop.ui.DesktopSwitcher;
 import main.java.com.scholar.desktop.ui.LoginScreen;
