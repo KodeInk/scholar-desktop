@@ -5,6 +5,10 @@
  */
 package main.java.com.scholar.desktop.engine.caller;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.ws.rs.client.Client;
@@ -92,13 +96,18 @@ public class EngineCaller {
      * @return
      */
     public MultivaluedMap getHeaderParameter() {
-        MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
+
+                                   
+        Map httpHeaders = new HashMap();
 
         System.out.println(schoolData.toString());
         httpHeaders.put("Authorization", schoolData.getAuthentication());
         httpHeaders.put("schoolname", schoolData.getSchoolname());
         httpHeaders.put("Content-Type", "application/json");
-        return httpHeaders;
+
+        MultivaluedMap map = new MultivaluedHashMap(httpHeaders);
+
+        return map;
     }
 
     /**
