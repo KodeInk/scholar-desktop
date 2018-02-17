@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
@@ -52,11 +54,24 @@ public class UserAPI {
      * @return
      */
     public AuthenticationResponse login(_login login, String logId) {
+        try {
         Map body = new HashMap();
         body.put("username", login.getUsername());
         body.put("password", login.getPassword());
 
-        return engineCaller.post("user/v1/login", body, AuthenticationResponse.class, logId);
+            return engineCaller.post("user/v1/login", body, AuthenticationResponse.class, logId);
+        } catch (BadRequestException bre) {
+
+            bre.printStackTrace();
+            System.out.println("EXCEPTION " + bre.getResponse());
+            JOptionPane.showMessageDialog(null, "BAD REQUEST ");
+            return null;
+        } catch (Exception e) {
+            System.out.println("EXCEPTION " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR");
+
+            return null;
+        }
     }
 
     /**

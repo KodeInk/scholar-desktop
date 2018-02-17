@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.engine.caller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -15,6 +16,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 
@@ -155,11 +157,25 @@ public class EngineCaller {
      */
     public <T> T post(String path, Map body, Class<T> responseType, String logId) {
 
-        return target.path(path)
+        Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .headers(getHeaderParameter())
-                .post(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
+                .post(Entity.entity(body, MediaType.APPLICATION_JSON), Response.class);
+
+        if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+
+            switch (response.getStatus()) {
+                case 400:
+
+                    break;
+            }
+            JOptionPane.showMessageDialog(null, response.getStatus());
+
+            return null;
+        }
+
+        return response.readEntity(responseType);
 
     }
 
