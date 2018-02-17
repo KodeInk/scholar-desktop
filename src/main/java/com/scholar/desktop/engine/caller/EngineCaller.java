@@ -5,17 +5,8 @@
  */
 package main.java.com.scholar.desktop.engine.caller;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -24,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 
 
@@ -47,7 +37,7 @@ public class EngineCaller {
 
     private static EngineCaller instance;
 
-    private SchoolData schoolData;
+    private final SchoolData schoolData;
 
     /**
      *
@@ -99,10 +89,9 @@ public class EngineCaller {
 
     /**
      *
-     * @param schoolData
      * @return
      */
-    public MultivaluedMap getHeaderParameter(SchoolData schoolData) {
+    public MultivaluedMap getHeaderParameter() {
         MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
         httpHeaders.put("Authorization", schoolData.getAuthentication());
         httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
@@ -115,15 +104,14 @@ public class EngineCaller {
      * @param <T>
      * @param path
      * @param queryParameter
-     * @param schoolData
      * @param responseType
      * @return
      */
-    public <T> T get(String path, Map queryParameter, SchoolData schoolData, Class<T> responseType) {
+    public <T> T get(String path, Map queryParameter, Class<T> responseType) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .get(responseType);
 
     }
@@ -133,16 +121,15 @@ public class EngineCaller {
      * @param <T>
      * @param path
      * @param body
-     * @param schoolData
      * @param logId
      * @return
      */
-    public <T> T post(String path, Map body, SchoolData schoolData, String logId) {
+    public <T> T post(String path, Map body, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .post(Entity.entity(body, MediaType.APPLICATION_JSON));
 
         return null;
@@ -154,17 +141,16 @@ public class EngineCaller {
      * @param <T>
      * @param path
      * @param body
-     * @param schoolData
      * @param responseType
      * @param logId
      * @return
      */
-    public <T> T post(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
+    public <T> T post(String path, Map body, Class<T> responseType, String logId) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .post(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
 
 
@@ -175,16 +161,15 @@ public class EngineCaller {
      * @param <T>
      * @param path
      * @param body
-     * @param schoolData
      * @param logId
      * @return
      */
-    public <T> T put(String path, Map body, SchoolData schoolData, String logId) {
+    public <T> T put(String path, Map body, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .put(Entity.entity(body, MediaType.APPLICATION_JSON));
 
         return null;
@@ -196,17 +181,16 @@ public class EngineCaller {
      * @param <T>
      * @param path
      * @param body
-     * @param schoolData
      * @param responseType
      * @param logId
      * @return
      */
-    public <T> T put(String path, Map body, SchoolData schoolData, Class<T> responseType, String logId) {
+    public <T> T put(String path, Map body, Class<T> responseType, String logId) {
 
         return target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .put(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
 
     }
@@ -215,15 +199,14 @@ public class EngineCaller {
      *
      * @param path
      * @param body
-     * @param schoolData
      * @param logId
      */
-    public void delete(String path, Map body, SchoolData schoolData, String logId) {
+    public void delete(String path, Map body, String logId) {
 
         target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter(schoolData))
+                .headers(getHeaderParameter())
                 .delete();
     }
 
