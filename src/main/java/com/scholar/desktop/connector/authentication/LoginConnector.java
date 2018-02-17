@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.UserAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.ui.DashboardScreen;
 import main.java.com.scholar.desktop.ui.DesktopSwitcher;
 import main.java.com.scholar.desktop.ui.LoginScreen;
@@ -70,7 +72,8 @@ public class LoginConnector {
         login.setPassword(password);
         login.setUsername(Username);
 
-        //todo: send to API
+        UserAPI aPI = new UserAPI(schoolData);
+        AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
         //todo: based on response choose destinaction to go
 
         JOptionPane.showMessageDialog(null, password);

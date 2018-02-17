@@ -5,7 +5,9 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
+import com.google.common.collect.HashBiMap;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
@@ -23,19 +25,14 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 public class UserAPI {
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
     private final SchoolData schoolData;
-    private UserAPI instance;
+    private static UserAPI instance;
 
+    private EngineCaller engineCaller;
     public UserAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
+        engineCaller = new EngineCaller(schoolData);
     }
 
-    private UserAPI getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new UserAPI(schoolData);
-        }
-
-        return instance;
-    }
 
     /**
      *
@@ -45,7 +42,7 @@ public class UserAPI {
      * @throws IOException
      */
     public UserResponse create(_User user, String logId) throws IOException {
-        return EngineCaller.getInstance(schoolData).post("user/v1/", (Map) user, UserResponse.class, logId);
+        return engineCaller.post("user/v1/", (Map) user, UserResponse.class, logId);
     }
 
     /**
@@ -55,7 +52,11 @@ public class UserAPI {
      * @return
      */
     public AuthenticationResponse login(_login login, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/login", (Map) login, AuthenticationResponse.class, logId);
+        Map body = new HashMap();
+        body.put("username", login.getUsername());
+        body.put("password", login.getPassword());
+
+        return engineCaller.post("user/v1/login", body, AuthenticationResponse.class, logId);
     }
 
     /**
@@ -65,7 +66,7 @@ public class UserAPI {
      * @return
      */
     public Response deactivateAccount(Integer user_id, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/deactivate/" + user_id, null, Response.class, logId);
+        return engineCaller.post("user/v1/deactivate/" + user_id, null, Response.class, logId);
     }
 
     /**
@@ -75,7 +76,7 @@ public class UserAPI {
      * @return
      */
     public Response activateAccount(Integer user_id, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/activate/" + user_id, null, Response.class, logId);
+        return engineCaller.post("user/v1/activate/" + user_id, null, Response.class, logId);
     }
 
 

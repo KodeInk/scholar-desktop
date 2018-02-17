@@ -193,8 +193,9 @@ public class LoginScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "School Name does not exist");
         }
 
+        LoginConnector connector = new LoginConnector(schoolData);
+        connector.login(Username, String.valueOf(Password), this);
 
-        LoginConnector.getInstance(schoolData).login(Username, String.valueOf(Password), this);
         //todo: init dashboard
        
     }//GEN-LAST:event_LOGINBUTTONActionPerformed

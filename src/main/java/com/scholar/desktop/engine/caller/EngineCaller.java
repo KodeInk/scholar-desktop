@@ -93,8 +93,10 @@ public class EngineCaller {
      */
     public MultivaluedMap getHeaderParameter() {
         MultivaluedMap httpHeaders = new MultivaluedHashMap<>();
+
+        System.out.println(schoolData.toString());
         httpHeaders.put("Authorization", schoolData.getAuthentication());
-        httpHeaders.put("X-Mifos-Platform-TenantId", schoolData.getSchoolname());
+        httpHeaders.put("schoolname", schoolData.getSchoolname());
         httpHeaders.put("Content-Type", "application/json");
         return httpHeaders;
     }
