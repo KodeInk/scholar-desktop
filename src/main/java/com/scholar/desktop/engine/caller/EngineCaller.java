@@ -5,10 +5,7 @@
  */
 package main.java.com.scholar.desktop.engine.caller;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.ws.rs.client.Client;
@@ -163,7 +160,6 @@ public class EngineCaller {
                 .accept(MediaType.APPLICATION_JSON)
                 .headers(getHeaderParameter())
                 .post(Entity.entity(body, MediaType.APPLICATION_JSON), responseType);
-
 
     }
 
