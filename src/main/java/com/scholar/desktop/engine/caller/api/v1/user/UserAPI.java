@@ -45,7 +45,7 @@ public class UserAPI {
      * @throws IOException
      */
     public UserResponse create(_User user, String logId) throws IOException {
-        return EngineCaller.getInstance(schoolData).post("user/v1/", (Map) user, schoolData, UserResponse.class, logId);
+        return EngineCaller.getInstance(schoolData).post("user/v1/", (Map) user, UserResponse.class, logId);
     }
 
     /**
@@ -55,7 +55,7 @@ public class UserAPI {
      * @return
      */
     public AuthenticationResponse login(_login login, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/login", (Map) login, schoolData, AuthenticationResponse.class, logId);
+        return EngineCaller.getInstance(schoolData).post("user/v1/login", (Map) login, AuthenticationResponse.class, logId);
     }
 
     /**
@@ -65,7 +65,7 @@ public class UserAPI {
      * @return
      */
     public Response deactivateAccount(Integer user_id, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/deactivate/" + user_id, null, schoolData, Response.class, logId);
+        return EngineCaller.getInstance(schoolData).post("user/v1/deactivate/" + user_id, null, Response.class, logId);
     }
 
     /**
@@ -75,7 +75,7 @@ public class UserAPI {
      * @return
      */
     public Response activateAccount(Integer user_id, String logId) {
-        return EngineCaller.getInstance(schoolData).post("user/v1/activate/" + user_id, null, schoolData, Response.class, logId);
+        return EngineCaller.getInstance(schoolData).post("user/v1/activate/" + user_id, null, Response.class, logId);
     }
 
 
