@@ -19,6 +19,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 /**
  *
@@ -44,7 +45,9 @@ public class UserAPI {
      * @throws IOException
      */
     public UserResponse create(_User user, String logId) throws IOException {
-        return engineCaller.post("user/v1/", (Map) user, UserResponse.class, logId);
+        //  return engineCaller.post("user/v1/", (Map) user, UserResponse.class, logId);
+        return null;
+
     }
 
     /**
@@ -55,23 +58,38 @@ public class UserAPI {
      */
     public AuthenticationResponse login(_login login, String logId) {
         try {
-        Map body = new HashMap();
-        body.put("username", login.getUsername());
-        body.put("password", login.getPassword());
+            Map body = new HashMap();
+            body.put("username", login.getUsername());
+            body.put("password", login.getPassword());
 
-            return engineCaller.post("user/v1/login", body, AuthenticationResponse.class, logId);
-        } catch (BadRequestException bre) {
+            Response response = engineCaller.post("user/v1/login", body, logId);
 
-            bre.printStackTrace();
-            System.out.println("EXCEPTION " + bre.getResponse());
-            JOptionPane.showMessageDialog(null, "BAD REQUEST ");
+            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+
+                switch (response.getStatus()) {
+                    case 400:
+                        Message message = response.readEntity(Message.class);
+                        JOptionPane.showMessageDialog(null, message.getMessage());
+                        break;
+                    case 200:
+                        JOptionPane.showMessageDialog(null, "Login Succesfully");
+                        AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
+                        return authenticationResponse;
+                    default:
+                        return null;
+
+                }
+
+            }
             return null;
-        } catch (Exception e) {
-            System.out.println("EXCEPTION " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "ERROR");
 
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Something Went Wrong , Contact System Administrator");
             return null;
         }
+
     }
 
     /**
@@ -81,7 +99,8 @@ public class UserAPI {
      * @return
      */
     public Response deactivateAccount(Integer user_id, String logId) {
-        return engineCaller.post("user/v1/deactivate/" + user_id, null, Response.class, logId);
+        //  return engineCaller.post("user/v1/deactivate/" + user_id, null, Response.class, logId);
+        return null;
     }
 
     /**
@@ -91,7 +110,8 @@ public class UserAPI {
      * @return
      */
     public Response activateAccount(Integer user_id, String logId) {
-        return engineCaller.post("user/v1/activate/" + user_id, null, Response.class, logId);
+        //   return engineCaller.post("user/v1/activate/" + user_id, null, Response.class, logId);
+        return null;
     }
 
 

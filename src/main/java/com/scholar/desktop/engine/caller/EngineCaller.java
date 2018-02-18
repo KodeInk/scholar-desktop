@@ -8,7 +8,7 @@ package main.java.com.scholar.desktop.engine.caller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import static javafx.scene.input.KeyCode.T;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -134,17 +134,17 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public <T> T post(String path, Map body, String logId) {
-
-        target.path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .headers(getHeaderParameter())
-                .post(Entity.entity(body, MediaType.APPLICATION_JSON));
-
-        return null;
-
-    }
+//    public <T> T post(String path, Map body, String logId) {
+//
+//        target.path(path)
+//                .request(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .headers(getHeaderParameter())
+//                .post(Entity.entity(body, MediaType.APPLICATION_JSON));
+//
+//        return null;
+//
+//    }
 
     /**
      *
@@ -155,7 +155,7 @@ public class EngineCaller {
      * @param logId
      * @return
      */
-    public <T> T post(String path, Map body, Class<T> responseType, String logId) {
+    public Response post(String path, Map body, String logId) {
 
         Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -163,19 +163,23 @@ public class EngineCaller {
                 .headers(getHeaderParameter())
                 .post(Entity.entity(body, MediaType.APPLICATION_JSON), Response.class);
 
-        if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+        return response;
 
-            switch (response.getStatus()) {
-                case 400:
-
-                    break;
-            }
-            JOptionPane.showMessageDialog(null, response.getStatus());
-
-            return null;
-        }
-
-        return response.readEntity(responseType);
+//        if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+//
+//            switch (response.getStatus()) {
+//                case 400:
+//                    Message message = response.readEntity(Message.class);
+//                    JOptionPane.showMessageDialog(null, message.getMessage());
+//
+//                    break;
+//            }
+//            JOptionPane.showMessageDialog(null, response.getStatus());
+//
+//            return null;
+//        }
+//
+//        return response.readEntity(responseType);
 
     }
 
