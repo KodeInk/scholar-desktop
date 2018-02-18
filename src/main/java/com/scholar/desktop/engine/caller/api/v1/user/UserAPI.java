@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
 import com.google.common.collect.HashBiMap;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,23 +65,23 @@ public class UserAPI {
 
             Response response = engineCaller.post("user/v1/login", body, logId);
 
-            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
 
                 switch (response.getStatus()) {
                     case 400:
-                        Message message = response.readEntity(Message.class);
-                        JOptionPane.showMessageDialog(null, message.getMessage());
+                        ShowAlertMessage(response);
                         break;
                     case 200:
                         JOptionPane.showMessageDialog(null, "Login Succesfully");
                         AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
                         return authenticationResponse;
+                    case 401:
+                        ShowAlertMessage(response);
+                        break;
                     default:
                         return null;
 
                 }
 
-            }
             return null;
 
 
@@ -90,6 +91,11 @@ public class UserAPI {
             return null;
         }
 
+    }
+
+    public void ShowAlertMessage(Response response) throws HeadlessException {
+        Message message = response.readEntity(Message.class);
+        JOptionPane.showMessageDialog(null, message.getMessage());
     }
 
     /**

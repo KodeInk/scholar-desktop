@@ -74,10 +74,11 @@ public class LoginConnector {
 
         UserAPI aPI = new UserAPI(schoolData);
         AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
-        //todo: based on response choose destinaction to go
 
-        JOptionPane.showMessageDialog(null, password);
-        initDashboard(loginScreen);
+        if (authenticationResponse != null) {
+            initDashboard(loginScreen);
+        }
+
 
         return true;
 
