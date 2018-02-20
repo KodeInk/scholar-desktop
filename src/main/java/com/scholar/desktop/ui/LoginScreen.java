@@ -193,8 +193,10 @@ public class LoginScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "School Name does not exist");
         }
 
+        LOGINBUTTON.setText("Processing");        
         LoginConnector connector = new LoginConnector(schoolData);
         connector.login(Username, String.valueOf(Password), this);
+        LOGINBUTTON.setText("LOGIN");
 
         //todo: init dashboard
        

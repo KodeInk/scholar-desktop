@@ -71,7 +71,6 @@ public class UserAPI {
                         ShowAlertMessage(response);
                         break;
                     case 200:
-                        JOptionPane.showMessageDialog(null, "Login Succesfully");
                         AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
                         return authenticationResponse;
                     case 401:
