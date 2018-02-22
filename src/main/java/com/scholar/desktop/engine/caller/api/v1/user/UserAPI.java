@@ -5,14 +5,11 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
-import com.google.common.collect.HashBiMap;
-import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
@@ -20,7 +17,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.helper.exceptions.Message;
+import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 
 /**
  *
@@ -92,10 +89,6 @@ public class UserAPI {
 
     }
 
-    public void ShowAlertMessage(Response response) throws HeadlessException {
-        Message message = response.readEntity(Message.class);
-        JOptionPane.showMessageDialog(null, message.getMessage());
-    }
 
     /**
      *

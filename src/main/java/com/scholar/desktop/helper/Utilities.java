@@ -5,10 +5,13 @@
  */
 package main.java.com.scholar.desktop.helper;
 
+import java.awt.HeadlessException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.xml.ws.Response;
+import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 
 /**
@@ -40,6 +43,11 @@ public class Utilities {
         } else {
             LOG.log(Level.INFO, "{0} :: {1}: {2}", new Object[]{logId, message, parameterLog});
         }
+    }
+
+    public static void ShowAlertMessage(javax.ws.rs.core.Response response) throws HeadlessException {
+        Message message = response.readEntity(Message.class);
+        JOptionPane.showMessageDialog(null, message.getMessage());
     }
 
 
