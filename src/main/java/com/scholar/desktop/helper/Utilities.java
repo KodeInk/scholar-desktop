@@ -21,6 +21,9 @@ import main.java.com.scholar.desktop.helper.exceptions.Message;
 public class Utilities {
     private static final Logger LOG = Logger.getLogger(Utilities.class.getName());
 
+    private static final Integer default_offset = 0;
+    private static final Integer default_limit = 50;
+
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -50,5 +53,20 @@ public class Utilities {
         JOptionPane.showMessageDialog(null, message.getMessage());
     }
 
+    public static Integer getOffset(Integer offset) {
+        if (offset == null) {
+            offset = default_offset;
+        }
+        return offset;
+
+    }
+
+    public static Integer getLimit(Integer limit) {
+        if (limit == null) {
+            limit = default_offset;
+        }
+        return limit;
+
+    }
 
 }

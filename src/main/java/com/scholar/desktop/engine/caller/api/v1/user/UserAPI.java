@@ -19,6 +19,8 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.Authenti
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
+import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
+import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
 
 /**
  *
@@ -41,10 +43,20 @@ public class UserAPI {
      * @param limit
      * @return
      */
-    public List<UserResponse> list(int offset, int limit) {
+    public List<UserResponse> list(Integer offset, Integer limit) {
 
+        Map<String, String> queryParameter = new HashMap<>();
+
+        offset = getOffset(offset);
+        limit = getLimit(limit);
+
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        engineCaller.get("user/v1/", queryParameter);
         return null;
     }
+
 
 
 
