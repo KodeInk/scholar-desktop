@@ -111,47 +111,28 @@ public class EngineCaller {
 
     /**
      *
-     * @param <T>
      * @param path
      * @param queryParameter
-     * @param responseType
      * @return
      */
-    public <T> T get(String path, Map queryParameter, Class<T> responseType) {
+    public Response get(String path, Map queryParameter) {
 
-        return target.path(path)
+        Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .headers(getHeaderParameter())
-                .get(responseType);
+                .get(Response.class);
+
+        return response;
+
 
     }
 
-    /**
-     *
-     * @param <T>
-     * @param path
-     * @param body
-     * @param logId
-     * @return
-     */
-//    public <T> T post(String path, Map body, String logId) {
-//
-//        target.path(path)
-//                .request(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .headers(getHeaderParameter())
-//                .post(Entity.entity(body, MediaType.APPLICATION_JSON));
-//
-//        return null;
-//
-//    }
 
     /**
      *
-     * @param <T>
      * @param path
      * @param body
-     * @param responseType
      * @param logId
      * @return
      */
@@ -165,21 +146,6 @@ public class EngineCaller {
 
         return response;
 
-//        if (response.getStatus() != Response.Status.OK.getStatusCode()) {
-//
-//            switch (response.getStatus()) {
-//                case 400:
-//                    Message message = response.readEntity(Message.class);
-//                    JOptionPane.showMessageDialog(null, message.getMessage());
-//
-//                    break;
-//            }
-//            JOptionPane.showMessageDialog(null, response.getStatus());
-//
-//            return null;
-//        }
-//
-//        return response.readEntity(responseType);
 
     }
 
