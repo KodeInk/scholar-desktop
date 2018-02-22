@@ -19,8 +19,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
-
-
 /**
  *
  * @author mover
@@ -96,7 +94,6 @@ public class EngineCaller {
      */
     public MultivaluedMap getHeaderParameter() {
 
-                                   
         Map httpHeaders = new HashMap();
 
         System.out.println(schoolData.toString());
@@ -121,7 +118,6 @@ public class EngineCaller {
         }
     }
 
-
     /**
      *
      * @param path
@@ -139,14 +135,11 @@ public class EngineCaller {
 
         return response;
 
-
     }
 
     public Response get(String path) {
         return get(path, null);
     }
-
-
 
     /**
      *
@@ -164,7 +157,6 @@ public class EngineCaller {
                 .post(Entity.entity(body, MediaType.APPLICATION_JSON), Response.class);
 
         return response;
-
 
     }
 
@@ -221,9 +213,5 @@ public class EngineCaller {
                 .headers(getHeaderParameter())
                 .delete();
     }
-
-
-
-
 
 }
