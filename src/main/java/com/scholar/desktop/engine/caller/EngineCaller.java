@@ -111,11 +111,25 @@ public class EngineCaller {
 
     /**
      *
+     * @param queryParameter
+     */
+    public void getQuerParameters(Map<String, String> queryParameter) {
+        if (queryParameter != null) {
+            for (String key : queryParameter.keySet()) {
+                target.queryParam(key, queryParameter.get(key));
+            }
+        }
+    }
+
+
+    /**
+     *
      * @param path
      * @param queryParameter
      * @return
      */
-    public Response get(String path, Map queryParameter) {
+    public Response get(String path, Map<String, String> queryParameter) {
+        getQuerParameters(queryParameter);
 
         Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
@@ -127,6 +141,11 @@ public class EngineCaller {
 
 
     }
+
+    public Response get(String path) {
+        return get(path, null);
+    }
+
 
 
     /**
