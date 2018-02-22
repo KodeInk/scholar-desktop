@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,11 +29,23 @@ public class UserAPI {
     private final SchoolData schoolData;
     private static UserAPI instance;
 
-    private EngineCaller engineCaller;
+    private final EngineCaller engineCaller;
     public UserAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
         engineCaller = new EngineCaller(schoolData);
     }
+
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
+    public List<UserResponse> list(int offset, int limit) {
+
+        return null;
+    }
+
 
 
     /**
@@ -111,6 +124,5 @@ public class UserAPI {
         //   return engineCaller.post("user/v1/activate/" + user_id, null, Response.class, logId);
         return null;
     }
-
 
 }
