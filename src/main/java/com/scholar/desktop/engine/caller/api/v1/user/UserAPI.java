@@ -44,16 +44,30 @@ public class UserAPI {
      * @return
      */
     public List<UserResponse> list(Integer offset, Integer limit) {
-
-        Map<String, String> queryParameter = new HashMap<>();
-
         offset = getOffset(offset);
         limit = getLimit(limit);
 
+        Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        engineCaller.get("user/v1/", queryParameter);
+        Response response = engineCaller.get("user/v1/", queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                UserResponse[] userResponse = response.readEntity(UserResponse[].class);
+                return userResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
         return null;
     }
 
