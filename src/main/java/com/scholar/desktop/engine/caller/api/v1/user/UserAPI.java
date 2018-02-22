@@ -43,7 +43,7 @@ public class UserAPI {
      * @param limit
      * @return
      */
-    public List<UserResponse> list(Integer offset, Integer limit) {
+    public UserResponse[] list(Integer offset, Integer limit) {
         offset = getOffset(offset);
         limit = getLimit(limit);
 
