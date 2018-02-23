@@ -37,6 +37,7 @@ public class LoginService {
 
     /**
      *
+     * @param schoolData
      * @return
      */
     public static LoginService getInstance(SchoolData schoolData) {
