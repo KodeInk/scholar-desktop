@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.AppConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.connector.authentication.LoginConnector;
+import main.java.com.scholar.desktop.services.authentication.LoginService;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
@@ -194,7 +194,7 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
         LOGINBUTTON.setText("Processing");        
-        LoginConnector connector = new LoginConnector(schoolData);
+        LoginService connector = new LoginService(schoolData);
         connector.login(Username, String.valueOf(Password), this);
         LOGINBUTTON.setText("LOGIN");
 

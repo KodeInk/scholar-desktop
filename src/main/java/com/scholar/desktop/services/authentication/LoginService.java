@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.connector.authentication;
+package main.java.com.scholar.desktop.services.authentication;
 
 import java.awt.Toolkit;
 import java.util.logging.Logger;
@@ -23,15 +23,15 @@ import main.java.com.scholar.desktop.ui.helper.DashboardViews;
  *
  * @author mover 2/15/2018
  */
-public class LoginConnector {
+public class LoginService {
 
-    private static final Logger LOG = Logger.getLogger(LoginConnector.class.getName());
+    private static final Logger LOG = Logger.getLogger(LoginService.class.getName());
 
-    private static LoginConnector instance;
+    private static LoginService instance;
 
     private final SchoolData schoolData;
 
-    public LoginConnector(SchoolData schoolData) {
+    public LoginService(SchoolData schoolData) {
         this.schoolData = schoolData;
     }
 
@@ -39,9 +39,9 @@ public class LoginConnector {
      *
      * @return
      */
-    public static LoginConnector getInstance(SchoolData schoolData) {
+    public static LoginService getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new LoginConnector(schoolData);
+            instance = new LoginService(schoolData);
         }
         return instance;
 
