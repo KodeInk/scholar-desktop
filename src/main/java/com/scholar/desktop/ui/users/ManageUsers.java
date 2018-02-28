@@ -5,7 +5,10 @@
  */
 package main.java.com.scholar.desktop.ui.users;
 
+import java.util.List;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
@@ -21,8 +24,11 @@ public class ManageUsers extends javax.swing.JPanel {
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
-        UsersService.getInstance(schoolData).list();
+        List<UserResponse> list = UsersService.getInstance(schoolData).list();
+
         initComponents();
+
+        JOptionPane.showMessageDialog(null, "I am Closer than Normal");
 
     }
 

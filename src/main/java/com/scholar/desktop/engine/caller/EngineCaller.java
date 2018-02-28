@@ -96,8 +96,10 @@ public class EngineCaller {
 
         Map httpHeaders = new HashMap();
 
-        System.out.println(schoolData.toString());
-        httpHeaders.put("Authorization", schoolData.getAuthentication());
+        if (schoolData.getAuthentication() != null) {
+            System.out.println("AUTHENTICATION " + schoolData.getAuthentication().getAuthentication());
+            httpHeaders.put("authentication", schoolData.getAuthentication().getAuthentication());
+        }
         httpHeaders.put("schoolname", schoolData.getSchoolname());
         httpHeaders.put("Content-Type", "application/json");
 

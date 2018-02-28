@@ -68,6 +68,7 @@ public class UserAPI {
 
         }
 
+        JOptionPane.showMessageDialog(null, "MOVER NOT WORKING ");
         return null;
     }
 
@@ -101,13 +102,14 @@ public class UserAPI {
 
             Response response = engineCaller.post("user/v1/login", body, logId);
 
-
+            JOptionPane.showMessageDialog(null, response.toString());
                 switch (response.getStatus()) {
                     case 400:
                         ShowAlertMessage(response);
                         break;
                     case 200:
                         AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
+                        JOptionPane.showMessageDialog(null, authenticationResponse.getAuthentication());
                         return authenticationResponse;
                     case 401:
                         ShowAlertMessage(response);
