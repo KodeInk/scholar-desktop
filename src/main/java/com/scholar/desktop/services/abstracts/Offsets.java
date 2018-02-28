@@ -5,31 +5,20 @@
  */
 package main.java.com.scholar.desktop.services.abstracts;
 
+import static main.java.com.scholar.desktop.helper.Utilities.default_limit;
+import static main.java.com.scholar.desktop.helper.Utilities.default_offset;
+
 /**
  *
  * @author mover
  */
 public class Offsets {
 
-    public Integer offset = 0;
-    public Integer limit = 50;
+    public static Integer offset = default_offset;
+    public static Integer limit = default_limit;
 
     public Offsets() {
+
     }
 
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
 }

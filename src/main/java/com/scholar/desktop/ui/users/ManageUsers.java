@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.users;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
  *
@@ -19,7 +20,8 @@ public class ManageUsers extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
-        //todo: fetch from service : 
+        //todo: fetch from service :
+        UsersService.getInstance(schoolData).list();
         initComponents();
 
     }

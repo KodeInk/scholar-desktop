@@ -21,8 +21,8 @@ import main.java.com.scholar.desktop.helper.exceptions.Message;
 public class Utilities {
     private static final Logger LOG = Logger.getLogger(Utilities.class.getName());
 
-    private static final Integer default_offset = 0;
-    private static final Integer default_limit = 50;
+    public static final Integer default_offset = 0;
+    public static final Integer default_limit = 50;
 
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {

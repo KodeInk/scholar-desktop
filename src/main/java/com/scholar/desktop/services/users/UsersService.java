@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
@@ -20,6 +21,8 @@ public class UsersService extends AbstractService {
     private static final Logger LOG = Logger.getLogger(UsersService.class.getName());
     private final SchoolData schoolData;
     private static UsersService instance;
+
+    private List<UserResponse> list;
 
     /**
      *
@@ -41,9 +44,9 @@ public class UsersService extends AbstractService {
         return instance;
     }
 
-    public static List<UserResponse> manageUsers() {
-//todo: the work is going to be in the view
-// here fetch the work respond
+    public static List<UserResponse> list() {
+
+        offset = Utilities.getOffset(null);
         return null;
     }
 
