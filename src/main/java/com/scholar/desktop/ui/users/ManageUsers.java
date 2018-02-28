@@ -16,8 +16,12 @@ public class ManageUsers extends javax.swing.JPanel {
     /**
      * Creates new form ManageUsers
      */
-    public ManageUsers() {
+    SchoolData schoolData = null;
+    public ManageUsers(SchoolData schoolData) {
+        this.schoolData = schoolData;
+        //todo: fetch from service : 
         initComponents();
+
     }
 
 

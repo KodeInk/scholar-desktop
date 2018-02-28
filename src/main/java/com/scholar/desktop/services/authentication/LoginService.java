@@ -101,7 +101,7 @@ public class LoginService {
         }
 
         java.awt.EventQueue.invokeLater(() -> {
-            DashboardScreen dashboardScreen = new DashboardScreen();
+            DashboardScreen dashboardScreen = new DashboardScreen(schoolData);
             dashboardScreen.setVisible(true);
             dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
             dashboardScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);

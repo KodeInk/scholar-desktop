@@ -24,11 +24,11 @@ import main.java.com.scholar.desktop.ui.users.ManageUsers;
  *
  * @author mover
  */
-public class DesktopSwitcher extends SchoolData {
+public class DesktopSwitcher {
 
     private static DesktopSwitcher switcher = null;
 
-    private SchoolData schoolData;
+    private final SchoolData schoolData;
 
     public DesktopSwitcher(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -44,14 +44,15 @@ public class DesktopSwitcher extends SchoolData {
 
     public void showDashboard(DashboardScreen dashboardScreen, DashboardViews view) {
         //  dashboardScreen.setLocation(400, 100);
-        JOptionPane.showMessageDialog(null, getSchoolname());
+
 
         switch (view.toString()) {
             case "OVERVIEW":
+                JOptionPane.showMessageDialog(null, schoolData.getSchoolname());
                 break;
             case "USERS":
 
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers());
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers(schoolData));
                 break;
 
             case "ROLES":
