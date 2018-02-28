@@ -44,11 +44,11 @@ public class UsersService extends AbstractService {
         return instance;
     }
 
-    public static List<UserResponse> list() {
-
-        offset = Utilities.getOffset(null);
+    public List<UserResponse> list() {
+        IncreaseOffsetLimit();
         return null;
     }
+
 
 
 }
