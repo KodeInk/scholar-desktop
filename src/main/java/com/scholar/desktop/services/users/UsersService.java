@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
+import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
  *
  * @author mover 2/23/2018
  */
-public class UsersService {
+public class UsersService extends AbstractService {
 
     private static final Logger LOG = Logger.getLogger(UsersService.class.getName());
     private final SchoolData schoolData;
