@@ -5,11 +5,13 @@
  */
 package main.java.com.scholar.desktop.services.users;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.UserAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
-import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
@@ -22,7 +24,8 @@ public class UsersService extends AbstractService {
     private final SchoolData schoolData;
     private static UsersService instance;
 
-    private List<UserResponse> list;
+    private List<UserResponse> list = null;
+    private static UserAPI userAPI;
 
     /**
      *
@@ -30,6 +33,7 @@ public class UsersService extends AbstractService {
      */
     public UsersService(SchoolData schoolData) {
         this.schoolData = schoolData;
+        userAPI = new UserAPI(schoolData);
     }
 
     /**
@@ -45,8 +49,17 @@ public class UsersService extends AbstractService {
     }
 
     public List<UserResponse> list() {
+
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
+        UserResponse[] responses = userAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
         IncreaseOffsetLimit();
-        return null;
+        return list;
     }
 
 
