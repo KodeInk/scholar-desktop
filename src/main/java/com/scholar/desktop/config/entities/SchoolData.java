@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.config.entities;
 
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.Objects;
  */
 public class SchoolData {
 
-    private String authentication;
+    private AuthenticationResponse authentication;
     private String schoolname;
     private Engine engine;
 
@@ -21,19 +22,11 @@ public class SchoolData {
     public SchoolData() {
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getAuthentication() {
+    public AuthenticationResponse getAuthentication() {
         return authentication;
     }
 
-    /**
-     *
-     * @param authentication
-     */
-    public void setAuthentication(String authentication) {
+    public void setAuthentication(AuthenticationResponse authentication) {
         this.authentication = authentication;
     }
 

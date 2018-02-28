@@ -5,9 +5,11 @@
  */
 package main.java.com.scholar.desktop.ui.users;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class ManageUsers extends javax.swing.JPanel {
 
@@ -17,6 +19,7 @@ public class ManageUsers extends javax.swing.JPanel {
     public ManageUsers() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -5,9 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissions;
 import main.java.com.scholar.desktop.ui.departments.ManageDepartments;
 import main.java.com.scholar.desktop.ui.setup.classes.ManageClasses;
@@ -25,25 +24,33 @@ import main.java.com.scholar.desktop.ui.users.ManageUsers;
  *
  * @author mover
  */
-public class DesktopSwitcher {
+public class DesktopSwitcher extends SchoolData {
 
     private static DesktopSwitcher switcher = null;
 
-    public static DesktopSwitcher getInstance() {
+    private SchoolData schoolData;
+
+    public DesktopSwitcher(SchoolData schoolData) {
+        this.schoolData = schoolData;
+    }
+
+    public static DesktopSwitcher getInstance(SchoolData schoolData) {
 
         if (switcher == null) {
-            switcher = new DesktopSwitcher();
+            switcher = new DesktopSwitcher(schoolData);
         }
         return switcher;
     }
 
     public void showDashboard(DashboardScreen dashboardScreen, DashboardViews view) {
         //  dashboardScreen.setLocation(400, 100);
+        JOptionPane.showMessageDialog(null, getSchoolname());
 
         switch (view.toString()) {
             case "OVERVIEW":
                 break;
             case "USERS":
+
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers());
                 break;
 

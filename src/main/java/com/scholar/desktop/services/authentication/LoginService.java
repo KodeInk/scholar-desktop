@@ -77,6 +77,7 @@ public class LoginService {
         AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
 
         if (authenticationResponse != null) {
+            schoolData.setAuthentication(authenticationResponse);
             initDashboard(loginScreen);
         }
 
@@ -105,7 +106,7 @@ public class LoginService {
             dashboardScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
             dashboardScreen.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-            DesktopSwitcher.getInstance().showDashboard(dashboardScreen, DashboardViews.OTHERS);
+            DesktopSwitcher.getInstance(schoolData).showDashboard(dashboardScreen, DashboardViews.OTHERS);
         });
     }
 

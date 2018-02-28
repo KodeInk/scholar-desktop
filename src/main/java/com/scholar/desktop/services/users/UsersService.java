@@ -5,8 +5,10 @@
  */
 package main.java.com.scholar.desktop.services.users;
 
+import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 
 /**
  *
@@ -18,6 +20,10 @@ public class UsersService {
     private final SchoolData schoolData;
     private static UsersService instance;
 
+    /**
+     *
+     * @param schoolData
+     */
     public UsersService(SchoolData schoolData) {
         this.schoolData = schoolData;
     }
@@ -32,6 +38,12 @@ public class UsersService {
             instance = new UsersService(schoolData);
         }
         return instance;
+    }
+
+    public static List<UserResponse> manageUsers() {
+//todo: the work is going to be in the view
+// here fetch the work respond
+        return null;
     }
 
 

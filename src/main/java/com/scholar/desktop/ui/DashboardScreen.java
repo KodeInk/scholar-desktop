@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
@@ -22,7 +23,10 @@ public class DashboardScreen extends javax.swing.JFrame {
     /**
      * Creates new form DashboardScreen
      */
-    public DashboardScreen() {
+    private SchoolData schoolData;
+
+    public DashboardScreen(SchoolData data) {
+        this.schoolData = data;
         initComponents();
     }
 
@@ -550,57 +554,57 @@ public class DashboardScreen extends javax.swing.JFrame {
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
         // TODO add your handling code here:
-        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.USERS);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.USERS);
     }//GEN-LAST:event_jLabel35MouseClicked
 
     private void jLabel36MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel36MouseClicked
         // TODO add your handling code here:
-        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.ROLES);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.ROLES);
     }//GEN-LAST:event_jLabel36MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
-        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.CLASSES);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.CLASSES);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.CURRICULUM);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.CURRICULUM);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
-        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.SUBJECTS);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.SUBJECTS);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
-        DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.GRADING);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.GRADING);
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.STUDY_PERIOD);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STUDY_PERIOD);
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.TERMS);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.TERMS);
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.DEPARTMENTS);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.DEPARTMENTS);
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.STAFF);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STAFF);
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance().showDashboard(this, DashboardViews.ADMISSION);
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.ADMISSION);
     }//GEN-LAST:event_jLabel22MouseClicked
 
     /**
