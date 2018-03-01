@@ -23,6 +23,7 @@ public class UserResponse {
     private String emailaddress;
     private String authentication;
     private Date dateCreated;
+    private ProfileResponse profile;
 
     public UserResponse() {
     }
@@ -95,17 +96,26 @@ public class UserResponse {
         this.dateCreated = dateCreated;
     }
 
+    public ProfileResponse getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileResponse profile) {
+        this.profile = profile;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.username);
-        hash = 53 * hash + Objects.hashCode(this.status);
-        hash = 53 * hash + Arrays.deepHashCode(this.Roles);
-        hash = 53 * hash + Objects.hashCode(this.accounttype);
-        hash = 53 * hash + Objects.hashCode(this.emailaddress);
-        hash = 53 * hash + Objects.hashCode(this.authentication);
-        hash = 53 * hash + Objects.hashCode(this.dateCreated);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.username);
+        hash = 61 * hash + Objects.hashCode(this.status);
+        hash = 61 * hash + Arrays.deepHashCode(this.Roles);
+        hash = 61 * hash + Objects.hashCode(this.accounttype);
+        hash = 61 * hash + Objects.hashCode(this.emailaddress);
+        hash = 61 * hash + Objects.hashCode(this.authentication);
+        hash = 61 * hash + Objects.hashCode(this.dateCreated);
+        hash = 61 * hash + Objects.hashCode(this.profile);
         return hash;
     }
 
@@ -142,7 +152,10 @@ public class UserResponse {
         if (!Arrays.deepEquals(this.Roles, other.Roles)) {
             return false;
         }
-        return Objects.equals(this.dateCreated, other.dateCreated);
+        if (!Objects.equals(this.dateCreated, other.dateCreated)) {
+            return false;
+        }
+        return Objects.equals(this.profile, other.profile);
     }
 
     @Override
@@ -156,6 +169,7 @@ public class UserResponse {
                 + ", emailaddress=" + emailaddress
                 + ", authentication=" + authentication
                 + ", dateCreated=" + dateCreated
+                + ", profile=" + profile
                 + "}";
     }
 

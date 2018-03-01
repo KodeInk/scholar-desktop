@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -29,9 +30,20 @@ public class ManageUsers extends javax.swing.JPanel {
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
-        List<UserResponse> list = UsersService.getInstance(schoolData).list();
+
+
         usersModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         initComponents();
+        jLabel1.setText("PROCESSING .... ");
+        List<UserResponse> list = UsersService.getInstance(schoolData).list();
+
+        populateJTable(list);
+
+        JOptionPane.showMessageDialog(null, "I am Closer than Normal");
+
+    }
+
+    public void populateJTable(List<UserResponse> list) {
         if (list != null) {
             for (UserResponse ur : list) {
 
@@ -44,17 +56,25 @@ public class ManageUsers extends javax.swing.JPanel {
                     }
                     roles = roleString;
                 }
+
                 String profile_name = "";
+                if (ur.getProfile() != null) {
+                    profile_name = ur.getProfile().getFirstName() + " " + ur.getProfile().getLastName();
+                }
 
+                String isStaff = "_";
+                String status = ur.getStatus();
+                String dateCreated = "";
+                //ur.getDateCreated().toString();
+                String createdBy = "_";
+                String updatedBy = " ";
 
+                Object[] data = {username, roles, profile_name, isStaff, status, dateCreated, createdBy, updatedBy};
+                usersModel.addRow(data);
             }
         }
 
         //usersModel.addColumn("USERNAME");
-
-
-        JOptionPane.showMessageDialog(null, "I am Closer than Normal");
-
     }
 
 
