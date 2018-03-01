@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.users.UsersService;
@@ -20,13 +21,24 @@ public class ManageUsers extends javax.swing.JPanel {
     /**
      * Creates new form ManageUsers
      */
+    private static final String[] COLUMN_HEADERS = {"Title", "Artist", "Gengre", "Quality", "Duration", "Favorite"};
+
     SchoolData schoolData = null;
+    public DefaultTableModel usersModel;
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
         List<UserResponse> list = UsersService.getInstance(schoolData).list();
-
+        usersModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         initComponents();
+        if (list != null) {
+            for (UserResponse ur : list) {
+
+            }
+        }
+
+        //usersModel.addColumn("USERNAME");
+
 
         JOptionPane.showMessageDialog(null, "I am Closer than Normal");
 
@@ -141,30 +153,7 @@ public class ManageUsers extends javax.swing.JPanel {
         );
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"", null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "USERNAME", "ROLES", "PROFILE", "IS STAFF", "STATUS", "DATE CREATED", "CREATED BY", "DATE UPDATED", "UPDATED BY "
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable1.setModel(usersModel);
         jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
@@ -348,7 +337,7 @@ public class ManageUsers extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -372,6 +361,6 @@ public class ManageUsers extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
