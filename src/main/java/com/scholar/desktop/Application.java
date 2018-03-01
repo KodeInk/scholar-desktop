@@ -32,6 +32,11 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        //todo: get the path of the configuration file :
+        /*
+        SUGGESTIONS : U WILL ADD IT AS PART OF THE EMBEDED DB:
+        ITS CREATED AT TENANT SETUP ;
+         */
 
         Application application = new Application();
         //todo: start splash screen ::
@@ -56,7 +61,7 @@ public class Application {
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
 //            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-        //</editor-fold>
+//</editor-fold>
 
         /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,6 +83,5 @@ public class Application {
 //                // ImageIcon icon = new ImageIcon(image);
 //            }
 //        });
-
     }
 }

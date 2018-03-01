@@ -513,6 +513,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Classes"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel11MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
@@ -524,6 +527,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Curriculum"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel12MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel13">
                           <Properties>
@@ -535,6 +541,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Subjects"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel13MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel14">
                           <Properties>
@@ -546,6 +555,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Grading"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel14MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel15">
                           <Properties>
@@ -568,6 +580,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Study Period"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel16MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel17">
                           <Properties>
@@ -579,6 +594,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Terms"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel17MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel18">
                           <Properties>
@@ -601,6 +619,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Departments"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel19MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel20">
                           <Properties>
@@ -612,6 +633,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Staff"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel20MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel21">
                           <Properties>
@@ -634,6 +658,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Student Administration"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel22MouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel23">
                           <Properties>
@@ -791,6 +818,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Manage Roles"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel36MouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
