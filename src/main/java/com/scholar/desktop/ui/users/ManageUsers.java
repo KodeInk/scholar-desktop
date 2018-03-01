@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.users.UsersService;
 
@@ -21,7 +22,7 @@ public class ManageUsers extends javax.swing.JPanel {
     /**
      * Creates new form ManageUsers
      */
-    private static final String[] COLUMN_HEADERS = {"Title", "Artist", "Gengre", "Quality", "Duration", "Favorite"};
+    private static final String[] COLUMN_HEADERS = {"USERNAME", "ROLES", "PROFILE", "IS STAFF", "STATUS", "DATE CREATED", "CREATED BY", "DATE UPDATED", "UPDATED BY"};
 
     SchoolData schoolData = null;
     public DefaultTableModel usersModel;
@@ -33,6 +34,18 @@ public class ManageUsers extends javax.swing.JPanel {
         initComponents();
         if (list != null) {
             for (UserResponse ur : list) {
+
+                String username = ur.getUsername();
+                String roles = "";
+                if (ur.getRoles() != null) {
+                    String roleString = "";
+                    for (RoleResponse role : ur.getRoles()) {
+                        roleString += role.getName();
+                    }
+                    roles = roleString;
+                }
+                String profile_name = "";
+
 
             }
         }
