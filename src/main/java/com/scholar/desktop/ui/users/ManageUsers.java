@@ -6,13 +6,13 @@
 package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.users.UsersService;
+import main.java.com.scholar.desktop.ui.helper.Utilities;
 
 /**
  *
@@ -27,12 +27,14 @@ public class ManageUsers extends javax.swing.JPanel {
 
     SchoolData schoolData = null;
     public DefaultTableModel usersModel;
+
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
 
-
-        usersModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        if (usersModel == null) {
+            usersModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
         initComponents();
         jLabel1.setText("PROCESSING .... ");
         List<UserResponse> list = UsersService.getInstance(schoolData).list();
@@ -45,6 +47,9 @@ public class ManageUsers extends javax.swing.JPanel {
 
     public void populateJTable(List<UserResponse> list) {
         if (list != null) {
+
+            Utilities.removeRowsFromDefaultModel(usersModel);
+
             for (UserResponse ur : list) {
 
                 String username = ur.getUsername();
@@ -74,9 +79,11 @@ public class ManageUsers extends javax.swing.JPanel {
             }
         }
 
+        usersModel.fireTableDataChanged();
+
+//fireTableDataChanged
         //usersModel.addColumn("USERNAME");
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
