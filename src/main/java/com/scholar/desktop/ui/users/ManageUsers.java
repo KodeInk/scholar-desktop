@@ -5,12 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.users;
 
-import java.awt.BorderLayout;
 import java.util.List;
-import javax.swing.JDialog;
-
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -32,7 +27,7 @@ public class ManageUsers extends javax.swing.JPanel {
 
     SchoolData schoolData = null;
     public DefaultTableModel usersModel;
-    final JDialog dlg;
+
 
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -43,15 +38,11 @@ public class ManageUsers extends javax.swing.JPanel {
         }
         initComponents();
 
-        dlg = new JDialog();
-        JProgressBar dpb = new JProgressBar(0, 500);
-        dlg.add(BorderLayout.CENTER, dpb);
-        dlg.add(BorderLayout.NORTH, new JLabel("Progress..."));
-        dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        dlg.setSize(300, 150);
-        dlg.setLocationRelativeTo(null);
+        final String message = "     Processsing ...     ";
 
-        dlg.setVisible(true);
+        Utilities.ShowDialogMessage(message);
+
+        
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -68,6 +59,7 @@ public class ManageUsers extends javax.swing.JPanel {
 
 
     }
+
 
     public void populateJTable(List<UserResponse> list) {
         if (list != null) {
@@ -105,7 +97,7 @@ public class ManageUsers extends javax.swing.JPanel {
 
         usersModel.fireTableDataChanged();
 
-        dlg.setVisible(false);
+        Utilities.hideDialog();
 //fireTableDataChanged
         //usersModel.addColumn("USERNAME");
     }

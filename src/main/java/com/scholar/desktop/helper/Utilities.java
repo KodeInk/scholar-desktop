@@ -5,25 +5,29 @@
  */
 package main.java.com.scholar.desktop.helper;
 
+import java.awt.BorderLayout;
+import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.HeadlessException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.xml.ws.Response;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
-
 
 /**
  *
  * @author mover 2/9/2018
  */
 public class Utilities {
+
     private static final Logger LOG = Logger.getLogger(Utilities.class.getName());
 
     public static final Integer default_offset = 0;
     public static final Integer default_limit = 50;
-
+    private static JDialog dialog;
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -32,7 +36,7 @@ public class Utilities {
     public static String getParameterForLogging(Map parameter) {
         try {
 
-                return "none";
+            return "none";
 
         } catch (Exception ex) {
             return "--- parameter conversion error ---";
