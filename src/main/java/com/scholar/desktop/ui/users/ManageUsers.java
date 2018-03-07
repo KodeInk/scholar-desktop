@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
@@ -37,9 +38,19 @@ public class ManageUsers extends javax.swing.JPanel {
         }
         initComponents();
         jLabel1.setText("PROCESSING .... ");
-        List<UserResponse> list = UsersService.getInstance(schoolData).list();
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-        populateJTable(list);
+                List<UserResponse> list = UsersService.getInstance(schoolData).list();
+                populateJTable(list);
+                return null;
+            }
+        };
+
+        swingWorker.execute();
+
 
         JOptionPane.showMessageDialog(null, "I am Closer than Normal");
 

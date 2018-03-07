@@ -50,9 +50,10 @@ public class UsersService extends AbstractService {
 
     public List<UserResponse> list() {
 
-        if (list == null) {
-            list = new ArrayList<>();
-        }
+        list = new ArrayList<>();
+//        if (list == null) {
+//            list = new ArrayList<>();
+//        }
 
         UserResponse[] responses = userAPI.list(offset, limit);
         if (responses != null) {
