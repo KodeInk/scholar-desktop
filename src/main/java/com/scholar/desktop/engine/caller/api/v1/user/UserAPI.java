@@ -68,7 +68,6 @@ public class UserAPI {
 
         }
 
-        JOptionPane.showMessageDialog(null, "MOVER NOT WORKING ");
         return null;
     }
 
