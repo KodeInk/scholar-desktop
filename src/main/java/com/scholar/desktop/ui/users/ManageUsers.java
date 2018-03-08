@@ -28,7 +28,6 @@ public class ManageUsers extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
 
-
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
@@ -40,9 +39,9 @@ public class ManageUsers extends javax.swing.JPanel {
 
         fetchData(schoolData);
 
-        
     }
     List<UserResponse> list = null;
+
     public final void fetchData(SchoolData schoolData1) {
         if (list != null) {
             populateJTable(list);
@@ -60,7 +59,6 @@ public class ManageUsers extends javax.swing.JPanel {
         };
         swingWorker.execute();
     }
-
 
     public void populateJTable(List<UserResponse> list) {
         if (list != null) {
@@ -389,7 +387,6 @@ public class ManageUsers extends javax.swing.JPanel {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

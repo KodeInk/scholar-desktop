@@ -13,7 +13,9 @@ import main.java.com.scholar.desktop.ui.SplashScreen;
  * @author mover
  */
 public class Application {
+
     static SplashScreen screen = null;
+
     public Application() {
         screen = new SplashScreen();
         screen.setVisible(true);

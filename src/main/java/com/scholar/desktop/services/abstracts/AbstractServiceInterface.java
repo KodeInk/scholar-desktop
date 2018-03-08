@@ -10,6 +10,7 @@ package main.java.com.scholar.desktop.services.abstracts;
  * @author mover
  */
 public interface AbstractServiceInterface {
+
     public void IncreaseOffsetLimit();
 
 }

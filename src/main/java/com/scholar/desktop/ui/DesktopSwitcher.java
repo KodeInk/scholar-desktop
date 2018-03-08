@@ -45,7 +45,6 @@ public class DesktopSwitcher {
     public void showDashboard(DashboardScreen dashboardScreen, DashboardViews view) {
         //  dashboardScreen.setLocation(400, 100);
 
-
         switch (view.toString()) {
             case "OVERVIEW":
                 JOptionPane.showMessageDialog(null, schoolData.getSchoolname());
@@ -95,9 +94,6 @@ public class DesktopSwitcher {
 //            case "REGISTRATION":
 //                dashboardScreen.getjSplitPane1().setRightComponent(new ManageStaff());
 //                break;
-
-
-
             default:
                 // ManageUsers manageUsers = new ManageUsers();
 

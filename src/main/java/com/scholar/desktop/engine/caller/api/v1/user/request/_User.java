@@ -18,13 +18,13 @@ import java.util.Objects;
 public class _User {
 
     private Integer id;
-    private    String username;
-    private    String password;
+    private String username;
+    private String password;
     private String emailaddress;
     private StatusEnum status;
     private String externalid;
     private String date_created;
-    private    String[] roles;
+    private String[] roles;
 
     public _User() {
     }
@@ -146,7 +146,6 @@ public class _User {
         }
         return Arrays.deepEquals(this.roles, other.roles);
     }
-
 
     @Override
     public String toString() {

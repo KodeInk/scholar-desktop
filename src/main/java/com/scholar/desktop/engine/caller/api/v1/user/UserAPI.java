@@ -27,11 +27,13 @@ import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
  * @author mover 2/14/2018
  */
 public class UserAPI {
+
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
     private final SchoolData schoolData;
     private static UserAPI instance;
 
     private final EngineCaller engineCaller;
+
     public UserAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
         engineCaller = new EngineCaller(schoolData);
@@ -71,9 +73,6 @@ public class UserAPI {
         return null;
     }
 
-
-
-
     /**
      *
      * @param user
@@ -102,24 +101,23 @@ public class UserAPI {
             Response response = engineCaller.post("user/v1/login", body, logId);
 
             JOptionPane.showMessageDialog(null, response.toString());
-                switch (response.getStatus()) {
-                    case 400:
-                        ShowAlertMessage(response);
-                        break;
-                    case 200:
-                        AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
-                        JOptionPane.showMessageDialog(null, authenticationResponse.getAuthentication());
-                        return authenticationResponse;
-                    case 401:
-                        ShowAlertMessage(response);
-                        break;
-                    default:
-                        return null;
+            switch (response.getStatus()) {
+                case 400:
+                    ShowAlertMessage(response);
+                    break;
+                case 200:
+                    AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
+                    JOptionPane.showMessageDialog(null, authenticationResponse.getAuthentication());
+                    return authenticationResponse;
+                case 401:
+                    ShowAlertMessage(response);
+                    break;
+                default:
+                    return null;
 
-                }
+            }
 
             return null;
-
 
         } catch (Exception e) {
 
@@ -128,7 +126,6 @@ public class UserAPI {
         }
 
     }
-
 
     /**
      *

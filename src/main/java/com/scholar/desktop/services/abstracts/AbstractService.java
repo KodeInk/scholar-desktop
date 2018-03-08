@@ -20,5 +20,4 @@ public class AbstractService extends Offsets implements AbstractServiceInterface
         limit = limit++;
     }
 
-
 }

@@ -25,6 +25,7 @@ public class LoginScreen extends javax.swing.JFrame {
      * Creates new form LoginScreen
      */
     private final List<SchoolConfig> configs;
+
     public LoginScreen(List<SchoolConfig> configs) {
         this.configs = configs;
         initComponents();
@@ -40,7 +41,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
         //jComboBox1
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,12 +178,11 @@ public class LoginScreen extends javax.swing.JFrame {
         String Username = USERNAMEFIELD.getText();
         char[] Password = PASSWORDFIELD.getPassword();
 
-        SchoolData schoolData = new SchoolData();        
+        SchoolData schoolData = new SchoolData();
         String school_name = jComboBox1.getSelectedItem().toString();
 
-
         for (SchoolConfig config : configs) {
-            if(config.getName().equalsIgnoreCase(school_name)){
+            if (config.getName().equalsIgnoreCase(school_name)) {
                 schoolData.setEngine(config.getEngine());
                 schoolData.setSchoolname(school_name);
             }
@@ -193,16 +192,13 @@ public class LoginScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "School Name does not exist");
         }
 
-        LOGINBUTTON.setText("Processing");        
+        LOGINBUTTON.setText("Processing");
         LoginService connector = new LoginService(schoolData);
         connector.login(Username, String.valueOf(Password), this);
         LOGINBUTTON.setText("LOGIN");
 
         //todo: init dashboard
-       
     }//GEN-LAST:event_LOGINBUTTONActionPerformed
-
-   
 
     /**
      * @param args the command line arguments
@@ -238,7 +234,6 @@ public class LoginScreen extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LOGINBUTTON;
     private javax.swing.JPasswordField PASSWORDFIELD;

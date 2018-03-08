@@ -26,6 +26,7 @@ public class SplashScreen extends javax.swing.JFrame {
      * Creates new form SplashScreen
      */
     JFrame frame = null;
+
     public SplashScreen() {
         //  EngineCaller engineCaller = new EngineCaller();
 
@@ -160,11 +161,9 @@ public class SplashScreen extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-       // System.exit(0);
-       
+        // System.exit(0);
+
     }//GEN-LAST:event_jLabel1MouseClicked
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

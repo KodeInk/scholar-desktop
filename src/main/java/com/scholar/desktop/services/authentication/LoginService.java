@@ -81,7 +81,6 @@ public class LoginService {
             initDashboard(loginScreen);
         }
 
-
         return true;
 
     }

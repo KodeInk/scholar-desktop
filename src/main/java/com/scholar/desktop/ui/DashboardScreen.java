@@ -569,7 +569,7 @@ public class DashboardScreen extends javax.swing.JFrame {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.CURRICULUM);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.CURRICULUM);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
@@ -584,27 +584,27 @@ public class DashboardScreen extends javax.swing.JFrame {
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STUDY_PERIOD);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STUDY_PERIOD);
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.TERMS);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.TERMS);
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.DEPARTMENTS);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.DEPARTMENTS);
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STAFF);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.STAFF);
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
         // TODO add your handling code here:
-         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.ADMISSION);
+        DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.ADMISSION);
     }//GEN-LAST:event_jLabel22MouseClicked
 
     /**
@@ -650,7 +650,6 @@ public class DashboardScreen extends javax.swing.JFrame {
 //        });
 //    }
 //
-
     public JSplitPane getjSplitPane1() {
         return jSplitPane1;
     }
@@ -666,7 +665,6 @@ public class DashboardScreen extends javax.swing.JFrame {
     public void setjPanel6(JPanel jPanel6) {
         this.jPanel6 = jPanel6;
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -18,7 +18,6 @@ public class SchoolData {
     private String schoolname;
     private Engine engine;
 
-
     public SchoolData() {
     }
 
@@ -37,7 +36,6 @@ public class SchoolData {
     public String getSchoolname() {
         return schoolname;
     }
-
 
     /**
      *
@@ -93,7 +91,6 @@ public class SchoolData {
         return Objects.equals(this.engine, other.engine);
     }
 
-
     @Override
     public String toString() {
         return "SchoolData{"
@@ -101,7 +98,5 @@ public class SchoolData {
                 + ", schoolname=" + schoolname
                 + '}';
     }
-
-
 
 }

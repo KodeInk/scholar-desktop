@@ -26,6 +26,7 @@ public class ManageRoles extends javax.swing.JPanel {
      * Creates new form ManageRoles
      */
     public DefaultTableModel tableModel;
+
     public ManageRoles(SchoolData schoolData) {
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
@@ -327,7 +328,6 @@ public class ManageRoles extends javax.swing.JPanel {
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("_manage_roles_tab");
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

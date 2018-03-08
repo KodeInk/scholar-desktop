@@ -15,8 +15,8 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class _login {
 
-    private    String username;
-    private    String password;
+    private String username;
+    private String password;
 
     public _login() {
     }

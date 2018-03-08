@@ -55,7 +55,6 @@ public class UsersService extends AbstractService {
         }
         list = new ArrayList<>();
 
-
         UserResponse[] responses = userAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
@@ -63,7 +62,5 @@ public class UsersService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-
-
 
 }
