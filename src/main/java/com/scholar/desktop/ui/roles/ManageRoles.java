@@ -12,7 +12,9 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.roles.RolesService;
 import main.java.com.scholar.desktop.services.users.UsersService;
+import org.glassfish.jersey.message.filtering.SecurityAnnotations;
 
 /**
  *
@@ -33,9 +35,11 @@ public class ManageRoles extends javax.swing.JPanel {
         }
 
         initComponents();
+        fetchData(schoolData);
+
     }
 
-    List<UserResponse> list = null;
+    List<RoleResponse> list = null;
 
     public final void fetchData(SchoolData schoolData1) {
         if (list != null) {
@@ -47,7 +51,7 @@ public class ManageRoles extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = UsersService.getInstance(schoolData1).list();
+                list = RolesService.getInstance(schoolData1).list();
                 populateJTable(list);
                 return null;
             }
@@ -55,36 +59,22 @@ public class ManageRoles extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void populateJTable(List<UserResponse> list) {
+    public void populateJTable(List<RoleResponse> list) {
         if (list != null) {
 
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (UserResponse ur : list) {
+            for (RoleResponse roleResponse : list) {
 
-                String username = ur.getUsername();
-                String roles = "";
-                if (ur.getRoles() != null) {
-                    String roleString = "";
-                    for (RoleResponse role : ur.getRoles()) {
-                        roleString += role.getName();
-                    }
-                    roles = roleString;
-                }
+                String name = roleResponse.getName();
+                String code = roleResponse.getCode();
+                String description = roleResponse.getDescription();
+                String isSystem = roleResponse.isIsSystem() ? "YES" : "NO";
+                String status = "- ";
+                String DateCreated = " - ";
+                String author = " - ";
 
-                String profile_name = "";
-                if (ur.getProfile() != null) {
-                    profile_name = ur.getProfile().getFirstName() + " " + ur.getProfile().getLastName();
-                }
-
-                String isStaff = "_";
-                String status = ur.getStatus();
-                String dateCreated = "";
-                //ur.getDateCreated().toString();
-                String createdBy = "_";
-                String updatedBy = " ";
-
-                Object[] data = {username, roles, profile_name, isStaff, status, dateCreated, createdBy, updatedBy};
+                Object[] data = {name, code, description, isSystem, status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }

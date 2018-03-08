@@ -16,6 +16,7 @@ public class RoleResponse {
 
     private Integer id;
     private String name;
+    private String code;
     private String description;
     private boolean isSystem;
     private PermissionsResponse[] permissions;
@@ -67,14 +68,23 @@ public class RoleResponse {
         this.permissions = permissions;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.id);
-        hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.description);
-        hash = 43 * hash + (this.isSystem ? 1 : 0);
-        hash = 43 * hash + Arrays.deepHashCode(this.permissions);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.code);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + (this.isSystem ? 1 : 0);
+        hash = 37 * hash + Arrays.deepHashCode(this.permissions);
         return hash;
     }
 
@@ -96,6 +106,9 @@ public class RoleResponse {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
@@ -105,6 +118,7 @@ public class RoleResponse {
         return Arrays.deepEquals(this.permissions, other.permissions);
     }
 
+
     @Override
     public String toString() {
         return "RoleResponse{"
@@ -113,6 +127,7 @@ public class RoleResponse {
                 + ", description=" + description
                 + ", isSystem=" + isSystem
                 + ", permissions=" + Arrays.asList(permissions)
+                + ", code=" + code
                 + "}";
     }
 

@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.RoleAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
@@ -31,11 +30,20 @@ public class RolesService extends AbstractService {
 
     private List<RoleResponse> list = null;
 
+    /**
+     *
+     * @param schoolData
+     */
     public RolesService(SchoolData schoolData) {
         this.schoolData = schoolData;
         roleAPI = new RoleAPI(schoolData);
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static RolesService getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new RolesService(schoolData);
@@ -43,6 +51,10 @@ public class RolesService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<RoleResponse> list() {
         if (list != null) {
             return list;
