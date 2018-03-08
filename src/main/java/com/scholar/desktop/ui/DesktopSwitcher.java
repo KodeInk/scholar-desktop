@@ -56,7 +56,7 @@ public class DesktopSwitcher {
                 break;
 
             case "ROLES":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRoles());
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRoles(schoolData));
                 break;
 
             case "CLASSES":

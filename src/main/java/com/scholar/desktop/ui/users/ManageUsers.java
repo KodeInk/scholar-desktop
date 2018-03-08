@@ -11,8 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.users.UsersService;
-import main.java.com.scholar.desktop.ui.helper.Utilities;
 
 /**
  *
@@ -26,45 +26,46 @@ public class ManageUsers extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"USERNAME", "ROLES", "PROFILE", "IS STAFF", "STATUS", "DATE CREATED", "CREATED BY", "DATE UPDATED", "UPDATED BY"};
 
     SchoolData schoolData = null;
-    public DefaultTableModel usersModel;
+    public DefaultTableModel tableModel;
 
 
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
 
-        if (usersModel == null) {
-            usersModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
         initComponents();
 
-        final String message = "     Processsing ...     ";
-
-        Utilities.ShowDialogMessage(message);
+        fetchData(schoolData);
 
         
+    }
+    List<UserResponse> list = null;
+    public final void fetchData(SchoolData schoolData1) {
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-                List<UserResponse> list = UsersService.getInstance(schoolData).list();
+                list = UsersService.getInstance(schoolData1).list();
                 populateJTable(list);
                 return null;
             }
         };
-
         swingWorker.execute();
-
-
-
     }
 
 
     public void populateJTable(List<UserResponse> list) {
         if (list != null) {
 
-            Utilities.removeRowsFromDefaultModel(usersModel);
+            Utilities.removeRowsFromDefaultModel(tableModel);
 
             for (UserResponse ur : list) {
 
@@ -91,11 +92,11 @@ public class ManageUsers extends javax.swing.JPanel {
                 String updatedBy = " ";
 
                 Object[] data = {username, roles, profile_name, isStaff, status, dateCreated, createdBy, updatedBy};
-                usersModel.addRow(data);
+                tableModel.addRow(data);
             }
         }
 
-        usersModel.fireTableDataChanged();
+        tableModel.fireTableDataChanged();
 
         Utilities.hideDialog();
 //fireTableDataChanged
@@ -210,7 +211,7 @@ public class ManageUsers extends javax.swing.JPanel {
         );
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(usersModel);
+        jTable1.setModel(tableModel);
         jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));

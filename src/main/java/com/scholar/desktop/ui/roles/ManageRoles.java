@@ -5,17 +5,93 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import java.util.List;
+import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.users.UsersService;
+
 /**
  *
- * @author Manny
+ * @author mover 3/8/2018
  */
 public class ManageRoles extends javax.swing.JPanel {
 
+    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"};
+    SchoolData schoolData = null;
     /**
      * Creates new form ManageRoles
      */
-    public ManageRoles() {
+    public DefaultTableModel tableModel;
+    public ManageRoles(SchoolData schoolData) {
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
+    }
+
+    List<UserResponse> list = null;
+
+    public final void fetchData(SchoolData schoolData1) {
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = UsersService.getInstance(schoolData1).list();
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+
+    public void populateJTable(List<UserResponse> list) {
+        if (list != null) {
+
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (UserResponse ur : list) {
+
+                String username = ur.getUsername();
+                String roles = "";
+                if (ur.getRoles() != null) {
+                    String roleString = "";
+                    for (RoleResponse role : ur.getRoles()) {
+                        roleString += role.getName();
+                    }
+                    roles = roleString;
+                }
+
+                String profile_name = "";
+                if (ur.getProfile() != null) {
+                    profile_name = ur.getProfile().getFirstName() + " " + ur.getProfile().getLastName();
+                }
+
+                String isStaff = "_";
+                String status = ur.getStatus();
+                String dateCreated = "";
+                //ur.getDateCreated().toString();
+                String createdBy = "_";
+                String updatedBy = " ";
+
+                Object[] data = {username, roles, profile_name, isStaff, status, dateCreated, createdBy, updatedBy};
+                tableModel.addRow(data);
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
+
     }
 
     /**
@@ -113,17 +189,7 @@ public class ManageRoles extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "CODE", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jTable1.setGridColor(new java.awt.Color(204, 204, 204));
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
