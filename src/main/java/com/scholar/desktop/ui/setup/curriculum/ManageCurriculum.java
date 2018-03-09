@@ -5,17 +5,37 @@
  */
 package main.java.com.scholar.desktop.ui.setup.curriculum;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+
 /**
  *
- * @author Manny
+ * @author mover 3/10/2018
  */
 public class ManageCurriculum extends javax.swing.JPanel {
 
+    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"};
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
     /**
      * Creates new form ManageCurriculum
      */
     public ManageCurriculum() {
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+
+    }
+
+    public void populateJTable(List<ClassResponse> list) {
+
     }
 
     /**
@@ -108,17 +128,7 @@ public class ManageCurriculum extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));

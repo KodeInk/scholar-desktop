@@ -196,15 +196,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
-                            <Column editable="true" title="NAME" type="java.lang.Object"/>
-                            <Column editable="true" title="CODE" type="java.lang.Object"/>
-                            <Column editable="true" title="DESCRIPTION" type="java.lang.Object"/>
-                            <Column editable="true" title="STATUS" type="java.lang.Object"/>
-                            <Column editable="true" title="DATE CREATED" type="java.lang.Object"/>
-                            <Column editable="true" title="AUTHOR" type="java.lang.Object"/>
-                          </Table>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="tableModel" type="code"/>
                         </Property>
                       </Properties>
                     </Component>
