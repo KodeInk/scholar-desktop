@@ -25,7 +25,7 @@ public class CurriculumService extends AbstractService {
 
     private static final Logger LOG = Logger.getLogger(CurriculumService.class.getName());
     private final SchoolData schoolData;
-    private static ClassesService instance;
+    private static CurriculumService instance;
     CurriculumAPI curriculumAPI;
     private List<CurriculumResponse> list = null;
 
@@ -34,9 +34,9 @@ public class CurriculumService extends AbstractService {
         curriculumAPI = new CurriculumAPI(schoolData);
     }
 
-    public static ClassesService getInstance(SchoolData schoolData) {
+    public static CurriculumService getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new ClassesService(schoolData);
+            instance = new CurriculumService(schoolData);
         }
         return instance;
     }

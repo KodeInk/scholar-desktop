@@ -5,14 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.setup.curriculum;
 
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 
 /**
@@ -27,7 +28,7 @@ public class ManageCurriculum extends javax.swing.JPanel {
     /**
      * Creates new form ManageCurriculum
      */
-    List<CurriculumService> list = null;
+    List<CurriculumResponse> list = null;
     public ManageCurriculum() {
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
@@ -49,7 +50,7 @@ public class ManageCurriculum extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = CurriculumService.getInstance(schoolData1).list();
+                list = CurriculumService.getInstance(schoolData).list();
 
                 populateJTable(list);
                 return null;
@@ -59,7 +60,30 @@ public class ManageCurriculum extends javax.swing.JPanel {
 
     }
 
-    public void populateJTable(List<ClassResponse> list) {
+    public void populateJTable(List<CurriculumResponse> list) {
+
+        JOptionPane.showMessageDialog(null, " :: ");
+        if (list != null) {
+            JOptionPane.showMessageDialog(null, "Wave");
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+//            for (CurriculumResponse ur : list) {
+//
+//                String name = ur.getName();
+//                String code = ur.getCode();
+//                String description = ur.getDescription();
+//                String status = ur.getStatus();
+//                Date date_Created = ur.getDate_created();
+//                String author = ur.getAuthor();
+//                Object[] data = {name, code, description, status, " - ", author};
+//                tableModel.addRow(data);
+//
+//            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
 
     }
 
