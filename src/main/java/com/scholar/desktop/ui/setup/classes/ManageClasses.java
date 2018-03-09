@@ -5,14 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 
@@ -33,7 +34,7 @@ public class ManageClasses extends javax.swing.JPanel {
     List<ClassResponse> list = null;
 
     public ManageClasses(SchoolData schoolData) {
-        this.schoolData = schoolData;
+
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
@@ -55,6 +56,7 @@ public class ManageClasses extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 list = ClassesService.getInstance(schoolData1).list();
+
                 populateJTable(list);
                 return null;
             }
@@ -65,18 +67,20 @@ public class ManageClasses extends javax.swing.JPanel {
     public void populateJTable(List<ClassResponse> list) {
 
         if (list != null) {
-
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (ClassResponse ur : list) {
-                String name = ur.getName();
-                String code = ur.getCode();
-                String ranking = ur.getRanking().toString();
-                String date_Created = ur.getDate_created().toString();
-                String author = ur.getAuthor();
+        for (ClassResponse ur : list) {
 
-                Object[] data = {name, code, ranking, date_Created, author};
-                tableModel.addRow(data);
+            String name = ur.getName();
+            String code = ur.getCode();
+            String ranking = ur.getRanking().toString();
+            String status = ur.getStatus().name();
+            Date date_Created = ur.getDate_created();
+
+            String author = ur.getAuthor();
+            Object[] data = {name, code, ranking, status, " - ", author};
+            tableModel.addRow(data);
+
             }
         }
 

@@ -10,11 +10,8 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.roles.RolesService;
-import main.java.com.scholar.desktop.services.users.UsersService;
-import org.glassfish.jersey.message.filtering.SecurityAnnotations;
 
 /**
  *
