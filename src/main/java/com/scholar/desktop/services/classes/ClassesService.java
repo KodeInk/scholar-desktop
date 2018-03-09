@@ -10,10 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
 
 /**
  *
@@ -25,8 +24,13 @@ public class ClassesService extends AbstractService {
     private final SchoolData schoolData;
     private static ClassesService instance;
 
+    ClassesAPI classesAPI;
+
+    private List<ClassResponse> list = null;
+
     public ClassesService(SchoolData schoolData) {
         this.schoolData = schoolData;
+        classesAPI = new ClassesAPI(schoolData);
     }
 
     public static ClassesService getInstance(SchoolData schoolData) {
@@ -36,18 +40,18 @@ public class ClassesService extends AbstractService {
         return instance;
     }
 
-//     public List<UserResponse> list() {
-//
-//        if (list != null) {
-//            return list;
-//        }
-//        list = new ArrayList<>();
-//
-//        UserResponse[] responses = userAPI.list(offset, limit);
-//        if (responses != null) {
-//            list.addAll(Arrays.asList(responses));
-//        }
-//        IncreaseOffsetLimit();
-//        return list;
-//    }
+    public List<ClassResponse> list() {
+
+        if (list != null) {
+            return list;
+        }
+        list = new ArrayList<>();
+
+        ClassResponse[] responses = classesAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+        IncreaseOffsetLimit();
+        return list;
+    }
 }
