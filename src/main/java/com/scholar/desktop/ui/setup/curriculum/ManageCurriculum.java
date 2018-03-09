@@ -6,9 +6,14 @@
 package main.java.com.scholar.desktop.ui.setup.curriculum;
 
 import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 
 /**
  *
@@ -22,15 +27,35 @@ public class ManageCurriculum extends javax.swing.JPanel {
     /**
      * Creates new form ManageCurriculum
      */
+    List<CurriculumService> list = null;
     public ManageCurriculum() {
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
 
         initComponents();
+        fetchData(schoolData);
     }
 
     public final void fetchData(SchoolData schoolData1) {
+
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = CurriculumService.getInstance(schoolData1).list();
+
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
 
     }
 

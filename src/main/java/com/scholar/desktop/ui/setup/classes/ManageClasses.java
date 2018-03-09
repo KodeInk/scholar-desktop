@@ -5,11 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
