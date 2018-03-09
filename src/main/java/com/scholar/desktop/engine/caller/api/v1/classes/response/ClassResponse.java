@@ -6,8 +6,6 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.classes.response;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;

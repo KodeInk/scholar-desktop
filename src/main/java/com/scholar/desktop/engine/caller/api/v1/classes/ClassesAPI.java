@@ -25,7 +25,7 @@ public class ClassesAPI {
 
     private static final Logger LOG = Logger.getLogger(ClassesAPI.class.getName());
     private final SchoolData schoolData;
-    private static UserAPI instance;
+    private static ClassesAPI instance;
 
     private final EngineCaller engineCaller;
 

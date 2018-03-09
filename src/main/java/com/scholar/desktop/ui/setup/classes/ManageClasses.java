@@ -11,8 +11,10 @@ import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.users.UsersService;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
@@ -37,6 +39,8 @@ public class ManageClasses extends javax.swing.JPanel {
         }
 
         initComponents();
+        fetchData(schoolData);
+
     }
 
     public final void fetchData(SchoolData schoolData1) {
@@ -50,18 +54,35 @@ public class ManageClasses extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = ClassesAPI.getInstance(schoolData1).list();
+                list = ClassesService.getInstance(schoolData1).list();
                 populateJTable(list);
                 return null;
             }
         };
         swingWorker.execute();
-
-
-
     }
 
     public void populateJTable(List<ClassResponse> list) {
+
+        if (list != null) {
+
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (ClassResponse ur : list) {
+                String name = ur.getName();
+                String code = ur.getCode();
+                String ranking = ur.getRanking().toString();
+                String date_Created = ur.getDate_created().toString();
+                String author = ur.getAuthor();
+
+                Object[] data = {name, code, ranking, date_Created, author};
+                tableModel.addRow(data);
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
 
     }
 
