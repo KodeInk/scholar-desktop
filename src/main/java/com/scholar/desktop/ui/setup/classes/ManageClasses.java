@@ -5,8 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
  *
@@ -22,6 +28,8 @@ public class ManageClasses extends javax.swing.JPanel {
      * Creates new form ManageClasses
      * @param schoolData
      */
+    List<ClassResponse> list = null;
+
     public ManageClasses(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
@@ -29,6 +37,32 @@ public class ManageClasses extends javax.swing.JPanel {
         }
 
         initComponents();
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = ClassesAPI.getInstance(schoolData1).list();
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
+
+
+
+    }
+
+    public void populateJTable(List<ClassResponse> list) {
+
     }
 
     /**
