@@ -5,16 +5,29 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 3/9/2018
  */
 public class ManageClasses extends javax.swing.JPanel {
 
+    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
+
     /**
      * Creates new form ManageClasses
+     * @param schoolData
      */
-    public ManageClasses() {
+    public ManageClasses(SchoolData schoolData) {
+        this.schoolData = schoolData;
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
     }
 
@@ -115,25 +128,7 @@ public class ManageClasses extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable1.setModel(tableModel);
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
