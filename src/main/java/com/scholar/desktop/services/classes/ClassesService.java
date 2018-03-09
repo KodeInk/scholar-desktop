@@ -5,9 +5,15 @@
  */
 package main.java.com.scholar.desktop.services.classes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
+import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
+import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
 
 /**
  *
@@ -19,5 +25,29 @@ public class ClassesService extends AbstractService {
     private final SchoolData schoolData;
     private static ClassesService instance;
 
+    public ClassesService(SchoolData schoolData) {
+        this.schoolData = schoolData;
+    }
 
+    public static ClassesService getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ClassesService(schoolData);
+        }
+        return instance;
+    }
+
+//     public List<UserResponse> list() {
+//
+//        if (list != null) {
+//            return list;
+//        }
+//        list = new ArrayList<>();
+//
+//        UserResponse[] responses = userAPI.list(offset, limit);
+//        if (responses != null) {
+//            list.addAll(Arrays.asList(responses));
+//        }
+//        IncreaseOffsetLimit();
+//        return list;
+//    }
 }
