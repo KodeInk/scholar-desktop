@@ -52,6 +52,7 @@ public class ManageCurriculum extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+
                 list = CurriculumService.getInstance(schoolData).list();
 
                 populateJTable(list);
@@ -64,17 +65,19 @@ public class ManageCurriculum extends javax.swing.JPanel {
 
     public void populateJTable(List<CurriculumResponse> list) {
 
+        // JOptionPane.showMessageDialog(null, "Blue Print");
+        JOptionPane.showMessageDialog(null, list.size());
         if (list != null) {
 
             Utilities.removeRowsFromDefaultModel(tableModel);
 
             for (CurriculumResponse ur : list) {
-
+                JOptionPane.showMessageDialog(null, "Blue Print");
                 String name = ur.getName();
                 String code = ur.getCode();
                 String description = ur.getDescription();
                 String status = ur.getStatus();
-                Date date_Created = ur.getDate_created();
+                // Date date_Created = ur.getDate_created();
                 String author = ur.getAuthor();
                 Object[] data = {name, code, description, status, " - ", author};
                 tableModel.addRow(data);
