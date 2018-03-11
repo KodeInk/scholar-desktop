@@ -5,8 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.setup.subjects;
 
+import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
  *
@@ -17,6 +23,7 @@ public class ManageSubjects extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
+    List<SubjectResponse> list = null;
     /**
      * Creates new form ManageSubjects
      */
@@ -30,6 +37,43 @@ public class ManageSubjects extends javax.swing.JPanel {
     }
 
     public final void fetchData(SchoolData schoolData1) {
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = SubjectsService.getInstance(schoolData).list();
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
+
+    }
+
+    public void populateJTable(List<SubjectResponse> list) {
+
+        if (list != null) {
+            Utilities.removeRowsFromDefaultModel(tableModel);
+            for (SubjectResponse ur : list) {
+                String name = ur.getName();
+                String code = ur.getCode();
+                String status = ur.getStatus();
+                String dateCreated = " - ";
+                String author = ur.getAuthor();
+                Object[] data = {name, code, status, dateCreated, author};
+                tableModel.addRow(data);
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
 
     }
 
