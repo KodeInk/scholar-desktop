@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -19,6 +20,7 @@ public class SubjectResponse {
     private String status;
     private Long date_created;
     private String author;
+    private SubjectPaperResponse[] subjectPaperResponses;
 
     public SubjectResponse() {
     }
@@ -75,15 +77,24 @@ public class SubjectResponse {
         this.author = author;
     }
 
+    public SubjectPaperResponse[] getSubjectPaperResponses() {
+        return subjectPaperResponses;
+    }
+
+    public void setSubjectPaperResponses(SubjectPaperResponse[] subjectPaperResponses) {
+        this.subjectPaperResponses = subjectPaperResponses;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.code);
-        hash = 23 * hash + Objects.hashCode(this.status);
-        hash = 23 * hash + Objects.hashCode(this.date_created);
-        hash = 23 * hash + Objects.hashCode(this.author);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.code);
+        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.date_created);
+        hash = 53 * hash + Objects.hashCode(this.author);
+        hash = 53 * hash + Arrays.deepHashCode(this.subjectPaperResponses);
         return hash;
     }
 
@@ -105,16 +116,19 @@ public class SubjectResponse {
         if (!Objects.equals(this.code, other.code)) {
             return false;
         }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
         if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (this.status != other.status) {
+        if (!Objects.equals(this.date_created, other.date_created)) {
             return false;
         }
-        return Objects.equals(this.date_created, other.date_created);
+        return Arrays.deepEquals(this.subjectPaperResponses, other.subjectPaperResponses);
     }
 
     @Override
@@ -125,7 +139,10 @@ public class SubjectResponse {
                 + ", code=" + code
                 + ", status=" + status
                 + ", date_created=" + date_created
-                + ", author=" + author + '}';
+                + ", author=" + author
+                + ", subjectPaperResponses=" + Arrays.toString(subjectPaperResponses)
+                + '}';
     }
+
 
 }
