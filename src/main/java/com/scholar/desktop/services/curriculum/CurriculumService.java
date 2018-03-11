@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.CurriculumAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
@@ -32,6 +33,7 @@ public class CurriculumService extends AbstractService {
     public CurriculumService(SchoolData schoolData) {
         this.schoolData = schoolData;
         curriculumAPI = new CurriculumAPI(schoolData);
+
     }
 
     public static CurriculumService getInstance(SchoolData schoolData) {

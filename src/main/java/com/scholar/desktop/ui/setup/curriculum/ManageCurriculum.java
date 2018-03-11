@@ -29,7 +29,9 @@ public class ManageCurriculum extends javax.swing.JPanel {
      * Creates new form ManageCurriculum
      */
     List<CurriculumResponse> list = null;
-    public ManageCurriculum() {
+
+    public ManageCurriculum(SchoolData schoolData) {
+        this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
@@ -62,23 +64,22 @@ public class ManageCurriculum extends javax.swing.JPanel {
 
     public void populateJTable(List<CurriculumResponse> list) {
 
-        JOptionPane.showMessageDialog(null, " :: ");
         if (list != null) {
-            JOptionPane.showMessageDialog(null, "Wave");
+
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-//            for (CurriculumResponse ur : list) {
-//
-//                String name = ur.getName();
-//                String code = ur.getCode();
-//                String description = ur.getDescription();
-//                String status = ur.getStatus();
-//                Date date_Created = ur.getDate_created();
-//                String author = ur.getAuthor();
-//                Object[] data = {name, code, description, status, " - ", author};
-//                tableModel.addRow(data);
-//
-//            }
+            for (CurriculumResponse ur : list) {
+
+                String name = ur.getName();
+                String code = ur.getCode();
+                String description = ur.getDescription();
+                String status = ur.getStatus();
+                Date date_Created = ur.getDate_created();
+                String author = ur.getAuthor();
+                Object[] data = {name, code, description, status, " - ", author};
+                tableModel.addRow(data);
+
+            }
         }
 
         tableModel.fireTableDataChanged();
