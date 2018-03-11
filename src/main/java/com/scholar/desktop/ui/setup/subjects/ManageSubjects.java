@@ -5,17 +5,32 @@
  */
 package main.java.com.scholar.desktop.ui.setup.subjects;
 
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 3/11/2018
  */
 public class ManageSubjects extends javax.swing.JPanel {
 
+    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "STATUS", "DATE CREATED ", "AUTHOR"};
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
     /**
      * Creates new form ManageSubjects
      */
-    public ManageSubjects() {
+    public ManageSubjects(SchoolData schoolData) {
+        this.schoolData = schoolData;
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
         initComponents();
+        fetchData(schoolData);
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+
     }
 
     /**
@@ -133,17 +148,7 @@ public class ManageSubjects extends javax.swing.JPanel {
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "CODE", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
@@ -317,7 +322,7 @@ public class ManageSubjects extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -361,7 +366,7 @@ public class ManageSubjects extends javax.swing.JPanel {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
