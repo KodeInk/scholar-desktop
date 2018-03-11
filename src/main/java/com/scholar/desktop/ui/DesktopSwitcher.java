@@ -67,7 +67,7 @@ public class DesktopSwitcher {
                 break;
 
             case "SUBJECTS":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageSubjects());
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageSubjects(schoolData));
                 break;
 
             case "GRADING":
