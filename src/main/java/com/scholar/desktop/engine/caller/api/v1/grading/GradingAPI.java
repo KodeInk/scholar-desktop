@@ -5,10 +5,59 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.grading;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+import javax.ws.rs.core.Response;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.EngineCaller;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
+import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
+import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
+import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
+
 /**
  *
  * @author mover 3/13/2018
  */
 public class GradingAPI {
+
+    private static final Logger LOG = Logger.getLogger(GradingAPI.class.getName());
+    private final SchoolData schoolData;
+    private static GradingAPI instance;
+    private final EngineCaller engineCaller;
+
+    public GradingAPI(SchoolData schoolData) {
+        this.schoolData = schoolData;
+        engineCaller = new EngineCaller(schoolData);
+    }
+
+    public GradingResponse[] list(Integer offset, Integer limit) {
+        offset = getOffset(offset);
+        limit = getLimit(limit);
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("grading/v1/", queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                GradingResponse[] curriculumResponse = response.readEntity(GradingResponse[].class);
+                return curriculumResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
 
 }
