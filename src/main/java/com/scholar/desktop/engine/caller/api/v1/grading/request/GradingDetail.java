@@ -5,9 +5,6 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.grading.request;
 
-import com.codemovers.scholar.engine.annotation.Mandatory;
-import com.codemovers.scholar.engine.api.v1.abstracts.AbstractEntity;
-import static com.codemovers.scholar.engine.helper.Utilities.validateMandatoryFields;
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Date;
 
@@ -15,7 +12,7 @@ import java.util.Date;
  *
  * @author mover 12/20/2017
  */
-public class _GradingDetail {
+public class GradingDetail {
 
     private Integer id;
     private Integer grading_id;
@@ -28,10 +25,10 @@ public class _GradingDetail {
     private Date date_created;
     private Integer author_id;
 
-    public _GradingDetail() {
+    public GradingDetail() {
     }
 
-    public _GradingDetail(Integer id) {
+    public GradingDetail(Integer id) {
         this.id = id;
     }
 
@@ -117,7 +114,7 @@ public class _GradingDetail {
 
     @Override
     public String toString() {
-        return "_GradingDetail{"
+        return "GradingDetail{"
                 + "id=" + id
                 + ", grading_id=" + grading_id
                 + ", grading_scale=" + grading_scale
