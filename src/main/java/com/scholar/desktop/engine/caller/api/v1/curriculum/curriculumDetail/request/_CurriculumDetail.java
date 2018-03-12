@@ -147,7 +147,6 @@ public class _CurriculumDetail {
         return Objects.equals(this.date_created, other.date_created);
     }
 
-
     @Override
     public String toString() {
         return "_CurriculumDetail{"

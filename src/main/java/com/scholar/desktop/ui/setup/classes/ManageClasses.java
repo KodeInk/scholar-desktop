@@ -26,6 +26,7 @@ public class ManageClasses extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageClasses
+     *
      * @param schoolData
      */
     List<ClassResponse> list = null;
@@ -66,17 +67,17 @@ public class ManageClasses extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-        for (ClassResponse ur : list) {
+            for (ClassResponse ur : list) {
 
-            String name = ur.getName();
-            String code = ur.getCode();
-            String ranking = ur.getRanking().toString();
-            String status = ur.getStatus().name();
-            Date date_Created = ur.getDate_created();
+                String name = ur.getName();
+                String code = ur.getCode();
+                String ranking = ur.getRanking().toString();
+                String status = ur.getStatus().name();
+                Date date_Created = ur.getDate_created();
 
-            String author = ur.getAuthor();
-            Object[] data = {name, code, ranking, status, " - ", author};
-            tableModel.addRow(data);
+                String author = ur.getAuthor();
+                Object[] data = {name, code, ranking, status, " - ", author};
+                tableModel.addRow(data);
 
             }
         }

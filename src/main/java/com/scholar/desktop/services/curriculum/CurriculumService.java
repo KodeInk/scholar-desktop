@@ -58,6 +58,4 @@ public class CurriculumService extends AbstractService {
         return list;
     }
 
-
-
 }

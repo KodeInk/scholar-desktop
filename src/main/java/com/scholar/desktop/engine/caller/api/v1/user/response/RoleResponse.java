@@ -118,7 +118,6 @@ public class RoleResponse {
         return Arrays.deepEquals(this.permissions, other.permissions);
     }
 
-
     @Override
     public String toString() {
         return "RoleResponse{"

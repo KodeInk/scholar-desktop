@@ -27,6 +27,7 @@ public class SubjectsService extends AbstractService {
     private static SubjectsService instance;
     private List<SubjectResponse> list = null;
     SubjectAPI subjectAPI;
+
     public SubjectsService(SchoolData schoolData) {
         this.schoolData = schoolData;
         subjectAPI = new SubjectAPI(schoolData);

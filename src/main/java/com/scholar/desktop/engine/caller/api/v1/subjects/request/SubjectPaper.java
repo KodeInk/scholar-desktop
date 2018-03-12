@@ -23,7 +23,6 @@ public class SubjectPaper {
     private Date date_created;
     private Integer author_id;
 
-
     public SubjectPaper() {
     }
 
@@ -132,7 +131,6 @@ public class SubjectPaper {
         }
         return Objects.equals(this.author_id, other.author_id);
     }
-
 
     @Override
     public String toString() {

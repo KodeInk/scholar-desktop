@@ -17,6 +17,7 @@ public class ManageGrading extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
+
     /**
      * Creates new form ManageGrading
      */

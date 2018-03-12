@@ -24,6 +24,7 @@ public class ManageSubjects extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<SubjectResponse> list = null;
+
     /**
      * Creates new form ManageSubjects
      */
