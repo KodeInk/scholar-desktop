@@ -70,8 +70,12 @@ public class ManageStudyYear extends javax.swing.JPanel {
             for (StudyYearResponse response : list) {
 
                 String theme = response.getTheme();
-                String start_date = response.getStart_date().toString();
-                String end_date = response.getEnd_date().toString();
+                String start_date = "-";
+
+                System.out.println(" KK " + response.getStart_date());
+                //response.getStart_date().toString();
+                String end_date = "-";
+                //response.getEnd_date().toString();
 
                 String status = response.getStatus();
                 String DateCreated = new Date(response.getDate_created()).toString();
@@ -178,14 +182,7 @@ public class ManageStudyYear extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "THEME", "START DATE", "END DATE", "CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
