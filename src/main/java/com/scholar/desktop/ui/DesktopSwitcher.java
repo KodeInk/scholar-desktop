@@ -16,8 +16,8 @@ import main.java.com.scholar.desktop.ui.roles.ManageRoles;
 import main.java.com.scholar.desktop.ui.setup.grading.ManageGrading;
 import main.java.com.scholar.desktop.ui.setup.subjects.ManageSubjects;
 import main.java.com.scholar.desktop.ui.staff.ManageStaff;
-import main.java.com.scholar.desktop.ui.study_year.ManageStudyYear;
-import main.java.com.scholar.desktop.ui.study_year.terms.ManageTerms;
+import main.java.com.scholar.desktop.ui.studyyear.ManageStudyYear;
+import main.java.com.scholar.desktop.ui.studyyear.terms.ManageTerms;
 import main.java.com.scholar.desktop.ui.users.ManageUsers;
 
 /**
