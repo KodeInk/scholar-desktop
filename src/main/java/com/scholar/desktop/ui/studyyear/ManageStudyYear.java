@@ -70,13 +70,8 @@ public class ManageStudyYear extends javax.swing.JPanel {
             for (StudyYearResponse response : list) {
 
                 String theme = response.getTheme();
-                String start_date = "-";
-
-                System.out.println(" KK " + response.getStart_date());
-                //response.getStart_date().toString();
-                String end_date = "-";
-                //response.getEnd_date().toString();
-
+                String start_date = new Date(response.getStart_date()).toString();
+                String end_date = new Date(response.getEnd_date()).toString();
                 String status = response.getStatus();
                 String DateCreated = new Date(response.getDate_created()).toString();
                 String author = response.getAuthor();
