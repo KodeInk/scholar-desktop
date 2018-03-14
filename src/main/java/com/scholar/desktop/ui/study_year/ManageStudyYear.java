@@ -5,16 +5,24 @@
  */
 package main.java.com.scholar.desktop.ui.study_year;
 
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 3/14/2018
  */
 public class ManageStudyYear extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageStudyYear
      */
-    public ManageStudyYear() {
+    private static final String[] COLUMN_HEADERS = {"THEME", "START DATE", "END DATE", "CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
+
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
+
+    public ManageStudyYear(SchoolData schoolData) {
         initComponents();
     }
 
