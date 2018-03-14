@@ -23,7 +23,20 @@ public class ManageStudyYear extends javax.swing.JPanel {
     public DefaultTableModel tableModel;
 
     public ManageStudyYear(SchoolData schoolData) {
+        this.schoolData = schoolData;
+
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
+
+        fetchData(schoolData);
+
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+
     }
 
     /**
