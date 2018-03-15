@@ -6,9 +6,12 @@
 package main.java.com.scholar.desktop.ui.studyyear.terms;
 
 import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.terms.TermsService;
 
 /**
  *
@@ -22,7 +25,7 @@ public class ManageTerms extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-    List<StudyYearResponse> list = null;
+    List<TermResponse> list = null;
 
     public ManageTerms(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -38,6 +41,22 @@ public class ManageTerms extends javax.swing.JPanel {
     }
 
     public final void fetchData(SchoolData schoolData1) {
+
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = TermsService.getInstance(schoolData1).list();
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
 
     }
 

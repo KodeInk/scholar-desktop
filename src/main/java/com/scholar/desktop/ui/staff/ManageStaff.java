@@ -7,7 +7,7 @@ package main.java.com.scholar.desktop.ui.staff;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class ManageStaff extends javax.swing.JPanel {
 
