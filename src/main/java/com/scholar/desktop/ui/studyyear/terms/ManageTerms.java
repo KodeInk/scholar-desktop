@@ -5,17 +5,40 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear.terms;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+
 /**
  *
- * @author Manny
+ * @author mover 3/15/2018
  */
 public class ManageTerms extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageTerms
      */
-    public ManageTerms() {
+    private static final String[] COLUMN_HEADERS = {"NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
+    List<StudyYearResponse> list = null;
+
+    public ManageTerms(SchoolData schoolData) {
+        this.schoolData = schoolData;
+
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
+
+        fetchData(schoolData);
+
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+
     }
 
     /**
