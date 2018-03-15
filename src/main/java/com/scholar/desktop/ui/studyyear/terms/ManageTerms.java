@@ -5,11 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear.terms;
 
+import com.codemovers.scholar.engine.helper.enums.StatusEnum;
+import java.util.Date;
 import java.util.List;
+import javafx.scene.chart.PieChart;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 
@@ -57,6 +62,33 @@ public class ManageTerms extends javax.swing.JPanel {
             }
         };
         swingWorker.execute();
+
+    }
+
+    public void populateJTable(List<TermResponse> list) {
+        if (list != null) {
+
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (TermResponse ur : list) {
+
+                String name = ur.getName();
+                String start_date = new Date(ur.getStart_date()).toString();
+                String end_date = new Date(ur.getEnd_date()).toString();
+                String ranking = ur.getRanking().toString();
+                String status = ur.getStatus().toString();
+                String dateCreated = new Date(ur.getDate_created()).toString();
+                String author = ur.getAuthor();
+
+
+                Object[] data = {name, start_date, end_date, ranking, status, dateCreated, author};
+                tableModel.addRow(data);
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
 
     }
 
