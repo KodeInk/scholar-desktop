@@ -8,7 +8,6 @@ package main.java.com.scholar.desktop.services.departments;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
