@@ -5,8 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.departments;
 
+import java.util.Date;
+import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.departments.response.DepartmentResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.departments.DepartmentService;
 
 /**
  *
@@ -20,6 +28,7 @@ public class ManageDepartments extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"NAME", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
+    List<DepartmentResponse> list = null;
 
     public ManageDepartments(SchoolData schoolData) {
 
@@ -34,7 +43,49 @@ public class ManageDepartments extends javax.swing.JPanel {
 
     public final void fetchData(SchoolData schoolData1) {
 
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = DepartmentService.getInstance(schoolData1).list();
+
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
+
+    public void populateJTable(List<DepartmentResponse> list) {
+
+        if (list != null) {
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (DepartmentResponse ur : list) {
+                String name = ur.getName();
+                String code = ur.getCode();
+                String isSystem = ur.getIsSystem() == true ? "YES" : "NO";
+                String status = ur.getStatus();
+                String date_Created = new Date(ur.getDate_created()).toString();
+                String author = ur.getAuthor();
+                Object[] data = {name, code, isSystem, status, date_Created, author};
+                tableModel.addRow(data);
+
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,22 +178,7 @@ public class ManageDepartments extends javax.swing.JPanel {
         );
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "NAME", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
