@@ -197,13 +197,13 @@
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
-                            <Column editable="true" title="NAME" type="java.lang.Object"/>
-                            <Column editable="true" title="IS TEACHER" type="java.lang.Object"/>
-                            <Column editable="true" title="JOIN DATE" type="java.lang.Object"/>
-                            <Column editable="true" title="STATUS" type="java.lang.Object"/>
-                            <Column editable="true" title="DATE CREATED" type="java.lang.Object"/>
-                            <Column editable="true" title="AUTHOR" type="java.lang.Object"/>
+                          <Table columnCount="6" rowCount="0">
+                            <Column editable="true" title="NAME" type="java.lang.String"/>
+                            <Column editable="true" title="IS TEACHER" type="java.lang.String"/>
+                            <Column editable="true" title="JOIN DATE" type="java.lang.String"/>
+                            <Column editable="true" title="STATUS" type="java.lang.String"/>
+                            <Column editable="true" title="DATE CREATED" type="java.lang.String"/>
+                            <Column editable="true" title="AUTHOR" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
