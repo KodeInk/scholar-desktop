@@ -82,7 +82,7 @@ public class DesktopSwitcher {
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageTerms(schoolData));
                 break;
             case "DEPARTMENTS":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageDepartments());
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageDepartments(schoolData));
                 break;
             case "STAFF":
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageStaff());

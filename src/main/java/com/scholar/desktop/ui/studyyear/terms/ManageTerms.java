@@ -179,17 +179,7 @@ public class ManageTerms extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 153, 0));
         jLabel1.setText("MANAGE TERMS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);

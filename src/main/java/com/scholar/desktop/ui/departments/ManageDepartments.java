@@ -5,6 +5,9 @@
  */
 package main.java.com.scholar.desktop.ui.departments;
 
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author mover
@@ -14,8 +17,23 @@ public class ManageDepartments extends javax.swing.JPanel {
     /**
      * Creates new form ManageDepartments
      */
-    public ManageDepartments() {
+    private static final String[] COLUMN_HEADERS = {"NAME", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"};
+    SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
+
+    public ManageDepartments(SchoolData schoolData) {
+
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+
         initComponents();
+        fetchData(schoolData);
+
+    }
+
+    public final void fetchData(SchoolData schoolData1) {
+
     }
 
     /**
@@ -111,15 +129,20 @@ public class ManageDepartments extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "NAME", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
