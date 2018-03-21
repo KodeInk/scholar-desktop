@@ -20,6 +20,7 @@ public class StaffResponse {
     private String status;
     private Long date_created;
     private String author;
+    private Boolean isTeacher;
 
     public StaffResponse() {
     }
@@ -72,15 +73,24 @@ public class StaffResponse {
         this.author = author;
     }
 
+    public Boolean getIsTeacher() {
+        return isTeacher;
+    }
+
+    public void setIsTeacher(Boolean isTeacher) {
+        this.isTeacher = isTeacher;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.profile);
-        hash = 89 * hash + Objects.hashCode(this.joinDate);
-        hash = 89 * hash + Objects.hashCode(this.status);
-        hash = 89 * hash + Objects.hashCode(this.date_created);
-        hash = 89 * hash + Objects.hashCode(this.author);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.profile);
+        hash = 83 * hash + Objects.hashCode(this.joinDate);
+        hash = 83 * hash + Objects.hashCode(this.status);
+        hash = 83 * hash + Objects.hashCode(this.date_created);
+        hash = 83 * hash + Objects.hashCode(this.author);
+        hash = 83 * hash + Objects.hashCode(this.isTeacher);
         return hash;
     }
 
@@ -111,7 +121,10 @@ public class StaffResponse {
         if (!Objects.equals(this.joinDate, other.joinDate)) {
             return false;
         }
-        return Objects.equals(this.date_created, other.date_created);
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return Objects.equals(this.isTeacher, other.isTeacher);
     }
 
     @Override
@@ -120,6 +133,7 @@ public class StaffResponse {
                 + "id=" + id
                 + ", profile=" + profile
                 + ", joinDate=" + joinDate
+                + ", isTeacher=" + isTeacher
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author=" + author

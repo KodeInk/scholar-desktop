@@ -24,6 +24,7 @@ public class Staff {
     private StatusEnum status;
     private Long date_created;
     private Integer author_id;
+    private Boolean isTeacher;
 
     public Staff() {
     }
@@ -76,15 +77,24 @@ public class Staff {
         this.author_id = author_id;
     }
 
+    public Boolean getIsTeacher() {
+        return isTeacher;
+    }
+
+    public void setIsTeacher(Boolean isTeacher) {
+        this.isTeacher = isTeacher;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.profile);
-        hash = 79 * hash + Objects.hashCode(this.joinDate);
-        hash = 79 * hash + Objects.hashCode(this.status);
-        hash = 79 * hash + Objects.hashCode(this.date_created);
-        hash = 79 * hash + Objects.hashCode(this.author_id);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.profile);
+        hash = 53 * hash + Objects.hashCode(this.joinDate);
+        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.date_created);
+        hash = 53 * hash + Objects.hashCode(this.author_id);
+        hash = 53 * hash + Objects.hashCode(this.isTeacher);
         return hash;
     }
 
@@ -115,8 +125,15 @@ public class Staff {
         if (!Objects.equals(this.date_created, other.date_created)) {
             return false;
         }
-        return Objects.equals(this.author_id, other.author_id);
+        if (!Objects.equals(this.author_id, other.author_id)) {
+            return false;
+        }
+        if (!Objects.equals(this.isTeacher, other.isTeacher)) {
+            return false;
+        }
+        return true;
     }
+
 
     @Override
     public String toString() {
@@ -124,6 +141,7 @@ public class Staff {
                 + "id=" + id
                 + ", profile=" + profile
                 + ", joinDate=" + joinDate
+                + ", isTeacher=" + isTeacher
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
