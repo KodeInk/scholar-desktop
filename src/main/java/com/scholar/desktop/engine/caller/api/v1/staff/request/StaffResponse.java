@@ -5,27 +5,23 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.staff.request;
 
-import com.codemovers.scholar.engine.helper.enums.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.ProfileResponse;
 
 /**
  *
  * @author mover 3/16/2018
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Staff {
+public class StaffResponse {
 
     private Integer id;
-    private Profile profile;
-    private Date joinDate;
-    private StatusEnum status;
+    private ProfileResponse profile;
+    private Long joinDate;
+    private String status;
     private Long date_created;
-    private Integer author_id;
+    private String author;
 
-    public Staff() {
+    public StaffResponse() {
     }
 
     public Integer getId() {
@@ -36,27 +32,27 @@ public class Staff {
         this.id = id;
     }
 
-    public Profile getProfile() {
+    public ProfileResponse getProfile() {
         return profile;
     }
 
-    public void setProfile(Profile profile) {
+    public void setProfile(ProfileResponse profile) {
         this.profile = profile;
     }
 
-    public Date getJoinDate() {
+    public Long getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Date joinDate) {
+    public void setJoinDate(Long joinDate) {
         this.joinDate = joinDate;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -68,23 +64,23 @@ public class Staff {
         this.date_created = date_created;
     }
 
-    public Integer getAuthor_id() {
-        return author_id;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.profile);
-        hash = 79 * hash + Objects.hashCode(this.joinDate);
-        hash = 79 * hash + Objects.hashCode(this.status);
-        hash = 79 * hash + Objects.hashCode(this.date_created);
-        hash = 79 * hash + Objects.hashCode(this.author_id);
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.profile);
+        hash = 89 * hash + Objects.hashCode(this.joinDate);
+        hash = 89 * hash + Objects.hashCode(this.status);
+        hash = 89 * hash + Objects.hashCode(this.date_created);
+        hash = 89 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -99,7 +95,13 @@ public class Staff {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Staff other = (Staff) obj;
+        final StaffResponse other = (StaffResponse) obj;
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -109,24 +111,18 @@ public class Staff {
         if (!Objects.equals(this.joinDate, other.joinDate)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (!Objects.equals(this.date_created, other.date_created)) {
-            return false;
-        }
-        return Objects.equals(this.author_id, other.author_id);
+        return Objects.equals(this.date_created, other.date_created);
     }
 
     @Override
     public String toString() {
-        return "_Staff{"
+        return "StaffResponse{"
                 + "id=" + id
                 + ", profile=" + profile
                 + ", joinDate=" + joinDate
                 + ", status=" + status
                 + ", date_created=" + date_created
-                + ", author_id=" + author_id
+                + ", author=" + author
                 + '}';
     }
 
