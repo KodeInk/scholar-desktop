@@ -321,6 +321,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Student Registration");
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 204, 102));
@@ -606,6 +611,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.ADMISSION);
     }//GEN-LAST:event_jLabel22MouseClicked
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        // TODO add your handling code here:
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.REGISTRATION);
+    }//GEN-LAST:event_jLabel23MouseClicked
 
     /**
      * @param args the command line arguments
