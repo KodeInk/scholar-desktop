@@ -24,7 +24,8 @@ public enum DashboardViews {
     ADMISSION,
     REGISTRATION,
     EXAMS,
-    OTHERS;
+    OTHERS,
+    STUDENTTIMETABLE;
 
     public static final DashboardViews fromString(String text) {
         DashboardViews returnValue = OTHERS;

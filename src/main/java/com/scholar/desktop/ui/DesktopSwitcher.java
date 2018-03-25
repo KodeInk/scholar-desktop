@@ -20,6 +20,7 @@ import main.java.com.scholar.desktop.ui.setup.subjects.ManageSubjects;
 import main.java.com.scholar.desktop.ui.staff.ManageStaff;
 import main.java.com.scholar.desktop.ui.studyyear.ManageStudyYear;
 import main.java.com.scholar.desktop.ui.studyyear.terms.ManageTerms;
+import main.java.com.scholar.desktop.ui.timetable.students.StudentTimeTable;
 import main.java.com.scholar.desktop.ui.users.ManageUsers;
 
 /**
@@ -99,6 +100,9 @@ public class DesktopSwitcher {
 
             case "EXAMS":
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageExams());
+                break;
+            case "STUDENTTIMETABLE":
+                dashboardScreen.getjSplitPane1().setRightComponent(new StudentTimeTable());
                 break;
 
             default:
