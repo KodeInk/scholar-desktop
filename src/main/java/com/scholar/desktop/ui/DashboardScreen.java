@@ -377,6 +377,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Manage Section");
+        jLabel32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel32MouseClicked(evt);
+            }
+        });
 
         jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
@@ -646,6 +651,11 @@ public class DashboardScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
          DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.MARKSHEET);
     }//GEN-LAST:event_jLabel27MouseClicked
+
+    private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
+        // TODO add your handling code here:
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.LIBRARYSECTION);
+    }//GEN-LAST:event_jLabel32MouseClicked
 
     /**
      * @param args the command line arguments
