@@ -10,7 +10,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissions;
 import main.java.com.scholar.desktop.ui.administration.students.registration.ManageRegistration;
 import main.java.com.scholar.desktop.ui.departments.ManageDepartments;
-import main.java.com.scholar.desktop.ui.exams.ManageExams;
+import main.java.com.scholar.desktop.ui.setup.exams.ManageExams;
 import main.java.com.scholar.desktop.ui.setup.classes.ManageClasses;
 import main.java.com.scholar.desktop.ui.setup.curriculum.ManageCurriculum;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
