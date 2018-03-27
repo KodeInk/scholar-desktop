@@ -8,7 +8,6 @@ package main.java.com.scholar.desktop.engine.caller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-import static javafx.scene.input.KeyCode.T;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;

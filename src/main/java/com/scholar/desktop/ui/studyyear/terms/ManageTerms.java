@@ -5,16 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear.terms;
 
-import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.chart.PieChart;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 
