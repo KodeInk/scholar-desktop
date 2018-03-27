@@ -27,6 +27,7 @@ public enum DashboardViews {
     OTHERS,
     MARKSHEET,
     LIBRARYSECTION,
+    BOOKS,
     STUDENTTIMETABLE;
 
     public static final DashboardViews fromString(String text) {
