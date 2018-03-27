@@ -596,6 +596,8 @@ public class DashboardScreen extends javax.swing.JFrame {
 
     private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
         // TODO add your handling code here:
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.LIBRARYSTOCK);
+
       
     }//GEN-LAST:event_jLabel32MouseClicked
 
@@ -666,6 +668,7 @@ public class DashboardScreen extends javax.swing.JFrame {
 
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
         // TODO add your handling code here:
+         DesktopSwitcher.getInstance(schoolData).showDashboard(this, DashboardViews.LIBRARYSTOCK);
     }//GEN-LAST:event_jLabel31MouseClicked
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
