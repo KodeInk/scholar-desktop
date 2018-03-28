@@ -63,15 +63,20 @@ public class LoginService {
         }
 
         _login login = getLogin(password, Username);
-
+        loginScreen.getLOGINBUTTON().setText("PROCESSING");
+        loginScreen.getLOGINBUTTON().setEnabled(false);
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 UserAPI aPI = new UserAPI(schoolData);
                 AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
                 if (authenticationResponse != null) {
+
                     schoolData.setAuthentication(authenticationResponse);
                     initDashboard(loginScreen);
+                } else {
+                    loginScreen.getLOGINBUTTON().setText("LOGIN");
+                    loginScreen.getLOGINBUTTON().setEnabled(true);
                 }
                 return true;
             }

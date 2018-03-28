@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui;
 
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolConfig;
@@ -189,14 +190,9 @@ public class LoginScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "School Name does not exist");
         }
 
-        LOGINBUTTON.setText("Processing");
         LoginService connector = new LoginService(schoolData);
         connector.login(Username, String.valueOf(Password), this);
 
-
-       
-
-        //todo: init dashboard
     }//GEN-LAST:event_LOGINBUTTONActionPerformed
 
     /**
@@ -232,6 +228,13 @@ public class LoginScreen extends javax.swing.JFrame {
 //                new LoginScreen().setVisible(true);
 //            }
 //        });
+    public JButton getLOGINBUTTON() {
+        return LOGINBUTTON;
+    }
+
+    public void setLOGINBUTTON(JButton LOGINBUTTON) {
+        this.LOGINBUTTON = LOGINBUTTON;
+    }
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LOGINBUTTON;
