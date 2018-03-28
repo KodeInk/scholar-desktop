@@ -8,7 +8,6 @@ package main.java.com.scholar.desktop.ui;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.services.authentication.LoginService;

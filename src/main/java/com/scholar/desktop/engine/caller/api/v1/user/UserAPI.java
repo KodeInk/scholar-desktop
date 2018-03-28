@@ -93,20 +93,18 @@ public class UserAPI {
      */
     public AuthenticationResponse login(_login login, String logId) {
         try {
-            Map body = new HashMap();
-            body.put("username", login.getUsername());
-            body.put("password", login.getPassword());
+            Map body = getLogin(login);
 
             Response response = engineCaller.post("user/v1/login", body, logId);
 
-            JOptionPane.showMessageDialog(null, response.toString());
+//            JOptionPane.showMessageDialog(null, response.toString());
             switch (response.getStatus()) {
                 case 400:
                     ShowAlertMessage(response);
                     break;
                 case 200:
                     AuthenticationResponse authenticationResponse = response.readEntity(AuthenticationResponse.class);
-                    JOptionPane.showMessageDialog(null, authenticationResponse.getAuthentication());
+//                    JOptionPane.showMessageDialog(null, authenticationResponse.getAuthentication());
                     return authenticationResponse;
                 case 401:
                     ShowAlertMessage(response);
@@ -124,6 +122,18 @@ public class UserAPI {
             return null;
         }
 
+    }
+
+    /**
+     *
+     * @param login
+     * @return
+     */
+    public Map getLogin(_login login) {
+        Map body = new HashMap();
+        body.put("username", login.getUsername());
+        body.put("password", login.getPassword());
+        return body;
     }
 
     /**
