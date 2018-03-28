@@ -5,15 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui;
 
-import java.awt.Toolkit;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import main.java.com.scholar.desktop.config.AppConfig;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolConfig;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.services.authentication.LoginService;
-import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
@@ -195,7 +192,9 @@ public class LoginScreen extends javax.swing.JFrame {
         LOGINBUTTON.setText("Processing");
         LoginService connector = new LoginService(schoolData);
         connector.login(Username, String.valueOf(Password), this);
-        LOGINBUTTON.setText("LOGIN");
+
+
+       
 
         //todo: init dashboard
     }//GEN-LAST:event_LOGINBUTTONActionPerformed

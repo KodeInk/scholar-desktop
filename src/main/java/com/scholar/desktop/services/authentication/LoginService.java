@@ -5,11 +5,13 @@
  */
 package main.java.com.scholar.desktop.services.authentication;
 
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.UserAPI;
@@ -56,6 +58,38 @@ public class LoginService {
      * @param loginScreen
      */
     public boolean login(String Username, String password, LoginScreen loginScreen) {
+        if (checkUserCredentials(password, Username)) {
+            return false;
+        }
+
+        _login login = getLogin(password, Username);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                UserAPI aPI = new UserAPI(schoolData);
+                AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
+                if (authenticationResponse != null) {
+                    schoolData.setAuthentication(authenticationResponse);
+                    initDashboard(loginScreen);
+                }
+                return true;
+            }
+        };
+        swingWorker.execute();
+
+        return true;
+    }
+
+    public _login getLogin(String password, String Username) {
+        //todo: send to  Fill in the pojo
+        _login login = new _login();
+        login.setPassword(password);
+        login.setUsername(Username);
+        return login;
+    }
+
+    public boolean checkUserCredentials(String password, String Username) throws HeadlessException {
         // todo:  check if not null
         if (password.isEmpty() || Username.isEmpty()) {
             if (password.isEmpty() && Username.isEmpty()) {
@@ -65,24 +99,9 @@ public class LoginService {
             } else {
                 JOptionPane.showMessageDialog(null, "PASSWORD IS MANDATORY  ");
             }
-
-            return false;
+            return true;
         }
-        //todo: send to  Fill in the pojo
-        _login login = new _login();
-        login.setPassword(password);
-        login.setUsername(Username);
-
-        UserAPI aPI = new UserAPI(schoolData);
-        AuthenticationResponse authenticationResponse = aPI.login(login, "LOG_ID");
-
-        if (authenticationResponse != null) {
-            schoolData.setAuthentication(authenticationResponse);
-            initDashboard(loginScreen);
-        }
-
-        return true;
-
+        return false;
     }
 
     private void initDashboard(LoginScreen loginScreen) {
