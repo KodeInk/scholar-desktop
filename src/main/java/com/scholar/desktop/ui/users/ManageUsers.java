@@ -138,6 +138,7 @@ public class ManageUsers extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        addUser1 = new main.java.com.scholar.desktop.ui.users.AddUser();
 
         setName("manage_users_panel"); // NOI18N
 
@@ -376,6 +377,19 @@ public class ManageUsers extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Manage Users", jSplitPane1);
 
+        javax.swing.GroupLayout addUser1Layout = new javax.swing.GroupLayout(addUser1);
+        addUser1.setLayout(addUser1Layout);
+        addUser1Layout.setHorizontalGroup(
+            addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 787, Short.MAX_VALUE)
+        );
+        addUser1Layout.setVerticalGroup(
+            addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 334, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", addUser1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,6 +403,7 @@ public class ManageUsers extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private main.java.com.scholar.desktop.ui.users.AddUser addUser1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
