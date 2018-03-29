@@ -139,6 +139,7 @@ public class ManageUsers extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         addUser1 = new main.java.com.scholar.desktop.ui.users.AddUser();
+        addUser3 = new main.java.com.scholar.desktop.ui.users.AddUser();
 
         setName("manage_users_panel"); // NOI18N
 
@@ -381,20 +382,20 @@ public class ManageUsers extends javax.swing.JPanel {
         addUser1.setLayout(addUser1Layout);
         addUser1Layout.setHorizontalGroup(
             addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 787, Short.MAX_VALUE)
+            .addComponent(addUser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         addUser1Layout.setVerticalGroup(
             addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addComponent(addUser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", addUser1);
+        jTabbedPane1.addTab("Add User", addUser1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,6 +405,7 @@ public class ManageUsers extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private main.java.com.scholar.desktop.ui.users.AddUser addUser1;
+    private main.java.com.scholar.desktop.ui.users.AddUser addUser3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
