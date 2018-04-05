@@ -69,4 +69,11 @@ public class RolesService extends AbstractService {
         return list;
     }
 
+    public List<RoleResponse> list(Integer offset, Integer limit) {
+        list = new ArrayList<>();
+        RoleResponse[] responses = roleAPI.list(offset, limit);
+        return list;
+    }
+
+
 }

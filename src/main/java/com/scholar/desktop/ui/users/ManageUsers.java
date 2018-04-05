@@ -6,7 +6,11 @@
 package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
@@ -37,9 +41,31 @@ public class ManageUsers extends javax.swing.JPanel {
         }
         initComponents();
 
+        jTabbedPane1.addChangeListener(changeListener);
         fetchData(schoolData);
 
     }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    fetchData(schoolData);
+                    break;
+                case 1:
+                    //  JOptionPane.showMessageDialog(null, "Mailer");
+                    break;
+                default:
+                    fetchData(schoolData);
+                    break;
+            }
+
+        }
+    };
+
     List<UserResponse> list = null;
 
     public final void fetchData(SchoolData schoolData1) {
@@ -432,7 +458,7 @@ public class ManageUsers extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
