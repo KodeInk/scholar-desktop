@@ -18,16 +18,24 @@ import main.java.com.scholar.desktop.ui.helper.DashboardViews;
  *
  * @author mover
  */
-public class DashboardScreen extends javax.swing.JFrame {
+public class DashboardScreen extends javax.swing.JFrame implements DashboardScreenInterface {
 
     /**
      * Creates new form DashboardScreen
      */
-    private SchoolData schoolData;
+    SchoolData schoolData;
 
     public DashboardScreen(SchoolData data) {
         this.schoolData = data;
         initComponents();
+    }
+
+    public SchoolData getSchoolData() {
+        return schoolData;
+    }
+
+    public void setSchoolData(SchoolData schoolData) {
+        this.schoolData = schoolData;
     }
 
     /**
@@ -725,18 +733,22 @@ public class DashboardScreen extends javax.swing.JFrame {
 //        });
 //    }
 //
+    @Override
     public JSplitPane getjSplitPane1() {
         return jSplitPane1;
     }
 
+    @Override
     public void setjSplitPane1(JSplitPane jSplitPane1) {
         this.jSplitPane1 = jSplitPane1;
     }
 
+    @Override
     public JPanel getjPanel6() {
         return jPanel6;
     }
 
+    @Override
     public void setjPanel6(JPanel jPanel6) {
         this.jPanel6 = jPanel6;
     }

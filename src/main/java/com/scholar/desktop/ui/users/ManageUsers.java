@@ -6,7 +6,6 @@
 package main.java.com.scholar.desktop.ui.users;
 
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 import javax.swing.event.ChangeEvent;
@@ -32,6 +31,8 @@ public class ManageUsers extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
 
+    private static ManageUsers instance;
+
     public ManageUsers(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
@@ -41,30 +42,19 @@ public class ManageUsers extends javax.swing.JPanel {
         }
         initComponents();
 
-        jTabbedPane1.addChangeListener(changeListener);
         fetchData(schoolData);
 
     }
 
-    ChangeListener changeListener = new ChangeListener() {
-        @Override
-        public void stateChanged(ChangeEvent changeEvent) {
-            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
-            int index = sourceTabbedPane.getSelectedIndex();
-            switch (index) {
-                case 0:
-                    fetchData(schoolData);
-                    break;
-                case 1:
-                    //  JOptionPane.showMessageDialog(null, "Mailer");
-                    break;
-                default:
-                    fetchData(schoolData);
-                    break;
-            }
-
+    //singleton 
+    public static ManageUsers getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageUsers(schoolData);
+        } else {
+            instance.fetchData(schoolData);
         }
-    };
+        return instance;
+    }
 
     List<UserResponse> list = null;
 
@@ -136,7 +126,6 @@ public class ManageUsers extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -164,8 +153,6 @@ public class ManageUsers extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        addUser1 = new main.java.com.scholar.desktop.ui.users.AddUser();
-        addUser3 = new main.java.com.scholar.desktop.ui.users.AddUser();
 
         setName("manage_users_panel"); // NOI18N
 
@@ -402,36 +389,19 @@ public class ManageUsers extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(jPanel5);
 
-        jTabbedPane1.addTab("Manage Users", jSplitPane1);
-
-        javax.swing.GroupLayout addUser1Layout = new javax.swing.GroupLayout(addUser1);
-        addUser1.setLayout(addUser1Layout);
-        addUser1Layout.setHorizontalGroup(
-            addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addUser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        addUser1Layout.setVerticalGroup(
-            addUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addUser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Add User", addUser1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private main.java.com.scholar.desktop.ui.users.AddUser addUser1;
-    private main.java.com.scholar.desktop.ui.users.AddUser addUser3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -458,7 +428,6 @@ public class ManageUsers extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
-    public javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

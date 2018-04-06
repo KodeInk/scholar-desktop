@@ -13,17 +13,18 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.roles.RolesService;
-import main.java.com.scholar.desktop.services.users.UsersService;
+import main.java.com.scholar.desktop.ui.DashboardScreenInterface;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AddUser extends javax.swing.JPanel {
 
@@ -32,11 +33,12 @@ public class AddUser extends javax.swing.JPanel {
      */
     private JFileChooser fileChooser;
     private List<RoleResponse> roleResponses;
-
-    public AddUser() {
+    SchoolData schoolData = null;
+    public AddUser(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
-
         fileChooser = new JFileChooser();
+
 
     }
 
@@ -46,6 +48,7 @@ public class AddUser extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 roleResponses = RolesService.getInstance(schoolData).list(-1, -1);
+                Utilities.hideDialog();
                 return null;
             }
         };
@@ -425,4 +428,4 @@ public class AddUser extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     // End of variables declaration//GEN-END:variables
-}
+    }

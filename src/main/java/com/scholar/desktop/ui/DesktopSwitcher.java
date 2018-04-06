@@ -26,6 +26,7 @@ import main.java.com.scholar.desktop.ui.studyyear.ManageStudyYear;
 import main.java.com.scholar.desktop.ui.studyyear.terms.ManageTerms;
 import main.java.com.scholar.desktop.ui.timetable.students.StudentTimeTable;
 import main.java.com.scholar.desktop.ui.users.ManageUsers;
+import main.java.com.scholar.desktop.ui.users.Users;
 
 /**
  *
@@ -58,7 +59,8 @@ public class DesktopSwitcher {
                 break;
             case "USERS":
 
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers(schoolData));
+                // dashboardScreen.getjSplitPane1().setRightComponent(new ManageUsers(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(new Users(schoolData));
                 break;
 
             case "ROLES":
