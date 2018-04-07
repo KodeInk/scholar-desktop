@@ -11,16 +11,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.SwingWorker;
+import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.roles.RolesService;
-import main.java.com.scholar.desktop.ui.DashboardScreenInterface;
 
 /**
  *
@@ -34,15 +35,69 @@ public class AddUser extends javax.swing.JPanel {
     private JFileChooser fileChooser;
     private List<RoleResponse> roleResponses;
     SchoolData schoolData = null;
+
+    private static AddUser instance;
+    ComboBoxModel<RoleResponse> comboBoxModel;
+    JComboBox usersList;
     public AddUser(SchoolData schoolData) {
         this.schoolData = schoolData;
+
+        comboBoxModel = new ComboBoxModel<RoleResponse>() {
+            @Override
+            public void setSelectedItem(Object anItem) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object getSelectedItem() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getSize() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public RoleResponse getElementAt(int index) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addListDataListener(ListDataListener l) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removeListDataListener(ListDataListener l) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+
         initComponents();
         fileChooser = new JFileChooser();
-
+        roleResponses = fetchRoles(schoolData);
 
     }
 
-    public void fetchRoles(SchoolData schoolData) {
+    public static AddUser getInstance(SchoolData schoolData) {
+
+        if (instance == null) {
+            instance = new AddUser(schoolData);
+        }
+
+        return instance;
+    }
+
+    private void populateList(List<RoleResponse> roleResponses) {
+        usersList.addItem("movers");
+    }
+
+    private List<RoleResponse> fetchRoles(SchoolData schoolData) {
+
+        if (roleResponses != null && roleResponses.size() > 0) {
+            return roleResponses;
+        }
         Utilities.ShowDialogMessage("Processing");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
@@ -53,6 +108,8 @@ public class AddUser extends javax.swing.JPanel {
             }
         };
         swingWorker.execute();
+
+        return roleResponses;
     }
 
     /**
@@ -88,6 +145,11 @@ public class AddUser extends javax.swing.JPanel {
         jTextField3 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
+        if(roleResponses != null){
+            for(RoleResponse response: roleResponses){
+                jComboBox2.addItem(response.getName());
+            }
+        }
         jLabel12 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel13 = new javax.swing.JLabel();
@@ -168,8 +230,6 @@ public class AddUser extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("ROLE");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MR", "MIS", "MRS" }));
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("USERNAME");
@@ -335,7 +395,7 @@ public class AddUser extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,7 +461,7 @@ public class AddUser extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    public javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

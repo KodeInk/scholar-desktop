@@ -38,10 +38,10 @@ public class Users extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    new ManageUsers(schoolData);
+                    ManageUsers.getInstance(schoolData);
                     break;
                 case 1:
-                    new AddUser(schoolData);
+                    AddUser.getInstance(schoolData);
                     break;
                 default:
 

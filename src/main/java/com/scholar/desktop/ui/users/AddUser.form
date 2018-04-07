@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane2" alignment="0" pref="492" max="32767" attributes="0"/>
+          <Component id="jScrollPane2" alignment="0" pref="559" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -369,17 +369,10 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox2">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="MR"/>
-                    <StringItem index="1" value="MIS"/>
-                    <StringItem index="2" value="MRS"/>
-                  </StringArray>
-                </Property>
-              </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(roleResponses != null){&#xa;for(RoleResponse response: roleResponses){&#xa;jComboBox2.addItem(response.getName());&#xa;}&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
