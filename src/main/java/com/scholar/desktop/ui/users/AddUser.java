@@ -40,6 +40,7 @@ public class AddUser extends javax.swing.JPanel {
     private static AddUser instance;
     ComboBoxModel<RoleResponse> comboBoxModel;
     JComboBox usersList;
+
     public AddUser(SchoolData schoolData) {
         this.schoolData = schoolData;
 
@@ -97,6 +98,7 @@ public class AddUser extends javax.swing.JPanel {
     public void initData() {
         roleResponses = fetchRoles(schoolData);
     }
+
     private List<RoleResponse> fetchRoles(SchoolData schoolData) {
 
         if (roleResponses != null && roleResponses.size() > 0) {
@@ -108,20 +110,25 @@ public class AddUser extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 roleResponses = RolesService.getInstance(schoolData).list(-1, -1);
 
-                if (roleResponses != null) {
-                    for (RoleResponse response : roleResponses) {
-                        RolesJComboBox.addItem(response.getName());
-                    }
-                    RolesJComboBox.setSelectedItem(null);
-                }
+                populateRolesComboBox();
                 Utilities.hideDialog();
-                JOptionPane.showMessageDialog(null, "SIZE: " + roleResponses.size());
+
                 return null;
             }
+
         };
         swingWorker.execute();
 
         return roleResponses;
+    }
+
+    public void populateRolesComboBox() {
+        if (roleResponses != null) {
+            for (RoleResponse response : roleResponses) {
+                RolesJComboBox.addItem(response.getName());
+            }
+            RolesJComboBox.setSelectedItem(null);
+        }
     }
 
     /**
@@ -186,6 +193,7 @@ public class AddUser extends javax.swing.JPanel {
         jLabel2.setText("PREFIX");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MR", "MIS", "MRS" }));
+        jComboBox1.setSelectedItem(null);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("FIRST NAME");
@@ -500,4 +508,4 @@ public class AddUser extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     // End of variables declaration//GEN-END:variables
-    }
+}
