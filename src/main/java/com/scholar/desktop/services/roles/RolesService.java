@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.RoleAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
@@ -72,6 +73,10 @@ public class RolesService extends AbstractService {
     public List<RoleResponse> list(Integer offset, Integer limit) {
         list = new ArrayList<>();
         RoleResponse[] responses = roleAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+
         return list;
     }
 

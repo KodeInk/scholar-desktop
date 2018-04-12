@@ -38,10 +38,10 @@ public class Users extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageUsers.getInstance(schoolData);
+                    ManageUsers.getInstance(schoolData).fetchData();
                     break;
                 case 1:
-                    AddUser.getInstance(schoolData);
+                    AddUser.getInstance(schoolData).initData();
                     break;
                 default:
 
@@ -62,8 +62,8 @@ public class Users extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
-        jTabbedPane1.addTab("Manage Users", new ManageUsers(schoolData));
-        jTabbedPane1.addTab("Add User", new  AddUser(schoolData));
+        jTabbedPane1.add("Manage Users",  ManageUsers.getInstance(schoolData));
+        jTabbedPane1.add("Add User",    AddUser.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -41,8 +41,7 @@ public class ManageUsers extends javax.swing.JPanel {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
         initComponents();
-
-        fetchData(schoolData);
+        fetchData();
 
     }
 
@@ -50,25 +49,24 @@ public class ManageUsers extends javax.swing.JPanel {
     public static ManageUsers getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ManageUsers(schoolData);
-        } else {
-            instance.fetchData(schoolData);
         }
         return instance;
     }
 
     List<UserResponse> list = null;
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void fetchData() {
         if (list != null) {
             populateJTable(list);
         }
 
         final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
+        // Utilities.ShowDialogMessage(message);
+        jLabel1.setText(message);
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = UsersService.getInstance(schoolData1).list();
+                list = UsersService.getInstance(schoolData).list();
                 populateJTable(list);
                 return null;
             }
@@ -111,8 +109,8 @@ public class ManageUsers extends javax.swing.JPanel {
         }
 
         tableModel.fireTableDataChanged();
-
-        Utilities.hideDialog();
+        jLabel1.setText("Manage Users");
+        // Utilities.hideDialog();
 //fireTableDataChanged
         //usersModel.addColumn("USERNAME");
     }

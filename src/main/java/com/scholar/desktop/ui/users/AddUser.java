@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -76,7 +77,7 @@ public class AddUser extends javax.swing.JPanel {
 
         initComponents();
         fileChooser = new JFileChooser();
-        roleResponses = fetchRoles(schoolData);
+        //  roleResponses = fetchRoles(schoolData);
 
     }
 
@@ -93,6 +94,9 @@ public class AddUser extends javax.swing.JPanel {
         usersList.addItem("movers");
     }
 
+    public void initData() {
+        roleResponses = fetchRoles(schoolData);
+    }
     private List<RoleResponse> fetchRoles(SchoolData schoolData) {
 
         if (roleResponses != null && roleResponses.size() > 0) {
@@ -103,7 +107,9 @@ public class AddUser extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 roleResponses = RolesService.getInstance(schoolData).list(-1, -1);
+
                 Utilities.hideDialog();
+                JOptionPane.showMessageDialog(null, "SIZE: " + roleResponses.size());
                 return null;
             }
         };
