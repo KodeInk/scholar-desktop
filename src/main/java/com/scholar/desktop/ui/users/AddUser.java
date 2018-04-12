@@ -108,6 +108,12 @@ public class AddUser extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 roleResponses = RolesService.getInstance(schoolData).list(-1, -1);
 
+                if (roleResponses != null) {
+                    for (RoleResponse response : roleResponses) {
+                        RolesJComboBox.addItem(response.getName());
+                    }
+                    RolesJComboBox.setSelectedItem(null);
+                }
                 Utilities.hideDialog();
                 JOptionPane.showMessageDialog(null, "SIZE: " + roleResponses.size());
                 return null;
@@ -150,10 +156,10 @@ public class AddUser extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jTextField3 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        RolesJComboBox = new javax.swing.JComboBox<>();
         if(roleResponses != null){
             for(RoleResponse response: roleResponses){
-                jComboBox2.addItem(response.getName());
+                RolesJComboBox.addItem(response.getName());
             }
         }
         jLabel12 = new javax.swing.JLabel();
@@ -313,7 +319,7 @@ public class AddUser extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPasswordField1)
                         .addComponent(jTextField3)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RolesJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)))
                 .addGap(850, 850, 850))
         );
@@ -373,7 +379,7 @@ public class AddUser extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RolesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,12 +468,12 @@ public class AddUser extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> RolesJComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
-    public javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

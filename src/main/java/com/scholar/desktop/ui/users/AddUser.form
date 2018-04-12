@@ -115,7 +115,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jPasswordField1" max="32767" attributes="0"/>
                               <Component id="jTextField3" max="32767" attributes="0"/>
-                              <Component id="jComboBox2" max="32767" attributes="0"/>
+                              <Component id="RolesJComboBox" max="32767" attributes="0"/>
                               <Component id="jPasswordField2" alignment="0" pref="476" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -192,7 +192,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="RolesJComboBox" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -368,9 +368,9 @@
                 <Property name="text" type="java.lang.String" value="ROLE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="RolesJComboBox">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(roleResponses != null){&#xa;for(RoleResponse response: roleResponses){&#xa;jComboBox2.addItem(response.getName());&#xa;}&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(roleResponses != null){&#xa;for(RoleResponse response: roleResponses){&#xa;RolesJComboBox.addItem(response.getName());&#xa;}&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
