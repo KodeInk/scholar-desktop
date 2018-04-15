@@ -204,7 +204,6 @@ public class AddUser extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("DATE OF BIRTH");
 
-        jXDatePicker1.setEditable(false);
         jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jXDatePicker1ActionPerformed(evt);
@@ -255,17 +254,14 @@ public class AddUser extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("USERNAME");
 
-        jPasswordField1.setText("jPasswordField1");
-
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setText("PASSWORD");
-
-        jPasswordField2.setText("jPasswordField1");
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setText("REPEAT PASSWORD");
 
-        jButton2.setText("CREATE");
+        jButton2.setText("SAVE");
+        jButton2.setActionCommand("save_user");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -473,6 +469,7 @@ public class AddUser extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showConfirmDialog(null, "Mizer ");
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
