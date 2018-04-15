@@ -204,6 +204,7 @@ public class AddUser extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("DATE OF BIRTH");
 
+        jXDatePicker1.setEditable(false);
         jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jXDatePicker1ActionPerformed(evt);
