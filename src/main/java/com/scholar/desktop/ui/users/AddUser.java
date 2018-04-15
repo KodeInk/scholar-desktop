@@ -478,6 +478,7 @@ public class AddUser extends javax.swing.JPanel {
         if (prefix_combo.getSelectedIndex() == -1) {
             throw new BadRequestException("Prefix is required ");
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
