@@ -227,6 +227,16 @@ public class AddUser extends javax.swing.JPanel {
         jLabel7.setText("IMAGE");
 
         IsStaff.setBackground(new java.awt.Color(255, 255, 255));
+        IsStaff.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                IsStaffStateChanged(evt);
+            }
+        });
+        IsStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IsStaffMouseClicked(evt);
+            }
+        });
         IsStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IsStaffActionPerformed(evt);
@@ -236,6 +246,7 @@ public class AddUser extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("JOIN DATE");
 
+        JoinDate.setEnabled(false);
         JoinDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JoinDateActionPerformed(evt);
@@ -473,6 +484,21 @@ public class AddUser extends javax.swing.JPanel {
         // TODO add your handling code here:
         validateForm();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void IsStaffStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IsStaffStateChanged
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_IsStaffStateChanged
+
+    private void IsStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IsStaffMouseClicked
+        // TODO add your handling code here:
+           JoinDate.setEnabled(false);
+           JoinDate.setDate(null);
+        if (IsStaff.isSelected() == true) {
+            JoinDate.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_IsStaffMouseClicked
 
     public void validateForm(){
 
