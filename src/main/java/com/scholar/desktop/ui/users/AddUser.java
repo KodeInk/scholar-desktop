@@ -487,33 +487,33 @@ public class AddUser extends javax.swing.JPanel {
 
     private void IsStaffStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IsStaffStateChanged
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_IsStaffStateChanged
 
     private void IsStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IsStaffMouseClicked
         // TODO add your handling code here:
-           JoinDate.setEnabled(false);
-           JoinDate.setDate(null);
+        JoinDate.setEnabled(false);
+        JoinDate.setDate(null);
         if (IsStaff.isSelected() == true) {
             JoinDate.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_IsStaffMouseClicked
 
-    public void validateForm(){
+    public void validateForm() {
 
-        if(IsStaff.isSelected() == true){
-            try{
+        if (IsStaff.isSelected() == true) {
+            try {
                 JoinDate.getDate().toString();
             } catch (NullPointerException er) {
                 throw new BadRequestException("Staff Join Date  is Madantory");
             }
         }
-        
+
         if (prefix_combo.getSelectedIndex() == -1) {
             throw new BadRequestException("Prefix is required ");
         }
-        if(JFirstName.getText().isEmpty()){
+        if (JFirstName.getText().isEmpty()) {
             throw new BadRequestException("First Name  is required ");
         }
 
@@ -521,8 +521,13 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Last Name  is required ");
         }
 
+        try {
+            JDateOfBirth.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Date of Birth is Madantory");
+        }
 
-        if(Jusername.getText().isEmpty()){
+        if (Jusername.getText().isEmpty()) {
             throw new BadRequestException("Username is Empty ");
         }
 
@@ -538,14 +543,13 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Repeate Password  is Empty ");
         }
 
-         try{
-            JDateOfBirth.getDate().toString();
-        }catch(NullPointerException er){
-            throw new BadRequestException("Date of Birth is Madantory");
+
+        String password1 = JPassword1.getText();
+        String password2 = JPassword2.getText();
+
+        if(!password1.equals(password2)){
+            throw new BadRequestException("Password does not match repeat password ");
         }
-         
-      
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
