@@ -475,6 +475,15 @@ public class AddUser extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void validateForm(){
+
+        if(IsStaff.isSelected() == true){
+            try{
+                JoinDate.getDate().toString();
+            } catch (NullPointerException er) {
+                throw new BadRequestException("Staff Join Date  is Madantory");
+            }
+        }
+        
         if (prefix_combo.getSelectedIndex() == -1) {
             throw new BadRequestException("Prefix is required ");
         }
@@ -486,10 +495,30 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Last Name  is required ");
         }
 
-//        if (JDateOfBirth.get)) {
-//            throw new BadRequestException("Last Name  is required ");
-//        }
-        
+
+        if(Jusername.getText().isEmpty()){
+            throw new BadRequestException("Username is Empty ");
+        }
+
+        if (RolesJComboBox.getSelectedIndex() == -1) {
+            throw new BadRequestException("Role  is required ");
+        }
+
+        if (JPassword1.getText().isEmpty()) {
+            throw new BadRequestException("Password  is Empty ");
+        }
+
+        if (JPassword2.getText().isEmpty()) {
+            throw new BadRequestException("Repeate Password  is Empty ");
+        }
+
+         try{
+            JDateOfBirth.getDate().toString();
+        }catch(NullPointerException er){
+            throw new BadRequestException("Date of Birth is Madantory");
+        }
+         
+      
         
     }
 
