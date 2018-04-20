@@ -44,6 +44,15 @@ public class AddUser extends javax.swing.JPanel {
     public AddUser(SchoolData schoolData) {
         this.schoolData = schoolData;
 
+        initComboBoxModel();
+
+        initComponents();
+        fileChooser = new JFileChooser();
+        //  roleResponses = fetchRoles(schoolData);
+
+    }
+
+    public void initComboBoxModel() {
         comboBoxModel = new ComboBoxModel<RoleResponse>() {
             @Override
             public void setSelectedItem(Object anItem) {
@@ -75,11 +84,6 @@ public class AddUser extends javax.swing.JPanel {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
-
-        initComponents();
-        fileChooser = new JFileChooser();
-        //  roleResponses = fetchRoles(schoolData);
-
     }
 
     public static AddUser getInstance(SchoolData schoolData) {
