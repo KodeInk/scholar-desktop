@@ -9,6 +9,7 @@ import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
 
 /**
  *
@@ -25,6 +26,7 @@ public class User {
     private String externalid;
     private String date_created;
     private String[] roles;
+    private Profile profile;
 
     public User() {
     }
@@ -97,17 +99,26 @@ public class User {
         this.roles = roles;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.username);
-        hash = 59 * hash + Objects.hashCode(this.password);
-        hash = 59 * hash + Objects.hashCode(this.emailaddress);
-        hash = 59 * hash + Objects.hashCode(this.status);
-        hash = 59 * hash + Objects.hashCode(this.externalid);
-        hash = 59 * hash + Objects.hashCode(this.date_created);
-        hash = 59 * hash + Arrays.deepHashCode(this.roles);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.username);
+        hash = 41 * hash + Objects.hashCode(this.password);
+        hash = 41 * hash + Objects.hashCode(this.emailaddress);
+        hash = 41 * hash + Objects.hashCode(this.status);
+        hash = 41 * hash + Objects.hashCode(this.externalid);
+        hash = 41 * hash + Objects.hashCode(this.date_created);
+        hash = 41 * hash + Arrays.deepHashCode(this.roles);
+        hash = 41 * hash + Objects.hashCode(this.profile);
         return hash;
     }
 
@@ -144,21 +155,29 @@ public class User {
         if (this.status != other.status) {
             return false;
         }
-        return Arrays.deepEquals(this.roles, other.roles);
+        if (!Arrays.deepEquals(this.roles, other.roles)) {
+            return false;
+        }
+        if (!Objects.equals(this.profile, other.profile)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "_User{"
+        return "User{"
                 + "id=" + id
                 + ", username=" + username
                 + ", password=" + password
                 + ", emailaddress=" + emailaddress
                 + ", status=" + status
                 + ", externalid=" + externalid
-                + ", date_created=" + date_created
-                + ", roles=" + Arrays.asList(roles)
-                + "}";
+                + ", dateCreated=" + date_created
+                + ", roles=" + roles
+                + ", profile=" + profile
+                + '}';
     }
+
 
 }
