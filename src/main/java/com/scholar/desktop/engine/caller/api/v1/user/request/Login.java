@@ -13,12 +13,12 @@ import java.util.Objects;
  * @author mover
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _login {
+public class Login {
 
     private String username;
     private String password;
 
-    public _login() {
+    public Login() {
     }
 
     public String getUsername() {
@@ -56,7 +56,7 @@ public class _login {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _login other = (_login) obj;
+        final Login other = (Login) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

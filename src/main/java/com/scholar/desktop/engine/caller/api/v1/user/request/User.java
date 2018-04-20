@@ -15,7 +15,7 @@ import java.util.Objects;
  * @author MOver 11/19/2017
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _User {
+public class User {
 
     private Integer id;
     private String username;
@@ -26,10 +26,10 @@ public class _User {
     private String date_created;
     private String[] roles;
 
-    public _User() {
+    public User() {
     }
 
-    public _User(Integer id) {
+    public User(Integer id) {
         this.id = id;
     }
 
@@ -122,7 +122,7 @@ public class _User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _User other = (_User) obj;
+        final User other = (User) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

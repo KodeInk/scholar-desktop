@@ -52,40 +52,6 @@ public class AddUser extends javax.swing.JPanel {
 
     }
 
-    public void initComboBoxModel() {
-        comboBoxModel = new ComboBoxModel<RoleResponse>() {
-            @Override
-            public void setSelectedItem(Object anItem) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public Object getSelectedItem() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public int getSize() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public RoleResponse getElementAt(int index) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void addListDataListener(ListDataListener l) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void removeListDataListener(ListDataListener l) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
-    }
-
     public static AddUser getInstance(SchoolData schoolData) {
 
         if (instance == null) {
@@ -510,20 +476,7 @@ public class AddUser extends javax.swing.JPanel {
 
     }
 
-    public void getFormData() {
-        Date joinDate =  JoinDate.getDate();
-        String prefix = prefix_combo.getSelectedItem().toString();
-        String firstName = JFirstName.getText();
-        String lastName = JLastName.getText();
-        Date dob = JDateOfBirth.getDate();
-
-        String username = Jusername.getText();
-        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
-
-        String password1 = JPassword1.getText();
-        String password2 = JPassword2.getText();
-    }
-
+   
     public void validateForm() {
 
         if (IsStaff.isSelected() == true) {
@@ -576,6 +529,58 @@ public class AddUser extends javax.swing.JPanel {
         }
     }
 
+    public void getFormData() {
+        Date joinDate = JoinDate.getDate();
+        String prefix = prefix_combo.getSelectedItem().toString();
+        String firstName = JFirstName.getText();
+        String lastName = JLastName.getText();
+        Date dob = JDateOfBirth.getDate();
+
+        String username = Jusername.getText();
+        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
+
+        String password1 = JPassword1.getText();
+        String password2 = JPassword2.getText();
+    }
+
+    /**
+     *
+     */
+    public void initComboBoxModel() {
+        comboBoxModel = new ComboBoxModel<RoleResponse>() {
+            @Override
+            public void setSelectedItem(Object anItem) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object getSelectedItem() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getSize() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public RoleResponse getElementAt(int index) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addListDataListener(ListDataListener l) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removeListDataListener(ListDataListener l) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
+
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;
     private org.jdesktop.swingx.JXDatePicker JDateOfBirth;

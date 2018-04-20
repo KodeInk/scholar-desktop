@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._User;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.Login;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -79,7 +79,7 @@ public class UserAPI {
      * @return
      * @throws IOException
      */
-    public UserResponse create(_User user, String logId) throws IOException {
+    public UserResponse create(User user, String logId) throws IOException {
         //  return engineCaller.post("user/v1/", (Map) user, UserResponse.class, logId);
         return null;
 
@@ -91,7 +91,7 @@ public class UserAPI {
      * @param logId
      * @return
      */
-    public AuthenticationResponse login(_login login, String logId) {
+    public AuthenticationResponse login(Login login, String logId) {
         try {
             Map body = getLogin(login);
 
@@ -129,7 +129,7 @@ public class UserAPI {
      * @param login
      * @return
      */
-    public Map getLogin(_login login) {
+    public Map getLogin(Login login) {
         Map body = new HashMap();
         body.put("username", login.getUsername());
         body.put("password", login.getPassword());

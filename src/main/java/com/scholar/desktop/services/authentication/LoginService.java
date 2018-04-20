@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.SwingWorker;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.request._login;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.Login;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.UserAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
@@ -62,7 +62,7 @@ public class LoginService {
             return false;
         }
 
-        _login login = getLogin(password, Username);
+        Login login = getLogin(password, Username);
         loginScreen.getLOGINBUTTON().setText("PROCESSING");
         loginScreen.getLOGINBUTTON().setEnabled(false);
         SwingWorker swingWorker = new SwingWorker() {
@@ -86,9 +86,9 @@ public class LoginService {
         return true;
     }
 
-    public _login getLogin(String password, String Username) {
+    public Login getLogin(String password, String Username) {
         //todo: send to  Fill in the pojo
-        _login login = new _login();
+        Login login = new Login();
         login.setPassword(password);
         login.setUsername(Username);
         return login;
