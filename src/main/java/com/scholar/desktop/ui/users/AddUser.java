@@ -9,14 +9,13 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -483,6 +482,7 @@ public class AddUser extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         validateForm();
+        submitForm();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void IsStaffStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IsStaffStateChanged
@@ -499,6 +499,26 @@ public class AddUser extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_IsStaffMouseClicked
+
+    private void submitForm(){
+        getFormData();
+
+
+    }
+
+    public void getFormData() {
+        Date joinDate =  JoinDate.getDate();
+        String prefix = prefix_combo.getSelectedItem().toString();
+        String firstName = JFirstName.getText();
+        String lastName = JLastName.getText();
+        Date dob = JDateOfBirth.getDate();
+
+        String username = Jusername.getText();
+        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
+
+        String password1 = JPassword1.getText();
+        String password2 = JPassword2.getText();
+    }
 
     public void validateForm() {
 
