@@ -36,13 +36,11 @@ public class AddUserIT {
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
+        SchoolData schoolData = null;
+        AddUser result = AddUser.getInstance(schoolData);
+        assertNotNull(result);
+        assertEquals(result.schoolData, schoolData);
 
-//        SchoolData schoolData = null;
-//        AddUser expResult = null;
-//        //AddUser result = AddUser.getInstance(schoolData);
-//        //  assertEquals(expResult.schoolData, schoolData);
-
-        assertTrue(true);
     }
 
     /**
