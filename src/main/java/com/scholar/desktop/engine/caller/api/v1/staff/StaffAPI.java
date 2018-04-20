@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
-import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.StaffResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.response.StaffResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
 import static main.java.com.scholar.desktop.helper.Utilities.getOffset;

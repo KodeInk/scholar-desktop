@@ -19,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;
 import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -541,6 +542,12 @@ public class AddUser extends javax.swing.JPanel {
 
         String password1 = JPassword1.getText();
         String password2 = JPassword2.getText();
+
+        Profile profile = new Profile();
+        profile.setFirstName(firstName);
+        profile.setLastName(lastName);
+        profile.setPrefix(prefix);
+        profile.setDateOfBirth(dob);
     }
 
     /**

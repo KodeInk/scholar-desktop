@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.StaffResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.response.StaffResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.ProfileResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.staff.StaffService;

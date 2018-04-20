@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.Staff;
 
 /**
  *
@@ -27,6 +28,8 @@ public class User {
     private String date_created;
     private String[] roles;
     private Profile profile;
+    private Staff staff;
+
 
     public User() {
     }
@@ -107,18 +110,27 @@ public class User {
         this.profile = profile;
     }
 
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.username);
-        hash = 41 * hash + Objects.hashCode(this.password);
-        hash = 41 * hash + Objects.hashCode(this.emailaddress);
-        hash = 41 * hash + Objects.hashCode(this.status);
-        hash = 41 * hash + Objects.hashCode(this.externalid);
-        hash = 41 * hash + Objects.hashCode(this.date_created);
-        hash = 41 * hash + Arrays.deepHashCode(this.roles);
-        hash = 41 * hash + Objects.hashCode(this.profile);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.username);
+        hash = 59 * hash + Objects.hashCode(this.password);
+        hash = 59 * hash + Objects.hashCode(this.emailaddress);
+        hash = 59 * hash + Objects.hashCode(this.status);
+        hash = 59 * hash + Objects.hashCode(this.externalid);
+        hash = 59 * hash + Objects.hashCode(this.date_created);
+        hash = 59 * hash + Arrays.deepHashCode(this.roles);
+        hash = 59 * hash + Objects.hashCode(this.profile);
+        hash = 59 * hash + Objects.hashCode(this.staff);
         return hash;
     }
 
@@ -161,7 +173,7 @@ public class User {
         if (!Objects.equals(this.profile, other.profile)) {
             return false;
         }
-        return true;
+        return Objects.equals(this.staff, other.staff);
     }
 
     @Override
@@ -173,9 +185,10 @@ public class User {
                 + ", emailaddress=" + emailaddress
                 + ", status=" + status
                 + ", externalid=" + externalid
-                + ", dateCreated=" + date_created
+                + ", date_created=" + date_created
                 + ", roles=" + roles
                 + ", profile=" + profile
+                + ", staff=" + staff
                 + '}';
     }
 

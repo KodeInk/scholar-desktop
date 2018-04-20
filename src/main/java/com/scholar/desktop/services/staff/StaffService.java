@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.staff.StaffAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.StaffResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.response.StaffResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
