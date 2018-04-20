@@ -20,6 +20,8 @@ import javax.swing.SwingWorker;
 import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.Staff;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -147,6 +149,8 @@ public class AddUser extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        IsTeacher = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -253,6 +257,27 @@ public class AddUser extends javax.swing.JPanel {
 
         jButton3.setText("CANCEL");
 
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel15.setText("IS TEACHER");
+
+        IsTeacher.setBackground(new java.awt.Color(255, 255, 255));
+        IsTeacher.setEnabled(false);
+        IsTeacher.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                IsTeacherStateChanged(evt);
+            }
+        });
+        IsTeacher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IsTeacherMouseClicked(evt);
+            }
+        });
+        IsTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IsTeacherActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -279,20 +304,25 @@ public class AddUser extends javax.swing.JPanel {
                                     .addComponent(JFirstName)
                                     .addComponent(prefix_combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(JDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(IsStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(JoinDate, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)))
+                                    .addComponent(JoinDate, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(IsStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(IsTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jLabel10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(718, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 51, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -343,20 +373,23 @@ public class AddUser extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 32, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(IsStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(IsStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(11, 11, 11))
+                            .addComponent(jLabel15)
+                            .addComponent(IsTeacher))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JoinDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(12, 12, 12)))
-                .addGap(38, 38, 38)
+                        .addGap(64, 64, 64)))
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,7 +428,9 @@ public class AddUser extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -465,19 +500,33 @@ public class AddUser extends javax.swing.JPanel {
         // TODO add your handling code here:
         JoinDate.setEnabled(false);
         JoinDate.setDate(null);
+        IsTeacher.setEnabled(false);
+        IsTeacher.setSelected(false);
+
         if (IsStaff.isSelected() == true) {
             JoinDate.setEnabled(true);
+            IsTeacher.setEnabled(true);
         }
 
     }//GEN-LAST:event_IsStaffMouseClicked
 
-    private void submitForm(){
-        getFormData();
+    private void IsTeacherStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_IsTeacherStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IsTeacherStateChanged
 
+    private void IsTeacherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IsTeacherMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IsTeacherMouseClicked
+
+    private void IsTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IsTeacherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IsTeacherActionPerformed
+
+    private void submitForm() {
+        getFormData();
 
     }
 
-   
     public void validateForm() {
 
         if (IsStaff.isSelected() == true) {
@@ -521,33 +570,66 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Repeate Password  is Empty ");
         }
 
-
         String password1 = JPassword1.getText();
         String password2 = JPassword2.getText();
 
-        if(!password1.equals(password2)){
+        if (!password1.equals(password2)) {
             throw new BadRequestException("Password does not match repeat password ");
         }
     }
 
-    public void getFormData() {
+    public User getFormData() {
         Date joinDate = JoinDate.getDate();
         String prefix = prefix_combo.getSelectedItem().toString();
         String firstName = JFirstName.getText();
         String lastName = JLastName.getText();
         Date dob = JDateOfBirth.getDate();
-
         String username = Jusername.getText();
         RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
-
         String password1 = JPassword1.getText();
         String password2 = JPassword2.getText();
 
+        Profile profile = getProfile(firstName, lastName, prefix, dob);
+        Staff staff = getStaff(profile, joinDate);
+
+        User user = getUser(profile, username, password2, staff);
+
+        return user;
+
+    }
+
+    public User getUser(Profile profile, String username, String password2, Staff staff) {
+        //todo:missing Email in the Contact List : probably add email Address, POBOX phone number etc :
+        User user = new User();
+        user.setProfile(profile);
+        user.setUsername(username);
+        user.setPassword(password2);
+        user.setStaff(staff);
+        user.setProfile(profile);
+        return user;
+    }
+
+    public Profile getProfile(String firstName, String lastName, String prefix, Date dob) {
         Profile profile = new Profile();
         profile.setFirstName(firstName);
         profile.setLastName(lastName);
         profile.setPrefix(prefix);
         profile.setDateOfBirth(dob);
+        return profile;
+    }
+
+    public Staff getStaff(Profile profile, Date joinDate) {
+        Staff staff = null;
+        if (IsStaff.isSelected() == true) {
+            staff = new Staff();
+            //staff.setIsTeacher(Boolean.TRUE);
+            if (IsStaff.isSelected() == true) {
+                staff.setIsTeacher(true);
+            }
+            staff.setProfile(profile);
+            staff.setJoinDate(joinDate);
+        }
+        return staff;
     }
 
     /**
@@ -587,9 +669,9 @@ public class AddUser extends javax.swing.JPanel {
         };
     }
 
-      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;
+    private javax.swing.JCheckBox IsTeacher;
     private org.jdesktop.swingx.JXDatePicker JDateOfBirth;
     private javax.swing.JTextField JFirstName;
     private javax.swing.JTextField JLastName;
@@ -607,6 +689,7 @@ public class AddUser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
