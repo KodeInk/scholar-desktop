@@ -551,7 +551,7 @@ public class AddUser extends javax.swing.JPanel {
         Profile profile = getProfile(firstName, lastName, prefix, dob);
         Staff staff = getStaff(profile, joinDate);
 
-        User user = getUser(profile, username, "moseae", staff, roleResponse);
+        User user = getUser(profile, username, String.valueOf(password1), staff, roleResponse);
 
         return user;
 
