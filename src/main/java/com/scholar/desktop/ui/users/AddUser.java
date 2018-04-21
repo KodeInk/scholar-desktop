@@ -524,27 +524,20 @@ public class AddUser extends javax.swing.JPanel {
     }//GEN-LAST:event_IsTeacherActionPerformed
 
     private void submitForm() {
-     User user =   getFormData();
-     //todo: create a swing worker to send data to the server : and wait
-
-      Utilities.ShowDialogMessage("Processing");
+        User user = getFormData();
+        //todo: create a swing worker to send data to the server : and wait
+        Utilities.ShowDialogMessage("Processing");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-            //    UsersService.getInstance(schoolData).create(user, "LOG ID ");
-                //  populateRolesComboBox();
+                UsersService.getInstance(schoolData).create(user, "LOG ID ");
                 Utilities.hideDialog();
-
                 return null;
             }
-
         };
         swingWorker.execute();
-        
-
     }
 
-   
     public User getFormData() {
         Date joinDate = JoinDate.getDate();
         String prefix = prefix_combo.getSelectedItem().toString();
