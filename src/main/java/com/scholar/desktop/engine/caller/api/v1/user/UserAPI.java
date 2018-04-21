@@ -85,11 +85,22 @@ public class UserAPI extends AbstractAPI {
     public UserResponse create(Map body, String logId) throws IOException {
         //  return engineCaller.post("body/v1/", (Map) body, UserResponse.class, logId);
         Response response = engineCaller.post("user/v1/", body, logId);
+        JOptionPane.showMessageDialog(null, "JOEKEI " + response.getStatus());
+
+        if (response.getStatus() == 500) {
+            JOptionPane.showMessageDialog(null, "Milolor zi " + response.getStatus());
+        }
 
         switch (response.getStatus()) {
             case 400:
                 message = getMessage(response);
                 throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                JOptionPane.showMessageDialog(null, "Milolor zi " + response.getStatus());
+                throw new BadRequestException(message.getMessage());
+
 
             case 200:
                 UserResponse userResponse = response.readEntity(UserResponse.class);
