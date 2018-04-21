@@ -74,13 +74,14 @@ public class UserAPI {
 
     /**
      *
-     * @param user
+     * @param body
      * @param logId
      * @return
      * @throws IOException
      */
-    public UserResponse create(User user, String logId) throws IOException {
-        //  return engineCaller.post("user/v1/", (Map) user, UserResponse.class, logId);
+    public UserResponse create(Map body, String logId) throws IOException {
+        //  return engineCaller.post("body/v1/", (Map) body, UserResponse.class, logId);
+        Response response = engineCaller.post("user/v1/", body, logId);
         return null;
 
     }

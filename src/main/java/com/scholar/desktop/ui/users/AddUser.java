@@ -26,6 +26,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResp
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.roles.RolesService;
+import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
  *
@@ -523,7 +524,44 @@ public class AddUser extends javax.swing.JPanel {
     }//GEN-LAST:event_IsTeacherActionPerformed
 
     private void submitForm() {
-        getFormData();
+     User user =   getFormData();
+     //todo: create a swing worker to send data to the server : and wait
+
+      Utilities.ShowDialogMessage("Processing");
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+              //  roleResponses = UsersService.getInstance(schoolData).
+              //  populateRolesComboBox();
+                Utilities.hideDialog();
+
+                return null;
+            }
+
+        };
+        swingWorker.execute();
+        
+
+    }
+
+   
+    public User getFormData() {
+        Date joinDate = JoinDate.getDate();
+        String prefix = prefix_combo.getSelectedItem().toString();
+        String firstName = JFirstName.getText();
+        String lastName = JLastName.getText();
+        Date dob = JDateOfBirth.getDate();
+        String username = Jusername.getText();
+        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
+        String password1 = JPassword1.getText();
+        String password2 = JPassword2.getText();
+
+        Profile profile = getProfile(firstName, lastName, prefix, dob);
+        Staff staff = getStaff(profile, joinDate);
+
+        User user = getUser(profile, username, password2, staff);
+
+        return user;
 
     }
 
@@ -576,26 +614,6 @@ public class AddUser extends javax.swing.JPanel {
         if (!password1.equals(password2)) {
             throw new BadRequestException("Password does not match repeat password ");
         }
-    }
-
-    public User getFormData() {
-        Date joinDate = JoinDate.getDate();
-        String prefix = prefix_combo.getSelectedItem().toString();
-        String firstName = JFirstName.getText();
-        String lastName = JLastName.getText();
-        Date dob = JDateOfBirth.getDate();
-        String username = Jusername.getText();
-        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
-        String password1 = JPassword1.getText();
-        String password2 = JPassword2.getText();
-
-        Profile profile = getProfile(firstName, lastName, prefix, dob);
-        Staff staff = getStaff(profile, joinDate);
-
-        User user = getUser(profile, username, password2, staff);
-
-        return user;
-
     }
 
     public User getUser(Profile profile, String username, String password2, Staff staff) {
