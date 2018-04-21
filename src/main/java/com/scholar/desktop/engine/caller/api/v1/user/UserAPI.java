@@ -20,12 +20,14 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
 import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 /**
  *
  * @author mover 2/14/2018
  */
-public class UserAPI {
+public class UserAPI extends AbstractAPI {
 
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
     private final SchoolData schoolData;
@@ -85,20 +87,21 @@ public class UserAPI {
 
         switch (response.getStatus()) {
             case 400:
-                ShowAlertMessage(response);
-                break;
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
             case 200:
                 UserResponse userResponse = response.readEntity(UserResponse.class);
                 return userResponse;
             case 401:
-                ShowAlertMessage(response);
-                break;
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
             default:
                 return null;
 
         }
 
-        return null;
 
     }
 
