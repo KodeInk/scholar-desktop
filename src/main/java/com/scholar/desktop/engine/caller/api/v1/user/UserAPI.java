@@ -76,23 +76,6 @@ public class UserAPI extends AbstractAPI {
         return null;
     }
 
-    protected static String toString(final Response r) {
-        try {
-            try (final InputStream is = (InputStream) r.getEntity()) {
-                final byte[] b = new byte[1024];
-                int read = 0;
-                final StringBuffer buff = new StringBuffer();
-                while ((read = is.read(b)) > 0) {
-                    buff.append(new String(b, 0, read));
-                }
-                return buff.toString();
-            }
-        } catch (final IOException e) {
-
-        }
-
-        return null;
-    }
 
     /**
      *
@@ -104,11 +87,7 @@ public class UserAPI extends AbstractAPI {
     public UserResponse create(Map body, String logId) throws IOException {
         //  return engineCaller.post("body/v1/", (Map) body, UserResponse.class, logId);
         Response response = engineCaller.post("user/v1/", body, logId);
-        JOptionPane.showMessageDialog(null, "JOEKEI " + response.getStatus());
 
-        if (response.getStatus() == 500) {
-            JOptionPane.showMessageDialog(null, "Milolor zi " + toString(response));
-        }
 
         switch (response.getStatus()) {
             case 400:
@@ -117,7 +96,6 @@ public class UserAPI extends AbstractAPI {
 
             case 500:
                 message = getMessage(response);
-                JOptionPane.showMessageDialog(null, "Milolor zi " + response.getStatus());
                 throw new BadRequestException(message.getMessage());
 
 
