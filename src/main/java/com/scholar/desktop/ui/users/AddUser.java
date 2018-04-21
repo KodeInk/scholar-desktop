@@ -545,13 +545,13 @@ public class AddUser extends javax.swing.JPanel {
         Date dob = JDateOfBirth.getDate();
         String username = Jusername.getText();
         RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
-        String password1 = JPassword1.getText();
-        String password2 = JPassword2.getText();
+        char[] password1 = JPassword1.getPassword();
+        char[] password2 = JPassword2.getPassword();
 
         Profile profile = getProfile(firstName, lastName, prefix, dob);
         Staff staff = getStaff(profile, joinDate);
 
-        User user = getUser(profile, username, password2, staff);
+        User user = getUser(profile, username, "moseae", staff, roleResponse);
 
         return user;
 
@@ -600,15 +600,14 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Repeate Password  is Empty ");
         }
 
-        String password1 = JPassword1.getText();
-        String password2 = JPassword2.getText();
+        char[] password1 = JPassword1.getPassword();
+        char[] password2 = JPassword2.getPassword();
 
-        if (!password1.equals(password2)) {
-            throw new BadRequestException("Password does not match repeat password ");
-        }
+        ValidatePassword(password1, password2);
     }
 
-    public User getUser(Profile profile, String username, String password2, Staff staff) {
+
+    public User getUser(Profile profile, String username, String password2, Staff staff, RoleResponse role) {
         //todo:missing Email in the Contact List : probably add email Address, POBOX phone number etc :
         User user = new User();
         user.setProfile(profile);
@@ -616,6 +615,9 @@ public class AddUser extends javax.swing.JPanel {
         user.setPassword(password2);
         user.setStaff(staff);
         user.setProfile(profile);
+        String[] roles = new String[1];
+        roles[0] = role.getName();
+        user.setRoles(roles);
         return user;
     }
 
@@ -678,6 +680,16 @@ public class AddUser extends javax.swing.JPanel {
             }
         };
     }
+
+    public void ValidatePassword(char[] password1, char[] password2) throws BadRequestException {
+        String passwordOne = String.valueOf(password1);
+        String passwordTwo = String.valueOf(password2);
+
+        if (!passwordOne.equals(passwordTwo)) {
+            throw new BadRequestException("Password does not match repeat password ");
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;

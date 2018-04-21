@@ -199,7 +199,7 @@ public class UserIT {
         System.out.println("getDate_created");
         User instance = getInstance();
         String expResult = "";
-        String result = instance.getDate_created();
+        Long result = instance.getDate_created();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -211,11 +211,11 @@ public class UserIT {
     @Test
     public void testSetDate_created() {
         System.out.println("setDate_created");
-        String date_created = "";
+        Long date_created = null;
         User instance = getInstance();
         instance.setDate_created(date_created);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(date_created, instance.getDate_created());
+
     }
 
     /**
