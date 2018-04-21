@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller.api.v1.user;
+package main.java.com.scholar.desktop.engine.caller.api.v1.abstracts;
 
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
@@ -13,7 +13,7 @@ import main.java.com.scholar.desktop.helper.exceptions.Message;
  * @author mover
  */
 public class AbstractAPI {
-    Message message = null;
+
     public AbstractAPI() {
     }
 

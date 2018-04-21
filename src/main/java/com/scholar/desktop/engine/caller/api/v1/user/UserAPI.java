@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
+import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.Login;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.AuthenticationResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
@@ -32,6 +32,7 @@ public class UserAPI extends AbstractAPI {
     private static final Logger LOG = Logger.getLogger(UserAPI.class.getName());
     private final SchoolData schoolData;
     private static UserAPI instance;
+    private Message message = null;
 
     private final EngineCaller engineCaller;
 
