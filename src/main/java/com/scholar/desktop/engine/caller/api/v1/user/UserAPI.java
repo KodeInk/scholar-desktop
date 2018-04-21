@@ -82,6 +82,22 @@ public class UserAPI {
     public UserResponse create(Map body, String logId) throws IOException {
         //  return engineCaller.post("body/v1/", (Map) body, UserResponse.class, logId);
         Response response = engineCaller.post("user/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                UserResponse userResponse = response.readEntity(UserResponse.class);
+                return userResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
         return null;
 
     }

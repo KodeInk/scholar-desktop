@@ -531,8 +531,8 @@ public class AddUser extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-              //  roleResponses = UsersService.getInstance(schoolData).
-              //  populateRolesComboBox();
+            //    UsersService.getInstance(schoolData).create(user, "LOG ID ");
+                //  populateRolesComboBox();
                 Utilities.hideDialog();
 
                 return null;
