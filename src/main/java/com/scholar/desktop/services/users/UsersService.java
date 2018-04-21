@@ -54,29 +54,25 @@ public class UsersService extends AbstractService {
         return instance;
     }
 
-
+    /**
+     *
+     * @param user
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public UserResponse create(User user, String logId) throws IOException {
-
         if (user != null) {
-            Map profileMap = getProfileMap(user);
-
-            Map staffMap = getStaffMap(user, profileMap);
-
-            Map userMap = new HashMap<>();
-            userMap.put("username", user.getUsername());
-            userMap.put("password", user.getPassword());
-            userMap.put("roles", user.getRoles());
-            userMap.put("profile", profileMap);
-            userMap.put("staff", staffMap);
-
-            userAPI.create(userMap, logId);
+            Map userMap = getUserMap(user);
+            return userAPI.create(userMap, logId);
         }
-
         return null;
     }
 
-
-
+    /**
+     *
+     * @return
+     */
     public List<UserResponse> list() {
 
         if (list != null) {
@@ -92,6 +88,28 @@ public class UsersService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
+    public Map getUserMap(User user) {
+        Map profileMap = getProfileMap(user);
+        Map staffMap = getStaffMap(user, profileMap);
+        Map userMap = new HashMap<>();
+        userMap.put("username", user.getUsername());
+        userMap.put("password", user.getPassword());
+        userMap.put("roles", user.getRoles());
+        userMap.put("profile", profileMap);
+        userMap.put("staff", staffMap);
+        return userMap;
+    }
+
+    /**
+     *
+     * @param user
+     * @return
+     */
     public Map getProfileMap(User user) {
         Map profileMap = new HashMap<>();
         if (user.getProfile() != null) {
@@ -103,6 +121,12 @@ public class UsersService extends AbstractService {
         return profileMap;
     }
 
+    /**
+     *
+     * @param user
+     * @param profileMap
+     * @return
+     */
     public Map getStaffMap(User user, Map profileMap) {
         Map staffMap = new HashMap<>();
         if (user.getStaff() != null) {
