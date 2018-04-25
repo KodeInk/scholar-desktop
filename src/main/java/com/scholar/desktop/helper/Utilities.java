@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Response;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
-import oracle.jrockit.jfr.parser.ParseException;
 
 /**
  *
@@ -34,6 +33,7 @@ public class Utilities {
     public static final Integer default_offset = 0;
     public static final Integer default_limit = 50;
     private static JDialog dialog;
+    private final static String dateFormat = "yyyy-MM-dd";
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -125,14 +125,15 @@ public class Utilities {
 
     public static String toISO8601UTC(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        DateFormat df = new SimpleDateFormat(dateFormat);
         df.setTimeZone(tz);
         return df.format(date);
     }
 
     public static Date fromISO8601UTC(String dateStr) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+
+        DateFormat df = new SimpleDateFormat(dateFormat);
         df.setTimeZone(tz);
 
         try {
