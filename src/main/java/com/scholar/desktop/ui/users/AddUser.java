@@ -538,11 +538,12 @@ public class AddUser extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
+
     public User getFormData() {
-        Long joinDateLong = JoinDate.getDate().getTime();
+        String joinDateString = JoinDate.getDate().toString();
         String timeZone = JoinDate.getTimeZone().getDisplayName();
 
-        Date joinDate = new Date(joinDateLong);
+        Date joinDate = Utilities.fromISO8601UTC(joinDateString);
         
         String prefix = prefix_combo.getSelectedItem().toString();
         String firstName = JFirstName.getText();

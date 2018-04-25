@@ -33,7 +33,7 @@ public class Utilities {
     public static final Integer default_offset = 0;
     public static final Integer default_limit = 50;
     private static JDialog dialog;
-    private final static String dateFormat = "yyyy-MM-dd";
+    private final static String DATE_FORMAT = "dd/MMM/yyyy";
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -125,7 +125,7 @@ public class Utilities {
 
     public static String toISO8601UTC(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat(dateFormat);
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
         df.setTimeZone(tz);
         return df.format(date);
     }
@@ -133,7 +133,29 @@ public class Utilities {
     public static Date fromISO8601UTC(String dateStr) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
 
-        DateFormat df = new SimpleDateFormat(dateFormat);
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        df.setTimeZone(tz);
+
+        try {
+            return df.parse(dateStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static String toISO8601Local(Date date) {
+        TimeZone tz = TimeZone.getDefault();
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        df.setTimeZone(tz);
+        return df.format(date);
+    }
+
+    public static Date fromISO8601Local(String dateStr) {
+        TimeZone tz = TimeZone.getDefault();
+
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
         df.setTimeZone(tz);
 
         try {
