@@ -20,7 +20,7 @@ public class Profile {
     private String middleName;
     private String lastName;
     private String prefix;
-    private Date dateOfBirth;
+    private Long dateOfBirth;
     private String image;
     private ProfileTypesEnum profileType;
     private Integer parentId;
@@ -72,11 +72,11 @@ public class Profile {
         this.prefix = prefix;
     }
 
-    public Date getDateOfBirth() {
+    public Long getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(Long dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -33,7 +33,7 @@ public class Utilities {
     public static final Integer default_offset = 0;
     public static final Integer default_limit = 50;
     private static JDialog dialog;
-    private final static String DATE_FORMAT = "dd/MMM/yyyy";
+    private final static String DATE_FORMAT = "E MMM dd";
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -123,11 +123,11 @@ public class Utilities {
         }
     }
 
-    public static String toISO8601UTC(Date date) {
+    public static Date toISO8601UTC(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat(DATE_FORMAT);
         df.setTimeZone(tz);
-        return df.format(date);
+        return fromISO8601UTC(df.format(date));
     }
 
     public static Date fromISO8601UTC(String dateStr) {

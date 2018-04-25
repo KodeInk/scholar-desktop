@@ -526,29 +526,29 @@ public class AddUser extends javax.swing.JPanel {
     private void submitForm() {
         User user = getFormData();
         //todo: create a swing worker to send data to the server : and wait
-        Utilities.ShowDialogMessage("Processing");
-        SwingWorker swingWorker = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                UsersService.getInstance(schoolData).create(user, "LOG ID ");
-                Utilities.hideDialog();
-                return null;
-            }
-        };
-        swingWorker.execute();
+//        Utilities.ShowDialogMessage("Processing");
+//        SwingWorker swingWorker = new SwingWorker() {
+//            @Override
+//            protected Object doInBackground() throws Exception {
+//                UsersService.getInstance(schoolData).create(user, "LOG ID ");
+//                Utilities.hideDialog();
+//                return null;
+//            }
+//        };
+//        swingWorker.execute();
     }
 
 
     public User getFormData() {
-        String joinDateString = JoinDate.getDate().toString();
-        String timeZone = JoinDate.getTimeZone().getDisplayName();
+        Long joinDate = JoinDate.getDate().getTime();
 
-        Date joinDate = Utilities.fromISO8601UTC(joinDateString);
         
         String prefix = prefix_combo.getSelectedItem().toString();
         String firstName = JFirstName.getText();
         String lastName = JLastName.getText();
-        Date dob = JDateOfBirth.getDate();
+        Long dob = JDateOfBirth.getDate().getTime();
+        System.out.println(" DATE OF BIRTH : "+dob);
+        
         String username = Jusername.getText();
         RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
         JOptionPane.showMessageDialog(this, "ROLE " + roleResponse.getName());
@@ -630,7 +630,7 @@ public class AddUser extends javax.swing.JPanel {
         return user;
     }
 
-    public Profile getProfile(String firstName, String lastName, String prefix, Date dob) {
+    public Profile getProfile(String firstName, String lastName, String prefix, Long dob) {
         Profile profile = new Profile();
         profile.setFirstName(firstName);
         profile.setLastName(lastName);
@@ -639,7 +639,7 @@ public class AddUser extends javax.swing.JPanel {
         return profile;
     }
 
-    public Staff getStaff(Profile profile, Date joinDate) {
+    public Staff getStaff(Profile profile, Long joinDate) {
         Staff staff = null;
         if (IsStaff.isSelected() == true) {
             staff = new Staff();

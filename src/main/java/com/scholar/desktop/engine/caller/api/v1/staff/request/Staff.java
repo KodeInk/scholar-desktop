@@ -20,7 +20,7 @@ public class Staff {
 
     private Integer id;
     private Profile profile;
-    private Date joinDate;
+    private Long joinDate;
     private StatusEnum status;
     private Long date_created;
     private Integer author_id;
@@ -45,11 +45,11 @@ public class Staff {
         this.profile = profile;
     }
 
-    public Date getJoinDate() {
+    public Long getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Date joinDate) {
+    public void setJoinDate(Long joinDate) {
         this.joinDate = joinDate;
     }
 
