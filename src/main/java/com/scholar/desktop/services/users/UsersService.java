@@ -99,7 +99,8 @@ public class UsersService extends AbstractService {
         Map userMap = new HashMap<>();
         userMap.put("username", user.getUsername());
         userMap.put("password", user.getPassword());
-        userMap.put("roles", user.getRoles());
+        //todo: how to convert an array inot a hashmap
+        userMap.put("roles", Arrays.asList(user.getRoles()));
         userMap.put("profile", profileMap);
         userMap.put("staff", staffMap);
         return userMap;

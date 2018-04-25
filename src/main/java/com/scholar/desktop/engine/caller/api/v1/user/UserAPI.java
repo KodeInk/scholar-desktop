@@ -7,9 +7,9 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.user;
 
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
@@ -85,7 +85,7 @@ public class UserAPI extends AbstractAPI {
      * @throws IOException
      */
     public UserResponse create(Map body, String logId) throws IOException {
-        //  return engineCaller.post("body/v1/", (Map) body, UserResponse.class, logId);
+        LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("user/v1/", body, logId);
 
 

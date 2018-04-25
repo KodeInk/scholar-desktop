@@ -8,7 +8,11 @@ package main.java.com.scholar.desktop.helper;
 import java.awt.BorderLayout;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.HeadlessException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -17,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Response;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
+import oracle.jrockit.jfr.parser.ParseException;
 
 /**
  *
@@ -116,6 +121,27 @@ public class Utilities {
         if (dialog != null) {
             dialog.setVisible(false);
         }
+    }
+
+    public static String toISO8601UTC(Date date) {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+        return df.format(date);
+    }
+
+    public static Date fromISO8601UTC(String dateStr) {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+
+        try {
+            return df.parse(dateStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

@@ -16,6 +16,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.event.ListDataListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -538,13 +539,19 @@ public class AddUser extends javax.swing.JPanel {
     }
 
     public User getFormData() {
-        Date joinDate = JoinDate.getDate();
+        Long joinDateLong = JoinDate.getDate().getTime();
+        String timeZone = JoinDate.getTimeZone().getDisplayName();
+
+        Date joinDate = new Date(joinDateLong);
+        
         String prefix = prefix_combo.getSelectedItem().toString();
         String firstName = JFirstName.getText();
         String lastName = JLastName.getText();
         Date dob = JDateOfBirth.getDate();
         String username = Jusername.getText();
         RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
+        JOptionPane.showMessageDialog(this, "ROLE " + roleResponse.getName());
+
         char[] password1 = JPassword1.getPassword();
         char[] password2 = JPassword2.getPassword();
 
@@ -606,7 +613,6 @@ public class AddUser extends javax.swing.JPanel {
         ValidatePassword(password1, password2);
     }
 
-
     public User getUser(Profile profile, String username, String password2, Staff staff, RoleResponse role) {
         //todo:missing Email in the Contact List : probably add email Address, POBOX phone number etc :
         User user = new User();
@@ -618,6 +624,8 @@ public class AddUser extends javax.swing.JPanel {
         String[] roles = new String[1];
         roles[0] = role.getName();
         user.setRoles(roles);
+
+        System.out.println(user.toString());
         return user;
     }
 
@@ -689,7 +697,7 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Password does not match repeat password ");
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;
