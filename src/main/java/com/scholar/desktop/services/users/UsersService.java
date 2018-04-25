@@ -99,9 +99,16 @@ public class UsersService extends AbstractService {
         Map userMap = new HashMap<>();
         userMap.put("username", user.getUsername());
         userMap.put("password", user.getPassword());
-        userMap.put("roles", (Arrays.toString(user.getRoles())));
+        ArrayList<String> arrayList;
+        arrayList = new ArrayList<>(Arrays.asList(user.getRoles()));
+        userMap.put("roles", Arrays.toString(user.getRoles()));
         userMap.put("profile", profileMap);
         userMap.put("staff", staffMap);
+
+        System.out.println("==================================");
+        System.out.println(userMap);
+        System.out.println("==================================");
+
         return userMap;
     }
 

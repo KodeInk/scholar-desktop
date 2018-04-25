@@ -626,7 +626,6 @@ public class AddUser extends javax.swing.JPanel {
         roles[0] = role.getName();
         user.setRoles(roles);
 
-        System.out.println(user.toString());
         return user;
     }
 
