@@ -526,16 +526,16 @@ public class AddUser extends javax.swing.JPanel {
     private void submitForm() {
         User user = getFormData();
         //todo: create a swing worker to send data to the server : and wait
-//        Utilities.ShowDialogMessage("Processing");
-//        SwingWorker swingWorker = new SwingWorker() {
-//            @Override
-//            protected Object doInBackground() throws Exception {
-//                UsersService.getInstance(schoolData).create(user, "LOG ID ");
-//                Utilities.hideDialog();
-//                return null;
-//            }
-//        };
-//        swingWorker.execute();
+        Utilities.ShowDialogMessage("Processing");
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                UsersService.getInstance(schoolData).create(user, "LOG ID ");
+                Utilities.hideDialog();
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
 
 
