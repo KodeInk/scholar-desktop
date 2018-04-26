@@ -19,7 +19,6 @@ public interface DashboardScreenInterface {
 
     SchoolData getSchoolData();
 
-
     /**
      * @param args the command line arguments
      */

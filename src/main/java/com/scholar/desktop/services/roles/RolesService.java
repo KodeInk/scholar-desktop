@@ -80,5 +80,4 @@ public class RolesService extends AbstractService {
         return list;
     }
 
-
 }

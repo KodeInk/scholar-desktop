@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.services.users;
 
+import com.google.common.collect.HashBiMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,7 +102,9 @@ public class UsersService extends AbstractService {
         userMap.put("password", user.getPassword());
         ArrayList<String> arrayList;
         arrayList = new ArrayList<>(Arrays.asList(user.getRoles()));
-        userMap.put("roles", Arrays.toString(user.getRoles()));
+        Map<String, ArrayList<String>> m1 = new HashMap<>();
+        m1.put("roles", arrayList);
+        userMap.put("roles", m1.get("roles"));
         userMap.put("profile", profileMap);
         userMap.put("staff", staffMap);
 
@@ -124,6 +127,7 @@ public class UsersService extends AbstractService {
             profileMap.put("firstName", _profile.getFirstName());
             profileMap.put("lastName", _profile.getLastName());
             profileMap.put("prefix", _profile.getPrefix());
+            profileMap.put("dateOfBirth", _profile.getDateOfBirth());
         }
         return profileMap;
     }
@@ -140,9 +144,12 @@ public class UsersService extends AbstractService {
             Staff staff = user.getStaff();
             staffMap.put("isTeacher", staff.getIsTeacher());
             staffMap.put("joinDate", staff.getJoinDate());
+
+                    
             if (profileMap != null) {
                 staffMap.put("profile", profileMap);
             }
+
         }
         return staffMap;
     }

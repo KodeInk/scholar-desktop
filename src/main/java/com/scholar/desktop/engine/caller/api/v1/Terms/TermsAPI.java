@@ -60,5 +60,4 @@ public class TermsAPI {
         return null;
     }
 
-
 }

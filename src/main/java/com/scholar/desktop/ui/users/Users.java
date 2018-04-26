@@ -21,6 +21,7 @@ public class Users extends javax.swing.JPanel {
     public DefaultTableModel tableModel;
 
     JTabbedPane jTabbedPane;
+
     /**
      * Creates new form Users
      */
@@ -76,7 +77,6 @@ public class Users extends javax.swing.JPanel {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;

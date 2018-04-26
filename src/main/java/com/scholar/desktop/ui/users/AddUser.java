@@ -538,17 +538,15 @@ public class AddUser extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-
     public User getFormData() {
         Long joinDate = JoinDate.getDate().getTime();
 
-        
         String prefix = prefix_combo.getSelectedItem().toString();
         String firstName = JFirstName.getText();
         String lastName = JLastName.getText();
         Long dob = JDateOfBirth.getDate().getTime();
-        System.out.println(" DATE OF BIRTH : "+dob);
-        
+        System.out.println(" DATE OF BIRTH : " + dob);
+
         String username = Jusername.getText();
         RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
         JOptionPane.showMessageDialog(this, "ROLE " + roleResponse.getName());
@@ -697,7 +695,6 @@ public class AddUser extends javax.swing.JPanel {
             throw new BadRequestException("Password does not match repeat password ");
         }
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;

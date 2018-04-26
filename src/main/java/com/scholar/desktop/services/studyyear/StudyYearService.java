@@ -41,7 +41,6 @@ public class StudyYearService extends AbstractService {
         return instance;
     }
 
-
     public List<StudyYearResponse> list() {
 
         if (list != null) {

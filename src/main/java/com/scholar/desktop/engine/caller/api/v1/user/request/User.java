@@ -30,7 +30,6 @@ public class User {
     private Profile profile;
     private Staff staff;
 
-
     public User() {
     }
 
@@ -191,6 +190,5 @@ public class User {
                 + ", staff=" + staff
                 + '}';
     }
-
 
 }

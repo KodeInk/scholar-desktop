@@ -76,7 +76,6 @@ public class ManageTerms extends javax.swing.JPanel {
                 String dateCreated = new Date(ur.getDate_created()).toString();
                 String author = ur.getAuthor();
 
-
                 Object[] data = {name, start_date, end_date, ranking, status, dateCreated, author};
                 tableModel.addRow(data);
             }

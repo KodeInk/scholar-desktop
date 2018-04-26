@@ -76,7 +76,6 @@ public class UserAPI extends AbstractAPI {
         return null;
     }
 
-
     /**
      *
      * @param body
@@ -88,7 +87,6 @@ public class UserAPI extends AbstractAPI {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("user/v1/", body, logId);
 
-
         switch (response.getStatus()) {
             case 400:
                 message = getMessage(response);
@@ -97,7 +95,6 @@ public class UserAPI extends AbstractAPI {
             case 500:
                 message = getMessage(response);
                 throw new BadRequestException(message.getMessage());
-
 
             case 200:
                 UserResponse userResponse = response.readEntity(UserResponse.class);
@@ -110,7 +107,6 @@ public class UserAPI extends AbstractAPI {
                 return null;
 
         }
-
 
     }
 
