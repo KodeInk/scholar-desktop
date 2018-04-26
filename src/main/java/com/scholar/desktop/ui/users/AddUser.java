@@ -24,6 +24,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
 import main.java.com.scholar.desktop.engine.caller.api.v1.staff.request.Staff;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.roles.RolesService;
@@ -530,8 +531,11 @@ public class AddUser extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                UsersService.getInstance(schoolData).create(user, "LOG ID ");
+                UserResponse ur = UsersService.getInstance(schoolData).create(user, "LOG ID ");
                 Utilities.hideDialog();
+                if (ur != null) {
+                    JOptionPane.showMessageDialog(null, "Record Saved Successfuly");
+                }
                 return null;
             }
         };

@@ -43,7 +43,6 @@ public class UserIT {
 
     }
 
-
     /**
      * Test of setId method, of class User.
      */
