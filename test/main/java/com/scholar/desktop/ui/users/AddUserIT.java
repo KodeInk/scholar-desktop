@@ -30,44 +30,44 @@ public class AddUserIT {
     }
 
     /**
-     * Test of getInstance method, of class AddUser.
+     * Test of getInstance method, of class AddUserUI.
      */
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
         SchoolData schoolData = null;
-        AddUser result = AddUser.getInstance(schoolData);
+        AddUserUI result = AddUserUI.getInstance(schoolData);
         assertNotNull(result);
         assertEquals(result.schoolData, schoolData);
 
     }
 
     /**
-     * Test of initData method, of class AddUser.
+     * Test of initData method, of class AddUserUI.
      */
     @Test
     public void testInitData() {
         System.out.println("initData");
-        AddUser instance = null;
+        AddUserUI instance = null;
         instance.initData();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of populateRolesComboBox method, of class AddUser.
+     * Test of populateRolesComboBox method, of class AddUserUI.
      */
     @Test
     public void testPopulateRolesComboBox() {
         System.out.println("populateRolesComboBox");
-        AddUser instance = null;
+        AddUserUI instance = null;
         instance.populateRolesComboBox();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of scaleImage method, of class AddUser.
+     * Test of scaleImage method, of class AddUserUI.
      */
     @Test
     public void testScaleImage() throws Exception {
@@ -76,31 +76,31 @@ public class AddUserIT {
         int h = 0;
         BufferedImage img = null;
         BufferedImage expResult = null;
-        BufferedImage result = AddUser.scaleImage(w, h, img);
+        BufferedImage result = AddUserUI.scaleImage(w, h, img);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getFormData method, of class AddUser.
+     * Test of getFormData method, of class AddUserUI.
      */
     @Test
     public void testGetFormData() {
         System.out.println("getFormData");
-        AddUser instance = null;
+        AddUserUI instance = null;
         instance.getFormData();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of validateForm method, of class AddUser.
+     * Test of validateForm method, of class AddUserUI.
      */
     @Test
     public void testValidateForm() {
         System.out.println("validateForm");
-        AddUser instance = null;
+        AddUserUI instance = null;
         instance.validateForm();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
