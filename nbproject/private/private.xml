@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/ui/staff/ManageStaff.java</file>
-            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/services/staff/StaffService.java</file>
-            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/engine/caller/api/v1/staff/request/StaffResponse.java</file>
-            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/engine/caller/api/v1/staff/StaffAPI.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
