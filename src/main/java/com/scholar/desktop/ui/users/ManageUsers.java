@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.users;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
@@ -81,12 +82,12 @@ public class ManageUsers extends javax.swing.JPanel {
 
             for (UserResponse ur : list) {
 
-                String username = ur.getUsername();
+                String username = ur.getUsername().toUpperCase();
                 String roles = "";
                 if (ur.getRoles() != null) {
                     String roleString = "";
                     for (RoleResponse role : ur.getRoles()) {
-                        roleString += role.getName();
+                        roleString += role.getName().toUpperCase();
                     }
                     roles = roleString;
                 }
@@ -94,14 +95,22 @@ public class ManageUsers extends javax.swing.JPanel {
                 String profile_name = "";
                 if (ur.getProfile() != null) {
                     profile_name = ur.getProfile().getFirstName() + " " + ur.getProfile().getLastName();
+                    profile_name = profile_name.toUpperCase();
+                }
+                String isStaff = "NO";
+                if (ur.getStaff() != null) {
+                    isStaff = "YES";
                 }
 
-                String isStaff = "_";
                 String status = ur.getStatus();
                 String dateCreated = "";
+                if (ur.getDateCreated() != null) {
+                    Date date_created = new Date(ur.getDateCreated());
+                    dateCreated = date_created.toLocaleString().toUpperCase();
+                }
                 //ur.getDateCreated().toString();
-                String createdBy = "_";
-                String updatedBy = " ";
+                String createdBy = "N/A ";
+                String updatedBy = "N/A ";
 
                 Object[] data = {username, roles, profile_name, isStaff, status, dateCreated, createdBy, updatedBy};
                 tableModel.addRow(data);

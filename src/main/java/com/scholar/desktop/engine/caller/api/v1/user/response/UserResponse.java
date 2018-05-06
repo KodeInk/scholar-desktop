@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.user.response;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.staff.response.StaffResponse;
 
 /**
  *
@@ -22,8 +23,9 @@ public class UserResponse {
     private String accounttype;
     private String emailaddress;
     private String authentication;
-    private Date dateCreated;
+    private Long dateCreated;
     private ProfileResponse profile;
+    private StaffResponse staff;
 
     public UserResponse() {
     }
@@ -88,11 +90,11 @@ public class UserResponse {
         this.authentication = authentication;
     }
 
-    public Date getDateCreated() {
+    public Long getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(Long dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -102,6 +104,14 @@ public class UserResponse {
 
     public void setProfile(ProfileResponse profile) {
         this.profile = profile;
+    }
+
+    public StaffResponse getStaff() {
+        return staff;
+    }
+
+    public void setStaff(StaffResponse staff) {
+        this.staff = staff;
     }
 
     @Override
@@ -170,6 +180,7 @@ public class UserResponse {
                 + ", authentication=" + authentication
                 + ", dateCreated=" + dateCreated
                 + ", profile=" + profile
+                + ", staff=" + staff
                 + "}";
     }
 
