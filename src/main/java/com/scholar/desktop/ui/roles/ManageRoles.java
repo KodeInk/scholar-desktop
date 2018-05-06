@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
@@ -63,13 +64,19 @@ public class ManageRoles extends javax.swing.JPanel {
 
             for (RoleResponse roleResponse : list) {
 
-                String name = roleResponse.getName();
-                String code = roleResponse.getCode();
+                String name = roleResponse.getName().toUpperCase();
+                String code = roleResponse.getCode().toUpperCase();
                 String description = roleResponse.getDescription();
                 String isSystem = roleResponse.isIsSystem() ? "YES" : "NO";
-                String status = "- ";
-                String DateCreated = " - ";
-                String author = " - ";
+                String status = " N/A ";
+
+                String DateCreated = " N/A ";
+                if (roleResponse.getDateCreated() != null) {
+                    Date dateCreated = new Date(roleResponse.getDateCreated());
+                    DateCreated = dateCreated.toString();
+                }
+
+                String author = roleResponse.getAuthor().toUpperCase();
 
                 Object[] data = {name, code, description, isSystem, status, DateCreated, author};
                 tableModel.addRow(data);

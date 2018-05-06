@@ -20,6 +20,8 @@ public class RoleResponse {
     private String description;
     private boolean isSystem;
     private PermissionsResponse[] permissions;
+    private Long dateCreated;
+    private String author;
 
     public RoleResponse() {
     }
@@ -74,6 +76,22 @@ public class RoleResponse {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Long getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
