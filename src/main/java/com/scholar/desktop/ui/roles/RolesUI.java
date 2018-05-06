@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.ui.users.*;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
@@ -25,6 +26,7 @@ public class RolesUI extends javax.swing.JPanel {
 
     /**
      * Creates new form Users
+     * @param schoolData
      */
     public RolesUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -40,10 +42,11 @@ public class RolesUI extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageUsersUI.getInstance(schoolData).fetchData();
+                    ManageRolesUI.getInstance(schoolData).fetchData();
                     break;
                 case 1:
-                    AddUserUI.getInstance(schoolData).initData();
+//                    AddUserUI.getInstance(schoolData).initData();
+                    JOptionPane.showMessageDialog(null, "Greater than Great");
                     break;
                 default:
 
@@ -64,8 +67,8 @@ public class RolesUI extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
-        jTabbedPane1.add("Manage Users",  ManageUsersUI.getInstance(schoolData));
-        jTabbedPane1.add("Add User",    AddUserUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Roles",  main.java.com.scholar.desktop.ui.roles.ManageRolesUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Role",   null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

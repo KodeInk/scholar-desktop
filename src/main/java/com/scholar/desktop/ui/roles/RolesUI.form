@@ -28,7 +28,7 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Users&quot;,  main.java.com.scholar.desktop.ui.users.ManageUsersUI.getInstance(schoolData));&#xa;jTabbedPane1.add(&quot;Add User&quot;,    main.java.com.scholar.desktop.ui.users.AddUserUI.getInstance(schoolData));"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Roles&quot;,  main.java.com.scholar.desktop.ui.roles.ManageRolesUI.getInstance(schoolData));&#xa;jTabbedPane1.add(&quot;Add Role&quot;,   null);"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

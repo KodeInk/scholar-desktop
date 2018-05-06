@@ -18,28 +18,37 @@ import main.java.com.scholar.desktop.services.roles.RolesService;
  *
  * @author mover 3/8/2018
  */
-public class ManageRoles extends javax.swing.JPanel {
+public class ManageRolesUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     /**
-     * Creates new form ManageRoles
+     * Creates new form ManageRolesUI
      */
-    public DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
+    private static ManageRolesUI instance;
 
-    public ManageRoles(SchoolData schoolData) {
+    public ManageRolesUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
 
         initComponents();
-        fetchData(schoolData);
+        fetchData();
 
+    }
+
+    public static ManageRolesUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageRolesUI(schoolData);
+        }
+        return instance;
     }
 
     List<RoleResponse> list = null;
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void fetchData() {
         if (list != null) {
             populateJTable(list);
         }
@@ -49,7 +58,7 @@ public class ManageRoles extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = RolesService.getInstance(schoolData1).list();
+                list = RolesService.getInstance(schoolData).list();
                 populateJTable(list);
                 return null;
             }
@@ -120,6 +129,7 @@ public class ManageRoles extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTabbedPane1.getAccessibleContext().setAccessibleName("_manage_roles_tab");
 
         jSplitPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jSplitPane1.setDividerLocation(300);
@@ -307,20 +317,22 @@ public class ManageRoles extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(jPanel4);
 
-        jTabbedPane1.addTab("Manage Roles", jSplitPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jTabbedPane1.getAccessibleContext().setAccessibleName("_manage_roles_tab");
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

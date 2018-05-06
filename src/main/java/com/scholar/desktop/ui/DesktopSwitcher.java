@@ -18,14 +18,13 @@ import main.java.com.scholar.desktop.ui.library.LibrarySection;
 import main.java.com.scholar.desktop.ui.library.LibraryStock;
 import main.java.com.scholar.desktop.ui.library.books.ManageBooks;
 import main.java.com.scholar.desktop.ui.marksheet.Marksheet;
-import main.java.com.scholar.desktop.ui.roles.ManageRoles;
+import main.java.com.scholar.desktop.ui.roles.RolesUI;
 import main.java.com.scholar.desktop.ui.setup.grading.ManageGrading;
 import main.java.com.scholar.desktop.ui.setup.subjects.ManageSubjects;
 import main.java.com.scholar.desktop.ui.staff.ManageStaff;
 import main.java.com.scholar.desktop.ui.studyyear.ManageStudyYear;
 import main.java.com.scholar.desktop.ui.studyyear.terms.ManageTerms;
 import main.java.com.scholar.desktop.ui.timetable.students.StudentTimeTable;
-import main.java.com.scholar.desktop.ui.users.ManageUsersUI;
 import main.java.com.scholar.desktop.ui.users.UsersUI;
 
 /**
@@ -64,7 +63,7 @@ public class DesktopSwitcher {
                 break;
 
             case "ROLES":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRoles(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(new RolesUI(schoolData));
                 break;
 
             case "CLASSES":
