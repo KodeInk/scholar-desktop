@@ -34,20 +34,20 @@ import main.java.com.scholar.desktop.services.users.UsersService;
  *
  * @author mover
  */
-public class AddUser extends javax.swing.JPanel {
+public class AddUserUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddUser
+     * Creates new form AddUserUI
      */
     private JFileChooser fileChooser;
     private List<RoleResponse> roleResponses;
     SchoolData schoolData = null;
 
-    private static AddUser instance;
+    private static AddUserUI instance;
     ComboBoxModel<RoleResponse> comboBoxModel;
     JComboBox usersList;
 
-    public AddUser(SchoolData schoolData) {
+    public AddUserUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
         initComboBoxModel();
@@ -58,10 +58,10 @@ public class AddUser extends javax.swing.JPanel {
 
     }
 
-    public static AddUser getInstance(SchoolData schoolData) {
+    public static AddUserUI getInstance(SchoolData schoolData) {
 
         if (instance == null) {
-            instance = new AddUser(schoolData);
+            instance = new AddUserUI(schoolData);
         }
 
         return instance;

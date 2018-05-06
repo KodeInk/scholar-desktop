@@ -22,19 +22,19 @@ import main.java.com.scholar.desktop.services.users.UsersService;
  *
  * @author mover
  */
-public class ManageUsers extends javax.swing.JPanel {
+public class ManageUsersUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form ManageUsers
+     * Creates new form ManageUsersUI
      */
     private static final String[] COLUMN_HEADERS = {"USERNAME", "ROLES", "PROFILE", "IS STAFF", "STATUS", "DATE CREATED", "CREATED BY", "DATE UPDATED", "UPDATED BY"};
 
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
 
-    private static ManageUsers instance;
+    private static ManageUsersUI instance;
 
-    public ManageUsers(SchoolData schoolData) {
+    public ManageUsersUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         //todo: fetch from service :
 
@@ -47,9 +47,9 @@ public class ManageUsers extends javax.swing.JPanel {
     }
 
     //singleton 
-    public static ManageUsers getInstance(SchoolData schoolData) {
+    public static ManageUsersUI getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new ManageUsers(schoolData);
+            instance = new ManageUsersUI(schoolData);
         }
         return instance;
     }

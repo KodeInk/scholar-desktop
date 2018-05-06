@@ -15,7 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
  *
  * @author mover
  */
-public class Users extends javax.swing.JPanel {
+public class UsersUI extends javax.swing.JPanel {
 
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
@@ -25,7 +25,7 @@ public class Users extends javax.swing.JPanel {
     /**
      * Creates new form Users
      */
-    public Users(SchoolData schoolData) {
+    public UsersUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         jTabbedPane = new javax.swing.JTabbedPane();
         initComponents();
@@ -39,10 +39,10 @@ public class Users extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageUsers.getInstance(schoolData).fetchData();
+                    ManageUsersUI.getInstance(schoolData).fetchData();
                     break;
                 case 1:
-                    AddUser.getInstance(schoolData).initData();
+                    AddUserUI.getInstance(schoolData).initData();
                     break;
                 default:
 
@@ -63,8 +63,8 @@ public class Users extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
-        jTabbedPane1.add("Manage Users",  ManageUsers.getInstance(schoolData));
-        jTabbedPane1.add("Add User",    AddUser.getInstance(schoolData));
+        jTabbedPane1.add("Manage Users",  ManageUsersUI.getInstance(schoolData));
+        jTabbedPane1.add("Add User",    AddUserUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
