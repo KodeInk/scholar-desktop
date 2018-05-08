@@ -45,8 +45,7 @@ public class RolesUI extends javax.swing.JPanel {
                     ManageRolesUI.getInstance(schoolData).fetchData();
                     break;
                 case 1:
-//                    AddUserUI.getInstance(schoolData).initData();
-                    JOptionPane.showMessageDialog(null, "Greater than Great");
+                   AddRoleUI.getInstance(schoolData);
                     break;
                 default:
 
@@ -68,7 +67,7 @@ public class RolesUI extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         jTabbedPane1.add("Manage Roles",  main.java.com.scholar.desktop.ui.roles.ManageRolesUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Role",   null);
+        jTabbedPane1.add("Add Role",    main.java.com.scholar.desktop.ui.roles.AddRoleUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
