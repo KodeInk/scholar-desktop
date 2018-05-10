@@ -62,9 +62,78 @@ public class AddRoleUI extends javax.swing.JPanel {
                         .addGap(0, 293, Short.MAX_VALUE)
         );
 
+        JPanel xs2 = new JPanel();
+        xs2.setBackground(new java.awt.Color(255, 204, 0));
 
-        permissionsJpanel.add(xs);
-        permissionsJpanel.add(xs1);
+        javax.swing.GroupLayout jPanel3Layout1 = new javax.swing.GroupLayout(xs2);
+        xs2.setLayout(jPanel3Layout1);
+        jPanel3Layout1.setHorizontalGroup(
+                jPanel3Layout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel3Layout1.setVerticalGroup(
+                jPanel3Layout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        /*  JPanel xs3 = new JPanel();
+        xs3.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel3Layout2 = new javax.swing.GroupLayout(xs3);
+        xs1.setLayout(jPanel3Layout2);
+        jPanel3Layout2.setHorizontalGroup(
+                jPanel3Layout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel3Layout2.setVerticalGroup(
+                jPanel3Layout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        JPanel xs4 = new JPanel();
+        xs4.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel3Layout4 = new javax.swing.GroupLayout(xs4);
+        xs4.setLayout(jPanel3Layout4);
+        jPanel3Layout4.setHorizontalGroup(
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel3Layout4.setVerticalGroup(
+                jPanel3Layout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        JPanel xs5 = new JPanel();
+        xs5.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel3Layout5 = new javax.swing.GroupLayout(xs5);
+        xs1.setLayout(jPanel3Layout5);
+        jPanel3Layout5.setHorizontalGroup(
+                jPanel3Layout5.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel3Layout5.setVerticalGroup(
+                jPanel3Layout5.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        */
+
+//        jPanel3.add(xs);
+//        jPanel3.add(xs1);
+//        jPanel3.add(xs2);
+//        jPanel3.add(xs2);
+//        jPanel3.add(xs2);
+//        jPanel3.add(xs2);
+//        jPanel3.add(xs2);
+//        jPanel3.add(xs2);
+
+//        permissionsJpanel.add(xs3);
+//        permissionsJpanel.add(xs4);
+//        permissionsJpanel.add(xs5);
+//        permissionsJpanel.add(xs);
+//        permissionsJpanel.add(xs1);
 
     }
 
@@ -99,7 +168,13 @@ public class AddRoleUI extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         permissionsJpanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -131,7 +206,11 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         jSeparator2.setBackground(new java.awt.Color(153, 153, 153));
 
-        permissionsJpanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        permissionsJpanel.setBackground(new java.awt.Color(0, 255, 0));
+
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -146,7 +225,80 @@ public class AddRoleUI extends javax.swing.JPanel {
             .addGap(0, 293, Short.MAX_VALUE)
         );
 
-        permissionsJpanel.add(jPanel2);
+        jPanel3.add(jPanel2);
+
+        jPanel4.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel5);
+
+        jPanel7.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel7);
+
+        jPanel8.setBackground(new java.awt.Color(255, 204, 0));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel8);
+
+        jScrollPane3.setViewportView(jPanel3);
+
+        javax.swing.GroupLayout permissionsJpanelLayout = new javax.swing.GroupLayout(permissionsJpanel);
+        permissionsJpanel.setLayout(permissionsJpanelLayout);
+        permissionsJpanelLayout.setHorizontalGroup(
+            permissionsJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+        );
+        permissionsJpanelLayout.setVerticalGroup(
+            permissionsJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,7 +327,7 @@ public class AddRoleUI extends javax.swing.JPanel {
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 384, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator2)))
@@ -232,8 +384,14 @@ public class AddRoleUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
