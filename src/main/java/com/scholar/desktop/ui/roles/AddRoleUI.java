@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
@@ -34,106 +35,26 @@ public class AddRoleUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
 
-        JPanel xs = new JPanel();
-        xs.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(xs);
-        xs.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
+       
+        JPanel jp = new JPanel();
+        jp.setBackground(new java.awt.Color(255, 204, 0));
+        
+        
+        javax.swing.GroupLayout layout_1 = new javax.swing.GroupLayout(jp);
+        jp.setLayout(layout_1);
+        layout_1.setHorizontalGroup(layout_1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        JPanel xs1 = new JPanel();
-        xs1.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(xs1);
-        xs1.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
+        layout_1.setVerticalGroup(layout_1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
         );
 
-        JPanel xs2 = new JPanel();
-        xs2.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel3.add(jp);
 
-        javax.swing.GroupLayout jPanel3Layout1 = new javax.swing.GroupLayout(xs2);
-        xs2.setLayout(jPanel3Layout1);
-        jPanel3Layout1.setHorizontalGroup(
-                jPanel3Layout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel3Layout1.setVerticalGroup(
-                jPanel3Layout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        /*  JPanel xs3 = new JPanel();
-        xs3.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel3Layout2 = new javax.swing.GroupLayout(xs3);
-        xs1.setLayout(jPanel3Layout2);
-        jPanel3Layout2.setHorizontalGroup(
-                jPanel3Layout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel3Layout2.setVerticalGroup(
-                jPanel3Layout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        JPanel xs4 = new JPanel();
-        xs4.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel3Layout4 = new javax.swing.GroupLayout(xs4);
-        xs4.setLayout(jPanel3Layout4);
-        jPanel3Layout4.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel3Layout4.setVerticalGroup(
-                jPanel3Layout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        JPanel xs5 = new JPanel();
-        xs5.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel3Layout5 = new javax.swing.GroupLayout(xs5);
-        xs1.setLayout(jPanel3Layout5);
-        jPanel3Layout5.setHorizontalGroup(
-                jPanel3Layout5.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel3Layout5.setVerticalGroup(
-                jPanel3Layout5.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        */
-
-//        jPanel3.add(xs);
-//        jPanel3.add(xs1);
-//        jPanel3.add(xs2);
-//        jPanel3.add(xs2);
-//        jPanel3.add(xs2);
-//        jPanel3.add(xs2);
-//        jPanel3.add(xs2);
-//        jPanel3.add(xs2);
-
-//        permissionsJpanel.add(xs3);
-//        permissionsJpanel.add(xs4);
-//        permissionsJpanel.add(xs5);
-//        permissionsJpanel.add(xs);
-//        permissionsJpanel.add(xs1);
+      
+        
+        
+        
 
     }
 
@@ -173,8 +94,11 @@ public class AddRoleUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jPanel6 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -212,80 +136,88 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel2);
-
-        jPanel4.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 33, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel4);
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel5.setBackground(new java.awt.Color(255, 204, 0));
+        jCheckBox1.setText("jCheckBox1");
+
+        jCheckBox2.setText("jCheckBox2");
+
+        jCheckBox3.setText("jCheckBox3");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox3)
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+
+        jScrollPane4.setViewportView(jPanel6);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
+            .addComponent(jScrollPane4)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addComponent(jScrollPane4)
         );
 
-        jPanel3.add(jPanel5);
-
-        jPanel7.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel7);
-
-        jPanel8.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel3.add(jPanel8);
+        jPanel3.add(jPanel2);
 
         jScrollPane3.setViewportView(jPanel3);
 
@@ -377,6 +309,9 @@ public class AddRoleUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -387,11 +322,11 @@ public class AddRoleUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
