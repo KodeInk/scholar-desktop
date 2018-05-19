@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.request._Permission;
 
 /**
  *

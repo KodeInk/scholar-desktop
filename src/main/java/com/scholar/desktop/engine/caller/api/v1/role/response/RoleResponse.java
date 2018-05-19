@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.role.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.PermissionsResponse;
 
 /**
  *
