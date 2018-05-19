@@ -35,32 +35,124 @@ public class AddRoleUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
 
-        
-        jPanel3.add(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
+        jScrollPane3.setViewportView(getJpanel());
 
+        // jPanel3.add(getJpanel());
     }
 
     public JPanel getJpanel() {
-        JPanel tp = new JPanel();
-        GroupLayout gl = new GroupLayout(tp);
-        tp.setLayout(gl);
+        JPanel jPanel7 = new JPanel();
+        jPanel7.setBackground(new java.awt.Color(204, 204, 204));
 
-        JPanel xp1 = new JPanel();
-        JPanel xp2 = new JPanel();
-        gl.setHorizontalGroup(
-                gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(
-                                gl.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(xp1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(xp2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        )
-                                        .addContainerGap()
-                        )
+        JPanel jPanel8 = new JPanel();
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        JLabel jLabel7 = new JLabel();
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Selection One");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel7)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addContainerGap())
         );
 
-        return tp;
+        JPanel jPanel10 = new JPanel();
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+
+        JCheckBox jCheckBox4 = new JCheckBox();
+        jCheckBox4.setText("jCheckBox1");
+
+        JCheckBox jCheckBox5 = new JCheckBox();
+        jCheckBox5.setText("jCheckBox2");
+        JCheckBox jCheckBox6 = new JCheckBox();
+        jCheckBox6.setText("jCheckBox3");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                        .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jCheckBox4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox6)
+                                .addContainerGap(154, Short.MAX_VALUE))
+        );
+
+        JScrollPane jScrollPane5 = new JScrollPane();
+        jScrollPane5.setViewportView(jPanel10);
+        JPanel jPanel9 = new JPanel();
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane5)
+        );
+        jPanel9Layout.setVerticalGroup(
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane5)
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel7);
+
+        return jPanel3;
     }
 
     public static AddRoleUI getInstance(SchoolData schoolData) {
