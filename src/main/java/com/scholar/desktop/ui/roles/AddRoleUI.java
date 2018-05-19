@@ -35,27 +35,32 @@ public class AddRoleUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
 
-       
-        JPanel jp = new JPanel();
-        jp.setBackground(new java.awt.Color(255, 204, 0));
         
-        
-        javax.swing.GroupLayout layout_1 = new javax.swing.GroupLayout(jp);
-        jp.setLayout(layout_1);
-        layout_1.setHorizontalGroup(layout_1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
+        jPanel3.add(getJpanel());
+
+    }
+
+    public JPanel getJpanel() {
+        JPanel tp = new JPanel();
+        GroupLayout gl = new GroupLayout(tp);
+        tp.setLayout(gl);
+
+        JPanel xp1 = new JPanel();
+        JPanel xp2 = new JPanel();
+        gl.setHorizontalGroup(
+                gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(
+                                gl.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(xp1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(xp2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        )
+                                        .addContainerGap()
+                        )
         );
-        layout_1.setVerticalGroup(layout_1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
-        );
 
-        jPanel3.add(jp);
-
-      
-        
-        
-        
-
+        return tp;
     }
 
     public static AddRoleUI getInstance(SchoolData schoolData) {
