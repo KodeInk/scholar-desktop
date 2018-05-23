@@ -5,7 +5,9 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -27,8 +29,8 @@ public class AddRoleUI extends javax.swing.JPanel {
 
     private SchoolData schoolData;
     private static AddRoleUI instance;
-     private List<PermissionsResponse> permissionsResponses;
-     
+    private List<PermissionsResponse> permissionsResponses;
+
     /**
      * Creates new form AddRoleUI
      *
@@ -39,12 +41,7 @@ public class AddRoleUI extends javax.swing.JPanel {
     public AddRoleUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        //todo: get the permissions :: 
 
-        final String grouping = "Selection One";
-        jScrollPane3.setViewportView(getJpanel(grouping));
-
-        // jPanel3.add(getJpanel());
     }
 
     public static AddRoleUI getInstance(SchoolData schoolData) {
@@ -54,25 +51,66 @@ public class AddRoleUI extends javax.swing.JPanel {
         return instance;
     }
 
-     public void initData() {
+    public void fetchData() {
         permissionsResponses = fetchPermissions(schoolData);
+        
     }
-     
-     
-      private List<PermissionsResponse> fetchPermissions(SchoolData schoolData) {
 
+    public void populate() {
+        //todo: populate
+
+
+        if (permissionsResponses != null) {
+
+            List<String> categories = new ArrayList<>();
+
+            for (PermissionsResponse pr : permissionsResponses) {
+                if (categories.contains(pr.getCategory())) {
+                    continue;
+                }
+
+                categories.add(pr.getCategory());
+            }
+            String grouping = null;
+            List<PermissionsResponse> list = new ArrayList<>();
+ 
+
+            for (String category : categories) {
+                for (PermissionsResponse pr : permissionsResponses) {
+                    list = new ArrayList<>();
+                    if (pr.getCategory().equalsIgnoreCase(category)) {
+                        grouping = category;
+                        list.add(pr);
+                    }
+                }
+                
+                 jScrollPane3.setViewportView(getJpanel(grouping));
+            }
+
+         jScrollPane3.repaint();
+
+            //todo: group by keys in 
+        }
+        
+           
+
+    }
+
+    private List<PermissionsResponse> fetchPermissions(SchoolData schoolData) {
+ Utilities.ShowDialogMessage("Processing");
         if (permissionsResponses != null && permissionsResponses.size() > 0) {
+              Utilities.hideDialog();
             return permissionsResponses;
         }
-        Utilities.ShowDialogMessage("Processing");
+       
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 permissionsResponses = PermissionsService.getInstance(schoolData).list(-1, -1);
 
-              //  populateRolesComboBox();
+                //  populateRolesComboBox();
                 Utilities.hideDialog();
-
+populate();
                 return null;
             }
 
@@ -82,7 +120,6 @@ public class AddRoleUI extends javax.swing.JPanel {
         return permissionsResponses;
     }
 
-      
     public JPanel getJpanel(String grouping) {
         JPanel jPanel7 = new JPanel();
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
@@ -125,7 +162,7 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         //182 
         ParallelGroup parallelGroup = jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        parallelGroup.addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        parallelGroup.addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
         parallelGroup.addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         parallelGroup.addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 

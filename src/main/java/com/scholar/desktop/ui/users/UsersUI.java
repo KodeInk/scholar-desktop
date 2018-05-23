@@ -39,7 +39,7 @@ public class UsersUI extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageUsersUI.getInstance(schoolData).fetchData();
+                    ManageUsersUI.getInstance(schoolData).initData();
                     break;
                 case 1:
                     AddUserUI.getInstance(schoolData).initData();

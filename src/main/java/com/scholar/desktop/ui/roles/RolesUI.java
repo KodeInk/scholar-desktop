@@ -45,7 +45,7 @@ public class RolesUI extends javax.swing.JPanel {
                     ManageRolesUI.getInstance(schoolData).fetchData();
                     break;
                 case 1:
-                   AddRoleUI.getInstance(schoolData);
+                   AddRoleUI.getInstance(schoolData).fetchData();
                     break;
                 default:
 

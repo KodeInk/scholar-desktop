@@ -39,7 +39,7 @@ public class ManageUsersUI extends javax.swing.JPanel {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
         initComponents();
-        fetchData();
+        initData();
 
     }
 
@@ -53,7 +53,7 @@ public class ManageUsersUI extends javax.swing.JPanel {
 
     List<UserResponse> list = null;
 
-    public final void fetchData() {
+    public final void initData() {
         if (list != null) {
             populateJTable(list);
         }
