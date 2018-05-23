@@ -13,9 +13,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.PermissionsResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
-import main.java.com.scholar.desktop.ui.users.AddUserUI;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.roles.RolesService;
 
 /**
  *
@@ -25,7 +28,7 @@ public class AddRoleUI extends javax.swing.JPanel {
 
     private SchoolData schoolData;
     private static AddRoleUI instance;
-     private List<RoleResponse> roleResponses;
+     private List<PermissionsResponse> permissionsResponses;
      
     /**
      * Creates new form AddRoleUI
@@ -52,6 +55,35 @@ public class AddRoleUI extends javax.swing.JPanel {
         return instance;
     }
 
+     public void initData() {
+        permissionsResponses = fetchPermissions(schoolData);
+    }
+     
+     
+      private List<PermissionsResponse> fetchPermissions(SchoolData schoolData) {
+
+        if (permissionsResponses != null && permissionsResponses.size() > 0) {
+            return permissionsResponses;
+        }
+        Utilities.ShowDialogMessage("Processing");
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+               // permissionsResponses = PermissionsS.getInstance(schoolData).list(-1, -1);
+
+              //  populateRolesComboBox();
+                Utilities.hideDialog();
+
+                return null;
+            }
+
+        };
+        swingWorker.execute();
+
+        return permissionsResponses;
+    }
+
+      
     public JPanel getJpanel(String grouping) {
         JPanel jPanel7 = new JPanel();
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));

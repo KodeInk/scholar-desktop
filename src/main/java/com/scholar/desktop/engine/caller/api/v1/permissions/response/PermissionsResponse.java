@@ -25,10 +25,6 @@ public class PermissionsResponse {
     public PermissionsResponse() {
     }
 
-    public PermissionsResponse(Integer id) {
-        this.id = id;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -53,14 +49,6 @@ public class PermissionsResponse {
         this.code = code;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -69,14 +57,22 @@ public class PermissionsResponse {
         this.category = category;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        hash = 13 * hash + Objects.hashCode(this.name);
-        hash = 13 * hash + Objects.hashCode(this.code);
-        hash = 13 * hash + Objects.hashCode(this.category);
-        hash = 13 * hash + Objects.hashCode(this.status);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.code);
+        hash = 59 * hash + Objects.hashCode(this.category);
+        hash = 59 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
