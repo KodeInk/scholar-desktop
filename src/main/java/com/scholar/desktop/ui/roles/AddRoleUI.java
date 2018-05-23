@@ -118,46 +118,39 @@ public class AddRoleUI extends javax.swing.JPanel {
     }
 
     public JPanel getJpanel(String grouping, List<PermissionsResponse> list) {
-        JPanel jPanel7 = new JPanel();
-        jPanel7.setBackground(new java.awt.Color(204, 204, 204));
+        JPanel container1 = new JPanel();
+        container1.setBackground(new java.awt.Color(204, 204, 204));
 
-        JPanel jPanel8 = new JPanel();
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        JLabel groupingLabel = new JLabel();
-        groupingLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        JPanel container2 = new JPanel();
+        container2.setBackground(new java.awt.Color(255, 255, 255));
+        JLabel groupLabel = new JLabel();
+        groupLabel.setFont(new java.awt.Font("Arial", 0, 12)); 
+        groupLabel.setText(grouping);
 
-        groupingLabel.setText(grouping);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout groupLayout1 = new javax.swing.GroupLayout(container2);
+        container2.setLayout(groupLayout1);
+        groupLayout1.setHorizontalGroup(groupLayout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupLayout1.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(groupingLabel)
+                        .addComponent(groupLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+        groupLayout1.setVerticalGroup(groupLayout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupLayout1.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(groupingLabel)
+                        .addComponent(groupLabel)
                         .addContainerGap())
         );
 
-        JPanel jPanel10 = new JPanel();
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        JPanel container3 = new JPanel();
+        container3.setBackground(new java.awt.Color(255, 255, 255));
 
-        JCheckBox jCheckBox4 = new JCheckBox();
-        jCheckBox4.setText("jCheckBox1");
+      
 
-        JCheckBox jCheckBox5 = new JCheckBox();
-        jCheckBox5.setText("jCheckBox2");
-        JCheckBox jCheckBox6 = new JCheckBox();
-        jCheckBox6.setText("jCheckBox3");
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        ParallelGroup parallelGroup = jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        SequentialGroup sequentialGroup = jPanel10Layout.createSequentialGroup();
+        javax.swing.GroupLayout groupLayout2 = new javax.swing.GroupLayout(container3);
+        container3.setLayout(groupLayout2);
+        ParallelGroup parallelGroup = groupLayout2.createParallelGroup(GroupLayout.Alignment.LEADING);
+        SequentialGroup sequentialGroup = groupLayout2.createSequentialGroup();
         sequentialGroup.addContainerGap();
 
         for (PermissionsResponse pr : list) {
@@ -173,55 +166,49 @@ public class AddRoleUI extends javax.swing.JPanel {
         //182 
         sequentialGroup.addContainerGap(154, Short.MAX_VALUE);
 
-        jPanel10Layout.setHorizontalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel10Layout.createSequentialGroup()
+        groupLayout2.setHorizontalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(groupLayout2.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(parallelGroup)
                                 .addContainerGap())
         );
-        jPanel10Layout.setVerticalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        groupLayout2.setVerticalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(sequentialGroup)
         );
 
-        JScrollPane jScrollPane5 = new JScrollPane();
-        jScrollPane5.setViewportView(jPanel10);
+        JScrollPane scollPane1 = new JScrollPane();
+        scollPane1.setViewportView(container3);
         JPanel jPanel9 = new JPanel();
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane5)
+        javax.swing.GroupLayout groupLayout3 = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(groupLayout3);
+        groupLayout3.setHorizontalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scollPane1)
         );
-        jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane5)
+        groupLayout3.setVerticalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scollPane1)
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout groupLayout4 = new javax.swing.GroupLayout(container1);
+        container1.setLayout(groupLayout4);
+        groupLayout4.setHorizontalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(groupLayout4.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(container2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
+        groupLayout4.setVerticalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(groupLayout4.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(container2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel7);
+        jPanel3.add(container1);
 
         return jPanel3;
     }
