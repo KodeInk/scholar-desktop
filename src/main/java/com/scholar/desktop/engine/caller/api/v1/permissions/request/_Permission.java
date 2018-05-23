@@ -18,6 +18,7 @@ public class _Permission {
     private Integer id;
     private String name;
     private String code;
+    private String category;
 
     public _Permission() {
     }
@@ -46,12 +47,21 @@ public class _Permission {
         this.code = code;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.code);
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.name);
+        hash = 43 * hash + Objects.hashCode(this.code);
+        hash = 43 * hash + Objects.hashCode(this.category);
         return hash;
     }
 
@@ -73,6 +83,9 @@ public class _Permission {
         if (!Objects.equals(this.code, other.code)) {
             return false;
         }
+        if (!Objects.equals(this.category, other.category)) {
+            return false;
+        }
         return Objects.equals(this.id, other.id);
     }
 
@@ -82,6 +95,7 @@ public class _Permission {
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
+                + ", category=" + category
                 + '}';
     }
 

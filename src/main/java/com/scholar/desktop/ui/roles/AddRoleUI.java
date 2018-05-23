@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.ui.users.AddUserUI;
 
 /**
  *
@@ -22,6 +25,8 @@ public class AddRoleUI extends javax.swing.JPanel {
 
     private SchoolData schoolData;
     private static AddRoleUI instance;
+     private List<RoleResponse> roleResponses;
+     
     /**
      * Creates new form AddRoleUI
      *
@@ -32,10 +37,19 @@ public class AddRoleUI extends javax.swing.JPanel {
     public AddRoleUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        //todo: get the permissions :: 
+
         final String grouping = "Selection One";
         jScrollPane3.setViewportView(getJpanel(grouping));
 
         // jPanel3.add(getJpanel());
+    }
+
+    public static AddRoleUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddRoleUI(schoolData);
+        }
+        return instance;
     }
 
     public JPanel getJpanel(String grouping) {
@@ -78,8 +92,9 @@ public class AddRoleUI extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
 
+        //182 
         ParallelGroup parallelGroup = jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        parallelGroup.addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
+        parallelGroup.addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         parallelGroup.addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         parallelGroup.addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
@@ -143,14 +158,6 @@ public class AddRoleUI extends javax.swing.JPanel {
         jPanel3.add(jPanel7);
 
         return jPanel3;
-    }
-
-    public static AddRoleUI getInstance(SchoolData schoolData) {
-
-        if (instance == null) {
-            instance = new AddRoleUI(schoolData);
-        }
-        return instance;
     }
 
     /**
