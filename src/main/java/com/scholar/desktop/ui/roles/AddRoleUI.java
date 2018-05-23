@@ -265,13 +265,14 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         jLabel2.setText("Name :");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
 
         jLabel3.setText("Code : ");
 
-        jTextField2.setText("jTextField1");
+        jTextField2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
