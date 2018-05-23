@@ -8,7 +8,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.role.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.PermissionsResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
 
 /**
  *
@@ -19,15 +19,14 @@ public class RoleResponse {
 
     private Integer id;
     private String name;
+    private String code;
     private String description;
     private boolean isSystem;
     private PermissionsResponse[] permissions;
+    private Long dateCreated;
+    private String author;
 
     public RoleResponse() {
-    }
-
-    public RoleResponse(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -44,6 +43,14 @@ public class RoleResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -70,14 +77,33 @@ public class RoleResponse {
         this.permissions = permissions;
     }
 
+    public Long getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.id);
-        hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.description);
-        hash = 43 * hash + (this.isSystem ? 1 : 0);
-        hash = 43 * hash + Arrays.deepHashCode(this.permissions);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.code);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + (this.isSystem ? 1 : 0);
+        hash = 97 * hash + Arrays.deepHashCode(this.permissions);
+        hash = 97 * hash + Objects.hashCode(this.dateCreated);
+        hash = 97 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -99,24 +125,37 @@ public class RoleResponse {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        return Arrays.deepEquals(this.permissions, other.permissions);
+        if (!Arrays.deepEquals(this.permissions, other.permissions)) {
+            return false;
+        }
+        return Objects.equals(this.dateCreated, other.dateCreated);
     }
 
     @Override
     public String toString() {
         return "RoleResponse{"
-                + "id=" + id
+                + "id=" + id 
                 + ", name=" + name
+                + ", code=" + code 
                 + ", description=" + description
-                + ", isSystem=" + isSystem
-                + ", permissions=" + Arrays.asList(permissions)
-                + "}";
+                + ", isSystem=" + isSystem 
+                + ", permissions=" + permissions
+                + ", dateCreated=" + dateCreated 
+                + ", author=" + author 
+                + '}';
     }
-
+    
+     
 }

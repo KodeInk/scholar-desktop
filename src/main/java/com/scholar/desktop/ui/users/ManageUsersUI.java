@@ -7,13 +7,10 @@ package main.java.com.scholar.desktop.ui.users;
 
 import java.util.Date;
 import java.util.List;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.users.UsersService;

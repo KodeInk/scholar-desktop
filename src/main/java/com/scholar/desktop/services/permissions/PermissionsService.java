@@ -5,17 +5,13 @@
  */
 package main.java.com.scholar.desktop.services.permissions;
 
-import main.java.com.scholar.desktop.services.roles.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.PermissionsAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.role.RoleAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;

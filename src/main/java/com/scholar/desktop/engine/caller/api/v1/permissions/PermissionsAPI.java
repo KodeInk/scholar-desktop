@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
 import static main.java.com.scholar.desktop.helper.Utilities.getOffset;

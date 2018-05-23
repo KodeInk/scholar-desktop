@@ -7,7 +7,7 @@ package main.java.com.scholar.desktop.services.roles;
 
 import java.util.List;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

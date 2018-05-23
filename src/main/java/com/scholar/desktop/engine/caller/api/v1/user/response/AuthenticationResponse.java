@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.user.response;
 
 import java.util.List;
+import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
 
 /**
  *
