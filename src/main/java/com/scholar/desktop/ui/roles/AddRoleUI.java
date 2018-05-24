@@ -22,7 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.request._Permission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.request._Role;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.permissions.PermissionsService;
@@ -449,7 +451,26 @@ public class AddRoleUI extends javax.swing.JPanel {
         if (PERMISSIONLIST == null || PERMISSIONLIST.isEmpty()) {
             throw new BadRequestException(" Select Permissions  ");
         }
-        
+
+        //todo: add to ROle 
+        _Role role = new _Role();
+        role.setName(JROLENAME.getText());
+        role.setCode(JROLECODE.getText());
+        role.setCode(JROLEDESCRIPTION.getText());
+
+        List<_Permission> permissionsList = new ArrayList<>();
+
+        PERMISSIONLIST.stream().map((permissionId) -> {
+            _Permission permission = new _Permission();
+            permission.setId(permissionId);
+            return permission;
+        }).forEachOrdered((permission) -> {
+            permissionsList.add(permission);
+        });
+
+        _Permission[] permissions = new _Permission[permissionsList.size()];
+        role.setPermissions(permissionsList.toArray(permissions));
+
         JOptionPane.showMessageDialog(null, "Role Saving in progress ");
     }//GEN-LAST:event_saveRoleButtonActionPerformed
 
