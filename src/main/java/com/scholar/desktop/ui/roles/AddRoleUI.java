@@ -24,6 +24,7 @@ import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.permissions.PermissionsService;
 
 /**
@@ -32,10 +33,10 @@ import main.java.com.scholar.desktop.services.permissions.PermissionsService;
  */
 public class AddRoleUI extends javax.swing.JPanel {
 
-    private SchoolData schoolData;
+    private final SchoolData schoolData;
     private static AddRoleUI instance;
     private List<PermissionsResponse> permissionsResponses;
-    List<Integer> permissionList = new ArrayList<>();
+    List<Integer> PERMISSIONLIST;
 
     /**
      * Creates new form AddRoleUI
@@ -47,6 +48,7 @@ public class AddRoleUI extends javax.swing.JPanel {
     public AddRoleUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        PERMISSIONLIST = new ArrayList<>();
 
     }
 
@@ -233,10 +235,10 @@ public class AddRoleUI extends javax.swing.JPanel {
             Add permission to the permission List at selection 
              */
             Integer permission = Integer.parseInt(xx.getActionCommand());
-            permissionList.remove(permission);
+            PERMISSIONLIST.remove(permission);
 
             if (xx.isSelected()) {
-                permissionList.add(permission);
+                PERMISSIONLIST.add(permission);
             }
 
         });
@@ -258,11 +260,11 @@ public class AddRoleUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JROLENAME = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JROLECODE = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        JROLEDESCRIPTION = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -270,7 +272,7 @@ public class AddRoleUI extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        saveRoleButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -284,20 +286,20 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel2.setText("Name :");
+        jLabel2.setText("Name * :");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        JROLENAME.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
 
-        jLabel3.setText("Code : ");
+        jLabel3.setText("Code  * : ");
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        JROLECODE.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        JROLEDESCRIPTION.setColumns(20);
+        JROLEDESCRIPTION.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        JROLEDESCRIPTION.setRows(5);
+        jScrollPane2.setViewportView(JROLEDESCRIPTION);
 
-        jLabel4.setText("Description  : ");
+        jLabel4.setText("Description  * : ");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Permissions");
@@ -326,7 +328,12 @@ public class AddRoleUI extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("SAVE");
+        saveRoleButton.setText("SAVE");
+        saveRoleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveRoleButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CANCEL");
 
@@ -336,7 +343,7 @@ public class AddRoleUI extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveRoleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -344,7 +351,7 @@ public class AddRoleUI extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveRoleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -372,8 +379,8 @@ public class AddRoleUI extends javax.swing.JPanel {
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(JROLECODE, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(JROLENAME, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -393,10 +400,10 @@ public class AddRoleUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JROLENAME, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JROLECODE, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,9 +433,27 @@ public class AddRoleUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveRoleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRoleButtonActionPerformed
+        // TODO add your handling code here:
+        if (JROLENAME.getText().isEmpty()) {
+            throw new BadRequestException("Role Name Is Mandatory ");
+        }
+        if (JROLECODE.getText().isEmpty()) {
+            throw new BadRequestException("Role Code Is Mandatory ");
+        }
+
+        if (JROLEDESCRIPTION.getText().isEmpty()) {
+            throw new BadRequestException("Role Description Is Mandatory ");
+        }
+
+        JOptionPane.showMessageDialog(null, "Role Saving in progress ");
+    }//GEN-LAST:event_saveRoleButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField JROLECODE;
+    private javax.swing.JTextArea JROLEDESCRIPTION;
+    private javax.swing.JTextField JROLENAME;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -443,9 +468,7 @@ public class AddRoleUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel permissionsJpanel;
+    private javax.swing.JButton saveRoleButton;
     // End of variables declaration//GEN-END:variables
 }
