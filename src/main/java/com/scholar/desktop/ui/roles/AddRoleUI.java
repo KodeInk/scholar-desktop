@@ -446,6 +446,10 @@ public class AddRoleUI extends javax.swing.JPanel {
             throw new BadRequestException("Role Description Is Mandatory ");
         }
 
+        if (PERMISSIONLIST == null || PERMISSIONLIST.isEmpty()) {
+            throw new BadRequestException(" Select Permissions  ");
+        }
+        
         JOptionPane.showMessageDialog(null, "Role Saving in progress ");
     }//GEN-LAST:event_saveRoleButtonActionPerformed
 
