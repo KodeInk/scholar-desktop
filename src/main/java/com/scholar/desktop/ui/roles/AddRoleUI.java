@@ -156,6 +156,7 @@ public class AddRoleUI extends javax.swing.JPanel {
         for (PermissionsResponse pr : list) {
             JCheckBox jCheckBoxx = new JCheckBox();
             jCheckBoxx.setText(pr.getName());
+            jCheckBoxx.setActionCommand("PER_"+pr.getId());            
             parallelGroup.addComponent(jCheckBoxx, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
 
             sequentialGroup.addComponent(jCheckBoxx);
