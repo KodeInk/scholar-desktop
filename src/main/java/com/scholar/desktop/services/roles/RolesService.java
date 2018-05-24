@@ -5,13 +5,19 @@
  */
 package main.java.com.scholar.desktop.services.roles;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.request._Permission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.RoleAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.request._Role;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
@@ -79,4 +85,30 @@ public class RolesService extends AbstractService {
         return list;
     }
 
+    public RoleResponse create(_Role role, String logId) throws IOException {
+        if (role != null) {
+            Map roleMap = getRoleMap(role);
+            return roleAPI.create(roleMap, logId);
+        }
+        return null;
+    }
+
+    public Map getRoleMap(_Role role) {
+
+        Map roleMap = new HashMap<>();
+        roleMap.put("name", role.getName());
+        roleMap.put("code", role.getCode());
+        roleMap.put("description", role.getDescription());
+
+        ArrayList<_Permission> arrayList = new ArrayList<>(Arrays.asList(role.getPermissions()));
+        Map<String, ArrayList<_Permission>> m1 = new HashMap<>();
+        m1.put("permissions", arrayList);
+        roleMap.put("permissions", m1.get("permissions"));
+
+        System.out.println("==================================");
+        System.out.println(roleMap);
+        System.out.println("==================================");
+
+        return roleMap;
+    }
 }
