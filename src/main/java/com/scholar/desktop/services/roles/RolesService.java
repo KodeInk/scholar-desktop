@@ -17,7 +17,6 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.request._P
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.RoleAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.request._Role;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;

@@ -9,8 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
@@ -25,9 +28,11 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.request._Permission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.request._Role;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.permissions.PermissionsService;
+import main.java.com.scholar.desktop.services.roles.RolesService;
 
 /**
  *
@@ -436,42 +441,51 @@ public class AddRoleUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveRoleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRoleButtonActionPerformed
-        // TODO add your handling code here:
-        if (JROLENAME.getText().isEmpty()) {
-            throw new BadRequestException("Role Name Is Mandatory ");
+        try {
+            // TODO add your handling code here:
+            if (JROLENAME.getText().isEmpty()) {
+                throw new BadRequestException("Role Name Is Mandatory ");
+            }
+            if (JROLECODE.getText().isEmpty()) {
+                throw new BadRequestException("Role Code Is Mandatory ");
+            }
+
+            if (JROLEDESCRIPTION.getText().isEmpty()) {
+                throw new BadRequestException("Role Description Is Mandatory ");
+            }
+
+            if (PERMISSIONLIST == null || PERMISSIONLIST.isEmpty()) {
+                throw new BadRequestException(" Select Permissions  ");
+            }
+
+            //todo: add to ROle
+            _Role role = new _Role();
+            role.setName(JROLENAME.getText());
+            role.setCode(JROLECODE.getText());
+            role.setDescription(JROLEDESCRIPTION.getText());
+
+            List<_Permission> permissionsList = new ArrayList<>();
+
+            PERMISSIONLIST.stream().map((permissionId) -> {
+                _Permission permission = new _Permission();
+                permission.setId(permissionId);
+                return permission;
+            }).forEachOrdered((permission) -> {
+                permissionsList.add(permission);
+            });
+
+            _Permission[] permissions = new _Permission[permissionsList.size()];
+            role.setPermissions(permissionsList.toArray(permissions));
+
+            RoleResponse roleResponse = RolesService.getInstance(schoolData).create(role, "LOG_ID");
+            if (roleResponse != null) {
+                JOptionPane.showMessageDialog(null, "Record Saved Succesfully ");
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddRoleUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Something went wrong Record could not be saved");
         }
-        if (JROLECODE.getText().isEmpty()) {
-            throw new BadRequestException("Role Code Is Mandatory ");
-        }
-
-        if (JROLEDESCRIPTION.getText().isEmpty()) {
-            throw new BadRequestException("Role Description Is Mandatory ");
-        }
-
-        if (PERMISSIONLIST == null || PERMISSIONLIST.isEmpty()) {
-            throw new BadRequestException(" Select Permissions  ");
-        }
-
-        //todo: add to ROle 
-        _Role role = new _Role();
-        role.setName(JROLENAME.getText());
-        role.setCode(JROLECODE.getText());
-        role.setCode(JROLEDESCRIPTION.getText());
-
-        List<_Permission> permissionsList = new ArrayList<>();
-
-        PERMISSIONLIST.stream().map((permissionId) -> {
-            _Permission permission = new _Permission();
-            permission.setId(permissionId);
-            return permission;
-        }).forEachOrdered((permission) -> {
-            permissionsList.add(permission);
-        });
-
-        _Permission[] permissions = new _Permission[permissionsList.size()];
-        role.setPermissions(permissionsList.toArray(permissions));
-
-        JOptionPane.showMessageDialog(null, "Role Saving in progress ");
     }//GEN-LAST:event_saveRoleButtonActionPerformed
 
 
