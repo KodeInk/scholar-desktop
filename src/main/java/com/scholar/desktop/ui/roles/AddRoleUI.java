@@ -5,6 +5,10 @@
  */
 package main.java.com.scholar.desktop.ui.roles;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,6 +35,7 @@ public class AddRoleUI extends javax.swing.JPanel {
     private SchoolData schoolData;
     private static AddRoleUI instance;
     private List<PermissionsResponse> permissionsResponses;
+    List<Integer> permissionList = new ArrayList<>();
 
     /**
      * Creates new form AddRoleUI
@@ -124,7 +129,7 @@ public class AddRoleUI extends javax.swing.JPanel {
         JPanel container2 = new JPanel();
         container2.setBackground(new java.awt.Color(255, 255, 255));
         JLabel groupLabel = new JLabel();
-        groupLabel.setFont(new java.awt.Font("Arial", 0, 12)); 
+        groupLabel.setFont(new java.awt.Font("Arial", 0, 12));
         groupLabel.setText(grouping);
 
         javax.swing.GroupLayout groupLayout1 = new javax.swing.GroupLayout(container2);
@@ -145,8 +150,6 @@ public class AddRoleUI extends javax.swing.JPanel {
         JPanel container3 = new JPanel();
         container3.setBackground(new java.awt.Color(255, 255, 255));
 
-      
-
         javax.swing.GroupLayout groupLayout2 = new javax.swing.GroupLayout(container3);
         container3.setLayout(groupLayout2);
         ParallelGroup parallelGroup = groupLayout2.createParallelGroup(GroupLayout.Alignment.LEADING);
@@ -154,11 +157,10 @@ public class AddRoleUI extends javax.swing.JPanel {
         sequentialGroup.addContainerGap();
 
         for (PermissionsResponse pr : list) {
-            JCheckBox jCheckBoxx = new JCheckBox();
-            jCheckBoxx.setText(pr.getName());
-            jCheckBoxx.setActionCommand("PER_"+pr.getId());            
-            parallelGroup.addComponent(jCheckBoxx, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
 
+            JCheckBox jCheckBoxx = getCheckBox(pr);
+
+            parallelGroup.addComponent(jCheckBoxx, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
             sequentialGroup.addComponent(jCheckBoxx);
             sequentialGroup.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
 
@@ -168,13 +170,13 @@ public class AddRoleUI extends javax.swing.JPanel {
         sequentialGroup.addContainerGap(154, Short.MAX_VALUE);
 
         groupLayout2.setHorizontalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(groupLayout2.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(parallelGroup)
-                                .addContainerGap())
+                .addGroup(groupLayout2.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(parallelGroup)
+                        .addContainerGap())
         );
         groupLayout2.setVerticalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(sequentialGroup)
+                .addGroup(sequentialGroup)
         );
 
         JScrollPane scollPane1 = new JScrollPane();
@@ -184,34 +186,56 @@ public class AddRoleUI extends javax.swing.JPanel {
         javax.swing.GroupLayout groupLayout3 = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(groupLayout3);
         groupLayout3.setHorizontalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scollPane1)
+                .addComponent(scollPane1)
         );
         groupLayout3.setVerticalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scollPane1)
+                .addComponent(scollPane1)
         );
 
         javax.swing.GroupLayout groupLayout4 = new javax.swing.GroupLayout(container1);
         container1.setLayout(groupLayout4);
         groupLayout4.setHorizontalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(groupLayout4.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(container2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+                .addGroup(groupLayout4.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(container2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
         );
         groupLayout4.setVerticalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(groupLayout4.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(container2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
+                .addGroup(groupLayout4.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(container2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
 
         jPanel3.add(container1);
 
         return jPanel3;
+    }
+
+    private JCheckBox getCheckBox(PermissionsResponse pr) {
+        JCheckBox jCheckBoxx = new JCheckBox();
+        jCheckBoxx.setText(pr.getName());
+        jCheckBoxx.setActionCommand(pr.getId().toString());
+        jCheckBoxx.addActionListener((ActionEvent e) -> {
+            JCheckBox xx = (JCheckBox) e.getSource();
+
+            /*
+            Add permission to the permission List at selection 
+             */
+            Integer permission = Integer.parseInt(xx.getActionCommand());
+            permissionList.remove(permission);
+
+            if (xx.isSelected()) {
+                permissionList.add(permission);
+            }
+
+        });
+
+        return jCheckBoxx;
     }
 
     /**
