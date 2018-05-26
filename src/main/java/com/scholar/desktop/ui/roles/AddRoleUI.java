@@ -99,12 +99,7 @@ public class AddRoleUI extends javax.swing.JPanel {
                 }
 
                 jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
+               
             }
 
             jScrollPane3.repaint();
