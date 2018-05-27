@@ -39,7 +39,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         }
 
         initComponents();
-        fetchData(schoolData);
+        initData(schoolData);
 
     }
 
@@ -51,7 +51,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void initData(SchoolData schoolData1) {
         if (list != null) {
             populateJTable(list);
         }

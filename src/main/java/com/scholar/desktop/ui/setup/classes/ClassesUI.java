@@ -5,16 +5,20 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 5/27/2018
  */
 public class ClassesUI extends javax.swing.JPanel {
 
+    private SchoolData schoolData;
     /**
      * Creates new form ClassesUI
      */
-    public ClassesUI() {
+    public ClassesUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -31,7 +35,7 @@ public class ClassesUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.add("Manage Classes",ManageClassesUI.getDefaultLocale())
+        jTabbedPane1.add("Manage Classes",main.java.com.scholar.desktop.ui.setup.classes.ManageClassesUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -19,6 +19,7 @@ import main.java.com.scholar.desktop.ui.library.LibraryStock;
 import main.java.com.scholar.desktop.ui.library.books.ManageBooks;
 import main.java.com.scholar.desktop.ui.marksheet.Marksheet;
 import main.java.com.scholar.desktop.ui.roles.RolesUI;
+import main.java.com.scholar.desktop.ui.setup.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.setup.grading.ManageGrading;
 import main.java.com.scholar.desktop.ui.setup.subjects.ManageSubjects;
 import main.java.com.scholar.desktop.ui.staff.ManageStaff;
@@ -67,7 +68,7 @@ public class DesktopSwitcher {
                 break;
 
             case "CLASSES":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageClassesUI(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(new ClassesUI(schoolData));
                 break;
 
             case "CURRICULUM":
