@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.setup.classes;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 
 /**
  *
@@ -29,33 +30,30 @@ public class AddClassUI extends javax.swing.JPanel {
         initData();
     }
 
-
     /**
      *
      * @param schoolData
      * @return
      */
-    public  static AddClassUI getInstance(SchoolData schoolData) {
+    public static AddClassUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddClassUI(schoolData);
         }
         return instance;
     }
 
-        
-    public void initData(){        
+    public void initData() {
         initRankComboBox();
     }
 
     public void initRankComboBox() {
         RankJComboBox.addItem("Select Option");
-        for(int x = 0; x <= 500; x ++){
-            RankJComboBox.addItem(""+x);
+        for (int x = 0; x <= 500; x++) {
+            RankJComboBox.addItem("" + x);
         }
         RankJComboBox.setSelectedIndex(1);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,9 +68,9 @@ public class AddClassUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        JFirstName = new javax.swing.JTextField();
+        classCode = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JFirstName1 = new javax.swing.JTextField();
+        className = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         RankJComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -93,9 +91,9 @@ public class AddClassUI extends javax.swing.JPanel {
         jLabel2.setText("Name : *");
         jLabel2.setToolTipText("");
 
-        JFirstName.addActionListener(new java.awt.event.ActionListener() {
+        classCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JFirstNameActionPerformed(evt);
+                classCodeActionPerformed(evt);
             }
         });
 
@@ -110,6 +108,11 @@ public class AddClassUI extends javax.swing.JPanel {
         RankJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jButton1.setText("SAVE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CANCEL");
 
@@ -130,8 +133,8 @@ public class AddClassUI extends javax.swing.JPanel {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JFirstName)
-                            .addComponent(JFirstName1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(classCode)
+                            .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RankJComboBox, 0, 451, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,10 +153,10 @@ public class AddClassUI extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(JFirstName1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(classCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,15 +183,31 @@ public class AddClassUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JFirstNameActionPerformed
+    private void classCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JFirstNameActionPerformed
+    }//GEN-LAST:event_classCodeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //todo: form validation
+        if (className.getText().isEmpty()) {
+            throw new BadRequestException("Class name is   mandatory");
+        }
+        if (classCode.getText().isEmpty()) {
+            throw new BadRequestException("Class code is   mandatory");
+        }
+        if (RankJComboBox.getSelectedIndex() <= 1) {
+            throw new BadRequestException("Rank   is   mandatory");
+        }
+        //todi:  submit to sever
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JFirstName;
-    private javax.swing.JTextField JFirstName1;
     private javax.swing.JComboBox<String> RankJComboBox;
+    private javax.swing.JTextField classCode;
+    private javax.swing.JTextField className;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

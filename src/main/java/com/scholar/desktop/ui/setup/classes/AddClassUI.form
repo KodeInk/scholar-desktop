@@ -65,8 +65,8 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="JFirstName" max="32767" attributes="0"/>
-                                  <Component id="JFirstName1" min="-2" pref="450" max="-2" attributes="0"/>
+                                  <Component id="classCode" max="32767" attributes="0"/>
+                                  <Component id="className" min="-2" pref="450" max="-2" attributes="0"/>
                                   <Component id="RankJComboBox" alignment="0" pref="451" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jButton1" min="-2" pref="122" max="-2" attributes="0"/>
@@ -91,11 +91,11 @@
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JFirstName1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="className" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JFirstName" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="classCode" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -138,9 +138,9 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="JFirstName">
+            <Component class="javax.swing.JTextField" name="classCode">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JFirstNameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="classCodeActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -152,7 +152,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="JFirstName1">
+            <Component class="javax.swing.JTextField" name="className">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -179,6 +179,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="SAVE"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
