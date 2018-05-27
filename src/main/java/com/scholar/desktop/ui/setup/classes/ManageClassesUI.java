@@ -18,11 +18,12 @@ import main.java.com.scholar.desktop.services.classes.ClassesService;
  *
  * @author mover 3/9/2018
  */
-public class ManageClasses extends javax.swing.JPanel {
+public class ManageClassesUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
-    SchoolData schoolData = null;
+    private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
+    private static ManageClassesUI instance;
 
     /**
      * Creates new form ManageClasses
@@ -31,7 +32,7 @@ public class ManageClasses extends javax.swing.JPanel {
      */
     List<ClassResponse> list = null;
 
-    public ManageClasses(SchoolData schoolData) {
+    public ManageClassesUI(SchoolData schoolData) {
 
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
@@ -40,6 +41,14 @@ public class ManageClasses extends javax.swing.JPanel {
         initComponents();
         fetchData(schoolData);
 
+    }
+
+    public static ManageClassesUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageClassesUI(schoolData);
+        }
+
+        return instance;
     }
 
     public final void fetchData(SchoolData schoolData1) {
@@ -322,7 +331,7 @@ public class ManageClasses extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
