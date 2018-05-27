@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -206,16 +207,30 @@ public class AddClassUI extends javax.swing.JPanel {
             throw new BadRequestException("Rank   is   mandatory");
         }
         _Class schoolClass = getSchoolClass();
-        
+
+        saveClass(schoolClass);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void saveClass(_Class schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
             ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+            
+            resetForm();
+            
         } catch (IOException ex) {
             Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
+    }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void resetForm() {
+        className.setText("");
+        classCode.setText("");
+        RankJComboBox.setSelectedIndex(1);
+    }
 
     public _Class getSchoolClass() throws NumberFormatException {
         _Class schoolClass = new _Class();
