@@ -26,7 +26,9 @@ public class AddClassUI extends javax.swing.JPanel {
     public AddClassUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        initData();
     }
+
 
     /**
      *
@@ -40,6 +42,20 @@ public class AddClassUI extends javax.swing.JPanel {
         return instance;
     }
 
+        
+    public void initData(){        
+        initRankComboBox();
+    }
+
+    public void initRankComboBox() {
+        RankJComboBox.addItem("Select Option");
+        for(int x = 0; x <= 500; x ++){
+            RankJComboBox.addItem(""+x);
+        }
+        RankJComboBox.setSelectedIndex(1);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +74,7 @@ public class AddClassUI extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         JFirstName1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        RankJComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -91,7 +107,7 @@ public class AddClassUI extends javax.swing.JPanel {
         jLabel4.setText("Rank  : *");
         jLabel4.setToolTipText("");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        RankJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jButton1.setText("SAVE");
 
@@ -116,7 +132,7 @@ public class AddClassUI extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JFirstName)
                             .addComponent(JFirstName1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, 0, 451, Short.MAX_VALUE)
+                            .addComponent(RankJComboBox, 0, 451, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,7 +158,7 @@ public class AddClassUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RankJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,9 +188,9 @@ public class AddClassUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JFirstName;
     private javax.swing.JTextField JFirstName1;
+    private javax.swing.JComboBox<String> RankJComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
