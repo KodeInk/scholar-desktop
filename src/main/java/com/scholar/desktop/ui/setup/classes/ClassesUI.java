@@ -36,6 +36,7 @@ public class ClassesUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.add("Manage Classes",main.java.com.scholar.desktop.ui.setup.classes.ManageClassesUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Class",main.java.com.scholar.desktop.ui.setup.classes.AddClassUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
