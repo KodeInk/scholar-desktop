@@ -5,13 +5,19 @@
  */
 package main.java.com.scholar.desktop.services.classes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
@@ -54,4 +60,27 @@ public class ClassesService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+
+    public ClassResponse create(_Class classes, String logId) throws IOException {
+        if (classes != null) {
+            Map classesMap = getClassMap(classes);
+            return classesAPI.create(classesMap, logId);
+        }
+        return null;
+    }
+
+    public Map getClassMap(_Class classes) {
+
+        Map classesMap = new HashMap<>();
+        classesMap.put("name", classes.getName());
+        classesMap.put("code", classes.getCode());
+        classesMap.put("ranking", classes.getRanking());
+
+        System.out.println("==================================");
+        System.out.println(classesMap);
+        System.out.println("==================================");
+
+        return classesMap;
+    }
+
 }

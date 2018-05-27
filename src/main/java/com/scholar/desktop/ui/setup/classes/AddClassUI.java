@@ -5,8 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.setup.classes;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
@@ -199,9 +205,25 @@ public class AddClassUI extends javax.swing.JPanel {
         if (RankJComboBox.getSelectedIndex() <= 1) {
             throw new BadRequestException("Rank   is   mandatory");
         }
-        //todi:  submit to sever
+        _Class schoolClass = getSchoolClass();
+        
+        try {
+            //todi:  submit to sever
+            ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public _Class getSchoolClass() throws NumberFormatException {
+        _Class schoolClass = new _Class();
+        schoolClass.setName(className.getText());
+        schoolClass.setCode(classCode.getText());
+        schoolClass.setRanking(Integer.valueOf(RankJComboBox.getSelectedItem().toString()));
+        return schoolClass;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
