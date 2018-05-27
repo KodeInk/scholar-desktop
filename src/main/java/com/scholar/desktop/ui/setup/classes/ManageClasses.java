@@ -69,14 +69,17 @@ public class ManageClasses extends javax.swing.JPanel {
 
             for (ClassResponse ur : list) {
 
-                String name = ur.getName();
-                String code = ur.getCode();
-                String ranking = ur.getRanking().toString();
-                String status = ur.getStatus().name();
-                Date date_Created = ur.getDate_created();
+                String name = ur.getName().toUpperCase();
+                String code = ur.getCode().toUpperCase();
+                String ranking = ur.getRanking().toString().toUpperCase();
+                String status = ur.getStatus().name().toUpperCase();
+                String date_Created = " - ";
+                if (ur.getDate_created() != null) {
+                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
+                }
 
-                String author = ur.getAuthor();
-                Object[] data = {name, code, ranking, status, " - ", author};
+                String author = ur.getAuthor().toUpperCase();
+                Object[] data = {name, code, ranking, status, date_Created, author};
                 tableModel.addRow(data);
 
             }
