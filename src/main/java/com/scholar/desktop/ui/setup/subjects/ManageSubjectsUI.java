@@ -5,11 +5,11 @@
  */
 package main.java.com.scholar.desktop.ui.setup.subjects;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
@@ -18,18 +18,18 @@ import main.java.com.scholar.desktop.services.subjects.SubjectsService;
  *
  * @author mover 3/11/2018
  */
-public class ManageSubjects extends javax.swing.JPanel {
+public class ManageSubjectsUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<SubjectResponse> list = null;
-    private static ManageSubjects instance;
+    private static ManageSubjectsUI instance;
 
     /**
      * Creates new form ManageSubjects
      */
-    public ManageSubjects(SchoolData schoolData) {
+    public ManageSubjectsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
@@ -38,9 +38,9 @@ public class ManageSubjects extends javax.swing.JPanel {
         fetchData(schoolData);
     }
 
-    public static ManageSubjects getInstance(SchoolData schoolData) {
+    public static ManageSubjectsUI getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new ManageSubjects(schoolData);
+            instance = new ManageSubjectsUI(schoolData);
         }
 
         return instance;
@@ -74,7 +74,10 @@ public class ManageSubjects extends javax.swing.JPanel {
                 String name = ur.getName();
                 String code = ur.getCode();
                 String status = ur.getStatus();
-                String dateCreated = " - ";
+                String dateCreated = "";
+                if (ur.getDate_created() != null) {
+                    dateCreated = new Date(ur.getDate_created()).toString();
+                }
                 String author = ur.getAuthor();
                 Object[] data = {name, code, status, dateCreated, author};
                 tableModel.addRow(data);
@@ -96,7 +99,6 @@ public class ManageSubjects extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -244,7 +246,7 @@ public class ManageSubjects extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -256,7 +258,7 @@ public class ManageSubjects extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -371,7 +373,7 @@ public class ManageSubjects extends javax.swing.JPanel {
                     .addComponent(jSeparator5)
                     .addComponent(jScrollPane6)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,17 +427,15 @@ public class ManageSubjects extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(jPanel2);
 
-        jTabbedPane1.addTab("Manage Subjects", jSplitPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -479,7 +479,6 @@ public class ManageSubjects extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
