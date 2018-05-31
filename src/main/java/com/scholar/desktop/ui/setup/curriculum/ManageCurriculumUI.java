@@ -82,7 +82,12 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
                 String description = ur.getDescription();
                 String status = ur.getStatus();
                 String author = ur.getAuthor();
-                Object[] data = {name, code, description, status, " - ", author};
+                String date_created = " - ";
+                if (ur.getDate_created() != null) {
+                    date_created = new Date(ur.getDate_created()).toString();
+                }
+
+                Object[] data = {name, code, description, status, date_created, author};
                 tableModel.addRow(data);
             }
         }
