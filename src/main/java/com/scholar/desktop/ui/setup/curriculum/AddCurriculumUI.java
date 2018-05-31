@@ -9,17 +9,27 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author mover 5/31/2018
+ * @author Manny
  */
-public class CurriculumUI extends javax.swing.JPanel {
+public class AddCurriculumUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form CurriculumUI
+     * Creates new form AddCurriculumUI
      */
-    private SchoolData schoolData;
-    public CurriculumUI(SchoolData schoolData) {
+    private static  AddCurriculumUI instance;
+    private final SchoolData schoolData;
+
+    public AddCurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static  AddCurriculumUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddCurriculumUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -31,27 +41,19 @@ public class CurriculumUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        jTabbedPane1.add("Manage Curriculum", ManageCurriculumUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Curriculum", AddCurriculumUI.getInstance(schoolData));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addGap(0, 711, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
