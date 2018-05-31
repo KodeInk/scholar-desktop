@@ -20,7 +20,7 @@ import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
  *
  * @author mover 3/10/2018
  */
-public class ManageCurriculum extends javax.swing.JPanel {
+public class ManageCurriculumUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
@@ -30,7 +30,7 @@ public class ManageCurriculum extends javax.swing.JPanel {
      */
     List<CurriculumResponse> list = null;
 
-    public ManageCurriculum(SchoolData schoolData) {
+    public ManageCurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
