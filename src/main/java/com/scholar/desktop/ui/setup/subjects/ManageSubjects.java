@@ -24,6 +24,7 @@ public class ManageSubjects extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<SubjectResponse> list = null;
+    private static ManageSubjects instance;
 
     /**
      * Creates new form ManageSubjects
@@ -35,6 +36,14 @@ public class ManageSubjects extends javax.swing.JPanel {
         }
         initComponents();
         fetchData(schoolData);
+    }
+
+    public static ManageSubjects getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageSubjects(schoolData);
+        }
+
+        return instance;
     }
 
     public final void fetchData(SchoolData schoolData1) {

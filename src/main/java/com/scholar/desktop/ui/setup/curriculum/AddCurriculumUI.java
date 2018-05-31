@@ -183,7 +183,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
             submit(name, code, description);
             JOptionPane.showMessageDialog(null, "Record Saved Succesfully ");
             resetForm();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(AddCurriculumUI.class.getName()).log(Level.SEVERE, null, ex);
             new BadRequestException("Something went wrong, could not submit data to server");

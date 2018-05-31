@@ -46,7 +46,7 @@ public class SubjectAPI {
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        Response response = engineCaller.get("curriculum/v1/", queryParameter);
+        Response response = engineCaller.get("subjects/v1/", queryParameter);
 
         switch (response.getStatus()) {
             case 400:
