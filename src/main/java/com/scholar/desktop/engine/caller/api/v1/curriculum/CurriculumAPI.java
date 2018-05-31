@@ -5,27 +5,34 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.curriculum;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
+import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
 import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 /**
  *
  * @author mover 3/10/2018
  */
-public class CurriculumAPI {
+public class CurriculumAPI extends AbstractAPI {
 
     private static final Logger LOG = Logger.getLogger(CurriculumAPI.class.getName());
     private final SchoolData schoolData;
     private static CurriculumAPI instance;
     private final EngineCaller engineCaller;
+    private Message message = null;
 
     public CurriculumAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -58,6 +65,33 @@ public class CurriculumAPI {
         }
 
         return null;
+    }
+
+    public CurriculumResponse create(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.post("curriculum/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                CurriculumResponse curriculumResponse = response.readEntity(CurriculumResponse.class);
+                return curriculumResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
     }
 
 }

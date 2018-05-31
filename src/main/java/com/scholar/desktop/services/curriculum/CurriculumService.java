@@ -5,18 +5,21 @@
  */
 package main.java.com.scholar.desktop.services.curriculum;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.CurriculumAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request._Curriculum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
@@ -58,4 +61,27 @@ public class CurriculumService extends AbstractService {
         return list;
     }
 
+    
+     public CurriculumResponse create(_Curriculum curriculum, String logId) throws IOException {
+        if (curriculum != null) {
+            Map curriculumMap = getCurriculumMap(curriculum);
+            return curriculumAPI.create(curriculumMap, logId);
+        }
+        return null;
+    }
+     
+        public Map getCurriculumMap(_Curriculum curriculum) {
+
+        Map curriculumMap = new HashMap<>();
+        curriculumMap.put("name", curriculum.getName());
+        curriculumMap.put("code", curriculum.getCode());
+        curriculumMap.put("description", curriculum.getDescription());
+
+        System.out.println("==================================");
+        System.out.println(curriculumMap);
+        System.out.println("==================================");
+
+        return curriculumMap;
+    }
+        
 }
