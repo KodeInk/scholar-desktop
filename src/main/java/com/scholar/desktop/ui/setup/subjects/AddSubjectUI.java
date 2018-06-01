@@ -5,9 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.setup.subjects;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
  *
@@ -151,14 +157,38 @@ public class AddSubjectUI extends javax.swing.JPanel {
             throw new BadRequestException("Subject code is   mandatory");
         }
 
-        Subject subject = new Subject();
-        subject.setName(subjectName.getText());
-        subject.setCode(subjectCode.getText());
+        Subject subject = getSubject();
         
         
+        try {
+            SubjectResponse subjectResponse =   submit(subject);
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            
+            resetForm();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
 
 
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void resetForm() {
+        subjectName.setText("");
+        subjectCode.setText("");
+    }
+
+    private SubjectResponse submit(Subject subject) throws IOException {
+        return   SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+    }
+
+    private Subject getSubject() {
+        Subject subject = new Subject();
+        subject.setName(subjectName.getText());
+        subject.setCode(subjectCode.getText());
+        return subject;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
