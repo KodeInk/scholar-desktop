@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.setup.subjects;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 
 /**
@@ -16,8 +18,20 @@ public class AddSubjectUI extends javax.swing.JPanel {
     /**
      * Creates new form AddSubjectUI
      */
-    public AddSubjectUI() {
+    private SchoolData schoolData;
+    private static AddSubjectUI instance = null;
+
+    public AddSubjectUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static AddSubjectUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddSubjectUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -108,8 +122,8 @@ public class AddSubjectUI extends javax.swing.JPanel {
                     .addComponent(subjectCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(283, Short.MAX_VALUE))
         );
 
@@ -136,8 +150,14 @@ public class AddSubjectUI extends javax.swing.JPanel {
         if (subjectCode.getText().isEmpty()) {
             throw new BadRequestException("Subject code is   mandatory");
         }
-       
- 
+
+        Subject subject = new Subject();
+        subject.setName(subjectName.getText());
+        subject.setCode(subjectCode.getText());
+        
+        
+
+
     }//GEN-LAST:event_saveButtonActionPerformed
 
 
