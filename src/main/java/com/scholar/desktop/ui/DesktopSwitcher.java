@@ -21,7 +21,8 @@ import main.java.com.scholar.desktop.ui.marksheet.Marksheet;
 import main.java.com.scholar.desktop.ui.roles.RolesUI;
 import main.java.com.scholar.desktop.ui.setup.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.setup.curriculum.CurriculumUI;
-import main.java.com.scholar.desktop.ui.setup.grading.ManageGrading;
+import main.java.com.scholar.desktop.ui.setup.grading.GradingUI;
+import main.java.com.scholar.desktop.ui.setup.grading.ManageGradingUI;
 import main.java.com.scholar.desktop.ui.setup.subjects.ManageSubjectsUI;
 import main.java.com.scholar.desktop.ui.setup.subjects.SubjectsUI;
 import main.java.com.scholar.desktop.ui.staff.ManageStaff;
@@ -82,7 +83,7 @@ public class DesktopSwitcher {
                 break;
 
             case "GRADING":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageGrading(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(new GradingUI(schoolData));
                 break;
 
             case "STUDY_PERIOD":
