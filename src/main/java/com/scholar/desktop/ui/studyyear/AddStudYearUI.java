@@ -187,6 +187,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
         try {
             StudyYearResponse studyYearResponse = StudyYearService.getInstance(schoolData).create(studyYear, "log_id");
             JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
+            theme.setText("");
+            startDate.setDate(null);
+            endDate.setDate(null);
         } catch (IOException ex) {
             Logger.getLogger(AddStudYearUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Something went wrong, record could not be saved");
@@ -201,7 +204,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         //todo:populate template
         StudyYear studyYear = new StudyYear();
         studyYear.setTheme(theme.getText());
-        studyYear.setDate_created(startDate.getDate().getTime());
+        studyYear.setStart_date(startDate.getDate().getTime());
         studyYear.setEnd_date(endDate.getDate().getTime());
         return studyYear;
     }
