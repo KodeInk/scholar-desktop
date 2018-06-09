@@ -6,7 +6,6 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,11 +16,11 @@ public class StudyYear {
 
     private Integer id;
     private String theme;
-    private Date start_date;
-    private Date end_date;
+    private Long start_date;
+    private Long end_date;
     private StatusEnum status;
     private Integer author_id;
-    private Date date_created;
+    private Long date_created;
 
     public StudyYear() {
     }
@@ -46,19 +45,19 @@ public class StudyYear {
         this.theme = theme;
     }
 
-    public Date getStart_date() {
+    public Long getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(Long start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public Long getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(Long end_date) {
         this.end_date = end_date;
     }
 
@@ -78,11 +77,11 @@ public class StudyYear {
         this.author_id = author_id;
     }
 
-    public Date getDate_created() {
+    public Long getDate_created() {
         return date_created;
     }
 
-    public void setDate_created(Date date_created) {
+    public void setDate_created(Long date_created) {
         this.date_created = date_created;
     }
 
