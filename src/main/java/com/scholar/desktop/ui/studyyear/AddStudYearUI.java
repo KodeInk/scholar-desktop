@@ -5,17 +5,29 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 6/9/2018
  */
 public class AddStudYearUI extends javax.swing.JPanel {
 
     /**
      * Creates new form AddStudYear
      */
-    public AddStudYearUI() {
+    private static AddStudYearUI instance;
+
+    public AddStudYearUI(SchoolData schoolData) {
         initComponents();
+    }
+
+    public static AddStudYearUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddStudYearUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -31,11 +43,11 @@ public class AddStudYearUI extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 746, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
