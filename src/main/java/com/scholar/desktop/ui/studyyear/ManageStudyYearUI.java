@@ -28,6 +28,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<StudyYearResponse> list = null;
+    private static ManageStudyYearUI instance;
 
     public ManageStudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -40,6 +41,14 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
         fetchData(schoolData);
 
+    }
+
+    public static ManageStudyYearUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageStudyYearUI(schoolData);
+        }
+
+        return instance;
     }
 
     public final void fetchData(SchoolData schoolData1) {

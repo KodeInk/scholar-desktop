@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author Manny
@@ -14,7 +16,9 @@ public class StudyYearUI extends javax.swing.JPanel {
     /**
      * Creates new form StudyYearUI
      */
-    public StudyYearUI() {
+    private SchoolData schoolData;
+    public StudyYearUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -30,6 +34,9 @@ public class StudyYearUI extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.add("Manage Study Period", ManageStudyYearUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Study Period", AddStudYearUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
