@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.studyyear;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 
 /**
@@ -160,25 +161,40 @@ public class AddStudYearUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //todo: validate the form
-        if(theme.getText().isEmpty()){
-            throw new BadRequestException("Theme is mandatory");
-        }
-        try {
-                startDate.getDate().toString();
-            } catch (NullPointerException er) {
-                throw new BadRequestException("Staff Join Date  is Madantory");
-            }
+        validateForm();
         
         
         //todo:populate template
+        StudyYear studyYear = new StudyYear();
+        studyYear.setTheme(theme.getText());
+        studyYear.setDate_created(startDate.getDate().getTime());
+        studyYear.setEnd_date(endDate.getDate().getTime());
         
         //todo: send to server
-        
         //todo: reset form 
         
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void validateForm() throws BadRequestException {
+        //todo: validate the form
+        if (theme.getText().isEmpty()) {
+            throw new BadRequestException("Theme is mandatory");
+        }
+        try {
+            startDate.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Start Date  is Madantory");
+        }
+        
+        try {
+            endDate.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("End Date  is Madantory");
+        }
+        
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

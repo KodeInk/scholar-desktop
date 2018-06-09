@@ -5,13 +5,18 @@
  */
 package main.java.com.scholar.desktop.services.studyyear;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.StudyYearAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
@@ -26,14 +31,22 @@ public class StudyYearService extends AbstractService {
     private final SchoolData schoolData;
     private static StudyYearService instance;
     private static StudyYearAPI studyYearAPI;
-
     private List<StudyYearResponse> list = null;
 
+    /**
+     *
+     * @param schoolData
+     */
     public StudyYearService(SchoolData schoolData) {
         this.schoolData = schoolData;
         studyYearAPI = new StudyYearAPI(schoolData);
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static StudyYearService getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new StudyYearService(schoolData);
@@ -41,6 +54,10 @@ public class StudyYearService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<StudyYearResponse> list() {
 
         if (list != null) {
@@ -55,5 +72,41 @@ public class StudyYearService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+
+    /**
+     *
+     * @param studyYear
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public StudyYearResponse create(StudyYear studyYear, String logId) throws IOException {
+        if (studyYear != null) {
+            Map studyYearMap = getStudyYearMap(studyYear);
+            return studyYearAPI.create(studyYearMap, logId);
+        }
+        return null;
+    }
+     
+    /**
+     *
+     * @param studyYear
+     * @return
+     */
+    public Map getStudyYearMap(StudyYear studyYear) {
+         
+        Map studyYearMap = new HashMap<>();
+        studyYearMap.put("theme", studyYear.getTheme());
+        studyYearMap.put("start_date", studyYear.getStart_date());
+         studyYearMap.put("end_date", studyYear.getEnd_date());
+        
+
+        System.out.println("==================================");
+        System.out.println(studyYearMap);
+        System.out.println("==================================");
+
+        return studyYearMap;
+    }
+
 
 }
