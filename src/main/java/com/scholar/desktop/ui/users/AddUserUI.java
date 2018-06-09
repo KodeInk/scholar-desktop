@@ -100,9 +100,9 @@ public class AddUserUI extends javax.swing.JPanel {
     public void populateRolesComboBox() {
         if (roleResponses != null) {
             for (RoleResponse response : roleResponses) {
-                RolesJComboBox.addItem(response.getName());
+                rolesJComboBox.addItem(response.getName());
             }
-            RolesJComboBox.setSelectedItem(null);
+            rolesJComboBox.setSelectedItem(null);
         }
     }
 
@@ -120,10 +120,10 @@ public class AddUserUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        JFirstName = new javax.swing.JTextField();
+        jFirstName = new javax.swing.JTextField();
         prefix_combo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        JLastName = new javax.swing.JTextField();
+        jLastName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -134,25 +134,25 @@ public class AddUserUI extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        Jusername = new javax.swing.JTextField();
+        jUsername = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        RolesJComboBox = new javax.swing.JComboBox<>();
+        rolesJComboBox = new javax.swing.JComboBox<>();
         if(roleResponses != null){
             for(RoleResponse response: roleResponses){
-                RolesJComboBox.addItem(response.getName());
+                rolesJComboBox.addItem(response.getName());
             }
         }
         jLabel12 = new javax.swing.JLabel();
-        JPassword1 = new javax.swing.JPasswordField();
+        jPassword1 = new javax.swing.JPasswordField();
         jLabel13 = new javax.swing.JLabel();
-        JPassword2 = new javax.swing.JPasswordField();
+        jPassword2 = new javax.swing.JPasswordField();
         jLabel14 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         IsTeacher = new javax.swing.JCheckBox();
-        JoinDate = new org.jdesktop.swingx.JXDatePicker();
-        JDateOfBirth = new org.jdesktop.swingx.JXDatePicker();
+        joinDate = new org.jdesktop.swingx.JXDatePicker();
+        jDateOfBirth = new org.jdesktop.swingx.JXDatePicker();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -285,10 +285,10 @@ public class AddUserUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(JPassword1)
-                        .addComponent(Jusername)
-                        .addComponent(RolesJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)))
+                        .addComponent(jPassword1)
+                        .addComponent(jUsername)
+                        .addComponent(rolesJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)))
                 .addGap(850, 850, 850))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,23 +307,22 @@ public class AddUserUI extends javax.swing.JPanel {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(JLastName)
-                                        .addComponent(JFirstName)
-                                        .addComponent(prefix_combo, 0, 469, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(IsStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel15)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(IsTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(JoinDate, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(JDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLastName)
+                                    .addComponent(jFirstName)
+                                    .addComponent(prefix_combo, 0, 469, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(IsStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(IsTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(joinDate, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -344,16 +343,16 @@ public class AddUserUI extends javax.swing.JPanel {
                     .addComponent(prefix_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(JDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,26 +376,26 @@ public class AddUserUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(JoinDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(joinDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)))
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Jusername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(RolesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rolesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -487,13 +486,13 @@ public class AddUserUI extends javax.swing.JPanel {
 
     private void IsStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IsStaffMouseClicked
         // TODO add your handling code here:
-        JoinDate.setEnabled(false);
-        JoinDate.setDate(null);
+        joinDate.setEnabled(false);
+        joinDate.setDate(null);
         IsTeacher.setEnabled(false);
         IsTeacher.setSelected(false);
 
         if (IsStaff.isSelected() == true) {
-            JoinDate.setEnabled(true);
+            joinDate.setEnabled(true);
             IsTeacher.setEnabled(true);
         }
 
@@ -530,20 +529,20 @@ public class AddUserUI extends javax.swing.JPanel {
     }
 
     public User getFormData() {
-        Long joinDate = JoinDate.getDate().getTime();
+        Long joinDate = this.joinDate.getDate().getTime();
 
         String prefix = prefix_combo.getSelectedItem().toString();
-        String firstName = JFirstName.getText();
-        String lastName = JLastName.getText();
-        Long dob = JDateOfBirth.getDate().getTime();
+        String firstName = jFirstName.getText();
+        String lastName = jLastName.getText();
+        Long dob = jDateOfBirth.getDate().getTime();
         System.out.println(" DATE OF BIRTH : " + dob);
 
-        String username = Jusername.getText();
-        RoleResponse roleResponse = roleResponses.get(RolesJComboBox.getSelectedIndex());
+        String username = jUsername.getText();
+        RoleResponse roleResponse = roleResponses.get(rolesJComboBox.getSelectedIndex());
         JOptionPane.showMessageDialog(this, "ROLE " + roleResponse.getName());
 
-        char[] password1 = JPassword1.getPassword();
-        char[] password2 = JPassword2.getPassword();
+        char[] password1 = jPassword1.getPassword();
+        char[] password2 = jPassword2.getPassword();
 
         Profile profile = getProfile(firstName, lastName, prefix, dob);
         Staff staff = getStaff(profile, joinDate);
@@ -558,7 +557,7 @@ public class AddUserUI extends javax.swing.JPanel {
 
         if (IsStaff.isSelected() == true) {
             try {
-                JoinDate.getDate().toString();
+                joinDate.getDate().toString();
             } catch (NullPointerException er) {
                 throw new BadRequestException("Staff Join Date  is Madantory");
             }
@@ -567,38 +566,38 @@ public class AddUserUI extends javax.swing.JPanel {
         if (prefix_combo.getSelectedIndex() == -1) {
             throw new BadRequestException("Prefix is required ");
         }
-        if (JFirstName.getText().isEmpty()) {
+        if (jFirstName.getText().isEmpty()) {
             throw new BadRequestException("First Name  is required ");
         }
 
-        if (JLastName.getText().isEmpty()) {
+        if (jLastName.getText().isEmpty()) {
             throw new BadRequestException("Last Name  is required ");
         }
 
         try {
-            JDateOfBirth.getDate().toString();
+            jDateOfBirth.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Date of Birth is Madantory");
         }
 
-        if (Jusername.getText().isEmpty()) {
+        if (jUsername.getText().isEmpty()) {
             throw new BadRequestException("Username is Empty ");
         }
 
-        if (RolesJComboBox.getSelectedIndex() == -1) {
+        if (rolesJComboBox.getSelectedIndex() == -1) {
             throw new BadRequestException("Role  is required ");
         }
 
-        if (JPassword1.getText().isEmpty()) {
+        if (jPassword1.getText().isEmpty()) {
             throw new BadRequestException("Password  is Empty ");
         }
 
-        if (JPassword2.getText().isEmpty()) {
+        if (jPassword2.getText().isEmpty()) {
             throw new BadRequestException("Repeate Password  is Empty ");
         }
 
-        char[] password1 = JPassword1.getPassword();
-        char[] password2 = JPassword2.getPassword();
+        char[] password1 = jPassword1.getPassword();
+        char[] password2 = jPassword2.getPassword();
 
         ValidatePassword(password1, password2);
     }
@@ -690,17 +689,11 @@ public class AddUserUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox IsStaff;
     private javax.swing.JCheckBox IsTeacher;
-    private org.jdesktop.swingx.JXDatePicker JDateOfBirth;
-    private javax.swing.JTextField JFirstName;
-    private javax.swing.JTextField JLastName;
-    private javax.swing.JPasswordField JPassword1;
-    private javax.swing.JPasswordField JPassword2;
-    private org.jdesktop.swingx.JXDatePicker JoinDate;
-    private javax.swing.JTextField Jusername;
-    public javax.swing.JComboBox<String> RolesJComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private org.jdesktop.swingx.JXDatePicker jDateOfBirth;
+    private javax.swing.JTextField jFirstName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -716,10 +709,16 @@ public class AddUserUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jLastName;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPassword1;
+    private javax.swing.JPasswordField jPassword2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jUsername;
+    private org.jdesktop.swingx.JXDatePicker joinDate;
     private javax.swing.JComboBox<String> prefix_combo;
+    public javax.swing.JComboBox<String> rolesJComboBox;
     // End of variables declaration//GEN-END:variables
 }

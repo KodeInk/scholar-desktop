@@ -73,10 +73,10 @@
                               <Component id="jButton3" min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="JPassword1" max="32767" attributes="0"/>
-                              <Component id="Jusername" max="32767" attributes="0"/>
-                              <Component id="RolesJComboBox" max="32767" attributes="0"/>
-                              <Component id="JPassword2" alignment="0" pref="476" max="32767" attributes="0"/>
+                              <Component id="jPassword1" max="32767" attributes="0"/>
+                              <Component id="jUsername" max="32767" attributes="0"/>
+                              <Component id="rolesJComboBox" max="32767" attributes="0"/>
+                              <Component id="jPassword2" alignment="0" pref="476" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="850" max="-2" attributes="0"/>
@@ -99,26 +99,24 @@
                                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="JLastName" max="32767" attributes="0"/>
-                                              <Component id="JFirstName" max="32767" attributes="0"/>
-                                              <Component id="prefix_combo" pref="469" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel6" min="-2" pref="117" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jButton1" min="-2" pref="133" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="IsStaff" min="-2" pref="157" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="IsTeacher" min="-2" pref="157" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="JoinDate" alignment="0" min="-2" pref="353" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLastName" max="32767" attributes="0"/>
+                                          <Component id="jFirstName" max="32767" attributes="0"/>
+                                          <Component id="prefix_combo" pref="469" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel6" min="-2" pref="117" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jButton1" min="-2" pref="133" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="JDateOfBirth" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="IsStaff" min="-2" pref="157" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="IsTeacher" min="-2" pref="157" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="joinDate" alignment="0" min="-2" pref="353" max="-2" attributes="0"/>
+                                          <Component id="jDateOfBirth" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jSeparator2" min="-2" pref="760" max="-2" attributes="0"/>
@@ -148,18 +146,18 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JFirstName" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="jFirstName" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JLastName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLastName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JDateOfBirth" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jDateOfBirth" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -190,7 +188,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JoinDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="joinDate" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="59" max="32767" attributes="0"/>
                           </Group>
@@ -200,22 +198,22 @@
                       <Component id="jSeparator2" min="-2" pref="12" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Jusername" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jUsername" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RolesJComboBox" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="rolesJComboBox" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JPassword1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jPassword1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JPassword2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jPassword2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -252,7 +250,7 @@
                 <Property name="text" type="java.lang.String" value="PREFIX"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="JFirstName">
+            <Component class="javax.swing.JTextField" name="jFirstName">
             </Component>
             <Component class="javax.swing.JComboBox" name="prefix_combo">
               <Properties>
@@ -280,7 +278,7 @@
                 <Property name="text" type="java.lang.String" value="FIRST NAME"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="JLastName">
+            <Component class="javax.swing.JTextField" name="jLastName">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -368,7 +366,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Jusername">
+            <Component class="javax.swing.JTextField" name="jUsername">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -378,9 +376,9 @@
                 <Property name="text" type="java.lang.String" value="ROLE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="RolesJComboBox">
+            <Component class="javax.swing.JComboBox" name="rolesJComboBox">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(roleResponses != null){&#xa;for(RoleResponse response: roleResponses){&#xa;RolesJComboBox.addItem(response.getName());&#xa;}&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if(roleResponses != null){&#xa;for(RoleResponse response: roleResponses){&#xa;rolesJComboBox.addItem(response.getName());&#xa;}&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -393,7 +391,7 @@
                 <Property name="text" type="java.lang.String" value="USERNAME"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="JPassword1">
+            <Component class="javax.swing.JPasswordField" name="jPassword1">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
@@ -403,7 +401,7 @@
                 <Property name="text" type="java.lang.String" value="PASSWORD"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="JPassword2">
+            <Component class="javax.swing.JPasswordField" name="jPassword2">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
@@ -448,9 +446,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IsTeacherActionPerformed"/>
               </Events>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="JoinDate">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="joinDate">
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="JDateOfBirth">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="jDateOfBirth">
             </Component>
           </SubComponents>
         </Container>
