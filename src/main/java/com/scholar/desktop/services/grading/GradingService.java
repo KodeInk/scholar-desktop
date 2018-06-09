@@ -5,12 +5,18 @@
  */
 package main.java.com.scholar.desktop.services.grading;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.GradingAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.Grading;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
@@ -55,4 +61,27 @@ public class GradingService extends AbstractService {
         return list;
     }
 
+    
+     public GradingResponse create(Grading grading, String logId) throws IOException {
+        if (grading != null) {
+            Map gradingMap = getGradingMap(grading);
+            return gradingAPI.create(gradingMap, logId);
+        }
+        return null;
+    }
+     
+     
+      public Map getGradingMap(Grading grading) {
+
+        Map gradingMap = new HashMap<>();
+        gradingMap.put("name", grading.getName());
+        gradingMap.put("code", grading.getCode());
+        gradingMap.put("description", grading.getDescription());
+
+        System.out.println("==================================");
+        System.out.println(gradingMap);
+        System.out.println("==================================");
+
+        return gradingMap;
+    }
 }

@@ -36,6 +36,7 @@ public class GradingUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.add("Manage Grading", ManageGradingUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Grading", AddGradingUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

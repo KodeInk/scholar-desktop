@@ -5,7 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.setup.grading;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.Grading;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.grading.GradingService;
 
 /**
  *
@@ -45,14 +53,14 @@ public class AddGradingUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        className = new javax.swing.JTextField();
-        className1 = new javax.swing.JTextField();
+        gradingName = new javax.swing.JTextField();
+        gradingCode = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        gradingDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -71,17 +79,22 @@ public class AddGradingUI extends javax.swing.JPanel {
         jLabel3.setText("Code : *");
         jLabel3.setToolTipText("");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        gradingDescription.setColumns(20);
+        gradingDescription.setRows(5);
+        jScrollPane2.setViewportView(gradingDescription);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Description : *");
         jLabel4.setToolTipText("");
 
-        jButton1.setText("SAVE");
+        saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CANCEL");
+        cancelButton.setText("CANCEL");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,12 +115,12 @@ public class AddGradingUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(className, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                                .addComponent(className1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                                .addComponent(gradingName, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                                .addComponent(gradingCode, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2)))))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
@@ -121,10 +134,10 @@ public class AddGradingUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gradingName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(className1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gradingCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -135,8 +148,8 @@ public class AddGradingUI extends javax.swing.JPanel {
                         .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(287, Short.MAX_VALUE))
         );
 
@@ -154,12 +167,75 @@ public class AddGradingUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        validateGrading();
+        Grading grading = getGrading();
+        submitRecord(grading);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    /**
+     *
+     * @return
+     */
+    protected Grading getGrading() {
+        //todo: populae the entity
+        String gradeName = gradingName.getText();
+        String gradeCode = gradingCode.getText();
+        String gradeDesc = gradingDescription.getText();
+        Grading grading = new Grading();
+        grading.setCode(gradeCode);
+        grading.setName(gradeName);
+        grading.setDescription(gradeDesc);
+        return grading;
+    }
+
+    /**
+     *
+     * @param grading
+     * @throws HeadlessException
+     * @throws BadRequestException
+     */
+    protected void submitRecord(Grading grading) throws HeadlessException, BadRequestException {
+        try {
+            //todo: submit to the server
+            GradingService.getInstance(schoolData).create(grading, "LOG_ID");
+            //todo: Success Message
+            JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
+            //todo: reset and fnish
+            gradingName.setText("");
+            gradingCode.setText("");
+            gradingDescription.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(AddGradingUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Sorry,Record was not saved succesfuly, something went wrong");
+        }
+    }
+
+    /**
+     *
+     * @throws BadRequestException
+     */
+    protected void validateGrading() throws BadRequestException {
+        //todo: validate the UI
+        if (gradingName.getText().isEmpty()) {
+            throw new BadRequestException("Grading Name Is Mandatory");
+        }
+
+        if (gradingCode.getText().isEmpty()) {
+            throw new BadRequestException("Grading Code Is Mandatory");
+        }
+
+        if (gradingDescription.getText().isEmpty()) {
+            throw new BadRequestException("Grading Description Is Mandatory");
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField className;
-    private javax.swing.JTextField className1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField gradingCode;
+    private javax.swing.JTextArea gradingDescription;
+    private javax.swing.JTextField gradingName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -168,6 +244,6 @@ public class AddGradingUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
