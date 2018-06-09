@@ -18,7 +18,7 @@ import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
  *
  * @author mover 3/14/2018
  */
-public class ManageStudyYear extends javax.swing.JPanel {
+public class ManageStudyYearUI extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageStudyYear
@@ -29,7 +29,7 @@ public class ManageStudyYear extends javax.swing.JPanel {
     public DefaultTableModel tableModel;
     List<StudyYearResponse> list = null;
 
-    public ManageStudyYear(SchoolData schoolData) {
+    public ManageStudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
         if (tableModel == null) {
@@ -69,12 +69,12 @@ public class ManageStudyYear extends javax.swing.JPanel {
 
             for (StudyYearResponse response : list) {
 
-                String theme = response.getTheme();
-                String start_date = new Date(response.getStart_date()).toString();
-                String end_date = new Date(response.getEnd_date()).toString();
-                String status = response.getStatus();
-                String DateCreated = new Date(response.getDate_created()).toString();
-                String author = response.getAuthor();
+                String theme = response.getTheme().toUpperCase();
+                String start_date = new Date(response.getStart_date()).toString().toUpperCase();
+                String end_date = new Date(response.getEnd_date()).toString().toUpperCase();
+                String status = response.getStatus().toUpperCase();
+                String DateCreated = new Date(response.getDate_created()).toString().toUpperCase();
+                String author = response.getAuthor().toUpperCase();
 
                 Object[] data = {theme, start_date, end_date, "- ", status, DateCreated, author};
                 tableModel.addRow(data);
@@ -96,7 +96,6 @@ public class ManageStudyYear extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -221,7 +220,7 @@ public class ManageStudyYear extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,26 +245,24 @@ public class ManageStudyYear extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 746, Short.MAX_VALUE)
+            .addGap(0, 759, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 301, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
-
-        jTabbedPane1.addTab("Manage Study Period", jSplitPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +281,6 @@ public class ManageStudyYear extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

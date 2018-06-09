@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui.setup.grading;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -77,12 +78,12 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
             for (GradingResponse ur : list) {
 
-                String name = ur.getName();
-                String code = ur.getCode();
-                String details = ur.getDescription();
-                String status = ur.getStatus().name();
+                String name = ur.getName().toUpperCase();
+                String code = ur.getCode().toUpperCase();
+                String details = ur.getDescription().toUpperCase();
+                String status = ur.getStatus().name().toUpperCase();
                 Date date_Created = new Date(ur.getDateCreated());
-                String author = ur.getAuthor();
+                String author = ur.getAuthor().toUpperCase();
 
                 Object[] data = {name, code, details, status, date_Created.toString(), author};
                 tableModel.addRow(data);
