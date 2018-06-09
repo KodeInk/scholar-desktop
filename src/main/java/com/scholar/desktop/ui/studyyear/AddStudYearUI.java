@@ -5,9 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 
 /**
  *
@@ -20,7 +27,10 @@ public class AddStudYearUI extends javax.swing.JPanel {
      */
     private static AddStudYearUI instance;
 
+    private final SchoolData schoolData;
+
     public AddStudYearUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -162,19 +172,39 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         validateForm();
-        
-        
+        StudyYear studyYear = populateEntity();
+        submit(studyYear);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     *
+     * @param studyYear
+     * @throws BadRequestException
+     * @throws HeadlessException
+     */
+    public void submit(StudyYear studyYear) throws BadRequestException, HeadlessException {
+        try {
+            StudyYearResponse studyYearResponse = StudyYearService.getInstance(schoolData).create(studyYear, "log_id");
+            JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
+        } catch (IOException ex) {
+            Logger.getLogger(AddStudYearUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Something went wrong, record could not be saved");
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public StudyYear populateEntity() {
         //todo:populate template
         StudyYear studyYear = new StudyYear();
         studyYear.setTheme(theme.getText());
         studyYear.setDate_created(startDate.getDate().getTime());
         studyYear.setEnd_date(endDate.getDate().getTime());
-        
-        //todo: send to server
-        //todo: reset form 
-        
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+        return studyYear;
+    }
 
     private void validateForm() throws BadRequestException {
         //todo: validate the form
@@ -186,14 +216,13 @@ public class AddStudYearUI extends javax.swing.JPanel {
         } catch (NullPointerException er) {
             throw new BadRequestException("Start Date  is Madantory");
         }
-        
+
         try {
             endDate.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("End Date  is Madantory");
         }
-        
-        
+
     }
 
 
