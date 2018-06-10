@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.classes;
+package main.java.com.scholar.desktop.ui.classes;
 
 import java.awt.HeadlessException;
 import java.io.IOException;

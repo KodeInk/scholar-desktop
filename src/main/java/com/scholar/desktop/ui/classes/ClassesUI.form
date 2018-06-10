@@ -33,7 +33,7 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Classes&quot;,main.java.com.scholar.desktop.ui.setup.classes.ManageClassesUI.getInstance(schoolData));&#xa;jTabbedPane1.add(&quot;Add Class&quot;,main.java.com.scholar.desktop.ui.setup.classes.AddClassUI.getInstance(schoolData));"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Classes&quot;,ManageClassesUI.getInstance(schoolData));&#xa;jTabbedPane1.add(&quot;Add Class&quot;,AddClassUI.getInstance(schoolData));"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.curriculum;
+package main.java.com.scholar.desktop.ui.curriculum;
 
 import java.io.IOException;
 import java.util.logging.Level;

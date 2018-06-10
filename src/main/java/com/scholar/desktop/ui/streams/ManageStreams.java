@@ -3,22 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.grading;
-
-import main.java.com.scholar.desktop.config.entities.SchoolData;
+package main.java.com.scholar.desktop.ui.streams;
 
 /**
  *
  * @author Manny
  */
-public class GradingUI extends javax.swing.JPanel {
+public class ManageStreams extends javax.swing.JPanel {
 
     /**
-     * Creates new form GradingUI
+     * Creates new form ManageStreams
      */
-    private SchoolData schoolData;
-    public GradingUI(SchoolData schoolData) {
-        this.schoolData = schoolData;
+    public ManageStreams() {
         initComponents();
     }
 
@@ -31,27 +27,18 @@ public class GradingUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        jTabbedPane1.add("Manage Grading", ManageGradingUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Grading", AddGradingUI.getInstance(schoolData));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

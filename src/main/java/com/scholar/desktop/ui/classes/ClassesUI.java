@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.streams;
+package main.java.com.scholar.desktop.ui.classes;
+
+import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author Manny
+ * @author mover 5/27/2018
  */
-public class ManageStreams extends javax.swing.JPanel {
+public class ClassesUI extends javax.swing.JPanel {
 
+    private SchoolData schoolData;
     /**
-     * Creates new form ManageStreams
+     * Creates new form ClassesUI
      */
-    public ManageStreams() {
+    public ClassesUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -27,18 +31,27 @@ public class ManageStreams extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.add("Manage Classes",ManageClassesUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Class",AddClassUI.getInstance(schoolData));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

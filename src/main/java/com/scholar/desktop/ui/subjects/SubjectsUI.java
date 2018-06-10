@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.curriculum;
+package main.java.com.scholar.desktop.ui.subjects;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author mover 5/31/2018
+ * @author Mover 6/1/2018
  */
-public class CurriculumUI extends javax.swing.JPanel {
+public class SubjectsUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form CurriculumUI
+     * Creates new form SubjectsUI
      */
-    private SchoolData schoolData;
-    public CurriculumUI(SchoolData schoolData) {
+    private SchoolData  schoolData;
+    public SubjectsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
@@ -35,18 +35,18 @@ public class CurriculumUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.add("Manage Curriculum", ManageCurriculumUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Curriculum", AddCurriculumUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Subjects", ManageSubjectsUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Subject", AddSubjectUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

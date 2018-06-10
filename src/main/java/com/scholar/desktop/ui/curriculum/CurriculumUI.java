@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.classes;
+package main.java.com.scholar.desktop.ui.curriculum;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author mover 5/27/2018
+ * @author mover 5/31/2018
  */
-public class ClassesUI extends javax.swing.JPanel {
+public class CurriculumUI extends javax.swing.JPanel {
 
-    private SchoolData schoolData;
     /**
-     * Creates new form ClassesUI
+     * Creates new form CurriculumUI
      */
-    public ClassesUI(SchoolData schoolData) {
+    private SchoolData schoolData;
+    public CurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
@@ -35,18 +35,18 @@ public class ClassesUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.add("Manage Classes",main.java.com.scholar.desktop.ui.setup.classes.ManageClassesUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Class",main.java.com.scholar.desktop.ui.setup.classes.AddClassUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Curriculum", ManageCurriculumUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Curriculum", AddCurriculumUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

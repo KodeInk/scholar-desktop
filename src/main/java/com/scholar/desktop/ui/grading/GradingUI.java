@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.setup.subjects;
+package main.java.com.scholar.desktop.ui.grading;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author Mover 6/1/2018
+ * @author Manny
  */
-public class SubjectsUI extends javax.swing.JPanel {
+public class GradingUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form SubjectsUI
+     * Creates new form GradingUI
      */
-    private SchoolData  schoolData;
-    public SubjectsUI(SchoolData schoolData) {
+    private SchoolData schoolData;
+    public GradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
@@ -35,18 +35,18 @@ public class SubjectsUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.add("Manage Subjects", ManageSubjectsUI.getInstance(schoolData));
-        jTabbedPane1.add("Add Subject", AddSubjectUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Grading", ManageGradingUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Grading", AddGradingUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
