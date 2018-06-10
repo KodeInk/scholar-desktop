@@ -18,7 +18,7 @@ import main.java.com.scholar.desktop.services.terms.TermsService;
  *
  * @author mover 3/15/2018
  */
-public class ManageTerms extends javax.swing.JPanel {
+public class ManageTermsUI extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageTerms
@@ -27,8 +27,9 @@ public class ManageTerms extends javax.swing.JPanel {
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<TermResponse> list = null;
+    private static ManageTermsUI instance;
 
-    public ManageTerms(SchoolData schoolData) {
+    public ManageTermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
         if (tableModel == null) {
@@ -36,9 +37,20 @@ public class ManageTerms extends javax.swing.JPanel {
         }
 
         initComponents();
-
         fetchData(schoolData);
+    }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
+    public static ManageTermsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageTermsUI(schoolData);
+        }
+
+        return instance;
     }
 
     public final void fetchData(SchoolData schoolData1) {
