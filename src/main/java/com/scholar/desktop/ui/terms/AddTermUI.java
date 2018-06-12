@@ -17,6 +17,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 
 /**
@@ -70,17 +71,12 @@ public final class AddTermUI extends javax.swing.JPanel {
      */
     public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
         //StudyYearCombo
+        StudyYearCombo.removeAllItems();
         for (StudyYearResponse syr : studyYearResponses) {
             try {
                 StudyYearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
-            
-                StudyYearCombo.addItemListener(new ItemListener() {
-                    @Override
-                    public void itemStateChanged(ItemEvent e) {
-                     StudyYearResponse yearResponse = (StudyYearResponse)  e.getSource();
-                        JOptionPane.showMessageDialog(null, yearResponse.getTheme());
-                    }
-                });
+                StudyYearCombo.setActionCommand(syr.getId().toString());
+
             } catch (Exception er) {
 
             }
@@ -88,11 +84,11 @@ public final class AddTermUI extends javax.swing.JPanel {
     }
 
     public void initRankComboBox() {
-        RankJComboBox.addItem("Select Option");
+        termRanking.addItem("Select Option");
         for (int x = 0; x <= 500; x++) {
-            RankJComboBox.addItem("" + x);
+            termRanking.addItem("" + x);
         }
-        RankJComboBox.setSelectedIndex(1);
+        termRanking.setSelectedIndex(1);
     }
 
     private List<StudyYearResponse> fetchRoles(SchoolData schoolData) {
@@ -153,14 +149,14 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        subjectName = new javax.swing.JTextField();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        termName = new javax.swing.JTextField();
+        startDate = new org.jdesktop.swingx.JXDatePicker();
         StudyYearCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
-        RankJComboBox = new javax.swing.JComboBox<>();
+        endDate = new org.jdesktop.swingx.JXDatePicker();
+        termRanking = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -180,7 +176,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel2.setText("Study Year : *");
         jLabel2.setToolTipText("");
 
-        StudyYearCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        StudyYearCombo.setAutoscrolls(true);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText(" Name : *");
@@ -194,13 +190,13 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel5.setText(" Start Date : *");
         jLabel5.setToolTipText("");
 
-        jXDatePicker2.addActionListener(new java.awt.event.ActionListener() {
+        endDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDatePicker2ActionPerformed(evt);
+                endDateActionPerformed(evt);
             }
         });
 
-        RankJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        termRanking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Ranking : *");
@@ -231,35 +227,38 @@ public final class AddTermUI extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(subjectName, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                                    .addComponent(StudyYearCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(10, 10, 10)
-                                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(RankJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                    .addComponent(termRanking, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(10, 10, 10)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(termName, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(StudyYearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,34 +267,31 @@ public final class AddTermUI extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(StudyYearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(StudyYearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(subjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(termName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RankJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(termRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -312,13 +308,37 @@ public final class AddTermUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXDatePicker2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker2ActionPerformed
+    private void endDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jXDatePicker2ActionPerformed
+    }//GEN-LAST:event_endDateActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         //todo: validate form
+        if (StudyYearCombo.getSelectedIndex() < 0) {
+            throw new BadRequestException("Study Year is mandatory ");
+        }
 
+        if (termName.getText().isEmpty()) {
+            throw new BadRequestException("Term Name is Mandatory");
+        }
+
+        try {
+            startDate.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Start date is Madantory");
+        }
+
+        try {
+            endDate.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("End date is Madantory");
+        }
+
+         if (termRanking.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Ranking is Mandatory");
+        }
+         
+        
         //todo: populate entity
         //todo: 
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -329,9 +349,9 @@ public final class AddTermUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> RankJComboBox;
     private javax.swing.JComboBox<String> StudyYearCombo;
     private javax.swing.JButton cancelButton;
+    private org.jdesktop.swingx.JXDatePicker endDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -341,9 +361,9 @@ public final class AddTermUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private javax.swing.JButton saveButton;
-    private javax.swing.JTextField subjectName;
+    private org.jdesktop.swingx.JXDatePicker startDate;
+    private javax.swing.JTextField termName;
+    private javax.swing.JComboBox<String> termRanking;
     // End of variables declaration//GEN-END:variables
 }
