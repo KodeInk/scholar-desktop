@@ -86,7 +86,7 @@ public class TermsAPI  extends AbstractAPI{
      */
     public TermResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
-        Response response = engineCaller.post("classes/v1/", body, logId);
+        Response response = engineCaller.post("terms/v1/", body, logId);
 
         switch (response.getStatus()) {
             case 400:

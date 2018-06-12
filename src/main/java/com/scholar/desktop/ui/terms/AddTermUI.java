@@ -339,7 +339,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         term.setStudy_year(studyYearResponse.getId());
         term.setStart_date(startDate.getDate().getTime());
         term.setEnd_date(endDate.getDate().getTime());
-        term.setRanking((Integer) termRanking.getSelectedItem());
+        term.setRanking(Integer.parseInt(termRanking.getSelectedItem().toString()));
+        term.setName(termName.getText());
         return term;
     }
 
