@@ -9,8 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -20,6 +23,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.Stu
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.services.terms.TermsService;
 
 /**
  *
@@ -315,6 +319,20 @@ public final class AddTermUI extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
+        Term term = populateEntity();
+
+        try {
+            TermsService.getInstance(schoolData).create(term, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved successfully");
+        } catch (IOException ex) {
+            Logger.getLogger(AddTermUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Sorry, something went wrong, record could not be saved");
+        }
+
+
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    public Term populateEntity() {
         //todo: populate Entity
         Term term = new Term();
         StudyYearResponse studyYearResponse = studyYearResponses.get(StudyYearCombo.getSelectedIndex());
@@ -322,9 +340,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         term.setStart_date(startDate.getDate().getTime());
         term.setEnd_date(endDate.getDate().getTime());
         term.setRanking((Integer) termRanking.getSelectedItem());
-
-
-    }//GEN-LAST:event_saveButtonActionPerformed
+        return term;
+    }
 
     public void validateForm() throws BadRequestException {
         //todo: validate form
