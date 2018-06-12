@@ -72,6 +72,22 @@ public class StudyYearService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+    
+     public List<StudyYearResponse> list(Integer offset,Integer limit) {
+
+        if (list != null) {
+            return list;
+        }
+        list = new ArrayList<>();
+
+        StudyYearResponse[] responses = studyYearAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+        IncreaseOffsetLimit();
+        return list;
+    }
+     
 
     /**
      *
