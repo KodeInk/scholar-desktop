@@ -27,11 +27,21 @@ public class TermsAPI {
     private static TermsAPI instance;
     private final EngineCaller engineCaller;
 
+    /**
+     *
+     * @param schoolData
+     */
     public TermsAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
         engineCaller = new EngineCaller(schoolData);
     }
 
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
     public TermResponse[] list(Integer offset, Integer limit) {
         offset = getOffset(offset);
         limit = getLimit(limit);

@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.request.Term;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
@@ -31,7 +32,7 @@ public final class AddTermUI extends javax.swing.JPanel {
      */
     private static AddTermUI instance;
     private final SchoolData schoolData;
-    private List<StudyYearResponse> studyYearResponse = null;
+    private List<StudyYearResponse> studyYearResponses = null;
 
     public AddTermUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -47,8 +48,8 @@ public final class AddTermUI extends javax.swing.JPanel {
      */
     public final void initStudyYear(SchoolData schoolData1) {
 
-        if (studyYearResponse != null) {
-            populateStudyYearComboBox(studyYearResponse);
+        if (studyYearResponses != null) {
+            populateStudyYearComboBox(studyYearResponses);
         }
 
         final String message = "     Processsing ...     ";
@@ -56,8 +57,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                studyYearResponse = StudyYearService.getInstance(schoolData1).list();
-                populateStudyYearComboBox(studyYearResponse);
+                studyYearResponses = StudyYearService.getInstance(schoolData1).list();
+                populateStudyYearComboBox(studyYearResponses);
                 return null;
             }
         };
@@ -93,7 +94,7 @@ public final class AddTermUI extends javax.swing.JPanel {
 
     private List<StudyYearResponse> fetchRoles(SchoolData schoolData) {
 
-        if (studyYearResponse != null && studyYearResponse.size() > 0) {
+        if (studyYearResponses != null && studyYearResponses.size() > 0) {
             populate();
         }
 
@@ -102,9 +103,9 @@ public final class AddTermUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                studyYearResponse = StudyYearService.getInstance(schoolData).list(-1, -1);
+                studyYearResponses = StudyYearService.getInstance(schoolData).list(-1, -1);
                 populate();
-                return studyYearResponse;
+                return studyYearResponses;
             }
         };
         swingWorker.execute();
@@ -114,8 +115,8 @@ public final class AddTermUI extends javax.swing.JPanel {
     public void populate() {
         //   StudyYearCombo
         StudyYearCombo.removeAllItems();
-        if (studyYearResponse.size() > 0) {
-            for (StudyYearResponse syr : studyYearResponse) {
+        if (studyYearResponses.size() > 0) {
+            for (StudyYearResponse syr : studyYearResponses) {
                 StudyYearCombo.addItem("Testme");
             }
         }
@@ -315,7 +316,14 @@ public final class AddTermUI extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
         //todo: populate Entity
-        
+        Term term = new Term();
+        StudyYearResponse studyYearResponse = studyYearResponses.get(StudyYearCombo.getSelectedIndex());
+        term.setStudy_year(studyYearResponse.getId());
+        term.setStart_date(startDate.getDate().getTime());
+        term.setEnd_date(endDate.getDate().getTime());
+        term.setRanking((Integer) termRanking.getSelectedItem());
+
+
     }//GEN-LAST:event_saveButtonActionPerformed
 
     public void validateForm() throws BadRequestException {
@@ -323,28 +331,27 @@ public final class AddTermUI extends javax.swing.JPanel {
         if (StudyYearCombo.getSelectedIndex() < 0) {
             throw new BadRequestException("Study Year is mandatory ");
         }
-        
+
         if (termName.getText().isEmpty()) {
             throw new BadRequestException("Term Name is Mandatory");
         }
-        
+
         try {
             startDate.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Start date is Madantory");
         }
-        
+
         try {
             endDate.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("End date is Madantory");
         }
-        
+
         if (termRanking.getSelectedIndex() <= 1) {
             throw new BadRequestException("Ranking is Mandatory");
         }
-        
-        
+
         //todo: populate entity
         //todo: 
     }
