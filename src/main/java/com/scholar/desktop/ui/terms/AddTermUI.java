@@ -313,35 +313,41 @@ public final class AddTermUI extends javax.swing.JPanel {
     }//GEN-LAST:event_endDateActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        validateForm();
+        //todo: populate Entity
+        
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    public void validateForm() throws BadRequestException {
         //todo: validate form
         if (StudyYearCombo.getSelectedIndex() < 0) {
             throw new BadRequestException("Study Year is mandatory ");
         }
-
+        
         if (termName.getText().isEmpty()) {
             throw new BadRequestException("Term Name is Mandatory");
         }
-
+        
         try {
             startDate.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Start date is Madantory");
         }
-
+        
         try {
             endDate.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("End date is Madantory");
         }
-
-         if (termRanking.getSelectedIndex() <= 0) {
+        
+        if (termRanking.getSelectedIndex() <= 1) {
             throw new BadRequestException("Ranking is Mandatory");
         }
-         
+        
         
         //todo: populate entity
         //todo: 
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
