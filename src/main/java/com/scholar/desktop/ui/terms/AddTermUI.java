@@ -5,7 +5,13 @@
  */
 package main.java.com.scholar.desktop.ui.terms;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
@@ -17,7 +23,7 @@ import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
  *
  * @author mover 6/10/2018
  */
-public class AddTermUI extends javax.swing.JPanel {
+public final class AddTermUI extends javax.swing.JPanel {
 
     /**
      * Creates new form AddTermUI
@@ -30,6 +36,55 @@ public class AddTermUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
         initRankComboBox();
+        //todo: fetch study Year and populate it 
+        initStudyYear(schoolData);
+    }
+
+    /**
+     *
+     * @param schoolData1
+     */
+    public final void initStudyYear(SchoolData schoolData1) {
+
+        if (studyYearResponse != null) {
+            populateStudyYearComboBox(studyYearResponse);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                studyYearResponse = StudyYearService.getInstance(schoolData1).list();
+                populateStudyYearComboBox(studyYearResponse);
+                return null;
+            }
+        };
+        swingWorker.execute();
+
+    }
+
+    /**
+     *
+     * @param studyYearResponses
+     */
+    public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
+        //StudyYearCombo
+        for (StudyYearResponse syr : studyYearResponses) {
+            try {
+                StudyYearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
+            
+                StudyYearCombo.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                     StudyYearResponse yearResponse = (StudyYearResponse)  e.getSource();
+                        JOptionPane.showMessageDialog(null, yearResponse.getTheme());
+                    }
+                });
+            } catch (Exception er) {
+
+            }
+        }
     }
 
     public void initRankComboBox() {
