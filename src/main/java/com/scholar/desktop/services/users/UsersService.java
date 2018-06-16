@@ -20,6 +20,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.UserAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
+import main.java.com.scholar.desktop.services.profile.ProfileService;
 
 /**
  *
@@ -95,7 +96,7 @@ public class UsersService extends AbstractService {
      * @return
      */
     public Map getUserMap(User user) {
-        Map profileMap = getProfileMap(user);
+        Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(user.getProfile());
         Map staffMap = getStaffMap(user, profileMap);
         Map userMap = new HashMap<>();
         userMap.put("username", user.getUsername());
@@ -118,23 +119,6 @@ public class UsersService extends AbstractService {
     /**
      *
      * @param user
-     * @return
-     */
-    public Map getProfileMap(User user) {
-        Map profileMap = new HashMap<>();
-        if (user.getProfile() != null) {
-            Profile _profile = user.getProfile();
-            profileMap.put("firstName", _profile.getFirstName());
-            profileMap.put("lastName", _profile.getLastName());
-            profileMap.put("prefix", _profile.getPrefix());
-            profileMap.put("dateOfBirth", _profile.getDateOfBirth());
-        }
-        return profileMap;
-    }
-
-    /**
-     *
-     * @param user
      * @param profileMap
      * @return
      */
@@ -145,7 +129,6 @@ public class UsersService extends AbstractService {
             staffMap.put("isTeacher", staff.getIsTeacher());
             staffMap.put("joinDate", staff.getJoinDate());
 
-                    
             if (profileMap != null) {
                 staffMap.put("profile", profileMap);
             }

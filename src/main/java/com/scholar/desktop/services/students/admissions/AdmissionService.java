@@ -20,6 +20,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
+import main.java.com.scholar.desktop.services.profile.ProfileService;
 import main.java.com.scholar.desktop.services.staff.StaffService;
 
 /**
@@ -46,6 +47,10 @@ public class AdmissionService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<StudentAdmissionResponse> list() {
 
         if (list != null) {
@@ -61,33 +66,42 @@ public class AdmissionService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param studentAdmission
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public StudentAdmissionResponse create(_StudentAdmission studentAdmission, String logId) throws IOException {
         if (studentAdmission != null) {
-            Map userMap = getUserMap(studentAdmission);
+            Map userMap = getAdmissionMap(studentAdmission);
             return admissionsAPI.create(userMap, logId);
         }
         return null;
     }
 
-    public Map getAdmissionMap(User user) {
-        Map profileMap = getProfileMap(user);
-        Map staffMap = getStaffMap(user, profileMap);
-        Map userMap = new HashMap<>();
-        userMap.put("username", user.getUsername());
-        userMap.put("password", user.getPassword());
-        ArrayList<String> arrayList;
-        arrayList = new ArrayList<>(Arrays.asList(user.getRoles()));
-        Map<String, ArrayList<String>> m1 = new HashMap<>();
-        m1.put("roles", arrayList);
-        userMap.put("roles", m1.get("roles"));
-        userMap.put("profile", profileMap);
-        userMap.put("staff", staffMap);
-
+    /**
+     *
+     * @param studentAdmission
+     * @return
+     */
+    public Map getAdmissionMap(_StudentAdmission studentAdmission) {
+        Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(studentAdmission.getProfile());
+       
+        Map studentAdmissionMap = new HashMap<>();
+        studentAdmissionMap.put("admission_number", studentAdmission.getAdmission_number());
+        studentAdmissionMap.put("date_of_admission", studentAdmission.getDate_of_admission());
+        studentAdmissionMap.put("term_id", studentAdmission.getTerm_id());
+        studentAdmissionMap.put("stream_id", studentAdmission.getStream_id());
+        studentAdmissionMap.put("class_id", studentAdmission.getClass_id());        
+        studentAdmissionMap.put("profile",profileMap);        
+         
         System.out.println("==================================");
-        System.out.println(userMap);
+        System.out.println(studentAdmissionMap);
         System.out.println("==================================");
 
-        return userMap;
+        return studentAdmissionMap;
     }
 
 }

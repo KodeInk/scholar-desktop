@@ -7,7 +7,6 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.r
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
 
@@ -19,15 +18,14 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
 public class _StudentAdmission {
 
     private Integer id;
-    private Integer student_id;
     private String admission_number;
-    private Date date_of_admission;
+    private Long date_of_admission;
     private String external_id;
     private Integer term_id;
     private Integer stream_id;
     private Integer class_id;
     private StatusEnum status;
-    private Date date_created;
+    private Long date_created;
     private Integer author_id;
     private Profile profile;
 
@@ -46,14 +44,6 @@ public class _StudentAdmission {
         this.id = id;
     }
 
-    public Integer getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
-    }
-
     public String getAdmission_number() {
         return admission_number;
     }
@@ -62,11 +52,11 @@ public class _StudentAdmission {
         this.admission_number = admission_number;
     }
 
-    public Date getDate_of_admission() {
+    public Long getDate_of_admission() {
         return date_of_admission;
     }
 
-    public void setDate_of_admission(Date date_of_admission) {
+    public void setDate_of_admission(Long date_of_admission) {
         this.date_of_admission = date_of_admission;
     }
 
@@ -102,11 +92,11 @@ public class _StudentAdmission {
         this.status = status;
     }
 
-    public Date getDate_created() {
+    public Long getDate_created() {
         return date_created;
     }
 
-    public void setDate_created(Date date_created) {
+    public void setDate_created(Long date_created) {
         this.date_created = date_created;
     }
 
@@ -126,8 +116,6 @@ public class _StudentAdmission {
         this.profile = profile;
     }
 
- 
-
     public Integer getStream_id() {
         return stream_id;
     }
@@ -140,7 +128,6 @@ public class _StudentAdmission {
     public int hashCode() {
         int hash = 3;
         hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.student_id);
         hash = 59 * hash + Objects.hashCode(this.admission_number);
         hash = 59 * hash + Objects.hashCode(this.date_of_admission);
         hash = 59 * hash + Objects.hashCode(this.external_id);
@@ -175,9 +162,7 @@ public class _StudentAdmission {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.student_id, other.student_id)) {
-            return false;
-        }
+
         if (!Objects.equals(this.date_of_admission, other.date_of_admission)) {
             return false;
         }
@@ -209,7 +194,6 @@ public class _StudentAdmission {
     public String toString() {
         return "_StudentAdmission{"
                 + "id=" + id
-                + ", student_id=" + student_id
                 + ", admission_number=" + admission_number
                 + ", date_of_admission=" + date_of_admission
                 + ", external_id=" + external_id
