@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.user.response;
 
 import java.util.Arrays;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.staff.response.StaffResponse;
 

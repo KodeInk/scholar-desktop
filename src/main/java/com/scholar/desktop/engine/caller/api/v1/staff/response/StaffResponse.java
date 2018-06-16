@@ -6,7 +6,8 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.staff.response;
 
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.ProfileResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
+
 
 /**
  *

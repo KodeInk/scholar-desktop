@@ -5,9 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import java.util.Date;
+import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
+import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
@@ -20,27 +26,86 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageAdmissionsUI instance;
-
+ List<StudentAdmissionResponse> list = null;
     /**
      * Creates new form ManageAdmissions
+     *
      * @param schoolData
      */
     public ManageAdmissionsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
-         if (tableModel == null) {
+        if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
-         
+
         initComponents();
     }
 
-    public static ManageAdmissionsUI getInstance(SchoolData schoolData){
-          if (instance == null) {
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
+    public static ManageAdmissionsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
             instance = new ManageAdmissionsUI(schoolData);
         }
 
         return instance;
     }
+
+    
+     public final void initData(SchoolData schoolData1) {
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = ClassesService.getInstance(schoolData1).list();
+
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+     
+      public void populateJTable(List<ClassResponse> list) {
+
+        if (list != null) {
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (ClassResponse ur : list) {
+
+                String name = ur.getName().toUpperCase();
+                String code = ur.getCode().toUpperCase();
+                String ranking = ur.getRanking().toString().toUpperCase();
+                String status = ur.getStatus().name().toUpperCase();
+                String date_Created = " - ";
+                if (ur.getDate_created() != null) {
+                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
+                }
+
+                String author = ur.getAuthor().toUpperCase();
+                Object[] data = {name, code, ranking, status, date_Created, author};
+                tableModel.addRow(data);
+
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
+
+    }
+
+      
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
