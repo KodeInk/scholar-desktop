@@ -5,16 +5,28 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import javax.swing.table.DefaultTableModel;
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
+
 /**
  *
  * @author mover 6/16/2018
  */
-public class ManageAdmissions extends javax.swing.JPanel {
+public class ManageAdmissionsUI extends javax.swing.JPanel {
+
+    private static final String[] COLUMN_HEADERS = {"NAME", "AGE", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
+
+    private SchoolData schoolData = null;
+    public DefaultTableModel tableModel;
+    private static ManageAdmissionsUI instance;
 
     /**
      * Creates new form ManageAdmissions
+     * @param schoolData
      */
-    public ManageAdmissions() {
+    public ManageAdmissionsUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
