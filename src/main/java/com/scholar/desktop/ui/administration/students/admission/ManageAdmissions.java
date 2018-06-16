@@ -7,7 +7,7 @@ package main.java.com.scholar.desktop.ui.administration.students.admission;
 
 /**
  *
- * @author Manny
+ * @author mover 6/16/2018
  */
 public class ManageAdmissions extends javax.swing.JPanel {
 
