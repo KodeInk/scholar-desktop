@@ -27,9 +27,20 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
      */
     public ManageAdmissionsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
+         if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
+         
         initComponents();
     }
 
+    public static ManageAdmissionsUI getInstance(SchoolData schoolData){
+          if (instance == null) {
+            instance = new ManageAdmissionsUI(schoolData);
+        }
+
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,17 +132,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         );
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "NAME", "AGE", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"
-            }
-        ));
+        jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);

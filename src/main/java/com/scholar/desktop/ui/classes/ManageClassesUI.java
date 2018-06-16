@@ -33,6 +33,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
     List<ClassResponse> list = null;
 
     public ManageClassesUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
 
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
