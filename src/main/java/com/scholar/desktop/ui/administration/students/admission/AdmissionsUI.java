@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author Manny
@@ -14,8 +16,25 @@ public class AdmissionsUI extends javax.swing.JPanel {
     /**
      * Creates new form AdmissionsUI
      */
-    public AdmissionsUI() {
+    private static AdmissionsUI instance;
+    private final SchoolData schoolData;
+
+    public AdmissionsUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
+    public static AdmissionsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AdmissionsUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -27,21 +46,27 @@ public class AdmissionsUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.add("Manage Admissions", ManageAdmissionsUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Admission", AddAdmissionsUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 971, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

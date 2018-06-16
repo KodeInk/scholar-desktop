@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author MOVER
@@ -14,8 +16,19 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     /**
      * Creates new form AddAdmissionsUI
      */
-    public AddAdmissionsUI() {
+    private final SchoolData schoolData;
+    private static AddAdmissionsUI instance;
+
+    public AddAdmissionsUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static AddAdmissionsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddAdmissionsUI(schoolData);
+        }
+        return instance;
     }
 
     /**
@@ -294,8 +307,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -328,7 +340,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

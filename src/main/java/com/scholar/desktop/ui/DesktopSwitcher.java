@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.ui;
 
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.administration.students.admission.AdmissionsUI;
 import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissionsUI;
 import main.java.com.scholar.desktop.ui.administration.students.registration.ManageRegistration;
 import main.java.com.scholar.desktop.ui.departments.ManageDepartments;
@@ -102,7 +103,7 @@ public class DesktopSwitcher {
                 dashboardScreen.getjSplitPane1().setRightComponent(new ManageStaff(schoolData));
                 break;
             case "ADMISSION":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageAdmissionsUI(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(new AdmissionsUI(schoolData));
                 break;
 
             case "REGISTRATION":
