@@ -6,7 +6,7 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response;
 
  
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
@@ -17,20 +17,21 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.Profi
  *
  * @author mover 12/30/2017
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentAdmissionResponse {
 
-    private Integer id;
-    private Integer student_id;
+  
+    private Integer id;   
     private String admission_number;
-    private Date date_of_admission;
+    private Long date_of_admission;
     private String external_id;
-    private TermResponse term_response;
-    private ClassResponse class_response;
-    private StreamResponse streamResponse;
+    private TermResponse admissionTerm;
+    private ClassResponse admissionClass;
+    private StreamResponse admissionStream;
     private String status;
-    private Date date_created;
+    private Long date_created;
     private String author;
-    private ProfileResponse profileResponse;
+    private ProfileResponse student;
 
     public StudentAdmissionResponse() {
     }
@@ -47,13 +48,7 @@ public class StudentAdmissionResponse {
         this.id = id;
     }
 
-    public Integer getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
-    }
+   
 
     public String getAdmission_number() {
         return admission_number;
@@ -63,11 +58,11 @@ public class StudentAdmissionResponse {
         this.admission_number = admission_number;
     }
 
-    public Date getDate_of_admission() {
+    public Long getDate_of_admission() {
         return date_of_admission;
     }
 
-    public void setDate_of_admission(Date date_of_admission) {
+    public void setDate_of_admission(Long date_of_admission) {
         this.date_of_admission = date_of_admission;
     }
 
@@ -79,31 +74,31 @@ public class StudentAdmissionResponse {
         this.external_id = external_id;
     }
 
-    public TermResponse getTerm_response() {
-        return term_response;
+    public TermResponse getAdmissionTerm() {
+        return admissionTerm;
     }
 
-    public void setTerm_response(TermResponse term_response) {
-        this.term_response = term_response;
+    public void setAdmissionTerm(TermResponse admissionTerm) {
+        this.admissionTerm = admissionTerm;
     }
 
-    public ClassResponse getClass_response() {
-        return class_response;
+    public ClassResponse getAdmissionClass() {
+        return admissionClass;
     }
 
-    public void setClass_response(ClassResponse class_response) {
-        this.class_response = class_response;
+    public void setAdmissionClass(ClassResponse admissionClass) {
+        this.admissionClass = admissionClass;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public Date getDate_created() {
+    public Long getDate_created() {
         return date_created;
     }
 
-    public void setDate_created(Date date_created) {
+    public void setDate_created(Long date_created) {
         this.date_created = date_created;
     }
 
@@ -115,32 +110,32 @@ public class StudentAdmissionResponse {
         this.author = author;
     }
 
-    public ProfileResponse getProfileResponse() {
-        return profileResponse;
+    public ProfileResponse getStudent() {
+        return student;
     }
 
-    public void setProfileResponse(ProfileResponse profileResponse) {
-        this.profileResponse = profileResponse;
+    public void setStudent(ProfileResponse student) {
+        this.student = student;
     }
 
-    public StreamResponse getStreamResponse() {
-        return streamResponse;
+    public StreamResponse getAdmissionStream() {
+        return admissionStream;
     }
 
-    public void setStreamResponse(StreamResponse streamResponse) {
-        this.streamResponse = streamResponse;
+    public void setAdmissionStream(StreamResponse admissionStream) {
+        this.admissionStream = admissionStream;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.student_id);
+       
         hash = 89 * hash + Objects.hashCode(this.admission_number);
         hash = 89 * hash + Objects.hashCode(this.date_of_admission);
         hash = 89 * hash + Objects.hashCode(this.external_id);
-        hash = 89 * hash + Objects.hashCode(this.term_response);
-        hash = 89 * hash + Objects.hashCode(this.class_response);
+        hash = 89 * hash + Objects.hashCode(this.admissionTerm);
+        hash = 89 * hash + Objects.hashCode(this.admissionClass);
         hash = 89 * hash + Objects.hashCode(this.status);
         hash = 89 * hash + Objects.hashCode(this.date_created);
         hash = 89 * hash + Objects.hashCode(this.author);
@@ -174,16 +169,14 @@ public class StudentAdmissionResponse {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.student_id, other.student_id)) {
-            return false;
-        }
+       
         if (!Objects.equals(this.date_of_admission, other.date_of_admission)) {
             return false;
         }
-        if (!Objects.equals(this.term_response, other.term_response)) {
+        if (!Objects.equals(this.admissionTerm, other.admissionTerm)) {
             return false;
         }
-        if (!Objects.equals(this.class_response, other.class_response)) {
+        if (!Objects.equals(this.admissionClass, other.admissionClass)) {
             return false;
         }
         return Objects.equals(this.date_created, other.date_created);
@@ -192,13 +185,12 @@ public class StudentAdmissionResponse {
     @Override
     public String toString() {
         return "StudentAdmissionResponse{"
-                + "id=" + id
-                + ", student_id=" + student_id
+                + "id=" + id              
                 + ", admission_number=" + admission_number
                 + ", date_of_admission=" + date_of_admission
                 + ", external_id=" + external_id
-                + ", term_response=" + term_response
-                + ", class_response=" + class_response
+                + ", term_response=" + admissionTerm
+                + ", class_response=" + admissionClass
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author=" + author

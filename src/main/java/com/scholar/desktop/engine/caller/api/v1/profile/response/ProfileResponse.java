@@ -18,18 +18,19 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
 @JsonInclude(Include.NON_NULL)
 public class ProfileResponse {
 
-    private Integer id;
+      private Integer id;
     private String firstName;
     private String middleName;
     private String lastName;
     private String prefix;
-    private String dateOfBirth;
+    private Long dateOfBirth;
     private String image;
-    private ProfileTypesEnum profileType;
+    private String profileType;
     private Integer parentId;
-    private StatusEnum status;
+    private String status;
     private Long dateCreated;
     private Integer authorId;
+
 
     public ProfileResponse() {
     }
@@ -74,11 +75,11 @@ public class ProfileResponse {
         this.prefix = prefix;
     }
 
-    public String getDateOfBirth() {
+    public Long getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Long dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -90,13 +91,7 @@ public class ProfileResponse {
         this.image = image;
     }
 
-    public ProfileTypesEnum getProfileType() {
-        return profileType;
-    }
-
-    public void setProfileType(ProfileTypesEnum profileType) {
-        this.profileType = profileType;
-    }
+    
 
     public Integer getParentId() {
         return parentId;
@@ -106,13 +101,7 @@ public class ProfileResponse {
         this.parentId = parentId;
     }
 
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
+     
 
     public Long getDateCreated() {
         return dateCreated;

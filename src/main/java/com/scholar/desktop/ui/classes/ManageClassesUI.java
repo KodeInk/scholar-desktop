@@ -82,7 +82,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
                 String ranking = ur.getRanking().toString().toUpperCase();
-                String status = ur.getStatus().name().toUpperCase();
+                String status = ur.getStatus().toUpperCase();
                 String date_Created = " - ";
                 if (ur.getDate_created() != null) {
                     date_Created = new Date(ur.getDate_created()).toString().toUpperCase();

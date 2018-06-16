@@ -7,13 +7,15 @@ package main.java.com.scholar.desktop.ui.administration.students.admission;
 
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
 
 /**
  *
@@ -26,7 +28,8 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageAdmissionsUI instance;
- List<StudentAdmissionResponse> list = null;
+    List<StudentAdmissionResponse> list = null;
+
     /**
      * Creates new form ManageAdmissions
      *
@@ -39,6 +42,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         }
 
         initComponents();
+        initData(schoolData);
     }
 
     /**
@@ -54,8 +58,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
-    
-     public final void initData(SchoolData schoolData1) {
+    public final void initData(SchoolData schoolData1) {
         if (list != null) {
             populateJTable(list);
         }
@@ -66,35 +69,46 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = ClassesService.getInstance(schoolData1).list();
+                list = AdmissionService.getInstance(schoolData1).list();
 
+                
                 populateJTable(list);
                 return null;
             }
         };
         swingWorker.execute();
     }
-     
-      public void populateJTable(List<ClassResponse> list) {
+
+    public void populateJTable(List<StudentAdmissionResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (ClassResponse ur : list) {
-
-                String name = ur.getName().toUpperCase();
-                String code = ur.getCode().toUpperCase();
-                String ranking = ur.getRanking().toString().toUpperCase();
-                String status = ur.getStatus().name().toUpperCase();
-                String date_Created = " - ";
-                if (ur.getDate_created() != null) {
-                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
-                }
-
-                String author = ur.getAuthor().toUpperCase();
-                Object[] data = {name, code, ranking, status, date_Created, author};
+            for(StudentAdmissionResponse ur : list){
+            
+               
+                String name = ur.getStudent().getFirstName();
+                        //profileResponse.getFirstName().toUpperCase().concat(" , ").concat(profileResponse.getLastName());
+                String age = ""; 
+                        //profileResponse.getDateOfBirth() != null ? new Date(profileResponse.getDateOfBirth()).toString() : " - ";
+                String sex = "N/A";
+                String admission_no = "";
+                //ur.getAdmission_number();
+                String date_of_admission = "";
+                        //(ur.getDate_of_admission() != null ? new Date(ur.getDate_of_admission()).toString() : "N/A");
+                String admission_term =  "";
+                //ur.getTerm_response().getName();
+                String admission_class = "";
+                //ur.getClass_response().getName();
+                String admission_stream = " - ";
+                String status = " - ";
+                String date_created = "";
+                        //(ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ");
+                String author = "";
+                //ur.getAuthor();
+                Object[] data = {name, age, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
+              
                 tableModel.addRow(data);
-
             }
         }
 
@@ -104,8 +118,6 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     }
 
-      
-     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

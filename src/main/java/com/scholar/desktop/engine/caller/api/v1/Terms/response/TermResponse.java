@@ -5,14 +5,14 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response;
 
-import com.codemovers.scholar.engine.helper.enums.StatusEnum;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 /**
  *
  * @author mover 12/20/2017
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TermResponse {
 
     private Integer id;
@@ -21,10 +21,10 @@ public class TermResponse {
     private Long start_date;
     private Long end_date;
     private Integer ranking;
-    private StatusEnum status;
+    private String status;
     private String author;
     private Long date_created;
-
+    
     public TermResponse() {
     }
 
@@ -80,11 +80,11 @@ public class TermResponse {
         this.ranking = ranking;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

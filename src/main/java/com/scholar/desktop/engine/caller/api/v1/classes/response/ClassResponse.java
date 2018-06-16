@@ -21,7 +21,7 @@ public class ClassResponse {
     private String name;
     private String code;
     private Integer ranking;
-    private StatusEnum status;
+    private String status;
     private Long date_created;
     private String author;
     private StreamResponse[] streamResponses;
@@ -65,11 +65,11 @@ public class ClassResponse {
         this.ranking = ranking;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
