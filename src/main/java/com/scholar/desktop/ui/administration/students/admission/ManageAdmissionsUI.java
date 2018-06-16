@@ -23,7 +23,7 @@ import main.java.com.scholar.desktop.services.students.admissions.AdmissionServi
  */
 public class ManageAdmissionsUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"NAME", "AGE", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"NAME", "DATE OF BIRTH ", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
 
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
@@ -86,26 +86,18 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
             for(StudentAdmissionResponse ur : list){
             
-               
-                String name = ur.getStudent().getFirstName();
-                        //profileResponse.getFirstName().toUpperCase().concat(" , ").concat(profileResponse.getLastName());
-                String age = ""; 
-                        //profileResponse.getDateOfBirth() != null ? new Date(profileResponse.getDateOfBirth()).toString() : " - ";
+               ProfileResponse profileResponse = ur.getStudent();
+                String name = (profileResponse.getFirstName().toUpperCase().concat(" , ").concat(profileResponse.getLastName())).toUpperCase();
+                String age = profileResponse.getDateOfBirth() != null ? new Date(profileResponse.getDateOfBirth()).toString().toUpperCase() : " - ";
                 String sex = "N/A";
-                String admission_no = "";
-                //ur.getAdmission_number();
-                String date_of_admission = "";
-                        //(ur.getDate_of_admission() != null ? new Date(ur.getDate_of_admission()).toString() : "N/A");
-                String admission_term =  "";
-                //ur.getTerm_response().getName();
-                String admission_class = "";
-                //ur.getClass_response().getName();
+                String admission_no = ur.getAdmission_no().toUpperCase();
+                String date_of_admission = (ur.getDate_of_admission() != null ? new Date(ur.getDate_of_admission()).toString() : "N/A").toUpperCase();
+                String admission_term =  ur.getAdmissionTerm().getName().toUpperCase();
+                String admission_class = ur.getAdmissionClass().getName().toUpperCase();
                 String admission_stream = " - ";
-                String status = " - ";
-                String date_created = "";
-                        //(ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ");
-                String author = "";
-                //ur.getAuthor();
+                String status = ur.getStatus();
+                String date_created = (ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ").toUpperCase();
+                String author = ur.getAuthor().toUpperCase();
                 Object[] data = {name, age, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
               
                 tableModel.addRow(data);

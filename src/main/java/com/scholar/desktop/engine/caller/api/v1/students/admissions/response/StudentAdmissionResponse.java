@@ -22,7 +22,7 @@ public class StudentAdmissionResponse {
 
   
     private Integer id;   
-    private String admission_number;
+    private String admission_no;
     private Long date_of_admission;
     private String external_id;
     private TermResponse admissionTerm;
@@ -50,12 +50,12 @@ public class StudentAdmissionResponse {
 
    
 
-    public String getAdmission_number() {
-        return admission_number;
+    public String getAdmission_no() {
+        return admission_no;
     }
 
-    public void setAdmission_number(String admission_number) {
-        this.admission_number = admission_number;
+    public void setAdmission_no(String admission_no) {
+        this.admission_no = admission_no;
     }
 
     public Long getDate_of_admission() {
@@ -90,10 +90,15 @@ public class StudentAdmissionResponse {
         this.admissionClass = admissionClass;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
 
+    
     public Long getDate_created() {
         return date_created;
     }
@@ -131,7 +136,7 @@ public class StudentAdmissionResponse {
         int hash = 3;
         hash = 89 * hash + Objects.hashCode(this.id);
        
-        hash = 89 * hash + Objects.hashCode(this.admission_number);
+        hash = 89 * hash + Objects.hashCode(this.admission_no);
         hash = 89 * hash + Objects.hashCode(this.date_of_admission);
         hash = 89 * hash + Objects.hashCode(this.external_id);
         hash = 89 * hash + Objects.hashCode(this.admissionTerm);
@@ -154,7 +159,7 @@ public class StudentAdmissionResponse {
             return false;
         }
         final StudentAdmissionResponse other = (StudentAdmissionResponse) obj;
-        if (!Objects.equals(this.admission_number, other.admission_number)) {
+        if (!Objects.equals(this.admission_no, other.admission_no)) {
             return false;
         }
         if (!Objects.equals(this.external_id, other.external_id)) {
@@ -186,7 +191,7 @@ public class StudentAdmissionResponse {
     public String toString() {
         return "StudentAdmissionResponse{"
                 + "id=" + id              
-                + ", admission_number=" + admission_number
+                + ", admission_number=" + admission_no
                 + ", date_of_admission=" + date_of_admission
                 + ", external_id=" + external_id
                 + ", term_response=" + admissionTerm
