@@ -5,8 +5,13 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import java.util.Date;
+import java.util.List;
+import java.util.function.Consumer;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.users.UsersService;
 
@@ -34,48 +39,72 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public void initData(){
+    public void initData() {
         //todo: get study year
+        fetchStudyYear();
         //todo: get classes
-        
+
     }
-    public void fetchStudyYear(){
-         SwingWorker swingWorker = new SwingWorker() {
+    List<StudyYearResponse> studyYearResponses = null;
+
+    public void fetchStudyYear() {
+        if (studyYearResponses != null) {
+            populateStudyYearComboBox(studyYearResponses);
+        } else {
+            yearCombo.removeAll();
+            yearCombo.addItem("Processing ...");
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    studyYearResponses = StudyYearService.getInstance(schoolData).list();
+                    yearCombo.removeAll();
+                    populateStudyYearComboBox(studyYearResponses);
+
+                    return null;
+                }
+            };
+            swingWorker.execute();
+        }
+    }
+
+    public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
+        //StudyYearCombo
+        yearCombo.removeAllItems();
+
+        studyYearResponses.forEach(syr -> {
+            try {
+                yearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
+                yearCombo.setActionCommand(syr.getId().toString());
+
+            } catch (Exception er) {
+
+            }
+        });
+
+    }
+
+    public void fetchClasses() {
+        SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                 StudyYearService.getInstance(schoolData).list();               
+                StudyYearService.getInstance(schoolData).list();
                 return null;
             }
         };
         swingWorker.execute();
     }
-    
-     public void fetchClasses(){
-         SwingWorker swingWorker = new SwingWorker() {
+
+    public void fetchTerms() {
+        SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                 StudyYearService.getInstance(schoolData).list();               
+                StudyYearService.getInstance(schoolData).list();
                 return null;
             }
         };
         swingWorker.execute();
     }
-     
-      public void fetchTerms(){
-         SwingWorker swingWorker = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                 StudyYearService.getInstance(schoolData).list();               
-                return null;
-            }
-        };
-        swingWorker.execute();
-    }
-      
-      
-     
-     
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
