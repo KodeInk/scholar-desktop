@@ -27,7 +27,9 @@ public class AdmissionsUI extends javax.swing.JPanel {
     public AdmissionsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-          jTabbedPane1.addChangeListener(changeListener);
+        jTabbedPane1.addChangeListener(changeListener);
+        
+
     }
 
     /**
@@ -43,7 +45,7 @@ public class AdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
-     ChangeListener changeListener = new ChangeListener() {
+    ChangeListener changeListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
             JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
@@ -56,14 +58,13 @@ public class AdmissionsUI extends javax.swing.JPanel {
                     AddAdmissionsUI.getInstance(schoolData).initData();
                     break;
                 default:
-
+                   
                     break;
             }
 
         }
     };
 
-     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

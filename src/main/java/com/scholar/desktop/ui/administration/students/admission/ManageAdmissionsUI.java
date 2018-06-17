@@ -42,7 +42,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         }
 
         initComponents();
-        
+       initData();
     }
 
     /**
@@ -53,6 +53,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
     public static ManageAdmissionsUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ManageAdmissionsUI(schoolData);
+             
         }
 
         return instance;
