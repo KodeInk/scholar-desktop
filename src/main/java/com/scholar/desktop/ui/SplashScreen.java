@@ -62,13 +62,13 @@ public class SplashScreen extends javax.swing.JFrame {
 //                dashboardScreen.setVisible(true);
 
                 LoginScreen loginScreen = new LoginScreen(appConfig);
-                loginScreen.setLocation(400, 100);
+                loginScreen.setLocation(250, 30);
                 loginScreen.setVisible(true);
 
                 loginScreen.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/main/java/com/scholar/desktop/ui/images/logox1.png")));
 
             }
-        });
+        }); 
     }
 
     /**
@@ -108,12 +108,12 @@ public class SplashScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 48)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Agency FB", 0, 75)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("SCHOOL MANAGEMENT ");
 
-        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 48)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Agency FB", 0, 70)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("SYSTEM");
 
@@ -128,9 +128,9 @@ public class SplashScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
                     .addGroup(rightSidePanelLayout.createSequentialGroup()
-                        .addGap(179, 179, 179)
+                        .addGap(192, 192, 192)
                         .addComponent(jLabel3)))
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGap(0, 133, Short.MAX_VALUE))
         );
         rightSidePanelLayout.setVerticalGroup(
             rightSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -138,11 +138,11 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rightSidePanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

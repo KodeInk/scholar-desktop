@@ -58,6 +58,22 @@ public class ClassesService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+    
+    public List<ClassResponse> list(Integer offset,Integer limit) {
+
+        if (list != null) {
+            return list;
+        }
+        list = new ArrayList<>();
+
+        ClassResponse[] responses = classesAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+        IncreaseOffsetLimit();
+        return list;
+    }
+    
 
     public ClassResponse create(_Class classes, String logId) throws IOException {
         if (classes != null) {

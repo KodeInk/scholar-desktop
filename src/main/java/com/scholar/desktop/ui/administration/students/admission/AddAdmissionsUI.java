@@ -5,13 +5,19 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.users.UsersService;
 
@@ -26,12 +32,19 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
      */
     private final SchoolData schoolData;
     private static AddAdmissionsUI instance;
+    private List<StudyYearResponse> studyYearResponses = null;
+    private List<ClassResponse> classResponses = null;
 
     public AddAdmissionsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static AddAdmissionsUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddAdmissionsUI(schoolData);
@@ -39,14 +52,20 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
+    /**
+     *
+     */
     public void initData() {
         //todo: get study year
         fetchStudyYear();
         //todo: get classes
+        fetchClasses();
 
     }
-    List<StudyYearResponse> studyYearResponses = null;
 
+    /**
+     *
+     */
     public void fetchStudyYear() {
         if (studyYearResponses != null) {
             populateStudyYearComboBox(studyYearResponses);
@@ -56,7 +75,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
             SwingWorker swingWorker = new SwingWorker() {
                 @Override
                 protected Object doInBackground() throws Exception {
-                    studyYearResponses = StudyYearService.getInstance(schoolData).list();
+                    studyYearResponses = StudyYearService.getInstance(schoolData).list(-1, -1);
                     yearCombo.removeAll();
                     populateStudyYearComboBox(studyYearResponses);
 
@@ -67,14 +86,34 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         }
     }
 
-    public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
-        //StudyYearCombo
-        yearCombo.removeAllItems();
+    public void fetchClasses() {
+        if (classResponses != null) {
+            populateClassesCombo(classResponses);
+        } else {
+            classCombo.removeAll();
+            classCombo.addItem("Processing ...");
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    classResponses = ClassesService.getInstance(schoolData).list(-1, -1);
+                    populateClassesCombo(classResponses);
+                    return null;
+                }
+            };
+            swingWorker.execute();
+        }
+    }
 
-        studyYearResponses.forEach(syr -> {
+   
+
+    public void populateClassesCombo(List<ClassResponse> ClassResponse) {
+        //StudyYearCombo
+        classCombo.removeAllItems();
+        classCombo.addItem("Select Option");
+        ClassResponse.forEach(aClass -> {
             try {
-                yearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
-                yearCombo.setActionCommand(syr.getId().toString());
+                classCombo.addItem(aClass.getName());
+                classCombo.setActionCommand(aClass.getId().toString());
 
             } catch (Exception er) {
 
@@ -83,7 +122,39 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
 
     }
 
-    public void fetchClasses() {
+    public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
+        //StudyYearCombo
+        yearCombo.removeAllItems();
+        yearCombo.addItem("Select Option");
+        studyYearResponses.forEach(syr -> {
+            try {
+               
+                yearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
+               
+            } catch (Exception er) {
+
+            }
+        });
+        
+      yearCombo.addActionListener((ActionEvent e) -> {         
+           getSelectedYear();
+        });
+         
+        
+
+    }
+    public void getSelectedYear(){
+        
+        if(yearCombo.getSelectedIndex() > 0 )
+        {
+           StudyYearResponse syr =   studyYearResponses.get(yearCombo.getSelectedIndex() -1 );
+            fetchTerms(syr.getId());
+        }
+        
+    }
+
+    
+     public void fetchTerms(Integer studyYear) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -93,18 +164,8 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         };
         swingWorker.execute();
     }
-
-    public void fetchTerms() {
-        SwingWorker swingWorker = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                StudyYearService.getInstance(schoolData).list();
-                return null;
-            }
-        };
-        swingWorker.execute();
-    }
-
+     
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,6 +267,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         jLabel8.setText("LastName");
 
         yearCombo.setSelectedItem(null);
+        yearCombo.setActionCommand("");
         yearCombo.setName("prefix"); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

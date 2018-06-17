@@ -368,9 +368,11 @@
                 <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="null" type="code"/>
                 </Property>
+                <Property name="actionCommand" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="prefix" noResource="true"/>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="AddAdmissionsUI_yearCombo"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
