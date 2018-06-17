@@ -42,7 +42,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         }
 
         initComponents();
-        initData(schoolData);
+        
     }
 
     /**
@@ -58,7 +58,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void initData(SchoolData schoolData1) {
+    public final void initData() {
         if (list != null) {
             populateJTable(list);
         }
@@ -69,7 +69,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = AdmissionService.getInstance(schoolData1).list();
+                list = AdmissionService.getInstance(schoolData).list();
 
                 
                 populateJTable(list);

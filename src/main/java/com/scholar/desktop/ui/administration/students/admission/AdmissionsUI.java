@@ -5,7 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.users.AddUserUI;
+import main.java.com.scholar.desktop.ui.users.ManageUsersUI;
 
 /**
  *
@@ -22,6 +27,7 @@ public class AdmissionsUI extends javax.swing.JPanel {
     public AdmissionsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+          jTabbedPane1.addChangeListener(changeListener);
     }
 
     /**
@@ -37,6 +43,27 @@ public class AdmissionsUI extends javax.swing.JPanel {
         return instance;
     }
 
+     ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageAdmissionsUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddAdmissionsUI.getInstance(schoolData).initData();
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+    };
+
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
