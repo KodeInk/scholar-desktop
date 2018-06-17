@@ -32,7 +32,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }
 
     public void initData(){
-        
+        //todo: 
     }
     
     /**
@@ -50,9 +50,9 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jFirstName = new javax.swing.JTextField();
-        prefix_combo = new javax.swing.JComboBox<>();
+        sex = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jLastName = new javax.swing.JTextField();
+        jMiddleName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -64,16 +64,16 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jDateOfBirth = new org.jdesktop.swingx.JXDatePicker();
         jLabel8 = new javax.swing.JLabel();
-        jLastName1 = new javax.swing.JTextField();
-        prefix_combo1 = new javax.swing.JComboBox<>();
+        jLastName = new javax.swing.JTextField();
+        yearCombo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        prefix_combo2 = new javax.swing.JComboBox<>();
+        classCombo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        prefix_combo3 = new javax.swing.JComboBox<>();
+        termCombo = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jLastName2 = new javax.swing.JTextField();
+        admisionNumber = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jDateOfBirth1 = new org.jdesktop.swingx.JXDatePicker();
+        dateOfAdmission = new org.jdesktop.swingx.JXDatePicker();
         jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -90,9 +90,9 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Sex");
 
-        prefix_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
-        prefix_combo.setSelectedItem(null);
-        prefix_combo.setName("prefix"); // NOI18N
+        sex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
+        sex.setSelectedItem(null);
+        sex.setName("prefix"); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("FirstName");
@@ -135,23 +135,20 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("LastName");
 
-        prefix_combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
-        prefix_combo1.setSelectedItem(null);
-        prefix_combo1.setName("prefix"); // NOI18N
+        yearCombo.setSelectedItem(null);
+        yearCombo.setName("prefix"); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setText("Year");
 
-        prefix_combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
-        prefix_combo2.setSelectedItem(null);
-        prefix_combo2.setName("prefix"); // NOI18N
+        classCombo.setSelectedItem(null);
+        classCombo.setName("prefix"); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setText("Class");
 
-        prefix_combo3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "OTHER" }));
-        prefix_combo3.setSelectedItem(null);
-        prefix_combo3.setName("prefix"); // NOI18N
+        termCombo.setSelectedItem(null);
+        termCombo.setName("prefix"); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("Term");
@@ -187,12 +184,12 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                                             .addComponent(jLabel7))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(prefix_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(sex, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLastName)
+                                                .addComponent(jMiddleName)
                                                 .addComponent(jFirstName)
                                                 .addComponent(jDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                                                .addComponent(jLastName1))
+                                                .addComponent(jLastName))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(46, 46, 46)
@@ -204,12 +201,12 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                                 .addGap(141, 141, 141)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(prefix_combo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(yearCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(136, 136, 136)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(prefix_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(classCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -218,9 +215,9 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                                 .addComponent(jLabel14))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLastName2)
-                                .addComponent(prefix_combo3, 0, 475, Short.MAX_VALUE)
-                                .addComponent(jDateOfBirth1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))))
+                                .addComponent(admisionNumber)
+                                .addComponent(termCombo, 0, 475, Short.MAX_VALUE)
+                                .addComponent(dateOfAdmission, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(233, 233, 233)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,15 +240,15 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(prefix_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sex, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -274,23 +271,23 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prefix_combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prefix_combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(classCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prefix_combo3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(termCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(admisionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDateOfBirth1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateOfAdmission, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -349,11 +346,13 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField admisionNumber;
+    private javax.swing.JComboBox<String> classCombo;
+    private org.jdesktop.swingx.JXDatePicker dateOfAdmission;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private org.jdesktop.swingx.JXDatePicker jDateOfBirth;
-    private org.jdesktop.swingx.JXDatePicker jDateOfBirth1;
     private javax.swing.JTextField jFirstName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -370,15 +369,13 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jLastName;
-    private javax.swing.JTextField jLastName1;
-    private javax.swing.JTextField jLastName2;
+    private javax.swing.JTextField jMiddleName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JComboBox<String> prefix_combo;
-    private javax.swing.JComboBox<String> prefix_combo1;
-    private javax.swing.JComboBox<String> prefix_combo2;
-    private javax.swing.JComboBox<String> prefix_combo3;
+    private javax.swing.JComboBox<String> sex;
+    private javax.swing.JComboBox<String> termCombo;
+    private javax.swing.JComboBox<String> yearCombo;
     // End of variables declaration//GEN-END:variables
 }
