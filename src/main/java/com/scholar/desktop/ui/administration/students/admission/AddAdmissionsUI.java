@@ -5,7 +5,10 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
  *
@@ -32,8 +35,46 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }
 
     public void initData(){
-        //todo: 
+        //todo: get study year
+        //todo: get classes
+        
     }
+    public void fetchStudyYear(){
+         SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                 StudyYearService.getInstance(schoolData).list();               
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+    
+     public void fetchClasses(){
+         SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                 StudyYearService.getInstance(schoolData).list();               
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+     
+      public void fetchTerms(){
+         SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                 StudyYearService.getInstance(schoolData).list();               
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+      
+      
+     
+     
     
     /**
      * This method is called from within the constructor to initialize the form.
