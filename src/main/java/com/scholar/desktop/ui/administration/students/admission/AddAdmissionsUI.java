@@ -13,6 +13,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
@@ -468,8 +469,47 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        validate();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void validate() throws BadRequestException {
+        //todo: validate the project
+        if (jFirstName.getText().isEmpty()) {
+            throw new BadRequestException("Firstname is mandatory");
+        }
+        if (jLastName.getText().isEmpty()) {
+            throw new BadRequestException("Lastname is mandatory");
+        }
+        
+        try {
+            jDateOfBirth.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Date of Birth is Madantory");
+        }
+        
+        if (yearCombo.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Year");
+        }
+        
+        if (classCombo.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Class");
+        }
+        
+        if (termCombo.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Term");
+        }
+        
+        if (admisionNumber.getText().isEmpty()) {
+            throw new BadRequestException("Admission Number is mandatory");
+        }
+        
+        try {
+            dateOfAdmission.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Date of Admission  is Madantory");
+        }
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
