@@ -60,6 +60,21 @@ public class TermsService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+    
+     public List<TermResponse> list(Integer studyYear) {
+
+      
+        List<TermResponse>  list = new ArrayList<>();
+
+        TermResponse[] responses = termsAPI.list(studyYear,offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+        IncreaseOffsetLimit();
+        return list;
+    }
+     
+     
 
     public TermResponse create(Term term, String logId) throws IOException {
         if (term != null) {

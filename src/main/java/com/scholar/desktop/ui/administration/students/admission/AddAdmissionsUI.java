@@ -15,10 +15,12 @@ import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.services.terms.TermsService;
 import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
@@ -138,7 +140,8 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }
 
     public void getSelectedYear() {
-
+ termCombo.removeAllItems();
+     
         if (yearCombo.getSelectedIndex() > 0) {
             StudyYearResponse syr = studyYearResponses.get(yearCombo.getSelectedIndex() - 1);
             fetchTerms(syr.getId());
@@ -147,10 +150,20 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }
 
     public void fetchTerms(Integer studyYear) {
+
+        
+        termCombo.removeAllItems();
+        termCombo.addItem("Processing ...");
+
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                StudyYearService.getInstance(schoolData).list();
+                List<TermResponse> termResponses = TermsService.getInstance(schoolData).list(studyYear);
+                termCombo.removeAllItems();
+                termCombo.addItem("Select Option");
+                for (TermResponse tr : termResponses) {
+                    termCombo.addItem(tr.getName());
+                }
                 return null;
             }
         };

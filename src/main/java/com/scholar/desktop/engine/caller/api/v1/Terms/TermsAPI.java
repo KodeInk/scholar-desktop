@@ -76,6 +76,36 @@ public class TermsAPI  extends AbstractAPI{
 
         return null;
     }
+    
+     public TermResponse[] list(Integer studyYear,Integer offset, Integer limit) {
+        offset = getOffset(offset);
+        limit = getLimit(limit);
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("terms/v1/studyYear/"+studyYear, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                TermResponse[] classResponse = response.readEntity(TermResponse[].class);
+                return classResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+     
+     
 
     /**
      *
