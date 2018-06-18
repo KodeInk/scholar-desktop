@@ -20,6 +20,7 @@ public class Profile {
     private String middleName;
     private String lastName;
     private String prefix;
+    private String sex;
     private Long dateOfBirth;
     private String image;
     private ProfileTypesEnum profileType;
@@ -126,6 +127,14 @@ public class Profile {
 
     public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     @Override

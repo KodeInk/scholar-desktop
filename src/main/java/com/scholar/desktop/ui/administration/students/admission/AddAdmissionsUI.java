@@ -8,13 +8,17 @@ package main.java.com.scholar.desktop.ui.administration.students.admission;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 
@@ -143,7 +147,8 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         }
 
     }
-List<TermResponse> termResponses = null;
+    List<TermResponse> termResponses = null;
+
     public void fetchTerms(Integer studyYear) {
 
         termCombo.removeAllItems();
@@ -152,7 +157,7 @@ List<TermResponse> termResponses = null;
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                  termResponses = TermsService.getInstance(schoolData).list(studyYear);
+                termResponses = TermsService.getInstance(schoolData).list(studyYear);
                 termCombo.removeAllItems();
                 termCombo.addItem("Select Option");
                 termResponses.forEach((tr) -> {
@@ -474,22 +479,48 @@ List<TermResponse> termResponses = null;
         submit();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void submit(){
-     String firstname =   jFirstName.getText();
-     String middlename = jMiddleName.getText();
-     String lastname = jLastName.getText();
-     String studentSex = sex.getSelectedItem().toString();
-     Long dateOfBirth  =  jDateOfBirth.getDate().getTime();
-     Integer selecteYearIndex = yearCombo.getSelectedIndex()-1;
-     Integer admissionYear =  studyYearResponses.get(selecteYearIndex).getId();
-     Integer admissionClass = classResponses.get(classCombo.getSelectedIndex() - 1).getId();
-     Integer admissionTerm = termResponses.get(termCombo.getSelectedIndex() - 1).getId();
-     String admissionNumber = admisionNumber.getText();
-     Long addmissionDate = dateOfAdmission.getDate().getTime();
-           
-     
+    public void submit() {
+        String firstname = jFirstName.getText();
+        String middlename = jMiddleName.getText();
+        String lastname = jLastName.getText();
+        String studentSex = sex.getSelectedItem().toString();
+        Long dateOfBirth = jDateOfBirth.getDate().getTime();
+        Integer selecteYearIndex = yearCombo.getSelectedIndex() - 1;
+        Integer admissionYear = studyYearResponses.get(selecteYearIndex).getId();
+        Integer admissionClass = classResponses.get(classCombo.getSelectedIndex() - 1).getId();
+        Integer admissionTerm = termResponses.get(termCombo.getSelectedIndex() - 1).getId();
+        String admissionNumber = admisionNumber.getText();
+        Long addmissionDate = dateOfAdmission.getDate().getTime();
+
+        _StudentAdmission studentAdmission = populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
+        
+        try{
+        AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
+         JOptionPane.showMessageDialog(null, " Record saved succesfully");
+        }catch(Exception er){
+            throw new BadRequestException("Something went wrong, record could not be saved ");
+        }
+        
+
     }
-    
+
+    public _StudentAdmission populateEntity(String firstname, String middlename, String lastname, String studentSex, Long dateOfBirth, String admissionNumber, Integer admissionClass, Integer admissionTerm, Long addmissionDate) {
+        Profile profile = new Profile();
+        profile.setFirstName(firstname);
+        profile.setMiddleName(middlename);
+        profile.setLastName(lastname);
+        profile.setSex(studentSex);
+        profile.setDateOfBirth(dateOfBirth);
+        _StudentAdmission studentAdmission = new _StudentAdmission();
+        studentAdmission.setProfile(profile);
+        studentAdmission.setAdmission_number(admissionNumber);
+        studentAdmission.setClass_id(admissionClass);
+        studentAdmission.setTerm_id(admissionTerm);
+        studentAdmission.setDate_of_admission(addmissionDate);
+        return studentAdmission;
+    }
+
+    @Override
     public void validate() throws BadRequestException {
         //todo: validate the project
         if (jFirstName.getText().isEmpty()) {
@@ -498,35 +529,35 @@ List<TermResponse> termResponses = null;
         if (jLastName.getText().isEmpty()) {
             throw new BadRequestException("Lastname is mandatory");
         }
-        
+
         try {
             jDateOfBirth.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Date of Birth is Madantory");
         }
-        
+
         if (yearCombo.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Year");
         }
-        
+
         if (classCombo.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Class");
         }
-        
+
         if (termCombo.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Term");
         }
-        
+
         if (admisionNumber.getText().isEmpty()) {
             throw new BadRequestException("Admission Number is mandatory");
         }
-        
+
         try {
             dateOfAdmission.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Date of Admission  is Madantory");
         }
-        
+
     }
 
 
