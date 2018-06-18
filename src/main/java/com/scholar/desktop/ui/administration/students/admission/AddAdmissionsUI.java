@@ -6,13 +6,8 @@
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
@@ -21,7 +16,6 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.Stu
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
-import main.java.com.scholar.desktop.services.users.UsersService;
 
 /**
  *
@@ -140,8 +134,8 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }
 
     public void getSelectedYear() {
- termCombo.removeAllItems();
-     
+        termCombo.removeAllItems();
+
         if (yearCombo.getSelectedIndex() > 0) {
             StudyYearResponse syr = studyYearResponses.get(yearCombo.getSelectedIndex() - 1);
             fetchTerms(syr.getId());
@@ -151,7 +145,6 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
 
     public void fetchTerms(Integer studyYear) {
 
-        
         termCombo.removeAllItems();
         termCombo.addItem("Processing ...");
 
@@ -161,9 +154,9 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
                 List<TermResponse> termResponses = TermsService.getInstance(schoolData).list(studyYear);
                 termCombo.removeAllItems();
                 termCombo.addItem("Select Option");
-                for (TermResponse tr : termResponses) {
+                termResponses.forEach((tr) -> {
                     termCombo.addItem(tr.getName());
-                }
+                });
                 return null;
             }
         };
