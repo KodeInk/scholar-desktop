@@ -5,7 +5,9 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -498,7 +500,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
             AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
             JOptionPane.showMessageDialog(null, " Record saved succesfully");
             reset();
-        } catch (Exception er) {
+        } catch (HeadlessException | IOException er) {
             throw new BadRequestException("Something went wrong, record could not be saved ");
         }
 
