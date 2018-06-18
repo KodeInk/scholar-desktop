@@ -493,15 +493,26 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         Long addmissionDate = dateOfAdmission.getDate().getTime();
 
         _StudentAdmission studentAdmission = populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
-        
-        try{
-        AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
-         JOptionPane.showMessageDialog(null, " Record saved succesfully");
-        }catch(Exception er){
+
+        try {
+            AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
+            JOptionPane.showMessageDialog(null, " Record saved succesfully");
+            reset();
+        } catch (Exception er) {
             throw new BadRequestException("Something went wrong, record could not be saved ");
         }
-        
 
+    }
+
+    public void reset() {
+        admisionNumber.setText("");
+        jFirstName.setText("");
+        jMiddleName.setText("");
+        jLastName.setText("");
+        sex.setSelectedIndex(0);
+        yearCombo.setSelectedIndex(0);
+        classCombo.setSelectedIndex(0);
+        termCombo.setSelectedIndex(0);
     }
 
     public _StudentAdmission populateEntity(String firstname, String middlename, String lastname, String studentSex, Long dateOfBirth, String admissionNumber, Integer admissionClass, Integer admissionTerm, Long addmissionDate) {
