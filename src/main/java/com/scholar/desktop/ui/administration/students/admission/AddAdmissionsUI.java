@@ -143,7 +143,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         }
 
     }
-
+List<TermResponse> termResponses = null;
     public void fetchTerms(Integer studyYear) {
 
         termCombo.removeAllItems();
@@ -152,7 +152,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                List<TermResponse> termResponses = TermsService.getInstance(schoolData).list(studyYear);
+                  termResponses = TermsService.getInstance(schoolData).list(studyYear);
                 termCombo.removeAllItems();
                 termCombo.addItem("Select Option");
                 termResponses.forEach((tr) -> {
@@ -470,8 +470,26 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         validate();
+        //todo: submit to server
+        submit();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void submit(){
+     String firstname =   jFirstName.getText();
+     String middlename = jMiddleName.getText();
+     String lastname = jLastName.getText();
+     String studentSex = sex.getSelectedItem().toString();
+     Long dateOfBirth  =  jDateOfBirth.getDate().getTime();
+     Integer selecteYearIndex = yearCombo.getSelectedIndex()-1;
+     Integer admissionYear =  studyYearResponses.get(selecteYearIndex).getId();
+     Integer admissionClass = classResponses.get(classCombo.getSelectedIndex() - 1).getId();
+     Integer admissionTerm = termResponses.get(termCombo.getSelectedIndex() - 1).getId();
+     String admissionNumber = admisionNumber.getText();
+     Long addmissionDate = dateOfAdmission.getDate().getTime();
+           
+     
+    }
+    
     public void validate() throws BadRequestException {
         //todo: validate the project
         if (jFirstName.getText().isEmpty()) {
