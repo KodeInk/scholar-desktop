@@ -52,6 +52,7 @@ public class ProfileService extends AbstractService {
             profileMap.put("firstName", profile.getFirstName());
             profileMap.put("lastName", profile.getLastName());
             profileMap.put("prefix", profile.getPrefix());
+            profileMap.put("sex", profile.getSex());
             profileMap.put("dateOfBirth", profile.getDateOfBirth());
         }
         return profileMap;

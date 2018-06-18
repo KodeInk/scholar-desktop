@@ -18,7 +18,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
 public class _StudentAdmission {
 
     private Integer id;
-    private String admission_number;
+    private String admission_no;
     private Long date_of_admission;
     private String external_id;
     private Integer term_id;
@@ -27,7 +27,7 @@ public class _StudentAdmission {
     private StatusEnum status;
     private Long date_created;
     private Integer author_id;
-    private Profile profile;
+    private Profile student;
 
     public _StudentAdmission() {
     }
@@ -44,12 +44,12 @@ public class _StudentAdmission {
         this.id = id;
     }
 
-    public String getAdmission_number() {
-        return admission_number;
+    public String getAdmission_no() {
+        return admission_no;
     }
 
-    public void setAdmission_number(String admission_number) {
-        this.admission_number = admission_number;
+    public void setAdmission_no(String admission_no) {
+        this.admission_no = admission_no;
     }
 
     public Long getDate_of_admission() {
@@ -108,12 +108,12 @@ public class _StudentAdmission {
         this.author_id = author_id;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public Profile getStudent() {
+        return student;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setStudent(Profile student) {
+        this.student = student;
     }
 
     public Integer getStream_id() {
@@ -128,7 +128,7 @@ public class _StudentAdmission {
     public int hashCode() {
         int hash = 3;
         hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.admission_number);
+        hash = 59 * hash + Objects.hashCode(this.admission_no);
         hash = 59 * hash + Objects.hashCode(this.date_of_admission);
         hash = 59 * hash + Objects.hashCode(this.external_id);
         hash = 59 * hash + Objects.hashCode(this.term_id);
@@ -137,7 +137,7 @@ public class _StudentAdmission {
         hash = 59 * hash + Objects.hashCode(this.status);
         hash = 59 * hash + Objects.hashCode(this.date_created);
         hash = 59 * hash + Objects.hashCode(this.author_id);
-        hash = 59 * hash + Objects.hashCode(this.profile);
+        hash = 59 * hash + Objects.hashCode(this.student);
         return hash;
     }
 
@@ -153,7 +153,7 @@ public class _StudentAdmission {
             return false;
         }
         final _StudentAdmission other = (_StudentAdmission) obj;
-        if (!Objects.equals(this.admission_number, other.admission_number)) {
+        if (!Objects.equals(this.admission_no, other.admission_no)) {
             return false;
         }
         if (!Objects.equals(this.external_id, other.external_id)) {
@@ -184,7 +184,7 @@ public class _StudentAdmission {
         if (!Objects.equals(this.author_id, other.author_id)) {
             return false;
         }
-        if (!Objects.equals(this.profile, other.profile)) {
+        if (!Objects.equals(this.student, other.student)) {
             return false;
         }
         return true;
@@ -194,7 +194,7 @@ public class _StudentAdmission {
     public String toString() {
         return "_StudentAdmission{"
                 + "id=" + id
-                + ", admission_number=" + admission_number
+                + ", admission_number=" + admission_no
                 + ", date_of_admission=" + date_of_admission
                 + ", external_id=" + external_id
                 + ", term_id=" + term_id
@@ -203,7 +203,7 @@ public class _StudentAdmission {
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
-                + ", profile=" + profile
+                + ", profile=" + student
                 + "}";
     }
 

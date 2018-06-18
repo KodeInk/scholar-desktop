@@ -512,8 +512,8 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         profile.setSex(studentSex);
         profile.setDateOfBirth(dateOfBirth);
         _StudentAdmission studentAdmission = new _StudentAdmission();
-        studentAdmission.setProfile(profile);
-        studentAdmission.setAdmission_number(admissionNumber);
+        studentAdmission.setStudent(profile);
+        studentAdmission.setAdmission_no(admissionNumber);
         studentAdmission.setClass_id(admissionClass);
         studentAdmission.setTerm_id(admissionTerm);
         studentAdmission.setDate_of_admission(addmissionDate);

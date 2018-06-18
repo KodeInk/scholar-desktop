@@ -86,15 +86,15 @@ public class AdmissionService extends AbstractService {
      * @return
      */
     public Map getAdmissionMap(_StudentAdmission studentAdmission) {
-        Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(studentAdmission.getProfile());
+        Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(studentAdmission.getStudent());
        
         Map studentAdmissionMap = new HashMap<>();
-        studentAdmissionMap.put("admission_number", studentAdmission.getAdmission_number());
+        studentAdmissionMap.put("admission_no", studentAdmission.getAdmission_no());
         studentAdmissionMap.put("date_of_admission", studentAdmission.getDate_of_admission());
         studentAdmissionMap.put("term_id", studentAdmission.getTerm_id());
         studentAdmissionMap.put("stream_id", studentAdmission.getStream_id());
         studentAdmissionMap.put("class_id", studentAdmission.getClass_id());        
-        studentAdmissionMap.put("profile",profileMap);        
+        studentAdmissionMap.put("student",profileMap);        
          
         System.out.println("==================================");
         System.out.println(studentAdmissionMap);
