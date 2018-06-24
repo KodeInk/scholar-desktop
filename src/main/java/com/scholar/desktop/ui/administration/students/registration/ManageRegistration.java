@@ -5,11 +5,13 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.response.StudentTermRegistrationResponse;
-import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissionsUI;
+import main.java.com.scholar.desktop.helper.Utilities;
 
 /**
  *
@@ -20,7 +22,7 @@ public class ManageRegistration extends javax.swing.JPanel {
     private List<StudentTermRegistrationResponse> list = null;
     public DefaultTableModel tableModel;
     private static ManageRegistration instance;
-    private static final String[] COLUMN_HEADERS = {"NAME", "ADMISION NO", "TERM ", "CLASS", "STREAM", "DATE CREATED", "STATUS", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"NAME", "ADMISION NO", "TERM ", "CLASS", "STREAM", "DATE REGISTERED", "STATUS", "AUTHOR", "DATE CREATED"};
 
     /**
      * Creates new form ManageRegistration
@@ -29,7 +31,12 @@ public class ManageRegistration extends javax.swing.JPanel {
 
     public ManageRegistration(SchoolData schoolData) {
         this.schoolData = schoolData;
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+        }
         initComponents();
+        initData();
+
     }
 
     public static ManageRegistration getInstance(SchoolData schoolData) {
@@ -41,6 +48,48 @@ public class ManageRegistration extends javax.swing.JPanel {
 
     public void initData() {
 
+    }
+
+    /**
+     *
+     * @param list
+     */
+    public void populateJTable(List<StudentTermRegistrationResponse> list) {
+
+        if (list != null) {
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            list.stream().map(this::getObjectData).forEachOrdered((data) -> {
+                tableModel.addRow(data);
+            });
+        }
+
+        tableModel.fireTableDataChanged();
+
+        Utilities.hideDialog();
+
+    }
+
+    /**
+     *
+     * @param ur
+     * @return
+     */
+    public Object[] getObjectData(StudentTermRegistrationResponse ur) {
+        ProfileResponse profileResponse = ur.getAdmission().getStudent();
+        String name = (profileResponse.getFirstName().toUpperCase().concat(" , ").concat(profileResponse.getLastName())).toUpperCase();
+        String age = profileResponse.getDateOfBirth() != null ? new Date(profileResponse.getDateOfBirth()).toString().toUpperCase() : " - ";
+        String sex = "N/A";
+        String admission_no = ur.getAdmission().getAdmission_no().toUpperCase();
+        String admission_term = ur.getStudentTerm().getName().toUpperCase();
+        String admission_class = ur.getStudentClass().getName().toUpperCase();
+        String admission_stream = " - ";
+        String status = ur.getStatus();
+        String date_created = (ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ").toUpperCase();
+        String date_registered = (ur.getDate_registered() != null ? new Date(ur.getDate_registered()).toString() : " ").toUpperCase();
+        String author = ur.getAuthor().toUpperCase();
+        Object[] data = {name, admission_no, admission_term, admission_class, admission_stream, date_registered, status, author, status, date_created};
+        return data;
     }
 
     /**

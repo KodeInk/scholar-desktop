@@ -5,7 +5,6 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.response;
 
-
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
@@ -19,10 +18,12 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.re
 public class StudentTermRegistrationResponse {
 
     private Integer id;
-    private StudentAdmissionResponse studentAdmission;
-    private TermResponse registration_term;
-    private ClassResponse registration_class;
-    private StreamResponse registration_stream;
+    private StudentAdmissionResponse admission;
+    private TermResponse studentTerm;
+    private ClassResponse studentClass;
+    private StreamResponse studentStream;
+    private Long date_created;
+    private Long date_registered;
     private String status;
     private String author;
 
@@ -41,38 +42,36 @@ public class StudentTermRegistrationResponse {
         this.id = id;
     }
 
-    public StudentAdmissionResponse getStudentAdmission() {
-        return studentAdmission;
+    public StudentAdmissionResponse getAdmission() {
+        return admission;
     }
 
-    public void setStudentAdmission(StudentAdmissionResponse studentAdmission) {
-        this.studentAdmission = studentAdmission;
+    public void setAdmission(StudentAdmissionResponse admission) {
+        this.admission = admission;
     }
 
-    
-
-    public TermResponse getRegistration_term() {
-        return registration_term;
+    public TermResponse getStudentTerm() {
+        return studentTerm;
     }
 
-    public void setRegistration_term(TermResponse registration_term) {
-        this.registration_term = registration_term;
+    public void setStudentTerm(TermResponse studentTerm) {
+        this.studentTerm = studentTerm;
     }
 
-    public ClassResponse getRegistration_class() {
-        return registration_class;
+    public ClassResponse getStudentClass() {
+        return studentClass;
     }
 
-    public void setRegistration_class(ClassResponse registration_class) {
-        this.registration_class = registration_class;
+    public void setStudentClass(ClassResponse studentClass) {
+        this.studentClass = studentClass;
     }
 
-    public StreamResponse getRegistration_stream() {
-        return registration_stream;
+    public StreamResponse getStudentStream() {
+        return studentStream;
     }
 
-    public void setRegistration_stream(StreamResponse registration_stream) {
-        this.registration_stream = registration_stream;
+    public void setStudentStream(StreamResponse studentStream) {
+        this.studentStream = studentStream;
     }
 
     public String getStatus() {
@@ -91,16 +90,34 @@ public class StudentTermRegistrationResponse {
         this.author = author;
     }
 
+    public Long getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Long date_created) {
+        this.date_created = date_created;
+    }
+
+    public Long getDate_registered() {
+        return date_registered;
+    }
+
+    public void setDate_registered(Long date_registered) {
+        this.date_registered = date_registered;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.studentAdmission);
-        hash = 17 * hash + Objects.hashCode(this.registration_term);
-        hash = 17 * hash + Objects.hashCode(this.registration_class);
-        hash = 17 * hash + Objects.hashCode(this.registration_stream);
-        hash = 17 * hash + Objects.hashCode(this.status);
-        hash = 17 * hash + Objects.hashCode(this.author);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.admission);
+        hash = 41 * hash + Objects.hashCode(this.studentTerm);
+        hash = 41 * hash + Objects.hashCode(this.studentClass);
+        hash = 41 * hash + Objects.hashCode(this.studentStream);
+        hash = 41 * hash + Objects.hashCode(this.date_created);
+        hash = 41 * hash + Objects.hashCode(this.date_registered);
+        hash = 41 * hash + Objects.hashCode(this.status);
+        hash = 41 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -125,29 +142,37 @@ public class StudentTermRegistrationResponse {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.studentAdmission, other.studentAdmission)) {
+        if (!Objects.equals(this.admission, other.admission)) {
             return false;
         }
-        if (!Objects.equals(this.registration_term, other.registration_term)) {
+        if (!Objects.equals(this.studentTerm, other.studentTerm)) {
             return false;
         }
-        if (!Objects.equals(this.registration_class, other.registration_class)) {
+        if (!Objects.equals(this.studentClass, other.studentClass)) {
             return false;
         }
-        return Objects.equals(this.registration_stream, other.registration_stream);
+        if (!Objects.equals(this.studentStream, other.studentStream)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return Objects.equals(this.date_registered, other.date_registered);
     }
 
     @Override
     public String toString() {
         return "StudentTermRegistrationResponse{"
                 + "id=" + id
-                + ", studentAdmission=" + studentAdmission
-                + ", registration_term=" + registration_term
-                + ", registration_class=" + registration_class
-                + ", registration_stream=" + registration_stream
+                + ", admission=" + admission
+                + ", studentTerm=" + studentTerm
+                + ", studentClass=" + studentClass
+                + ", studentStream=" + studentStream
+                + ", date_created=" + date_created
+                + ", date_registered=" + date_registered
                 + ", status=" + status
                 + ", author=" + author
-                + "}";
+                + '}';
     }
 
 }
