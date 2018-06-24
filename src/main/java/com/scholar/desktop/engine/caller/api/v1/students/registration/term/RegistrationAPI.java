@@ -39,8 +39,13 @@ public class RegistrationAPI extends AbstractAPI {
         engineCaller = new EngineCaller(schoolData);
     }
 
-    
-     public StudentTermRegistrationResponse[] list(Integer offset, Integer limit) {
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
+    public StudentTermRegistrationResponse[] list(Integer offset, Integer limit) {
         offset = getOffset(offset);
         limit = getLimit(limit);
 
@@ -68,6 +73,13 @@ public class RegistrationAPI extends AbstractAPI {
         return null;
     }
 
+    /**
+     *
+     * @param body
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public StudentTermRegistrationResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("registration/term/v1/", body, logId);
