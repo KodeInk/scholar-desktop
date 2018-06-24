@@ -5,7 +5,11 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.response.StudentTermRegistrationResponse;
+import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissionsUI;
 
 /**
  *
@@ -13,19 +17,31 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
  */
 public class ManageRegistration extends javax.swing.JPanel {
 
+    private List<StudentTermRegistrationResponse> list = null;
+    public DefaultTableModel tableModel;
+    private static ManageRegistration instance;
+    private static final String[] COLUMN_HEADERS = {"NAME", "ADMISION NO", "TERM ", "CLASS", "STREAM", "DATE CREATED", "STATUS", "AUTHOR"};
+
     /**
      * Creates new form ManageRegistration
      */
     private final SchoolData schoolData;
+
     public ManageRegistration(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
-    
-    public void initData(){
-        
+
+    public static ManageRegistration getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageRegistration(schoolData);
+        }
+        return instance;
     }
-    
+
+    public void initData() {
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
