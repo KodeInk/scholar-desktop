@@ -36,7 +36,6 @@ public class ManageRegistration extends javax.swing.JPanel {
         }
         initComponents();
         initData();
-
     }
 
     public static ManageRegistration getInstance(SchoolData schoolData) {
