@@ -7,17 +7,19 @@ package main.java.com.scholar.desktop.ui.administration.students.registration;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.response.StudentTermRegistrationResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.students.registration.subjects.RegistrationService;
 
 /**
  *
  * @author mover 6.24.2018
  */
-public class ManageRegistration extends javax.swing.JPanel {
+public final class ManageRegistration extends javax.swing.JPanel {
 
     private List<StudentTermRegistrationResponse> list = null;
     public DefaultTableModel tableModel;
@@ -47,6 +49,23 @@ public class ManageRegistration extends javax.swing.JPanel {
 
     public void initData() {
 
+         if (list != null) {
+            populateJTable(list);
+        }
+
+        final String message = "     Processsing ...     ";
+        Utilities.ShowDialogMessage(message);
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = RegistrationService.getInstance(schoolData).list();
+
+                populateJTable(list);
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
 
     /**
@@ -87,7 +106,7 @@ public class ManageRegistration extends javax.swing.JPanel {
         String date_created = (ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ").toUpperCase();
         String date_registered = (ur.getDate_registered() != null ? new Date(ur.getDate_registered()).toString() : " ").toUpperCase();
         String author = ur.getAuthor().toUpperCase();
-        Object[] data = {name, admission_no, admission_term, admission_class, admission_stream, date_registered, status, author, status, date_created};
+        Object[] data = {name, admission_no, admission_term, admission_class, admission_stream, date_registered, status, author,  date_created};
         return data;
     }
 
@@ -181,22 +200,7 @@ public class ManageRegistration extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "NAME", "ADMISION NO", "TERM ", "CLASS", "STREAM", "DATE CREATED", "STATUS", "AUTHOR"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
