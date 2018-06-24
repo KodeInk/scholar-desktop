@@ -16,7 +16,7 @@ public class ManageRegistration extends javax.swing.JPanel {
     /**
      * Creates new form ManageRegistration
      */
-    private SchoolData schoolData;
+    private final SchoolData schoolData;
     public ManageRegistration(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
