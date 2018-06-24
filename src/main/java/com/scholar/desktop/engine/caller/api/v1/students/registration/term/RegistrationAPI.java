@@ -55,8 +55,8 @@ public class RegistrationAPI extends AbstractAPI {
                 ShowAlertMessage(response);
                 break;
             case 200:
-                StudentTermRegistrationResponse[] addmissionResponse = response.readEntity(StudentTermRegistrationResponse[].class);
-                return addmissionResponse;
+                StudentTermRegistrationResponse[] registrationResponse = response.readEntity(StudentTermRegistrationResponse[].class);
+                return registrationResponse;
             case 401:
                 ShowAlertMessage(response);
                 break;
@@ -82,8 +82,8 @@ public class RegistrationAPI extends AbstractAPI {
                 throw new BadRequestException(message.getMessage());
 
             case 200:
-                StudentTermRegistrationResponse addmissionResponse = response.readEntity(StudentTermRegistrationResponse.class);
-                return addmissionResponse;
+                StudentTermRegistrationResponse registrationResponse = response.readEntity(StudentTermRegistrationResponse.class);
+                return registrationResponse;
             case 401:
                 message = getMessage(response);
                 throw new BadRequestException(message.getMessage());
