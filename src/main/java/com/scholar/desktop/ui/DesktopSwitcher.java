@@ -100,7 +100,7 @@ public class DesktopSwitcher {
                 break;
 
             case "REGISTRATION":
-                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRegistration());
+                dashboardScreen.getjSplitPane1().setRightComponent(new ManageRegistration(schoolData));
                 break;
 
             case "EXAMS":

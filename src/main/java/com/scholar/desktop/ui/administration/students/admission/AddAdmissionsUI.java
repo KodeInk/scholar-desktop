@@ -476,7 +476,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        validate();
+        validateForm();
         //todo: submit to server
         submit();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -517,6 +517,19 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         termCombo.setSelectedIndex(0);
     }
 
+    /**
+     *
+     * @param firstname
+     * @param middlename
+     * @param lastname
+     * @param studentSex
+     * @param dateOfBirth
+     * @param admissionNumber
+     * @param admissionClass
+     * @param admissionTerm
+     * @param addmissionDate
+     * @return
+     */
     public _StudentAdmission populateEntity(String firstname, String middlename, String lastname, String studentSex, Long dateOfBirth, String admissionNumber, Integer admissionClass, Integer admissionTerm, Long addmissionDate) {
         Profile profile = new Profile();
         profile.setFirstName(firstname);
@@ -533,8 +546,11 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         return studentAdmission;
     }
 
-    @Override
-    public void validate() throws BadRequestException {
+    /**
+     *
+     * @throws BadRequestException
+     */
+    public void validateForm() throws BadRequestException {
         //todo: validate the project
         if (jFirstName.getText().isEmpty()) {
             throw new BadRequestException("Firstname is mandatory");
