@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author mover 6.24.2018
@@ -14,8 +16,20 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     /**
      * Creates new form AddRegistrationUI
      */
-    public AddRegistrationUI() {
+    private final SchoolData schoolData;
+    private static AddRegistrationUI instance;
+
+    public AddRegistrationUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static AddRegistrationUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddRegistrationUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -26,6 +40,8 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

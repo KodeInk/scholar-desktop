@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author mover 6.24.2018
@@ -14,7 +16,9 @@ public class RegistrationUI extends javax.swing.JPanel {
     /**
      * Creates new form RegistrationUI
      */
-    public RegistrationUI() {
+    private SchoolData schoolData;
+    public RegistrationUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -27,19 +31,27 @@ public class RegistrationUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.add("Manage Term Registration", ManageRegistrationUI.getInstance(schoolData));
+        //jTabbedPane1.add("Add Term Registration",  AddRegistrationUI.getDefaultLocale());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 813, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
