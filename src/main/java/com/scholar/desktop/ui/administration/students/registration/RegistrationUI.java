@@ -36,7 +36,7 @@ public class RegistrationUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.add("Manage Term Registration", ManageRegistrationUI.getInstance(schoolData));
-        //jTabbedPane1.add("Add Term Registration",  AddRegistrationUI.getDefaultLocale());
+        jTabbedPane1.add("Add Term Registration",  AddRegistrationUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

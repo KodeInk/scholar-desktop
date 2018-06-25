@@ -33,7 +33,7 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Term Registration&quot;, ManageRegistrationUI.getInstance(schoolData));&#xa;//jTabbedPane1.add(&quot;Add Term Registration&quot;,  AddRegistrationUI.getDefaultLocale());"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jTabbedPane1.add(&quot;Manage Term Registration&quot;, ManageRegistrationUI.getInstance(schoolData));&#xa;jTabbedPane1.add(&quot;Add Term Registration&quot;,  AddRegistrationUI.getInstance(schoolData));"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
