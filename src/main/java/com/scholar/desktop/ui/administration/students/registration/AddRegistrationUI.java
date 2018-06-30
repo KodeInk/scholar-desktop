@@ -5,16 +5,21 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 
@@ -341,11 +346,11 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
     public void validateForm() {
         //todo: check for mandatories
-        if(admissionNumber.getText().isEmpty()){
+        if (admissionNumber.getText().isEmpty()) {
             throw new BadRequestException("Admission Number is Mandatory");
         }
-        
-         try {
+
+        try {
             dateOfAdmission.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Date of Regoistration  is Madantory");
@@ -354,24 +359,44 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         if (admissionYear.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Admission Year");
         }
-        
-         if (registeredClass.getSelectedIndex() <= 0) {
+
+        if (registeredClass.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Class of Registration ");
         }
-         
-          if (registeredTerm.getSelectedIndex() <= 0) {
+
+        if (registeredTerm.getSelectedIndex() <= 0) {
             throw new BadRequestException("Select Term of Registration ");
         }
 
-        
-        
     }
 
     public void submit() {
-        //todo: populate entity
-        //todo: submit to service with a try
-        //todo alert success
-        //todo: reset form
+        String addmission_number = admissionNumber.getText();
+        Long date_of_admission = dateOfAdmission.getDate().getTime();
+        Integer selecteYearIndex = admissionYear.getSelectedIndex() - 1;
+        Integer admissionYear = studyYearResponses.get(selecteYearIndex).getId();
+        Integer admissionClass = classResponses.get(registeredClass.getSelectedIndex() - 1).getId();
+        Integer admissionTerm = termResponses.get(registeredTerm.getSelectedIndex() - 1).getId();
+
+        _StudentAdmission studentAdmission = null;
+        //populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
+
+        try {
+            AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
+            JOptionPane.showMessageDialog(null, " Record saved succesfully");
+            reset();
+        } catch (HeadlessException | IOException er) {
+            throw new BadRequestException("Something went wrong, record could not be saved ");
+        }
+    }
+
+    public void reset() {
+        admissionNumber.setText("");
+        dateOfAdmission.setDate(null);
+        admissionYear.setSelectedIndex(-1);
+        registeredClass.setSelectedIndex(-1);
+        registeredTerm.setSelectedIndex(-1);
+
     }
 
 
