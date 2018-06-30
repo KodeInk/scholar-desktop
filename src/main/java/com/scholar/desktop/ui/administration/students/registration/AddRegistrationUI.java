@@ -411,6 +411,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     */
     public void submit() {
         String addmission_number = admissionNumber.getText();
         Long date_of_admission = dateOfAdmission.getDate().getTime();
@@ -430,6 +433,13 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *
+     * @param addmission_number
+     * @param admissionTerm
+     * @param admissionClass
+     * @return
+     */
     public _StudentTermRegistration populateEntity(String addmission_number, Integer admissionTerm, Integer admissionClass) {
         //populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
         _StudentTermRegistration registration = new _StudentTermRegistration();
@@ -440,6 +450,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         return registration;
     }
 
+    /**
+     *
+     */
     public void reset() {
         admissionNumber.setText("");
         dateOfAdmission.setDate(null);
