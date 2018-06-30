@@ -88,7 +88,7 @@ public class RegistrationService extends AbstractService  {
     public Map getAdmissionMap(_StudentTermRegistration termRegistration) {
        
         Map studentAdmissionMap = new HashMap<>();
-        studentAdmissionMap.put("admission_id", termRegistration.getAdmission_number());
+        studentAdmissionMap.put("admission_number", termRegistration.getAdmission_number());
         studentAdmissionMap.put("term_id", termRegistration.getTerm_id());
         studentAdmissionMap.put("class_id", termRegistration.getClass_id());        
         studentAdmissionMap.put("stream_id", termRegistration.getStream_id());        
