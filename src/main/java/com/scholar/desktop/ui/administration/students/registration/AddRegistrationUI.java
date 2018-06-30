@@ -26,6 +26,7 @@ import main.java.com.scholar.desktop.services.terms.TermsService;
 /**
  *
  * @author mover 6.24.2018
+ * 
  */
 public class AddRegistrationUI extends javax.swing.JPanel {
 
@@ -37,18 +38,30 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     private List<StudyYearResponse> studyYearResponses = null;
     private List<ClassResponse> classResponses = null;
 
+    /**
+     *
+     * @param schoolData
+     */
     public AddRegistrationUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
 
     }
 
+    /**
+     *Init Data :: Call Fetch Study Year, Fetch Classes
+     */
     public void initData() {
         fetchStudyYear();
         //todo: get classes
         fetchClasses();
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return     
+     */
     public static AddRegistrationUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddRegistrationUI(schoolData);
@@ -57,6 +70,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         return instance;
     }
 
+    /**
+     * Fetch Classes
+     */
     public void fetchClasses() {
         if (classResponses != null) {
             populateClassesCombo(classResponses);
@@ -75,6 +91,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *
+     */
     public void fetchStudyYear() {
         if (studyYearResponses != null) {
             populateStudyYearComboBox(studyYearResponses);
@@ -95,6 +114,10 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *
+     * @param studyYearResponses
+     */
     public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
         //StudyYearCombo
         admissionYear.removeAllItems();
@@ -112,6 +135,10 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     * @param ClassResponse
+     */
     public void populateClassesCombo(List<ClassResponse> ClassResponse) {
         //StudyYearCombo
         registeredClass.removeAllItems();
@@ -128,6 +155,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     */
     public void getSelectedYear() {
         registeredTerm.removeAllItems();
 
@@ -139,6 +169,10 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     }
     List<TermResponse> termResponses = null;
 
+    /**
+     *
+     * @param studyYear
+     */
     public void fetchTerms(Integer studyYear) {
 
         registeredTerm.removeAllItems();
@@ -344,6 +378,9 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         submit();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * Validate the form :: Admission Number, Date of Admission , Admission Year, Class Registered , Term Registered
+     */
     public void validateForm() {
         //todo: check for mandatories
         if (admissionNumber.getText().isEmpty()) {
