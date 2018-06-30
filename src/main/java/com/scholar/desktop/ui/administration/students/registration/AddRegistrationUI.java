@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -16,17 +17,19 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.request._StudentTermRegistration;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
+import main.java.com.scholar.desktop.services.students.registration.terms.TermRegistrationService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 
 /**
  *
  * @author mover 6.24.2018
- * 
+ *
  */
 public class AddRegistrationUI extends javax.swing.JPanel {
 
@@ -49,7 +52,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     }
 
     /**
-     *Init Data :: Call Fetch Study Year, Fetch Classes
+     * Init Data :: Call Fetch Study Year, Fetch Classes
      */
     public void initData() {
         fetchStudyYear();
@@ -60,7 +63,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     /**
      *
      * @param schoolData
-     * @return     
+     * @return
      */
     public static AddRegistrationUI getInstance(SchoolData schoolData) {
         if (instance == null) {
@@ -379,7 +382,8 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-     * Validate the form :: Admission Number, Date of Admission , Admission Year, Class Registered , Term Registered
+     * Validate the form :: Admission Number, Date of Admission , Admission
+     * Year, Class Registered , Term Registered
      */
     public void validateForm() {
         //todo: check for mandatories
@@ -415,16 +419,25 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         Integer admissionClass = classResponses.get(registeredClass.getSelectedIndex() - 1).getId();
         Integer admissionTerm = termResponses.get(registeredTerm.getSelectedIndex() - 1).getId();
 
-        _StudentAdmission studentAdmission = null;
-        //populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
+        _StudentTermRegistration registration = populateEntity(addmission_number, admissionTerm, admissionClass);
 
         try {
-            AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
+            TermRegistrationService.getInstance(schoolData).create(registration, TOOL_TIP_TEXT_KEY);
             JOptionPane.showMessageDialog(null, " Record saved succesfully");
             reset();
         } catch (HeadlessException | IOException er) {
             throw new BadRequestException("Something went wrong, record could not be saved ");
         }
+    }
+
+    public _StudentTermRegistration populateEntity(String addmission_number, Integer admissionTerm, Integer admissionClass) {
+        //populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
+        _StudentTermRegistration registration = new _StudentTermRegistration();
+        registration.setAdmission_number(addmission_number);
+        registration.setTerm_id(admissionTerm);
+        registration.setClass_id(admissionClass);
+        registration.setStatus(StatusEnum.ACTIVE);
+        return registration;
     }
 
     public void reset() {
