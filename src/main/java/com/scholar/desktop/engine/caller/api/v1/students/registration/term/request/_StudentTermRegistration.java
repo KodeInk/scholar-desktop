@@ -15,7 +15,7 @@ import java.util.Objects;
 public class _StudentTermRegistration {
 
     private Integer id;
-    private Integer admission_id;
+    private String admission_number;
     private Integer term_id;
     private Integer class_id;
     private Integer stream_id;
@@ -37,12 +37,12 @@ public class _StudentTermRegistration {
         this.id = id;
     }
 
-    public Integer getAdmission_id() {
-        return admission_id;
+    public String getAdmission_number() {
+        return admission_number;
     }
 
-    public void setAdmission_id(Integer admission_id) {
-        this.admission_id = admission_id;
+    public void setAdmission_number(String admission_number) {
+        this.admission_number = admission_number;
     }
 
     public Integer getTerm_id() {
@@ -89,7 +89,7 @@ public class _StudentTermRegistration {
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.admission_id);
+        hash = 79 * hash + Objects.hashCode(this.admission_number);
         hash = 79 * hash + Objects.hashCode(this.term_id);
         hash = 79 * hash + Objects.hashCode(this.class_id);
         hash = 79 * hash + Objects.hashCode(this.stream_id);
@@ -113,7 +113,7 @@ public class _StudentTermRegistration {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.admission_id, other.admission_id)) {
+        if (!Objects.equals(this.admission_number, other.admission_number)) {
             return false;
         }
         if (!Objects.equals(this.term_id, other.term_id)) {
@@ -139,7 +139,7 @@ public class _StudentTermRegistration {
     public String toString() {
         return "_StudentTermRegistration{"
                 + "id=" + id
-                + ", admission_id=" + admission_id
+                + ", admission_number=" + admission_number
                 + ", class_id=" + class_id
                 + ", term_id=" + term_id
                 + ", stream_id=" + stream_id
