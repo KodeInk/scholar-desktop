@@ -25,22 +25,22 @@ import main.java.com.scholar.desktop.services.staff.StaffService;
  *
  * @author mover 6.24.2018
  */
-public class RegistrationService extends AbstractService  {
+public class TermRegistrationService extends AbstractService  {
 
     private static final Logger LOG = Logger.getLogger(StaffService.class.getName());
     private final SchoolData schoolData;
-    private static RegistrationService instance;
+    private static TermRegistrationService instance;
     private static RegistrationAPI registrationAPI;
     private List<StudentTermRegistrationResponse> list = null;
 
-    public RegistrationService(SchoolData schoolData) {
+    public TermRegistrationService(SchoolData schoolData) {
         this.schoolData = schoolData;
         registrationAPI = new RegistrationAPI(schoolData);
     }
 
-    public static RegistrationService getInstance(SchoolData schoolData) {
+    public static TermRegistrationService getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new RegistrationService(schoolData);
+            instance = new TermRegistrationService(schoolData);
         }
         return instance;
     }

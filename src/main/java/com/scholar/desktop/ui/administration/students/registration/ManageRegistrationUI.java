@@ -13,7 +13,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.response.StudentTermRegistrationResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.students.registration.terms.RegistrationService;
+import main.java.com.scholar.desktop.services.students.registration.terms.TermRegistrationService;
 
 /**
  *
@@ -59,7 +59,7 @@ public final class ManageRegistrationUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = RegistrationService.getInstance(schoolData).list();
+                list = TermRegistrationService.getInstance(schoolData).list();
 
                 populateJTable(list);
                 return null;
