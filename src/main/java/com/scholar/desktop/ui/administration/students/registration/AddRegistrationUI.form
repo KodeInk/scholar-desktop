@@ -99,7 +99,7 @@
                               <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="522" max="-2" attributes="0"/>
+                              <Component id="admissionNumber" min="-2" pref="522" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -116,7 +116,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="admissionNumber" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
@@ -283,7 +283,7 @@
                 <Property name="text" type="java.lang.String" value="Registration Information"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="admissionNumber">
               <Properties>
                 <Property name="name" type="java.lang.String" value="admission_no" noResource="true"/>
               </Properties>

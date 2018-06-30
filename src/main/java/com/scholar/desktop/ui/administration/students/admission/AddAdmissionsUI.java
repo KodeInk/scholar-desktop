@@ -448,31 +448,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-//        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-//            // textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-//            File f = fileChooser.getSelectedFile();
-//            String filename = f.getAbsolutePath();
-//            try {
-//                ImageIcon ii = new ImageIcon(scaleImage(120, 120, ImageIO.read(new File(f.getAbsolutePath()))));//get the image from file chooser and scale it to match JLabel size
-//                jLabel6.setIcon(ii);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//
-//            // JOptionPane.showMessageDialog(null, "MOVERS ");
-//        }
-//
-//        //         if (mode == MODE_OPEN) {
-//            //            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-//                //               // textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-//                //            }
-//            //        } else if (mode == MODE_SAVE) {
-//            //            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-//                //                textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-//                //            }
-//            //        }
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

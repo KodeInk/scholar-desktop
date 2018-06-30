@@ -13,6 +13,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
@@ -179,7 +180,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         registeredTerm = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        admissionNumber = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,7 +233,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Registration Information");
 
-        jTextField1.setName("admission_no"); // NOI18N
+        admissionNumber.setName("admission_no"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -278,7 +279,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                         .addGap(119, 119, 119)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(admissionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,7 +292,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(admissionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,13 +335,48 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        validateForm();
-//        //todo: submit to server
-//        submit();
+        validateForm();
+        submit();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void validateForm() {
+        //todo: check for mandatories
+        if(admissionNumber.getText().isEmpty()){
+            throw new BadRequestException("Admission Number is Mandatory");
+        }
+        
+         try {
+            dateOfAdmission.getDate().toString();
+        } catch (NullPointerException er) {
+            throw new BadRequestException("Date of Regoistration  is Madantory");
+        }
+
+        if (admissionYear.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Admission Year");
+        }
+        
+         if (registeredClass.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Class of Registration ");
+        }
+         
+          if (registeredTerm.getSelectedIndex() <= 0) {
+            throw new BadRequestException("Select Term of Registration ");
+        }
+
+        
+        
+    }
+
+    public void submit() {
+        //todo: populate entity
+        //todo: submit to service with a try
+        //todo alert success
+        //todo: reset form
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField admissionNumber;
     private javax.swing.JComboBox<String> admissionYear;
     private org.jdesktop.swingx.JXDatePicker dateOfAdmission;
     private javax.swing.JButton jButton2;
@@ -356,7 +392,6 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> registeredClass;
     private javax.swing.JComboBox<String> registeredTerm;
     // End of variables declaration//GEN-END:variables
