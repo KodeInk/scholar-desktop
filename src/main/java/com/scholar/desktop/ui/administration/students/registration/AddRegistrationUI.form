@@ -73,13 +73,10 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="classCombo1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="classCombo2" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="dateOfAdmission" min="-2" pref="512" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="yearCombo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="registeredClass" alignment="0" pref="533" max="32767" attributes="0"/>
+                                  <Component id="registeredTerm" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="admissionYear" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="dateOfAdmission" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -127,7 +124,7 @@
                       <Component id="jSeparator3" min="-2" pref="12" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="yearCombo" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="admissionYear" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -137,12 +134,12 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="classCombo1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="registeredClass" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="classCombo2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="registeredTerm" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -185,7 +182,7 @@
                 <Property name="text" type="java.lang.String" value="CANCEL"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="yearCombo">
+            <Component class="javax.swing.JComboBox" name="admissionYear">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -206,7 +203,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Admission Year"/>
+                <Property name="text" type="java.lang.String" value="Academic Year"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -224,7 +221,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Date of Registration"/>
+                <Property name="text" type="java.lang.String" value="Registration Date"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator3">
@@ -234,7 +231,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="classCombo1">
+            <Component class="javax.swing.JComboBox" name="registeredClass">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -253,10 +250,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Class of Registration"/>
+                <Property name="text" type="java.lang.String" value="Class"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="classCombo2">
+            <Component class="javax.swing.JComboBox" name="registeredTerm">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -275,7 +272,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Term of Registration"/>
+                <Property name="text" type="java.lang.String" value="Term"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">

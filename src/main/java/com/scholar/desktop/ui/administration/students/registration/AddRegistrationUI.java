@@ -5,7 +5,17 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import java.awt.event.ActionEvent;
+import java.util.Date;
+import java.util.List;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.services.terms.TermsService;
 
 /**
  *
@@ -18,10 +28,19 @@ public class AddRegistrationUI extends javax.swing.JPanel {
      */
     private final SchoolData schoolData;
     private static AddRegistrationUI instance;
+    private List<StudyYearResponse> studyYearResponses = null;
+    private List<ClassResponse> classResponses = null;
 
     public AddRegistrationUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+
+    }
+
+    public void initData() {
+        fetchStudyYear();
+        //todo: get classes
+        fetchClasses();
     }
 
     public static AddRegistrationUI getInstance(SchoolData schoolData) {
@@ -30,6 +49,108 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         }
 
         return instance;
+    }
+
+    public void fetchClasses() {
+        if (classResponses != null) {
+            populateClassesCombo(classResponses);
+        } else {
+            registeredClass.removeAll();
+            registeredClass.addItem("Processing ...");
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    classResponses = ClassesService.getInstance(schoolData).list(-1, -1);
+                    populateClassesCombo(classResponses);
+                    return null;
+                }
+            };
+            swingWorker.execute();
+        }
+    }
+
+    public void fetchStudyYear() {
+        if (studyYearResponses != null) {
+            populateStudyYearComboBox(studyYearResponses);
+        } else {
+            admissionYear.removeAll();
+            admissionYear.addItem("Processing ...");
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    studyYearResponses = StudyYearService.getInstance(schoolData).list(-1, -1);
+                    admissionYear.removeAll();
+                    populateStudyYearComboBox(studyYearResponses);
+
+                    return null;
+                }
+            };
+            swingWorker.execute();
+        }
+    }
+
+    public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
+        //StudyYearCombo
+        admissionYear.removeAllItems();
+        admissionYear.addItem("Select Option");
+        studyYearResponses.forEach((StudyYearResponse syr) -> {
+            try {
+                admissionYear.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
+            } catch (Exception er) {
+            }
+        });
+
+        admissionYear.addActionListener((ActionEvent e) -> {
+            getSelectedYear();
+        });
+
+    }
+
+    public void populateClassesCombo(List<ClassResponse> ClassResponse) {
+        //StudyYearCombo
+        registeredClass.removeAllItems();
+        registeredClass.addItem("Select Option");
+        ClassResponse.forEach(aClass -> {
+            try {
+                registeredClass.addItem(aClass.getName());
+                registeredClass.setActionCommand(aClass.getId().toString());
+
+            } catch (Exception er) {
+
+            }
+        });
+
+    }
+
+    public void getSelectedYear() {
+        registeredTerm.removeAllItems();
+
+        if (admissionYear.getSelectedIndex() > 0) {
+            StudyYearResponse syr = studyYearResponses.get(admissionYear.getSelectedIndex() - 1);
+            fetchTerms(syr.getId());
+        }
+
+    }
+    List<TermResponse> termResponses = null;
+
+    public void fetchTerms(Integer studyYear) {
+
+        registeredTerm.removeAllItems();
+        registeredTerm.addItem("Processing ...");
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                termResponses = TermsService.getInstance(schoolData).list(studyYear);
+                registeredTerm.removeAllItems();
+                registeredTerm.addItem("Select Option");
+                termResponses.forEach((tr) -> {
+                    registeredTerm.addItem(tr.getName());
+                });
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
 
     /**
@@ -47,15 +168,15 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        yearCombo = new javax.swing.JComboBox<>();
+        admissionYear = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         dateOfAdmission = new org.jdesktop.swingx.JXDatePicker();
         jLabel14 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        classCombo1 = new javax.swing.JComboBox<>();
+        registeredClass = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        classCombo2 = new javax.swing.JComboBox<>();
+        registeredTerm = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -81,32 +202,32 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
         jButton3.setText("CANCEL");
 
-        yearCombo.setSelectedItem(null);
-        yearCombo.setActionCommand("");
-        yearCombo.setName("prefix"); // NOI18N
+        admissionYear.setSelectedItem(null);
+        admissionYear.setActionCommand("");
+        admissionYear.setName("prefix"); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel9.setText("Admission Year");
+        jLabel9.setText("Academic Year");
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Admission Number");
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("Date of Registration");
+        jLabel14.setText("Registration Date");
 
         jSeparator3.setBackground(new java.awt.Color(153, 153, 153));
 
-        classCombo1.setSelectedItem(null);
-        classCombo1.setName("prefix"); // NOI18N
+        registeredClass.setSelectedItem(null);
+        registeredClass.setName("prefix"); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel15.setText("Class of Registration");
+        jLabel15.setText("Class");
 
-        classCombo2.setSelectedItem(null);
-        classCombo2.setName("prefix"); // NOI18N
+        registeredTerm.setSelectedItem(null);
+        registeredTerm.setName("prefix"); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel16.setText("Term of Registration");
+        jLabel16.setText("Term");
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Registration Information");
@@ -137,12 +258,10 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                                 .addComponent(jLabel9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(classCombo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(classCombo2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(dateOfAdmission, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(yearCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(registeredClass, 0, 533, Short.MAX_VALUE)
+                            .addComponent(registeredTerm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(admissionYear, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateOfAdmission, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(769, 769, 769))
             .addComponent(jSeparator3)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -179,7 +298,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(yearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(admissionYear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,11 +306,11 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registeredClass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registeredTerm, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,8 +341,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> classCombo1;
-    private javax.swing.JComboBox<String> classCombo2;
+    private javax.swing.JComboBox<String> admissionYear;
     private org.jdesktop.swingx.JXDatePicker dateOfAdmission;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -239,6 +357,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JComboBox<String> yearCombo;
+    private javax.swing.JComboBox<String> registeredClass;
+    private javax.swing.JComboBox<String> registeredTerm;
     // End of variables declaration//GEN-END:variables
 }

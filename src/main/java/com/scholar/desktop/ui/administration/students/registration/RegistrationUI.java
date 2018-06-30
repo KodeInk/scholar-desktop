@@ -5,7 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.administration.students.registration;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.administration.students.admission.AddAdmissionsUI;
+import main.java.com.scholar.desktop.ui.administration.students.admission.ManageAdmissionsUI;
 
 /**
  *
@@ -20,8 +25,30 @@ public class RegistrationUI extends javax.swing.JPanel {
     public RegistrationUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
 
+      ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageRegistrationUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddRegistrationUI.getInstance(schoolData).initData();
+                    break;
+                default:
+                   
+                    break;
+            }
+
+        }
+    };
+
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
