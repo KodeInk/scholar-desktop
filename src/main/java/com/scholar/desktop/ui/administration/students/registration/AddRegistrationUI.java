@@ -214,7 +214,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         admissionYear = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        dateOfAdmission = new org.jdesktop.swingx.JXDatePicker();
+        dateOfRegistration = new org.jdesktop.swingx.JXDatePicker();
         jLabel14 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         registeredClass = new javax.swing.JComboBox<>();
@@ -304,7 +304,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                             .addComponent(registeredClass, 0, 533, Short.MAX_VALUE)
                             .addComponent(registeredTerm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(admissionYear, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateOfAdmission, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(dateOfRegistration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(769, 769, 769))
             .addComponent(jSeparator3)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -345,7 +345,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateOfAdmission, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateOfRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -392,7 +392,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
         }
 
         try {
-            dateOfAdmission.getDate().toString();
+            dateOfRegistration.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Date of Regoistration  is Madantory");
         }
@@ -416,13 +416,13 @@ public class AddRegistrationUI extends javax.swing.JPanel {
      */
     public void submit() {
         String addmission_number = admissionNumber.getText();
-        Long date_of_admission = dateOfAdmission.getDate().getTime();
+        Long date_of_registration = dateOfRegistration.getDate().getTime();
         Integer selecteYearIndex = admissionYear.getSelectedIndex() - 1;
-        Integer admissionYear = studyYearResponses.get(selecteYearIndex).getId();
+        Integer addmission_year = studyYearResponses.get(selecteYearIndex).getId();
         Integer admissionClass = classResponses.get(registeredClass.getSelectedIndex() - 1).getId();
         Integer admissionTerm = termResponses.get(registeredTerm.getSelectedIndex() - 1).getId();
 
-        _StudentTermRegistration registration = populateEntity(addmission_number, admissionTerm, admissionClass);
+        _StudentTermRegistration registration = populateEntity(addmission_number, admissionTerm, admissionClass,date_of_registration);
 
         try {
             TermRegistrationService.getInstance(schoolData).create(registration, TOOL_TIP_TEXT_KEY);
@@ -438,15 +438,17 @@ public class AddRegistrationUI extends javax.swing.JPanel {
      * @param addmission_number
      * @param admissionTerm
      * @param admissionClass
+     * @param date_of_registration
      * @return
      */
-    public _StudentTermRegistration populateEntity(String addmission_number, Integer admissionTerm, Integer admissionClass) {
+    public _StudentTermRegistration populateEntity(String addmission_number, Integer admissionTerm, Integer admissionClass,Long date_of_registration) {
         //populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
         _StudentTermRegistration registration = new _StudentTermRegistration();
         registration.setAdmission_number(addmission_number);
         registration.setTerm_id(admissionTerm);
         registration.setClass_id(admissionClass);
         registration.setStatus(StatusEnum.ACTIVE);
+        registration.setDate_registered(date_of_registration);
         return registration;
     }
 
@@ -455,7 +457,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
      */
     public void reset() {
         admissionNumber.setText("");
-        dateOfAdmission.setDate(null);
+        dateOfRegistration.setDate(null);
         admissionYear.setSelectedIndex(-1);
         registeredClass.setSelectedIndex(-1);
         registeredTerm.setSelectedIndex(-1);
@@ -466,7 +468,7 @@ public class AddRegistrationUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField admissionNumber;
     private javax.swing.JComboBox<String> admissionYear;
-    private org.jdesktop.swingx.JXDatePicker dateOfAdmission;
+    private org.jdesktop.swingx.JXDatePicker dateOfRegistration;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;

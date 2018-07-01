@@ -91,7 +91,8 @@ public class TermRegistrationService extends AbstractService  {
         studentAdmissionMap.put("admission_number", termRegistration.getAdmission_number());
         studentAdmissionMap.put("term_id", termRegistration.getTerm_id());
         studentAdmissionMap.put("class_id", termRegistration.getClass_id());        
-        studentAdmissionMap.put("stream_id", termRegistration.getStream_id());        
+        studentAdmissionMap.put("stream_id", termRegistration.getStream_id());   
+         studentAdmissionMap.put("date_registered", termRegistration.getDate_registered());   
         
         System.out.println("==================================");
         System.out.println(studentAdmissionMap);

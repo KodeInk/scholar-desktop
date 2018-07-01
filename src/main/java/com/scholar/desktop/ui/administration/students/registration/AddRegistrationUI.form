@@ -76,7 +76,7 @@
                                   <Component id="registeredClass" alignment="0" pref="533" max="32767" attributes="0"/>
                                   <Component id="registeredTerm" alignment="0" max="32767" attributes="0"/>
                                   <Component id="admissionYear" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dateOfAdmission" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="dateOfRegistration" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -129,7 +129,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="dateOfAdmission" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="dateOfRegistration" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -214,7 +214,7 @@
                 <Property name="text" type="java.lang.String" value="Admission Number"/>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="dateOfAdmission">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="dateOfRegistration">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>

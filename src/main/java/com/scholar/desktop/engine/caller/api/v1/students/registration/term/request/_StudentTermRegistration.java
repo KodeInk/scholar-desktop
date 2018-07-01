@@ -21,6 +21,7 @@ public class _StudentTermRegistration {
     private Integer stream_id;
     private StatusEnum status;
     private Integer author_id;
+    private Long date_registered;
 
     public _StudentTermRegistration() {
     }
@@ -43,6 +44,14 @@ public class _StudentTermRegistration {
 
     public void setAdmission_number(String admission_number) {
         this.admission_number = admission_number;
+    }
+
+    public Long getDate_registered() {
+        return date_registered;
+    }
+
+    public void setDate_registered(Long date_registered) {
+        this.date_registered = date_registered;
     }
 
     public Integer getTerm_id() {
@@ -134,7 +143,6 @@ public class _StudentTermRegistration {
         return true;
     }
 
-   
     @Override
     public String toString() {
         return "_StudentTermRegistration{"
