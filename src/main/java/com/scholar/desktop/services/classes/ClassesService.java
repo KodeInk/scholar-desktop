@@ -82,6 +82,14 @@ public class ClassesService extends AbstractService {
         }
         return null;
     }
+    
+    public List<ClassResponse> search(String searchQuery, String logId)throws IOException{
+        
+        if(!searchQuery.isEmpty()){
+            //todo: get search  criteria :: 
+        }
+        
+    }
 
     public Map getClassMap(_Class classes) {
 
