@@ -5,14 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
+import java.awt.Color;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
@@ -42,6 +44,8 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         initComponents();
         initData(schoolData);
+        searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+        
 
     }
 
@@ -121,7 +125,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         searchbox = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -185,15 +189,17 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/detail.png"))); // NOI18N
 
-        searchbox.setBackground(new java.awt.Color(204, 204, 204));
-        searchbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        searchbox.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        searchbox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        searchbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 5));
 
         jLabel8.setText("SEARCH:");
 
-        jButton4.setText("GO");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(255, 255, 255));
+        searchButton.setText("GO");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -207,7 +213,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(jButton4)
+                .addComponent(searchButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,13 +222,14 @@ public class ManageClassesUI extends javax.swing.JPanel {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(searchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(searchbox, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
@@ -362,18 +369,17 @@ public class ManageClassesUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        if (!searchbox.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Hello Mmover");
+        if (searchbox.getText().isEmpty()) {
+            throw new BadRequestException("Search bos is empty");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -394,6 +400,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbox;
     // End of variables declaration//GEN-END:variables
 }
