@@ -89,6 +89,7 @@ public class ClassesService extends AbstractService {
             //todo: get search  criteria :: 
         }
         
+        return null;
     }
 
     public Map getClassMap(_Class classes) {
