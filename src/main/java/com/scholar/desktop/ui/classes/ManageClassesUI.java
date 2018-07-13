@@ -197,6 +197,11 @@ public class ManageClassesUI extends javax.swing.JPanel {
         searchbox.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
         searchbox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         searchbox.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 8, 5, 5));
+        searchbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchboxActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("SEARCH:");
 
@@ -375,6 +380,16 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        searchQuery();
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+
+    private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
+        // TODO add your handling code here:
+        searchQuery();
+    }//GEN-LAST:event_searchboxActionPerformed
+
+    public void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
@@ -387,7 +402,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                     List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, 0, 50, "ss");
                     populateJTable(crs);
                     repaint();
-                     jLabel1.setText("Manage Classes");
+                    jLabel1.setText("Manage Classes");
                     return null;
                 }
             };
@@ -398,7 +413,8 @@ public class ManageClassesUI extends javax.swing.JPanel {
             initData(schoolData);
         }
         jLabel1.setText("Manage Classes");
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
