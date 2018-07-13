@@ -6,8 +6,11 @@
 package main.java.com.scholar.desktop.ui.classes;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
@@ -45,7 +48,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
         initComponents();
         initData(schoolData);
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        
 
     }
 
@@ -66,11 +68,14 @@ public class ManageClassesUI extends javax.swing.JPanel {
         Utilities.ShowDialogMessage(message);
 
         SwingWorker swingWorker = new SwingWorker() {
+
             @Override
             protected Object doInBackground() throws Exception {
+                jLabel1.setText("Processing....");
                 list = ClassesService.getInstance(schoolData1).list();
 
                 populateJTable(list);
+                jLabel1.setText("Manage Classes");
                 return null;
             }
         };
@@ -371,9 +376,28 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        if (searchbox.getText().isEmpty()) {
-            throw new BadRequestException("Search bos is empty");
+        if (!searchbox.getText().isEmpty()) {
+
+            String search = searchbox.getText();
+
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    jLabel1.setText("Processing....");
+                    List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, 0, 50, "ss");
+                    populateJTable(crs);
+                    repaint();
+                     jLabel1.setText("Manage Classes");
+                    return null;
+                }
+            };
+            swingWorker.execute();
+
+        } else {
+            jLabel1.setText("Processing....");
+            initData(schoolData);
         }
+        jLabel1.setText("Manage Classes");
     }//GEN-LAST:event_searchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

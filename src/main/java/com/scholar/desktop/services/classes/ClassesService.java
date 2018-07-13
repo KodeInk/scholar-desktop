@@ -32,11 +32,20 @@ public class ClassesService extends AbstractService {
 
     private List<ClassResponse> list = null;
 
+    /**
+     *
+     * @param schoolData
+     */
     public ClassesService(SchoolData schoolData) {
         this.schoolData = schoolData;
         classesAPI = new ClassesAPI(schoolData);
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static ClassesService getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ClassesService(schoolData);
@@ -44,6 +53,10 @@ public class ClassesService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ClassResponse> list() {
 
         if (list != null) {
@@ -58,8 +71,14 @@ public class ClassesService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-    
-    public List<ClassResponse> list(Integer offset,Integer limit) {
+
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
+    public List<ClassResponse> list(Integer offset, Integer limit) {
 
         if (list != null) {
             return list;
@@ -73,8 +92,14 @@ public class ClassesService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-    
 
+    /**
+     *
+     * @param classes
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public ClassResponse create(_Class classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
@@ -82,16 +107,34 @@ public class ClassesService extends AbstractService {
         }
         return null;
     }
-    
-    public List<ClassResponse> search(String searchQuery, String logId)throws IOException{
+
+    /**
+     *
+     * @param searchQuery
+     * @param offset
+     * @param limit
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public List<ClassResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
         
-        if(!searchQuery.isEmpty()){
-            //todo: get search  criteria :: 
+        List<ClassResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+             ClassResponse[] responses = classesAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                classResponses.addAll(Arrays.asList(responses));
+            }
         }
-        
-        return null;
+
+        return classResponses;
     }
 
+    /**
+     *
+     * @param classes
+     * @return
+     */
     public Map getClassMap(_Class classes) {
 
         Map classesMap = new HashMap<>();

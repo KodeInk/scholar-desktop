@@ -66,6 +66,36 @@ public class ClassesAPI extends AbstractAPI {
 
         return null;
     }
+    
+     public ClassResponse[] list(String query,Integer offset, Integer limit) {
+        offset = getOffset(offset);
+        limit = getLimit(limit);
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("classes/v1/search/"+query, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                ClassResponse[] classResponse = response.readEntity(ClassResponse[].class);
+                return classResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+     
+     
 
     public ClassResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
