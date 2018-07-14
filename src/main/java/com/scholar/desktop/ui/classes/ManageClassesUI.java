@@ -49,7 +49,12 @@ public class ManageClassesUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
 
         if (tableModel == null) {
-            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
+                public boolean isCellEditable(int row, int column) {
+                    return false;//This causes all cells to be not editable
+                }
+            };
+
         }
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
@@ -80,16 +85,12 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }
 
     public void next() {
-
         offset = offset + limit;
         fetchData();
-
     }
 
     public void prev() {
-
         offset = offset - limit;
-        fetchData(offset, limit);
         if (offset >= 0) {
             fetchData();
         }
@@ -310,6 +311,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
+        jTable1.setCellSelectionEnabled(true);
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
