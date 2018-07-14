@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -38,6 +39,11 @@ public class ManageClassesUI extends javax.swing.JPanel {
      */
     List<ClassResponse> list = null;
 
+    private Integer page;
+    private Integer offset;
+    private Integer limit;
+
+    //pageCounter
     public ManageClassesUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
@@ -46,8 +52,9 @@ public class ManageClassesUI extends javax.swing.JPanel {
         }
 
         initComponents();
-        initData(schoolData);
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+        initData();
+        
 
     }
 
@@ -59,21 +66,43 @@ public class ManageClassesUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void initData(SchoolData schoolData1) {
+    public final void initData() {
         if (list != null) {
             populateJTable(list);
         }
 
+        offset = 0;
+        limit = 1;
+
         final String message = "     Processsing ...     ";
         Utilities.ShowDialogMessage(message);
 
+        fetchData();
+    }
+
+    public void next(){
+        offset = limit;
+        limit = limit +offset;
+         fetchData();
+    }
+    public void prev(){
+         offset = limit;
+        limit = limit  - offset;
+        if(limit  > 0 ){
+             fetchData();
+        }
+    }
+    
+    public void fetchData() {
         SwingWorker swingWorker = new SwingWorker() {
 
             @Override
             protected Object doInBackground() throws Exception {
                 jLabel1.setText("Processing....");
-                list = ClassesService.getInstance(schoolData1).list();
+               
+                list = ClassesService.getInstance(schoolData).list(offset, limit);
 
+                
                 populateJTable(list);
                 jLabel1.setText("Manage Classes");
                 return null;
@@ -135,7 +164,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        pageCounter = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -251,12 +280,22 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/prev.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("123");
+        pageCounter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pageCounter.setText("123");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/next.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -266,7 +305,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(pageCounter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(13, 13, 13))
@@ -275,7 +314,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pageCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -389,6 +428,16 @@ public class ManageClassesUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     public void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
@@ -410,7 +459,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         } else {
             jLabel1.setText("Processing....");
-            initData(schoolData);
+            initData();
         }
         jLabel1.setText("Manage Classes");
     }
@@ -424,7 +473,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -440,6 +488,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel pageCounter;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbox;
     // End of variables declaration//GEN-END:variables

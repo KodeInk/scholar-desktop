@@ -114,11 +114,22 @@ public class EngineCaller {
     public void getQuerParameters(Map<String, String> queryParameter) {
         if (queryParameter != null) {
             for (String key : queryParameter.keySet()) {
+                System.out.println(" VALUE "+queryParameter.get(key));
                 target.queryParam(key, queryParameter.get(key));
             }
         }
     }
 
+    
+       private static WebTarget addQueryParamsToTarget(WebTarget target, Map<String, String> queryParams) {
+        if (queryParams != null) {
+            for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+                target = target.queryParam(entry.getKey(), entry.getValue());
+            }
+        }
+        return target;
+    }
+       
     /**
      *
      * @param path
@@ -126,8 +137,9 @@ public class EngineCaller {
      * @return
      */
     public Response get(String path, Map<String, String> queryParameter) {
-        getQuerParameters(queryParameter);
-
+         
+        target =addQueryParamsToTarget(target, queryParameter);
+        
         Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

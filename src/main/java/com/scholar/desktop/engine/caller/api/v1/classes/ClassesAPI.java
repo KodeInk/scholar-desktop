@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
@@ -40,13 +41,15 @@ public class ClassesAPI extends AbstractAPI {
     }
 
     public ClassResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
+//        offset = getOffset(offset);
+//        limit = getLimit(limit);
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
+      
+         
         Response response = engineCaller.get("classes/v1/", queryParameter);
 
         switch (response.getStatus()) {
