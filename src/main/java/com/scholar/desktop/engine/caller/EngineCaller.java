@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.engine.caller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -138,6 +139,7 @@ public class EngineCaller {
      */
     public Response get(String path, Map<String, String> queryParameter) {
          
+          
         target =addQueryParamsToTarget(target, queryParameter);
         
         Response response = target.path(path)

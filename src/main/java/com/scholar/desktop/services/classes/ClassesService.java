@@ -48,9 +48,7 @@ public class ClassesService extends AbstractService {
      * @return
      */
     public static ClassesService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new ClassesService(schoolData);
-        }
+        instance = new ClassesService(schoolData);
         return instance;
     }
 
@@ -81,16 +79,17 @@ public class ClassesService extends AbstractService {
      */
     public List<ClassResponse> list(Integer offset, Integer limit) {
 
-        if (list != null) {
-            return list;
-        }
+//        if (list == null) {
+//            list = new ArrayList<>();
+//        }
         list = new ArrayList<>();
 
         ClassResponse[] responses = classesAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
-        IncreaseOffsetLimit();
+//        IncreaseOffsetLimit();
+
         return list;
     }
 
@@ -119,10 +118,10 @@ public class ClassesService extends AbstractService {
      * @throws IOException
      */
     public List<ClassResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
-        
+
         List<ClassResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
-             ClassResponse[] responses = classesAPI.list(searchQuery, offset, limit);
+            ClassResponse[] responses = classesAPI.list(searchQuery, offset, limit);
             if (responses != null) {
                 classResponses.addAll(Arrays.asList(responses));
             }

@@ -48,7 +48,7 @@ public class ClassesAPI extends AbstractAPI {
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-      
+             
          
         Response response = engineCaller.get("classes/v1/", queryParameter);
 
@@ -71,8 +71,8 @@ public class ClassesAPI extends AbstractAPI {
     }
     
      public ClassResponse[] list(String query,Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
+//        offset = getOffset(offset);
+//        limit = getLimit(limit);
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
