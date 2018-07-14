@@ -42,6 +42,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private Integer page;
     private Integer offset;
     private Integer limit;
+    private String search = null;
 
     //pageCounter
     public ManageClassesUI(SchoolData schoolData) {
@@ -50,7 +51,8 @@ public class ManageClassesUI extends javax.swing.JPanel {
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
-
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
@@ -70,9 +72,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
             populateJTable(list);
         }
 
-        offset = 0;
-        limit = 1;
-
         final String message = "     Processsing ...     ";
         Utilities.ShowDialogMessage(message);
 
@@ -81,30 +80,57 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }
 
     public void next() {
-        
+
         offset = offset + limit;
-        fetchData(offset, limit);
-         
+        fetchData();
+
     }
 
     public void prev() {
-       
+
         offset = offset - limit;
         fetchData(offset, limit);
         if (offset >= 0) {
-            fetchData(offset, limit);
+            fetchData();
         }
-        
+
     }
 
     public void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
     }
 
     public void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
+    }
+
+    public void fetchData() {
+        if (search != null) {
+            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+    }
+
+    public void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                jLabel1.setText("Processing....");
+                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(crs);
+                repaint();
+                jLabel1.setText("Manage Classes");
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
 
     public void fetchData(Integer offset, Integer limit) {
@@ -119,7 +145,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 jLabel1.setText("Manage Classes");
                 enableNextPrevLabels();
                 return null;
-                
+
             }
         };
         swingWorker.execute();
@@ -457,22 +483,15 @@ public class ManageClassesUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
-            String search = searchbox.getText();
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
 
-            SwingWorker swingWorker = new SwingWorker() {
-                @Override
-                protected Object doInBackground() throws Exception {
-                    jLabel1.setText("Processing....");
-                    List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, 0, 50, "ss");
-                    populateJTable(crs);
-                    repaint();
-                    jLabel1.setText("Manage Classes");
-                    return null;
-                }
-            };
-            swingWorker.execute();
+            search = searchbox.getText();
+
+            fetchData();
 
         } else {
+            search = null;
             jLabel1.setText("Processing....");
             initData();
         }

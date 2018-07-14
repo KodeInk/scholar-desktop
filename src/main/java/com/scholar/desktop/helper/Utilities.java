@@ -31,7 +31,7 @@ public class Utilities {
     private static final Logger LOG = Logger.getLogger(Utilities.class.getName());
 
     public static final Integer default_offset = 0;
-    public static final Integer default_limit = 50;
+    public static final Integer default_limit = 1;
     private static JDialog dialog;
     private final static String DATE_FORMAT = "E MMM dd";
 
