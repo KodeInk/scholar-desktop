@@ -6,19 +6,18 @@
 package main.java.com.scholar.desktop.ui.classes;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
@@ -27,7 +26,7 @@ import main.java.com.scholar.desktop.services.classes.ClassesService;
  */
 public class ManageClassesUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageClassesUI instance;
@@ -53,13 +52,16 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 public boolean isCellEditable(int row, int column) {
                     return false;//This causes all cells to be not editable
                 }
+
             };
 
         }
+
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+
         initData();
 
     }
@@ -159,6 +161,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
             for (ClassResponse ur : list) {
 
+                String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
                 String ranking = ur.getRanking().toString().toUpperCase();
@@ -169,14 +172,14 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 }
 
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {name, code, ranking, status, date_Created, author};
+                Object[] data = {id, name, code, ranking, status, date_Created, author};
                 tableModel.addRow(data);
 
             }
         }
 
         tableModel.fireTableDataChanged();
-
+        Utilities.hideColumn(0, jTable1);
         Utilities.hideDialog();
 
     }
@@ -316,6 +319,11 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -480,6 +488,11 @@ public class ManageClassesUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         prev();
     }//GEN-LAST:event_prevLabelMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Greaterst ");
+    }//GEN-LAST:event_jTable1MouseClicked
 
     public void searchQuery() {
         // TODO add your handling code here:

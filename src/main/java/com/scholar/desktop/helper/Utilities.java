@@ -18,7 +18,9 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.xml.ws.Response;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
 
@@ -165,6 +167,11 @@ public class Utilities {
         }
 
         return null;
+    }
+    
+      public static void hideColumn(Integer columnIndex,JTable jTable) {
+        TableColumn tc = jTable.getColumnModel().getColumn(columnIndex);
+        jTable.removeColumn(tc);
     }
 
 }
