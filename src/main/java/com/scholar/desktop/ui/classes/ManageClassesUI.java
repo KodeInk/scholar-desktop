@@ -20,6 +20,8 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.ui.DesktopSwitcher;
+import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
@@ -501,20 +503,31 @@ public class ManageClassesUI extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Integer row = jTable1.getSelectedRow();
-
-        if (mouseClick == 2) {
-            String value = jTable1.getModel().getValueAt(row, 0).toString();
-            JOptionPane.showMessageDialog(null, value);
-            resetCounter();
-        }
-
-        if (rowselect != row) {
-            mouseClick = 1;
-            rowselect = row;
+        if (rowselect == row) {
+            mouseClick++;
 
         } else {
-            mouseClick++;
+            mouseClick = 1;
         }
+
+        if (mouseClick % 2 == 0) {
+            String value = jTable1.getModel().getValueAt(row, 0).toString();
+         
+            
+   
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                     ClassesUI.getInstace(schoolData).editClass(response);
+                }
+            });
+                    ;
+            
+            
+
+           
+        }
+
+        rowselect = row;
 
 
     }//GEN-LAST:event_jTable1MouseClicked

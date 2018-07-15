@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.ui.users.AddUserUI;
 import main.java.com.scholar.desktop.ui.users.ManageUsersUI;
 
@@ -22,7 +23,9 @@ public class ClassesUI extends javax.swing.JPanel {
     /**
      * Creates new form ClassesUI
      */
-      JTabbedPane jTabbedPane;
+    JTabbedPane jTabbedPane;
+    private static ClassesUI instance;
+
     public ClassesUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         jTabbedPane = new javax.swing.JTabbedPane();
@@ -30,7 +33,23 @@ public class ClassesUI extends javax.swing.JPanel {
         jTabbedPane1.addChangeListener(changeListener);
     }
 
-       ChangeListener changeListener = new ChangeListener() {
+    public static ClassesUI getInstace(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ClassesUI(schoolData);
+        }
+
+        return instance;
+    }
+    
+    public void editClass(ClassResponse classResponse){
+         
+        jTabbedPane1.setSelectedIndex(1);
+       // AddClassUI.getInstance(schoolData).initData();
+       AddClassUI.getInstance(schoolData).edit(classResponse);
+       
+    }
+
+    ChangeListener changeListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
             JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
@@ -50,7 +69,6 @@ public class ClassesUI extends javax.swing.JPanel {
         }
     };
 
-       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
