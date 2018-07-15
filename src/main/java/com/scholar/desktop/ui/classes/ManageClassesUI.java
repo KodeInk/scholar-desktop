@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
+import com.sun.rowset.internal.Row;
 import java.awt.Color;
 import java.util.Date;
 import java.util.List;
@@ -357,10 +358,10 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(565, Short.MAX_VALUE)
                 .addComponent(prevLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pageCounter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pageCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextLabel)
                 .addGap(13, 13, 13))
@@ -494,10 +495,34 @@ public class ManageClassesUI extends javax.swing.JPanel {
         prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
+    Integer rowselect = 0;
+    Integer mouseClick = 0;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Greaterst ");
+
+        Integer row = jTable1.getSelectedRow();
+
+        if (mouseClick == 2) {
+            String value = jTable1.getModel().getValueAt(row, 0).toString();
+            JOptionPane.showMessageDialog(null, value);
+            resetCounter();
+        }
+
+        if (rowselect != row) {
+            mouseClick = 1;
+            rowselect = row;
+
+        } else {
+            mouseClick++;
+        }
+
+
     }//GEN-LAST:event_jTable1MouseClicked
+
+    public void resetCounter() {
+        rowselect = 0;
+        mouseClick = 0;
+    }
 
     public void searchQuery() {
         // TODO add your handling code here:

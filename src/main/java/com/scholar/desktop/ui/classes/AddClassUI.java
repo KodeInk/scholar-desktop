@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 
@@ -47,6 +48,10 @@ public class AddClassUI extends javax.swing.JPanel {
             instance = new AddClassUI(schoolData);
         }
         return instance;
+    }
+    
+    public void edit(ClassResponse classResponse){
+        JOptionPane.showMessageDialog(null, "Karma");
     }
 
     public void initData() {

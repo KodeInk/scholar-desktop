@@ -5,7 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.users.AddUserUI;
+import main.java.com.scholar.desktop.ui.users.ManageUsersUI;
 
 /**
  *
@@ -17,11 +22,35 @@ public class ClassesUI extends javax.swing.JPanel {
     /**
      * Creates new form ClassesUI
      */
+      JTabbedPane jTabbedPane;
     public ClassesUI(SchoolData schoolData) {
         this.schoolData = schoolData;
+        jTabbedPane = new javax.swing.JTabbedPane();
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
 
+       ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageClassesUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddClassUI.getInstance(schoolData).initData();
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+    };
+
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
