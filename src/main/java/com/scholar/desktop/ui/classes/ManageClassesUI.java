@@ -57,13 +57,10 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         }
 
-        offset = Utilities.default_offset;
-        limit = Utilities.default_limit;
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
         initData();
-
+        Utilities.hideColumn(0, jTable1);
     }
 
     public static ManageClassesUI getInstance(SchoolData schoolData) {
@@ -75,6 +72,9 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+
         if (list != null) {
             populateJTable(list);
         }
@@ -83,18 +83,23 @@ public class ManageClassesUI extends javax.swing.JPanel {
         Utilities.ShowDialogMessage(message);
 
         fetchData(offset, limit);
-
+        page = 1;
+        pageCounter.setText(page.toString());
     }
 
     public void next() {
         offset = offset + limit;
         fetchData();
+        page++;
+        pageCounter.setText(page.toString());
     }
 
     public void prev() {
         offset = offset - limit;
         if (offset >= 0) {
             fetchData();
+            page--;
+            pageCounter.setText(page.toString());
         }
 
     }
@@ -179,7 +184,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         }
 
         tableModel.fireTableDataChanged();
-        Utilities.hideColumn(0, jTable1);
+
         Utilities.hideDialog();
 
     }
@@ -500,6 +505,8 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
             offset = Utilities.default_offset;
             limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
 
             search = searchbox.getText();
 
