@@ -75,13 +75,15 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
-        offset = Utilities.default_offset;
-        limit = Utilities.default_limit;
-
+       
         if (list != null) {
             populateJTable(list);
         }
 
+         offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+
+        
         final String message = "     Processsing ...     ";
         Utilities.ShowDialogMessage(message);
 
