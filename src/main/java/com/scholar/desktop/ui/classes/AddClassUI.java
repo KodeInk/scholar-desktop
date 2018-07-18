@@ -20,7 +20,7 @@ import main.java.com.scholar.desktop.services.classes.ClassesService;
  *
  * @author MOVER 5/27/2018
  */
-public class AddClassUI extends javax.swing.JPanel {
+public final class AddClassUI extends javax.swing.JPanel {
 
     /**
      * Creates new form AddClassUI
@@ -35,6 +35,7 @@ public class AddClassUI extends javax.swing.JPanel {
     public AddClassUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+         jButton1.setText("CREATE");
         initData();
     }
 
@@ -50,14 +51,21 @@ public class AddClassUI extends javax.swing.JPanel {
         return instance;
     }
     
-    public void edit(ClassResponse classResponse){
-        JOptionPane.showMessageDialog(null, "Karma");
+    /**
+     *
+     * @param classResponse
+     */
+    public void edit(ClassResponse classResponse) {
+        className.setText(classResponse.getName());
+        classCode.setText(classResponse.getCode());
+        RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
+        jButton1.setText("EDIT");
     }
-
+    
     public void initData() {
         initRankComboBox();
     }
-
+    
     public void initRankComboBox() {
         RankJComboBox.addItem("Select Option");
         for (int x = 0; x <= 500; x++) {
@@ -212,11 +220,11 @@ public class AddClassUI extends javax.swing.JPanel {
             throw new BadRequestException("Rank   is   mandatory");
         }
         _Class schoolClass = getSchoolClass();
-
+        
         saveClass(schoolClass);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void saveClass(_Class schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
@@ -230,13 +238,13 @@ public class AddClassUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
     }
-
+    
     private void resetForm() {
         className.setText("");
         classCode.setText("");
         RankJComboBox.setSelectedIndex(1);
     }
-
+    
     public _Class getSchoolClass() throws NumberFormatException {
         _Class schoolClass = new _Class();
         schoolClass.setName(className.getText());
