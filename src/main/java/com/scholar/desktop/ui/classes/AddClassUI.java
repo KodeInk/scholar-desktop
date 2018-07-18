@@ -35,7 +35,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     public AddClassUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-         jButton1.setText("CREATE");
+
         initData();
     }
 
@@ -50,7 +50,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
         return instance;
     }
-    
+
     /**
      *
      * @param classResponse
@@ -61,11 +61,13 @@ public final class AddClassUI extends javax.swing.JPanel {
         RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
         jButton1.setText("EDIT");
     }
-    
+
     public void initData() {
         initRankComboBox();
+        resetForm();
+        jButton1.setText("SAVE");
     }
-    
+
     public void initRankComboBox() {
         RankJComboBox.addItem("Select Option");
         for (int x = 0; x <= 500; x++) {
@@ -220,31 +222,31 @@ public final class AddClassUI extends javax.swing.JPanel {
             throw new BadRequestException("Rank   is   mandatory");
         }
         _Class schoolClass = getSchoolClass();
-        
+
         saveClass(schoolClass);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void saveClass(_Class schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
             ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved succesfully");
-            
+
             resetForm();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
     }
-    
+
     private void resetForm() {
         className.setText("");
         classCode.setText("");
         RankJComboBox.setSelectedIndex(1);
     }
-    
+
     public _Class getSchoolClass() throws NumberFormatException {
         _Class schoolClass = new _Class();
         schoolClass.setName(className.getText());
