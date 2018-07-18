@@ -107,6 +107,15 @@ public class ClassesService extends AbstractService {
         }
         return null;
     }
+    
+     public ClassResponse edit(_Class classes, String logId) throws IOException {
+        if (classes != null) {
+            Map classesMap = getClassMap(classes);
+            return classesAPI.create(classesMap, logId);
+        }
+        return null;
+    }
+     
 
     /**
      *

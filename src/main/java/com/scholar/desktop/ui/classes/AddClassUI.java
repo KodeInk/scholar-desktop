@@ -27,6 +27,7 @@ public final class AddClassUI extends javax.swing.JPanel {
      */
     private static AddClassUI instance;
     private SchoolData schoolData;
+      private ClassResponse classResponse;
 
     /**
      *
@@ -51,11 +52,13 @@ public final class AddClassUI extends javax.swing.JPanel {
         return instance;
     }
 
+  
     /**
      *
      * @param classResponse
      */
     public void edit(ClassResponse classResponse) {
+        this.classResponse = classResponse;
         className.setText(classResponse.getName());
         classCode.setText(classResponse.getCode());
         RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
@@ -223,9 +226,48 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
         _Class schoolClass = getSchoolClass();
 
-        saveClass(schoolClass);
+        String btnText = jButton1.getText();
+
+        SubmitData(btnText, schoolClass);
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     *
+     * @param btnText
+     * @param schoolClass
+     * @throws HeadlessException
+     */
+    public void SubmitData(String btnText, _Class schoolClass) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveClass(schoolClass);
+                break;
+            case "EDIT":
+                saveClass(schoolClass);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void editClass(_Class schoolClass) throws HeadlessException {
+        try {
+            //todo: get the clas_id
+            
+            schoolClass.setId(WIDTH);
+            
+            ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
 
     private void saveClass(_Class schoolClass) throws HeadlessException {
         try {
