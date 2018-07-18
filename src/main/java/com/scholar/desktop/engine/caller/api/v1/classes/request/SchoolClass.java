@@ -17,7 +17,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.reques
  * @author mover
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _Class {
+public class SchoolClass {
 
     private Integer id;
     private String name;
@@ -28,10 +28,10 @@ public class _Class {
     private Integer author_id;
     private _Stream[] streams;
 
-    public _Class() {
+    public SchoolClass() {
     }
 
-    public _Class(Integer id) {
+    public SchoolClass(Integer id) {
         this.id = id;
     }
 
@@ -124,7 +124,7 @@ public class _Class {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _Class other = (_Class) obj;
+        final SchoolClass other = (SchoolClass) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }

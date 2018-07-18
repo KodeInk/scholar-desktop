@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request._Class;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
@@ -27,7 +27,7 @@ public final class AddClassUI extends javax.swing.JPanel {
      */
     private static AddClassUI instance;
     private SchoolData schoolData;
-      private ClassResponse classResponse;
+    private ClassResponse classResponse;
 
     /**
      *
@@ -52,7 +52,6 @@ public final class AddClassUI extends javax.swing.JPanel {
         return instance;
     }
 
-  
     /**
      *
      * @param classResponse
@@ -224,7 +223,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         if (RankJComboBox.getSelectedIndex() <= 1) {
             throw new BadRequestException("Rank   is   mandatory");
         }
-        _Class schoolClass = getSchoolClass();
+        SchoolClass schoolClass = getSchoolClass();
 
         String btnText = jButton1.getText();
 
@@ -239,7 +238,7 @@ public final class AddClassUI extends javax.swing.JPanel {
      * @param schoolClass
      * @throws HeadlessException
      */
-    public void SubmitData(String btnText, _Class schoolClass) throws HeadlessException {
+    public void SubmitData(String btnText, SchoolClass schoolClass) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
                 saveClass(schoolClass);
@@ -252,13 +251,15 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    private void editClass(_Class schoolClass) throws HeadlessException {
+    private void editClass(SchoolClass schoolClass) throws HeadlessException {
         try {
             //todo: get the clas_id
-            
-            schoolClass.setId(WIDTH);
-            
-            ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
+            if (classResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            schoolClass.setId(classResponse.getId());
+            ClassesService.getInstance(schoolData).edit(schoolClass, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved succesfully");
 
             resetForm();
@@ -269,7 +270,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    private void saveClass(_Class schoolClass) throws HeadlessException {
+    private void saveClass(SchoolClass schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
             ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
@@ -289,8 +290,8 @@ public final class AddClassUI extends javax.swing.JPanel {
         RankJComboBox.setSelectedIndex(1);
     }
 
-    public _Class getSchoolClass() throws NumberFormatException {
-        _Class schoolClass = new _Class();
+    public SchoolClass getSchoolClass() throws NumberFormatException {
+        SchoolClass schoolClass = new SchoolClass();
         schoolClass.setName(className.getText());
         schoolClass.setCode(classCode.getText());
         schoolClass.setRanking(Integer.valueOf(RankJComboBox.getSelectedItem().toString()));
