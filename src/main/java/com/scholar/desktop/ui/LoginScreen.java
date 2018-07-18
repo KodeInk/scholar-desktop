@@ -73,8 +73,18 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabel2.setText("Password : ");
 
         USERNAMEFIELD.setName("USERNAME"); // NOI18N
+        USERNAMEFIELD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                USERNAMEFIELDActionPerformed(evt);
+            }
+        });
 
         PASSWORDFIELD.setName("PASSWORD"); // NOI18N
+        PASSWORDFIELD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PASSWORDFIELDActionPerformed(evt);
+            }
+        });
 
         LOGINBUTTON.setBackground(new java.awt.Color(153, 153, 153));
         LOGINBUTTON.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -192,6 +202,16 @@ public class LoginScreen extends javax.swing.JFrame {
         connector.login(Username, String.valueOf(Password), this);
 
     }//GEN-LAST:event_LOGINBUTTONActionPerformed
+
+    private void PASSWORDFIELDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PASSWORDFIELDActionPerformed
+        // TODO add your handling code here:
+        LOGINBUTTON.doClick();
+    }//GEN-LAST:event_PASSWORDFIELDActionPerformed
+
+    private void USERNAMEFIELDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USERNAMEFIELDActionPerformed
+        // TODO add your handling code here:
+         LOGINBUTTON.doClick();
+    }//GEN-LAST:event_USERNAMEFIELDActionPerformed
 
     /**
      * @param args the command line arguments
