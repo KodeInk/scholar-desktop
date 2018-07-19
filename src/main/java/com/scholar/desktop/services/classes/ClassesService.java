@@ -107,15 +107,14 @@ public class ClassesService extends AbstractService {
         }
         return null;
     }
-    
-     public ClassResponse edit(SchoolClass classes, String logId) throws IOException {
+
+    public ClassResponse edit(SchoolClass classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
-            return classesAPI.create(classesMap, logId);
+            return classesAPI.update(classesMap, logId);
         }
         return null;
     }
-     
 
     /**
      *
@@ -147,6 +146,10 @@ public class ClassesService extends AbstractService {
     public Map getClassMap(SchoolClass classes) {
 
         Map classesMap = new HashMap<>();
+        if (classes.getId() != null) {
+            classesMap.put("id", classes.getId());
+        }
+
         classesMap.put("name", classes.getName());
         classesMap.put("code", classes.getCode());
         classesMap.put("ranking", classes.getRanking());

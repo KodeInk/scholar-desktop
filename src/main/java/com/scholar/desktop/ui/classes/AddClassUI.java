@@ -244,7 +244,7 @@ public final class AddClassUI extends javax.swing.JPanel {
                 saveClass(schoolClass);
                 break;
             case "EDIT":
-                saveClass(schoolClass);
+                editClass(schoolClass);
                 break;
             default:
                 break;

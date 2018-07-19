@@ -115,14 +115,13 @@ public class EngineCaller {
     public void getQuerParameters(Map<String, String> queryParameter) {
         if (queryParameter != null) {
             for (String key : queryParameter.keySet()) {
-                System.out.println(" VALUE "+queryParameter.get(key));
+                System.out.println(" VALUE " + queryParameter.get(key));
                 target.queryParam(key, queryParameter.get(key));
             }
         }
     }
 
-    
-       private static WebTarget addQueryParamsToTarget(WebTarget target, Map<String, String> queryParams) {
+    private static WebTarget addQueryParamsToTarget(WebTarget target, Map<String, String> queryParams) {
         if (queryParams != null) {
             for (Map.Entry<String, String> entry : queryParams.entrySet()) {
                 target = target.queryParam(entry.getKey(), entry.getValue());
@@ -130,7 +129,7 @@ public class EngineCaller {
         }
         return target;
     }
-       
+
     /**
      *
      * @param path
@@ -138,10 +137,9 @@ public class EngineCaller {
      * @return
      */
     public Response get(String path, Map<String, String> queryParameter) {
-         
-          
-        target =addQueryParamsToTarget(target, queryParameter);
-        
+
+        target = addQueryParamsToTarget(target, queryParameter);
+
         Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -177,21 +175,20 @@ public class EngineCaller {
 
     /**
      *
-     * @param <T>
      * @param path
      * @param body
      * @param logId
      * @return
      */
-    public <T> T put(String path, Map body, String logId) {
+    public Response put(String path, Map body, String logId) {
 
-        target.path(path)
+        Response response = target.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .headers(getHeaderParameter())
-                .put(Entity.entity(body, MediaType.APPLICATION_JSON));
+                .put(Entity.entity(body, MediaType.APPLICATION_JSON), Response.class);
 
-        return null;
+        return response;
 
     }
 
