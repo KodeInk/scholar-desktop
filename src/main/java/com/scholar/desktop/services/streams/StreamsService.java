@@ -19,6 +19,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.StreamsAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.request.Stream;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
@@ -31,8 +32,7 @@ public class StreamsService extends AbstractService {
     private static final Logger LOG = Logger.getLogger(StreamsService.class.getName());
     private final SchoolData schoolData;
     private static StreamsService instance;
-
-    StreamsAPI streamsAPI;
+    private StreamsAPI streamsAPI;
 
     private List<StreamResponse> list = null;
 
@@ -59,7 +59,7 @@ public class StreamsService extends AbstractService {
      *
      * @return
      */
-    public List<ClassResponse> list() {
+    public List<StreamResponse> list() {
 
         if (list != null) {
             return list;
@@ -80,14 +80,14 @@ public class StreamsService extends AbstractService {
      * @param limit
      * @return
      */
-    public List<ClassResponse> list(Integer offset, Integer limit) {
+    public List<StreamResponse> list(Integer offset, Integer limit) {
 
 //        if (list == null) {
 //            list = new ArrayList<>();
 //        }
         list = new ArrayList<>();
 
-        ClassResponse[] responses = streamsAPI.list(offset, limit);
+        StreamResponse[] responses = streamsAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
@@ -98,22 +98,22 @@ public class StreamsService extends AbstractService {
 
     /**
      *
-     * @param classes
+     * @param streams
      * @param logId
      * @return
      * @throws IOException
      */
-    public ClassResponse create(SchoolClass classes, String logId) throws IOException {
-        if (classes != null) {
-            Map classesMap = getClassMap(classes);
+    public StreamResponse create(Stream streams, String logId) throws IOException {
+        if (streams != null) {
+            Map classesMap = getStreamMap(streams);
             return streamsAPI.create(classesMap, logId);
         }
         return null;
     }
 
-    public ClassResponse edit(SchoolClass classes, String logId) throws IOException {
-        if (classes != null) {
-            Map classesMap = getClassMap(classes);
+    public ClassResponse edit(Stream streams, String logId) throws IOException {
+        if (streams != null) {
+            Map classesMap = getStreamMap(streams);
             return streamsAPI.update(classesMap, logId);
         }
         return null;
@@ -128,34 +128,33 @@ public class StreamsService extends AbstractService {
      * @return
      * @throws IOException
      */
-    public List<ClassResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+    public List<StreamResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
-        List<ClassResponse> classResponses = new ArrayList<>();
+        List<StreamResponse> streamResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
-            ClassResponse[] responses = streamsAPI.list(searchQuery, offset, limit);
+            StreamResponse[] responses = streamsAPI.list(searchQuery, offset, limit);
             if (responses != null) {
-                classResponses.addAll(Arrays.asList(responses));
+                streamResponses.addAll(Arrays.asList(responses));
             }
         }
 
-        return classResponses;
+        return streamResponses;
     }
 
     /**
      *
-     * @param classes
+     * @param stream
      * @return
      */
-    public Map getClassMap(SchoolClass classes) {
+    public Map getStreamMap(Stream stream) {
 
         Map classesMap = new HashMap<>();
-        if (classes.getId() != null) {
-            classesMap.put("id", classes.getId());
+        if (stream.getId() != null) {
+            classesMap.put("id", stream.getId());
         }
 
-        classesMap.put("name", classes.getName());
-        classesMap.put("code", classes.getCode());
-        classesMap.put("ranking", classes.getRanking());
+        classesMap.put("name", stream.getName());
+        classesMap.put("code", stream.getCode());
 
         System.out.println("==================================");
         System.out.println(classesMap);
