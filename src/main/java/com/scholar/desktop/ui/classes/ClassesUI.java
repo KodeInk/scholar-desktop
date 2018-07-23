@@ -10,8 +10,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.ui.users.AddUserUI;
-import main.java.com.scholar.desktop.ui.users.ManageUsersUI;
+import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
+import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
 
 /**
  *
@@ -84,6 +84,8 @@ public class ClassesUI extends javax.swing.JPanel {
 
         jTabbedPane1.add("Manage Classes",ManageClassesUI.getInstance(schoolData));
         jTabbedPane1.add("Add Class",AddClassUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Streams", ManageStreamsUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Stream", AddStreamUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

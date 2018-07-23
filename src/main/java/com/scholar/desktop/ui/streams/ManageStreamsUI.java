@@ -3,53 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.classes;
+package main.java.com.scholar.desktop.ui.streams;
 
-import com.sun.rowset.internal.Row;
 import java.awt.Color;
-import java.util.Date;
-import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
-import main.java.com.scholar.desktop.ui.DesktopSwitcher;
-import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
- * @author mover 3/9/2018
+ * @author mover
  */
-public class ManageClassesUI extends javax.swing.JPanel {
-
-    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
-    private SchoolData schoolData = null;
-    public DefaultTableModel tableModel;
-    private static ManageClassesUI instance;
+public class ManageStreamsUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form ManageClasses
-     *
-     * @param schoolData
+     * Creates new form ManageStreamsUI
      */
-    List<ClassResponse> list = null;
-
+    
     private Integer page;
     private Integer offset;
     private Integer limit;
     private String search = null;
+    private SchoolData schoolData = null;
+    private static ManageStreamsUI instance;
+    
+      private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "STATUS", "DATE CREATED", "AUTHOR"};
+    public DefaultTableModel tableModel;
 
-    //pageCounter
-    public ManageClassesUI(SchoolData schoolData) {
+    public ManageStreamsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
-
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
                 public boolean isCellEditable(int row, int column) {
@@ -59,139 +42,16 @@ public class ManageClassesUI extends javax.swing.JPanel {
             };
 
         }
-
         initComponents();
-        searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        initData();
-        Utilities.hideColumn(0, jTable1);
+         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
     }
 
-    public static ManageClassesUI getInstance(SchoolData schoolData) {
+    public static ManageStreamsUI getInstance(SchoolData schoolData) {
         if (instance == null) {
-            instance = new ManageClassesUI(schoolData);
+            instance = new ManageStreamsUI(schoolData);
         }
 
         return instance;
-    }
-
-    public final void initData() {
-       
-        if (list != null) {
-            populateJTable(list);
-        }
-
-         offset = Utilities.default_offset;
-        limit = Utilities.default_limit;
-
-        
-        final String message = "     Processsing ...     ";
-//        Utilities.ShowDialogMessage(message);
-
-        fetchData(offset, limit);
-        page = 1;
-        pageCounter.setText(page.toString());
-    }
-
-    public void next() {
-        offset = offset + limit;
-        fetchData();
-        page++;
-        pageCounter.setText(page.toString());
-    }
-
-    public void prev() {
-        offset = offset - limit;
-        if (offset >= 0) {
-            fetchData();
-            page--;
-            pageCounter.setText(page.toString());
-        }
-
-    }
-
-    public void enableNextPrevLabels() {
-        searchbox.setEnabled(true);
-        nextLabel.setEnabled(true);
-        prevLabel.setEnabled(true);
-        searchButton.setEnabled(true);
-    }
-
-    public void disableNextPrevLabels() {
-        searchbox.setEnabled(false);
-        searchButton.setEnabled(false);
-        nextLabel.setEnabled(false);
-        prevLabel.setEnabled(false);
-    }
-
-    public void fetchData() {
-        if (search != null) {
-            fetchData(search, offset, limit);
-        } else {
-            fetchData(offset, limit);
-        }
-    }
-
-    public void fetchData(String search, Integer offset, Integer limit) {
-        SwingWorker swingWorker = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                jLabel1.setText("Processing....");
-                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
-                populateJTable(crs);
-                repaint();
-                jLabel1.setText("Manage Classes");
-                return null;
-            }
-        };
-        swingWorker.execute();
-    }
-
-    public void fetchData(Integer offset, Integer limit) {
-        disableNextPrevLabels();
-        SwingWorker swingWorker = new SwingWorker() {
-
-            @Override
-            protected Object doInBackground() throws Exception {
-                jLabel1.setText("Processing....");
-                list = ClassesService.getInstance(schoolData).list(offset, limit);
-                populateJTable(list);
-                jLabel1.setText("Manage Classes");
-                enableNextPrevLabels();
-                return null;
-
-            }
-        };
-        swingWorker.execute();
-    }
-
-    public void populateJTable(List<ClassResponse> list) {
-
-        if (list != null) {
-            Utilities.removeRowsFromDefaultModel(tableModel);
-
-            for (ClassResponse ur : list) {
-
-                String id = ur.getId().toString();
-                String name = ur.getName().toUpperCase();
-                String code = ur.getCode().toUpperCase();
-                String ranking = ur.getRanking().toString().toUpperCase();
-                String status = ur.getStatus().toUpperCase();
-                String date_Created = " - ";
-                if (ur.getDate_created() != null) {
-                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
-                }
-
-                String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, name, code, ranking, status, date_Created, author};
-                tableModel.addRow(data);
-
-            }
-        }
-
-        tableModel.fireTableDataChanged();
-
-//        Utilities.hideDialog();
-
     }
 
     /**
@@ -229,6 +89,8 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(2);
@@ -242,7 +104,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 642, Short.MAX_VALUE)
+            .addGap(0, 1044, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +115,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel1.setText("Manage Classes");
+        jLabel1.setText("Manage Streams");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -301,7 +163,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+                .addContainerGap(572, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,7 +224,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(565, Short.MAX_VALUE)
+                .addContainerGap(967, Short.MAX_VALUE)
                 .addComponent(prevLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pageCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +247,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1044, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -440,7 +302,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(741, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +323,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -478,27 +340,38 @@ public class ManageClassesUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        searchQuery();
-    }//GEN-LAST:event_searchButtonActionPerformed
-
-
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
         searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
-    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        searchQuery();
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    public void searchQuery() {
         // TODO add your handling code here:
-        next();
+//        if (!searchbox.getText().isEmpty()) {
+//
+//            offset = Utilities.default_offset;
+//            limit = Utilities.default_limit;
+//            page = 1;
+//            pageCounter.setText(page.toString());
+//
+//            search = searchbox.getText();
+//
+//            fetchData();
+//
+//        } else {
+//            search = null;
+//            jLabel1.setText("Processing....");
+//            initData();
+//        }
+//        jLabel1.setText("Manage Classes");
+    }
 
-    }//GEN-LAST:event_nextLabelMouseClicked
-
-    private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
-        // TODO add your handling code here:
-        prev();
-    }//GEN-LAST:event_prevLabelMouseClicked
-
+    
+    
     Integer rowselect = 0;
     Integer mouseClick = 0;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -514,53 +387,48 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         if (mouseClick % 2 == 0) {
             String value = jTable1.getModel().getValueAt(row, 0).toString();
-         
-            
-   
-            list.forEach(response -> {
-                if (response.getId() == Integer.parseInt(value)) {
-                     ClassesUI.getInstace(schoolData).editClass(response);
-                }
-            });
-                    ;
-            
-            
 
-           
+//            list.forEach(response -> {
+//                if (response.getId() == Integer.parseInt(value)) {
+//                    ClassesUI.getInstace(schoolData).editClass(response);
+//                }
+//            });
+//            ;
+
         }
 
         rowselect = row;
 
-
     }//GEN-LAST:event_jTable1MouseClicked
 
-    public void resetCounter() {
-        rowselect = 0;
-        mouseClick = 0;
-    }
-
-    public void searchQuery() {
+    private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
-        if (!searchbox.getText().isEmpty()) {
+        prev();
+    }//GEN-LAST:event_prevLabelMouseClicked
 
-            offset = Utilities.default_offset;
-            limit = Utilities.default_limit;
-            page = 1;
-            pageCounter.setText(page.toString());
+    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_nextLabelMouseClicked
 
-            search = searchbox.getText();
-
-            fetchData();
-
-        } else {
-            search = null;
-            jLabel1.setText("Processing....");
-            initData();
-        }
-        jLabel1.setText("Manage Classes");
+      public void next() {
+        offset = offset + limit;
+//        fetchData();
+        page++;
+        pageCounter.setText(page.toString());
     }
 
+    public void prev() {
+        offset = offset - limit;
+        if (offset >= 0) {
+//            fetchData();
+            page--;
+            pageCounter.setText(page.toString());
+        }
 
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

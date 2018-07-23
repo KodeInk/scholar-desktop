@@ -5,17 +5,31 @@
  */
 package main.java.com.scholar.desktop.ui.streams;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover 7/22/2018
  */
-public class ManageStreams extends javax.swing.JPanel {
+public class AddStreamUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form ManageStreams
+     * Creates new form AddStreamUI
      */
-    public ManageStreams() {
+    private static AddStreamUI instance;
+    private SchoolData schoolData;
+
+    public AddStreamUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static AddStreamUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddStreamUI(schoolData);
+        }
+
+        return instance;
     }
 
     /**
@@ -31,13 +45,14 @@ public class ManageStreams extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
