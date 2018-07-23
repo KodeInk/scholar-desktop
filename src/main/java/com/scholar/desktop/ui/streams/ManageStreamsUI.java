@@ -16,6 +16,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.Class
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.streams.StreamsService;
 
 /**
  *
@@ -79,12 +80,12 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
-      public void fetchData(String search, Integer offset, Integer limit) {
+    public void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 jLabel1.setText("Processing....");
-                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                List<StreamResponse> crs = StreamsService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(crs);
                 repaint();
                 jLabel1.setText("Manage Classes");
@@ -101,7 +102,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 jLabel1.setText("Processing....");
-                list = ClassesService.getInstance(schoolData).list(offset, limit);
+                list = StreamsService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 jLabel1.setText("Manage Classes");
                 enableNextPrevLabels();
@@ -112,8 +113,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    
-    
     public void populateJTable(List<StreamResponse> list) {
 
         if (list != null) {
@@ -512,8 +511,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     }
 
-
-     public void enableNextPrevLabels() {
+    public void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
@@ -526,9 +524,8 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

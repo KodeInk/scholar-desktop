@@ -82,16 +82,12 @@ public class StreamsService extends AbstractService {
      */
     public List<StreamResponse> list(Integer offset, Integer limit) {
 
-//        if (list == null) {
-//            list = new ArrayList<>();
-//        }
         list = new ArrayList<>();
 
         StreamResponse[] responses = streamsAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
-//        IncreaseOffsetLimit();
 
         return list;
     }
