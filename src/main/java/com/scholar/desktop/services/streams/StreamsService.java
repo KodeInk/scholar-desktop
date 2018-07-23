@@ -18,6 +18,8 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.StreamsAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
@@ -30,9 +32,9 @@ public class StreamsService extends AbstractService {
     private final SchoolData schoolData;
     private static StreamsService instance;
 
-    ClassesAPI classesAPI;
+    StreamsAPI streamsAPI;
 
-    private List<ClassResponse> list = null;
+    private List<StreamResponse> list = null;
 
     /**
      *
@@ -40,7 +42,7 @@ public class StreamsService extends AbstractService {
      */
     public StreamsService(SchoolData schoolData) {
         this.schoolData = schoolData;
-        classesAPI = new ClassesAPI(schoolData);
+        streamsAPI = new StreamsAPI(schoolData);
     }
 
     /**
@@ -64,7 +66,7 @@ public class StreamsService extends AbstractService {
         }
         list = new ArrayList<>();
 
-        ClassResponse[] responses = classesAPI.list(offset, limit);
+        StreamResponse[] responses = streamsAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
@@ -85,7 +87,7 @@ public class StreamsService extends AbstractService {
 //        }
         list = new ArrayList<>();
 
-        ClassResponse[] responses = classesAPI.list(offset, limit);
+        ClassResponse[] responses = streamsAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
@@ -104,7 +106,7 @@ public class StreamsService extends AbstractService {
     public ClassResponse create(SchoolClass classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
-            return classesAPI.create(classesMap, logId);
+            return streamsAPI.create(classesMap, logId);
         }
         return null;
     }
@@ -112,7 +114,7 @@ public class StreamsService extends AbstractService {
     public ClassResponse edit(SchoolClass classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
-            return classesAPI.update(classesMap, logId);
+            return streamsAPI.update(classesMap, logId);
         }
         return null;
     }
@@ -130,7 +132,7 @@ public class StreamsService extends AbstractService {
 
         List<ClassResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
-            ClassResponse[] responses = classesAPI.list(searchQuery, offset, limit);
+            ClassResponse[] responses = streamsAPI.list(searchQuery, offset, limit);
             if (responses != null) {
                 classResponses.addAll(Arrays.asList(responses));
             }
