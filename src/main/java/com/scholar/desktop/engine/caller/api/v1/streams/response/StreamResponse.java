@@ -3,32 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.request;
+package main.java.com.scholar.desktop.engine.caller.api.v1.streams.response;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author mover 12/19/2017
+ * @author mover
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class _Stream {
+public class StreamResponse {
 
     private Integer id;
     private String name;
     private String code;
-    private StatusEnum status;
-    private Date date_created;
-    private Integer author_id;
-    private Integer[] classes;
+    private String status;
+    private Long date_created;
+    private String author;
 
-    public _Stream() {
+    public StreamResponse() {
     }
 
-    public _Stream(Integer id) {
+    public StreamResponse(Integer id) {
         this.id = id;
     }
 
@@ -56,47 +52,39 @@ public class _Stream {
         this.code = code;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Date getDate_created() {
+    public Long getDate_created() {
         return date_created;
     }
 
-    public void setDate_created(Date date_created) {
+    public void setDate_created(Long date_created) {
         this.date_created = date_created;
     }
 
-    public Integer getAuthor_id() {
-        return author_id;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
-    }
-
-    public Integer[] getClasses() {
-        return classes;
-    }
-
-    public void setClasses(Integer[] classes) {
-        this.classes = classes;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.code);
-        hash = 53 * hash + Objects.hashCode(this.status);
-        hash = 53 * hash + Objects.hashCode(this.date_created);
-        hash = 53 * hash + Objects.hashCode(this.author_id);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.code);
+        hash = 23 * hash + Objects.hashCode(this.status);
+        hash = 23 * hash + Objects.hashCode(this.date_created);
+        hash = 23 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -111,11 +99,14 @@ public class _Stream {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _Stream other = (_Stream) obj;
+        final StreamResponse other = (StreamResponse) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -124,21 +115,18 @@ public class _Stream {
         if (this.status != other.status) {
             return false;
         }
-        if (!Objects.equals(this.date_created, other.date_created)) {
-            return false;
-        }
-        return Objects.equals(this.author_id, other.author_id);
+        return Objects.equals(this.date_created, other.date_created);
     }
 
     @Override
     public String toString() {
-        return "_Stream{"
+        return "StreamResponse{"
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
                 + ", status=" + status
                 + ", date_created=" + date_created
-                + ", author_id=" + author_id
+                + ", author=" + author
                 + "}";
     }
 

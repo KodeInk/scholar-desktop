@@ -8,7 +8,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.students.registration
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.response.StreamResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 
 /**

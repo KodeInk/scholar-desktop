@@ -6,10 +6,16 @@
 package main.java.com.scholar.desktop.ui.streams;
 
 import java.awt.Color;
+import java.util.Date;
+import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 
 /**
  *
@@ -20,21 +26,22 @@ public class ManageStreamsUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageStreamsUI
      */
-    
     private Integer page;
     private Integer offset;
     private Integer limit;
     private String search = null;
     private SchoolData schoolData = null;
     private static ManageStreamsUI instance;
-    
-      private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "STATUS", "DATE CREATED", "AUTHOR"};
+    List<StreamResponse> list = null;
+
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "STATUS", "DATE CREATED", "AUTHOR"};
     public DefaultTableModel tableModel;
 
     public ManageStreamsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
+                @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;//This causes all cells to be not editable
                 }
@@ -43,7 +50,9 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
         }
         initComponents();
-         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+        searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+        initData();
+        Utilities.hideColumn(0, jTable1);
     }
 
     public static ManageStreamsUI getInstance(SchoolData schoolData) {
@@ -52,6 +61,84 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         }
 
         return instance;
+    }
+
+    public final void initData() {
+
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+
+        final String message = "     Processsing ...     ";
+
+        fetchData(offset, limit);
+        page = 1;
+        pageCounter.setText(page.toString());
+    }
+
+      public void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                jLabel1.setText("Processing....");
+                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(crs);
+                repaint();
+                jLabel1.setText("Manage Classes");
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+
+    public void fetchData(Integer offset, Integer limit) {
+        disableNextPrevLabels();
+        SwingWorker swingWorker = new SwingWorker() {
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                jLabel1.setText("Processing....");
+                list = ClassesService.getInstance(schoolData).list(offset, limit);
+                populateJTable(list);
+                jLabel1.setText("Manage Classes");
+                enableNextPrevLabels();
+                return null;
+
+            }
+        };
+        swingWorker.execute();
+    }
+
+    
+    
+    public void populateJTable(List<StreamResponse> list) {
+
+        if (list != null) {
+            Utilities.removeRowsFromDefaultModel(tableModel);
+
+            for (StreamResponse ur : list) {
+
+                String id = ur.getId().toString();
+                String name = ur.getName().toUpperCase();
+                String code = ur.getCode().toUpperCase();
+                String status = ur.getStatus().toUpperCase();
+                String date_Created = " - ";
+                if (ur.getDate_created() != null) {
+                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
+                }
+
+                String author = ur.getAuthor().toUpperCase();
+                Object[] data = {id, name, code, status, date_Created, author};
+                tableModel.addRow(data);
+
+            }
+        }
+
+        tableModel.fireTableDataChanged();
+
     }
 
     /**
@@ -370,8 +457,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 //        jLabel1.setText("Manage Classes");
     }
 
-    
-    
     Integer rowselect = 0;
     Integer mouseClick = 0;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -394,7 +479,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 //                }
 //            });
 //            ;
-
         }
 
         rowselect = row;
@@ -411,7 +495,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
-      public void next() {
+    public void next() {
         offset = offset + limit;
 //        fetchData();
         page++;
@@ -427,6 +511,22 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         }
 
     }
+
+
+     public void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
+        nextLabel.setEnabled(true);
+        prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
+    }
+
+    public void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
+        nextLabel.setEnabled(false);
+        prevLabel.setEnabled(false);
+    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

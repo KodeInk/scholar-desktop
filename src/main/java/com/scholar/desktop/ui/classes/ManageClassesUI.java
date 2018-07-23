@@ -5,23 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
-import com.sun.rowset.internal.Row;
 import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
-import main.java.com.scholar.desktop.ui.DesktopSwitcher;
-import main.java.com.scholar.desktop.ui.helper.DashboardViews;
 
 /**
  *
@@ -52,6 +45,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
+                @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;//This causes all cells to be not editable
                 }

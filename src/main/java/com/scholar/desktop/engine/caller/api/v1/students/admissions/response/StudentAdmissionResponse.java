@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.response.StreamResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 
 /**

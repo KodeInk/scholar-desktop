@@ -3,29 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.response;
+package main.java.com.scholar.desktop.engine.caller.api.v1.streams.request;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author mover
+ * @author mover 12/19/2017
  */
-public class StreamResponse {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Stream {
 
     private Integer id;
     private String name;
     private String code;
     private StatusEnum status;
     private Date date_created;
-    private String author;
+    private Integer author_id;
+    private Integer[] classes;
 
-    public StreamResponse() {
+    public Stream() {
     }
 
-    public StreamResponse(Integer id) {
+    public Stream(Integer id) {
         this.id = id;
     }
 
@@ -69,23 +72,31 @@ public class StreamResponse {
         this.date_created = date_created;
     }
 
-    public String getAuthor() {
-        return author;
+    public Integer getAuthor_id() {
+        return author_id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor_id(Integer author_id) {
+        this.author_id = author_id;
+    }
+
+    public Integer[] getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Integer[] classes) {
+        this.classes = classes;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.code);
-        hash = 23 * hash + Objects.hashCode(this.status);
-        hash = 23 * hash + Objects.hashCode(this.date_created);
-        hash = 23 * hash + Objects.hashCode(this.author);
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.code);
+        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.date_created);
+        hash = 53 * hash + Objects.hashCode(this.author_id);
         return hash;
     }
 
@@ -100,14 +111,11 @@ public class StreamResponse {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final StreamResponse other = (StreamResponse) obj;
+        final Stream other = (Stream) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Objects.equals(this.code, other.code)) {
-            return false;
-        }
-        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -116,18 +124,21 @@ public class StreamResponse {
         if (this.status != other.status) {
             return false;
         }
-        return Objects.equals(this.date_created, other.date_created);
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return Objects.equals(this.author_id, other.author_id);
     }
 
     @Override
     public String toString() {
-        return "StreamResponse{"
+        return "_Stream{"
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
                 + ", status=" + status
                 + ", date_created=" + date_created
-                + ", author=" + author
+                + ", author_id=" + author_id
                 + "}";
     }
 

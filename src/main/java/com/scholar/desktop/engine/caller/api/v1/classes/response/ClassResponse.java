@@ -9,7 +9,7 @@ import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.response.StreamResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 
 /**
  *

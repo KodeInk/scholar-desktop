@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.streams.request._Stream;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.request.Stream;
 
 /**
  *
@@ -26,7 +26,7 @@ public class SchoolClass {
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
-    private _Stream[] streams;
+    private Stream[] streams;
 
     public SchoolClass() {
     }
@@ -91,11 +91,11 @@ public class SchoolClass {
         this.author_id = author_id;
     }
 
-    public _Stream[] getStreams() {
+    public Stream[] getStreams() {
         return streams;
     }
 
-    public void setStreams(_Stream[] streams) {
+    public void setStreams(Stream[] streams) {
         this.streams = streams;
     }
 
