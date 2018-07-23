@@ -16,7 +16,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.TermsAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.request.Term;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Streams;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;

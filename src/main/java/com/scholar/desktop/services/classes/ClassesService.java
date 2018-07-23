@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Streams;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
@@ -100,7 +100,7 @@ public class ClassesService extends AbstractService {
      * @return
      * @throws IOException
      */
-    public ClassResponse create(SchoolClass classes, String logId) throws IOException {
+    public ClassResponse create(Streams classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
             return classesAPI.create(classesMap, logId);
@@ -108,7 +108,7 @@ public class ClassesService extends AbstractService {
         return null;
     }
 
-    public ClassResponse edit(SchoolClass classes, String logId) throws IOException {
+    public ClassResponse edit(Streams classes, String logId) throws IOException {
         if (classes != null) {
             Map classesMap = getClassMap(classes);
             return classesAPI.update(classesMap, logId);
@@ -143,7 +143,7 @@ public class ClassesService extends AbstractService {
      * @param classes
      * @return
      */
-    public Map getClassMap(SchoolClass classes) {
+    public Map getClassMap(Streams classes) {
 
         Map classesMap = new HashMap<>();
         if (classes.getId() != null) {

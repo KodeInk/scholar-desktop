@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.SchoolClass;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Streams;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.StreamsAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.request.Stream;
