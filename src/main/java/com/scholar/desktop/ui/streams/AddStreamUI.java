@@ -5,9 +5,19 @@
  */
 package main.java.com.scholar.desktop.ui.streams;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Streams;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.request.Stream;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.services.streams.StreamsService;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -20,6 +30,7 @@ public class AddStreamUI extends javax.swing.JPanel {
      */
     private static AddStreamUI instance;
     private SchoolData schoolData;
+    private ClassResponse classResponse;
 
     public AddStreamUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -161,7 +172,7 @@ public class AddStreamUI extends javax.swing.JPanel {
             throw new BadRequestException("Stream code is   mandatory");
         }
 
-        Streams streams = getSchoolClass();
+        Stream streams = getStream();
 
         String btnText = jButton1.getText();
 
@@ -169,12 +180,63 @@ public class AddStreamUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public Streams getSchoolClass() {
-        Streams schoolClass = new Streams();
-        schoolClass.setName(streamName.getText());
-        schoolClass.setCode(streamCode.getText());
+    public void SubmitData(String btnText, Stream stream) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveClass(stream);
+                break;
+            case "EDIT":
+                editClass(stream);
+                break;
+            default:
+                break;
+        }
+    }
 
-        return schoolClass;
+    private void editClass(Stream stream) throws HeadlessException {
+        try {
+            //todo: get the clas_id
+            if (classResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            stream.setId(classResponse.getId());
+            StreamsService.getInstance(schoolData).edit(stream, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
+
+    private void saveClass(Stream stream) throws HeadlessException {
+        try {
+            //todi:  submit to sever
+            StreamsService.getInstance(schoolData).create(stream, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
+
+    private void resetForm() {
+        streamName.setText("");
+        streamCode.setText("");
+
+    }
+
+    public Stream getStream() {
+        Stream stream = new Stream();
+        stream.setName(streamName.getText());
+        stream.setCode(streamCode.getText());
+        return stream;
     }
 
 

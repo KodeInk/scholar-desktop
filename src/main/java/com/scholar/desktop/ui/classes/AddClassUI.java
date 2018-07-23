@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Streams;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
@@ -223,7 +223,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         if (RankJComboBox.getSelectedIndex() <= 1) {
             throw new BadRequestException("Rank   is   mandatory");
         }
-        Streams schoolClass = getSchoolClass();
+        Classes schoolClass = getSchoolClass();
 
         String btnText = jButton1.getText();
 
@@ -238,7 +238,7 @@ public final class AddClassUI extends javax.swing.JPanel {
      * @param schoolClass
      * @throws HeadlessException
      */
-    public void SubmitData(String btnText, Streams schoolClass) throws HeadlessException {
+    public void SubmitData(String btnText, Classes schoolClass) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
                 saveClass(schoolClass);
@@ -251,7 +251,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    private void editClass(Streams schoolClass) throws HeadlessException {
+    private void editClass(Classes schoolClass) throws HeadlessException {
         try {
             //todo: get the clas_id
             if (classResponse == null) {
@@ -270,7 +270,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    private void saveClass(Streams schoolClass) throws HeadlessException {
+    private void saveClass(Classes schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
             ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
@@ -290,8 +290,8 @@ public final class AddClassUI extends javax.swing.JPanel {
         RankJComboBox.setSelectedIndex(1);
     }
 
-    public Streams getSchoolClass() throws NumberFormatException {
-        Streams schoolClass = new Streams();
+    public Classes getSchoolClass() throws NumberFormatException {
+        Classes schoolClass = new Classes();
         schoolClass.setName(className.getText());
         schoolClass.setCode(classCode.getText());
         schoolClass.setRanking(Integer.valueOf(RankJComboBox.getSelectedItem().toString()));
