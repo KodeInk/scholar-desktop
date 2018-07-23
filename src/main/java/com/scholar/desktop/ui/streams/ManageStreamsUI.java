@@ -88,7 +88,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
                 List<StreamResponse> crs = StreamsService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(crs);
                 repaint();
-                jLabel1.setText("Manage Classes");
+                jLabel1.setText("Manage Streams");
                 return null;
             }
         };
@@ -104,7 +104,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
                 jLabel1.setText("Processing....");
                 list = StreamsService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
-                jLabel1.setText("Manage Classes");
+                jLabel1.setText("Manage Streams");
                 enableNextPrevLabels();
                 return null;
 
