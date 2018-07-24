@@ -66,9 +66,9 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     public final void initData() {
 
-        if (list != null) {
-            populateJTable(list);
-        }
+//        if (list != null) {
+//            populateJTable(list);
+//        }
 
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;

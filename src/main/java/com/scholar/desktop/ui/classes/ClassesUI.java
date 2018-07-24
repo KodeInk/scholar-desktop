@@ -40,13 +40,13 @@ public class ClassesUI extends javax.swing.JPanel {
 
         return instance;
     }
-    
-    public void editClass(ClassResponse classResponse){
-         
+
+    public void editClass(ClassResponse classResponse) {
+
         jTabbedPane1.setSelectedIndex(1);
-       // AddClassUI.getInstance(schoolData).initData();
-       AddClassUI.getInstance(schoolData).edit(classResponse);
-       
+        // AddClassUI.getInstance(schoolData).initData();
+        AddClassUI.getInstance(schoolData).edit(classResponse);
+
     }
 
     ChangeListener changeListener = new ChangeListener() {
@@ -60,6 +60,14 @@ public class ClassesUI extends javax.swing.JPanel {
                     break;
                 case 1:
                     AddClassUI.getInstance(schoolData).initData();
+                    break;
+
+                case 2:
+                    ManageStreamsUI.getInstance(schoolData).initData();
+                    break;
+
+                case 3:
+                    AddStreamUI.getInstance(schoolData);
                     break;
                 default:
 
