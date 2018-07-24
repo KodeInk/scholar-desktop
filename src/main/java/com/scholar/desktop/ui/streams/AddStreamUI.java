@@ -180,6 +180,12 @@ public class AddStreamUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     *
+     * @param btnText
+     * @param stream
+     * @throws HeadlessException
+     */
     public void SubmitData(String btnText, Stream stream) throws HeadlessException {
         switch (btnText) {
             case "SAVE":

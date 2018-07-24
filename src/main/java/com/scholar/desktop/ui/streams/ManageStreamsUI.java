@@ -69,7 +69,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 //        if (list != null) {
 //            populateJTable(list);
 //        }
-
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
 
@@ -437,23 +436,23 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     public void searchQuery() {
         // TODO add your handling code here:
-//        if (!searchbox.getText().isEmpty()) {
-//
-//            offset = Utilities.default_offset;
-//            limit = Utilities.default_limit;
-//            page = 1;
-//            pageCounter.setText(page.toString());
-//
-//            search = searchbox.getText();
-//
-//            fetchData();
-//
-//        } else {
-//            search = null;
-//            jLabel1.setText("Processing....");
-//            initData();
-//        }
-//        jLabel1.setText("Manage Classes");
+        if (!searchbox.getText().isEmpty()) {
+
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
+
+            search = searchbox.getText();
+
+            fetchData(search, offset, limit);
+
+        } else {
+            search = null;
+            jLabel1.setText("Processing....");
+            initData();
+        }
+        jLabel1.setText("Manage Classes");
     }
 
     Integer rowselect = 0;
