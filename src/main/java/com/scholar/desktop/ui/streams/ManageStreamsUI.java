@@ -496,7 +496,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     public void next() {
         offset = offset + limit;
-//        fetchData();
+        fetchData(offset, limit);
         page++;
         pageCounter.setText(page.toString());
     }
@@ -504,7 +504,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
     public void prev() {
         offset = offset - limit;
         if (offset >= 0) {
-//            fetchData();
+            fetchData(offset, limit);
             page--;
             pageCounter.setText(page.toString());
         }
