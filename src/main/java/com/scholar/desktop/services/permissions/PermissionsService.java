@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.PermissionsAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
@@ -51,26 +52,11 @@ public class PermissionsService extends AbstractService {
         return instance;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<PermissionsResponse> list() {
-        if (list != null) {
-            return list;
-        }
-        list = new ArrayList<>();
-
-        PermissionsResponse[] responses = permissionsAPI.list(offset, limit);
-        if (responses != null) {
-            list.addAll(Arrays.asList(responses));
-        }
-        IncreaseOffsetLimit();
-        return list;
-    }
+ 
 
     public List<PermissionsResponse> list(Integer offset, Integer limit) {
         list = new ArrayList<>();
+     
         PermissionsResponse[] responses = permissionsAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
