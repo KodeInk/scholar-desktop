@@ -37,7 +37,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
 
-        initData();
+        
     }
 
     /**

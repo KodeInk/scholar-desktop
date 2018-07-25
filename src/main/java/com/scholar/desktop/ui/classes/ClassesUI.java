@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
 import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
 
@@ -48,6 +49,16 @@ public class ClassesUI extends javax.swing.JPanel {
         AddClassUI.getInstance(schoolData).edit(classResponse);
 
     }
+    
+     public void editStream(StreamResponse classResponse) {
+
+        jTabbedPane1.setSelectedIndex(2);
+        // AddClassUI.getInstance(schoolData).initData();
+        AddStreamUI.getInstance(schoolData).edit(classResponse);
+
+    }
+     
+     
 
     ChangeListener changeListener = new ChangeListener() {
         @Override

@@ -14,6 +14,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.request.Stream;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.streams.StreamsService;
@@ -31,6 +32,7 @@ public class AddStreamUI extends javax.swing.JPanel {
     private static AddStreamUI instance;
     private SchoolData schoolData;
     private ClassResponse classResponse;
+    private StreamResponse streamResponse;
 
     public AddStreamUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -43,6 +45,13 @@ public class AddStreamUI extends javax.swing.JPanel {
         }
 
         return instance;
+    }
+
+    public void edit(StreamResponse streamResponse) {
+        this.streamResponse = streamResponse;
+        streamName.setText(streamResponse.getName());
+        streamCode.setText(streamResponse.getCode());
+        jButton1.setText("EDIT");
     }
 
     /**
