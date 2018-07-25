@@ -19,7 +19,7 @@ import main.java.com.scholar.desktop.services.roles.RolesService;
  * @author mover 3/8/2018
  */
 public class ManageRolesUI extends javax.swing.JPanel {
-
+    
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "IS SYSTEM", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     /**
@@ -27,75 +27,86 @@ public class ManageRolesUI extends javax.swing.JPanel {
      */
     private DefaultTableModel tableModel;
     private static ManageRolesUI instance;
-
+    
+    private Integer page;
+    private Integer offset;
+    private Integer limit;
+    private String search = null;
+    
     public ManageRolesUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
         }
-
+        
         initComponents();
-        fetchData();
-
+        initData();
+        
     }
-
+    
     public static ManageRolesUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ManageRolesUI(schoolData);
         }
         return instance;
     }
-
+    
     List<RoleResponse> list = null;
+    
+    public final void initData() {
+//        if (list != null) {
+//            populateJTable(list);
+//        }
 
-    public final void fetchData() {
-        if (list != null) {
-            populateJTable(list);
-        }
-
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+        
+        fetchData();
+    }
+    
+    public void fetchData() {
         final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = RolesService.getInstance(schoolData).list();
+                list = RolesService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 return null;
             }
         };
         swingWorker.execute();
     }
-
+    
     public void populateJTable(List<RoleResponse> list) {
         if (list != null) {
-
+            
             Utilities.removeRowsFromDefaultModel(tableModel);
-
+            
             for (RoleResponse roleResponse : list) {
-
+                
                 String name = roleResponse.getName().toUpperCase();
                 String code = roleResponse.getCode().toUpperCase();
                 String description = roleResponse.getDescription();
                 String isSystem = roleResponse.isIsSystem() ? "YES" : "NO";
                 String status = " N/A ";
-
+                
                 String DateCreated = " N/A ";
                 if (roleResponse.getDateCreated() != null) {
                     Date dateCreated = new Date(roleResponse.getDateCreated());
                     DateCreated = dateCreated.toString();
                 }
-
+                
                 String author = roleResponse.getAuthor().toUpperCase();
-
+                
                 Object[] data = {name, code, description, isSystem, status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }
-
+        
         tableModel.fireTableDataChanged();
-
+        
         Utilities.hideDialog();
-
+        
     }
 
     /**

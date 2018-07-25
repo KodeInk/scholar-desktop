@@ -118,9 +118,7 @@ public class AddRoleUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                permissionsResponses = PermissionsService.getInstance(schoolData).list(-1, -1);
-
-                //  populateRolesComboBox();
+                permissionsResponses = PermissionsService.getInstance(schoolData).list(0, 10000);
                 Utilities.hideDialog();
                 populate();
                 return null;

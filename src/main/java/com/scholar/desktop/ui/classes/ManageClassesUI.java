@@ -75,7 +75,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         }
 
          offset = Utilities.default_offset;
-        limit = Utilities.default_limit;
+         limit = Utilities.default_limit;
 
         
         final String message = "     Processsing ...     ";

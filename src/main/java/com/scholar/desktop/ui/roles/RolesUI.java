@@ -42,7 +42,7 @@ public class RolesUI extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageRolesUI.getInstance(schoolData).fetchData();
+                    ManageRolesUI.getInstance(schoolData).initData();
                     break;
                 case 1:
                    AddRoleUI.getInstance(schoolData).fetchData();
