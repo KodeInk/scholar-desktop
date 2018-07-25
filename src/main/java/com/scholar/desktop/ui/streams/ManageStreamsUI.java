@@ -495,7 +495,12 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     public void next() {
         offset = offset + limit;
-        fetchData(offset, limit);
+        if (search != null) {
+            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+
         page++;
         pageCounter.setText(page.toString());
     }
@@ -503,7 +508,12 @@ public class ManageStreamsUI extends javax.swing.JPanel {
     public void prev() {
         offset = offset - limit;
         if (offset >= 0) {
-            fetchData(offset, limit);
+            if (search != null) {
+                fetchData(search, offset, limit);
+            } else {
+                fetchData(offset, limit);
+            }
+
             page--;
             pageCounter.setText(page.toString());
         }
