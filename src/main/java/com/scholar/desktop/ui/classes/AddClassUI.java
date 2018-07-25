@@ -43,7 +43,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     private SchoolData schoolData;
     private ClassResponse classResponse;
     private List<StreamResponse> permissionsResponses;
-    List<Integer> PERMISSIONLIST;
+    List<Integer> streamList;
 
     /**
      *
@@ -52,7 +52,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     public AddClassUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        PERMISSIONLIST = new ArrayList<>();
+        streamList = new ArrayList<>();
         initData(schoolData);
     }
 
@@ -69,10 +69,10 @@ public final class AddClassUI extends javax.swing.JPanel {
     }
 
     public void populate() {
-        
+
         if (permissionsResponses != null) {
-              jScrollPane3.setPreferredSize(new Dimension(450, 300));
-              jScrollPane3.repaint();
+            jScrollPane3.setPreferredSize(new Dimension(450, 300));
+            jScrollPane3.repaint();
             jScrollPane3.setViewportView(getJpanel("STREAMS", permissionsResponses));
             jScrollPane3.repaint();
 
@@ -119,12 +119,12 @@ public final class AddClassUI extends javax.swing.JPanel {
     }
 
     public JPanel getJpanel(String grouping, List<StreamResponse> list) {
-      
+
         JPanel container1 = new JPanel();
         container1.setBackground(new java.awt.Color(204, 204, 204));
- 
-         container1.setPreferredSize(new Dimension(450, 300));
-         
+
+        container1.setPreferredSize(new Dimension(450, 300));
+
         JPanel container2 = new JPanel();
         container2.setSize(600, 200);
         container2.setBackground(new java.awt.Color(255, 255, 255));
@@ -227,10 +227,10 @@ public final class AddClassUI extends javax.swing.JPanel {
             Add permission to the permission List at selection 
              */
             Integer permission = Integer.parseInt(xx.getActionCommand());
-            PERMISSIONLIST.remove(permission);
+            streamList.remove(permission);
 
             if (xx.isSelected()) {
-                PERMISSIONLIST.add(permission);
+                streamList.add(permission);
             }
 
         });
@@ -501,6 +501,8 @@ public final class AddClassUI extends javax.swing.JPanel {
         schoolClass.setName(className.getText());
         schoolClass.setCode(classCode.getText());
         schoolClass.setRanking(Integer.valueOf(RankJComboBox.getSelectedItem().toString()));
+        Integer[] streamArray = new Integer[streamList.size()];
+        schoolClass.setStreams(streamList.toArray(streamArray));
         return schoolClass;
     }
 
