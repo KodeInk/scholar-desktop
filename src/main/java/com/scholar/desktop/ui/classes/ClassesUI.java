@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -52,7 +53,7 @@ public class ClassesUI extends javax.swing.JPanel {
     
      public void editStream(StreamResponse classResponse) {
 
-        jTabbedPane1.setSelectedIndex(2);
+        jTabbedPane1.setSelectedIndex(3);
         // AddClassUI.getInstance(schoolData).initData();
         AddStreamUI.getInstance(schoolData).edit(classResponse);
 

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -405,6 +406,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
 
+        
         Integer row = jTable1.getSelectedRow();
         if (rowselect == row) {
             mouseClick++;
@@ -421,7 +423,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
                     ClassesUI.getInstace(schoolData).editStream(response);
                 }
             });
-            ;
         }
 
         rowselect = row;

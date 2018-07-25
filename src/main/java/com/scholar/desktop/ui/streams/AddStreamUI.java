@@ -211,11 +211,11 @@ public class AddStreamUI extends javax.swing.JPanel {
     private void editStream(Stream stream) throws HeadlessException {
         try {
             //todo: get the clas_id
-            if (classResponse == null) {
+            if (streamResponse == null) {
                 throw new BadRequestException("Could update record, missing data");
             }
 
-            stream.setId(classResponse.getId());
+            stream.setId(streamResponse.getId());
             StreamsService.getInstance(schoolData).edit(stream, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved succesfully");
 
