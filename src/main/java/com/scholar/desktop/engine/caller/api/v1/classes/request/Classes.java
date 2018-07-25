@@ -26,7 +26,7 @@ public class Classes {
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
-    private Stream[] streams;
+    private Integer[] streams;
 
     public Classes() {
     }
@@ -91,11 +91,11 @@ public class Classes {
         this.author_id = author_id;
     }
 
-    public Stream[] getStreams() {
+    public Integer[] getStreams() {
         return streams;
     }
 
-    public void setStreams(Stream[] streams) {
+    public void setStreams(Integer[] streams) {
         this.streams = streams;
     }
 
