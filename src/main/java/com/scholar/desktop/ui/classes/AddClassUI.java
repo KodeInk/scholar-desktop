@@ -24,11 +24,10 @@ import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.permissions.response.PermissionsResponse;
-import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
-import main.java.com.scholar.desktop.services.permissions.PermissionsService;
+import main.java.com.scholar.desktop.services.streams.StreamsService;
 
 /**
  *
@@ -42,7 +41,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     private static AddClassUI instance;
     private SchoolData schoolData;
     private ClassResponse classResponse;
-    private List<PermissionsResponse> permissionsResponses;
+    private List<StreamResponse> permissionsResponses;
     List<Integer> PERMISSIONLIST;
 
     /**
@@ -53,50 +52,26 @@ public final class AddClassUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
         PERMISSIONLIST = new ArrayList<>();
+        initData(schoolData);
+    }
 
+    public void initData(SchoolData schoolData1) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                permissionsResponses = PermissionsService.getInstance(schoolData).list(0, 10000);
-                Utilities.hideDialog();
+                permissionsResponses = StreamsService.getInstance(schoolData1).list(0, 10000);
                 populate();
                 return null;
             }
-
         };
-
+        swingWorker.execute();
     }
 
     public void populate() {
-        //todo: populate
-
+        
         if (permissionsResponses != null) {
 
-            List<String> categories = new ArrayList<>();
-
-            for (PermissionsResponse pr : permissionsResponses) {
-                if (categories.contains(pr.getCategory())) {
-                    continue;
-                }
-
-                categories.add(pr.getCategory());
-            }
-            String grouping = null;
-            List<PermissionsResponse> list = new ArrayList<>();
-
-            for (String category : categories) {
-                list = new ArrayList<>();
-                for (PermissionsResponse pr : permissionsResponses) {
-
-                    if (pr.getCategory().equalsIgnoreCase(category)) {
-                        grouping = category;
-                        list.add(pr);
-                    }
-                }
-
-                jScrollPane3.setViewportView(getJpanel(grouping, list));
-
-            }
+            jScrollPane3.setViewportView(getJpanel("STREAMS", permissionsResponses));
 
             jScrollPane3.repaint();
 
@@ -136,13 +111,13 @@ public final class AddClassUI extends javax.swing.JPanel {
 
     public void initRankComboBox() {
         RankJComboBox.addItem("Select Option");
-        for (int x = 0; x <= 500; x++) {
+        for (int x = 0; x <= 10000; x++) {
             RankJComboBox.addItem("" + x);
         }
         RankJComboBox.setSelectedIndex(1);
     }
 
-    public JPanel getJpanel(String grouping, List<PermissionsResponse> list) {
+    public JPanel getJpanel(String grouping, List<StreamResponse> list) {
         JPanel container1 = new JPanel();
         container1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -176,7 +151,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         SequentialGroup sequentialGroup = groupLayout2.createSequentialGroup();
         sequentialGroup.addContainerGap();
 
-        for (PermissionsResponse pr : list) {
+        for (StreamResponse pr : list) {
 
             JCheckBox jCheckBoxx = getCheckBox(pr);
 
@@ -236,7 +211,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         return jPanel3;
     }
 
-    private JCheckBox getCheckBox(PermissionsResponse pr) {
+    private JCheckBox getCheckBox(StreamResponse pr) {
         JCheckBox jCheckBoxx = new JCheckBox();
         jCheckBoxx.setText(pr.getName());
         jCheckBoxx.setActionCommand(pr.getId().toString());
@@ -332,7 +307,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         );
         permissionsJpanelLayout.setVerticalGroup(
             permissionsJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
         );
 
         jButton1.setText("SAVE");
@@ -343,6 +318,11 @@ public final class AddClassUI extends javax.swing.JPanel {
         });
 
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Streams  : *");
@@ -366,17 +346,16 @@ public final class AddClassUI extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(permissionsJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RankJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 462, Short.MAX_VALUE)
-                                .addComponent(classCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(className, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(permissionsJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RankJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 462, Short.MAX_VALUE)
+                            .addComponent(classCode, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(className, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(329, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -400,13 +379,15 @@ public final class AddClassUI extends javax.swing.JPanel {
                     .addComponent(RankJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(permissionsJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 142, Short.MAX_VALUE))
+                    .addComponent(permissionsJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -447,6 +428,10 @@ public final class AddClassUI extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      *
