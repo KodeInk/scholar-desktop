@@ -198,17 +198,17 @@ public class AddStreamUI extends javax.swing.JPanel {
     public void SubmitData(String btnText, Stream stream) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
-                saveClass(stream);
+                saveStream(stream);
                 break;
             case "EDIT":
-                editClass(stream);
+                editStream(stream);
                 break;
             default:
                 break;
         }
     }
 
-    private void editClass(Stream stream) throws HeadlessException {
+    private void editStream(Stream stream) throws HeadlessException {
         try {
             //todo: get the clas_id
             if (classResponse == null) {
@@ -227,7 +227,7 @@ public class AddStreamUI extends javax.swing.JPanel {
         }
     }
 
-    private void saveClass(Stream stream) throws HeadlessException {
+    private void saveStream(Stream stream) throws HeadlessException {
         try {
             //todi:  submit to sever
             StreamsService.getInstance(schoolData).create(stream, "LOG_ID");
