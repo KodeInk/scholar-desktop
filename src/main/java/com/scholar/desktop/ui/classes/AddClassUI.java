@@ -10,6 +10,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     private ClassResponse classResponse;
     private List<StreamResponse> permissionsResponses;
     List<Integer> streamList;
+    private List<JCheckBox> checkBoxs = new ArrayList<>();
 
     /**
      *
@@ -53,31 +55,78 @@ public final class AddClassUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
         streamList = new ArrayList<>();
-        initData(schoolData);
+        
     }
 
-    public void initData(SchoolData schoolData1) {
-        SwingWorker swingWorker = new SwingWorker() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                permissionsResponses = StreamsService.getInstance(schoolData1).list(0, 10000);
-                populate();
-                return null;
-            }
-        };
-        swingWorker.execute();
+    public void initData() {
+        initRankComboBox();
+        resetForm();
+        jButton1.setText("SAVE");
+        this.classResponse = null;
+
+        fetchPermissions();
+        
+    }
+
+    public void fetchPermissions() {
+        if (permissionsResponses == null || permissionsResponses.size() <= 0) {
+            SwingWorker swingWorker = new SwingWorker() {
+                @Override
+                protected Object doInBackground() throws Exception {
+                    permissionsResponses = StreamsService.getInstance(schoolData).list(0, 10000);
+                    populate();
+                    return null;
+                }
+            };
+            swingWorker.execute();
+        } else {
+            populate();
+        }
     }
 
     public void populate() {
+        resetJCheckBoxes();
+        if (checkBoxs != null && checkBoxs.size() == 0) {
+            JPanel jPanel = null;
 
-        if (permissionsResponses != null) {
-            jScrollPane3.setPreferredSize(new Dimension(450, 300));
-            jScrollPane3.repaint();
-            jScrollPane3.setViewportView(getJpanel("STREAMS", permissionsResponses));
-            jScrollPane3.repaint();
+            if (permissionsResponses != null) {
+                jPanel = getJpanel("STREAMS", permissionsResponses);
 
+            }
+            if (jPanel != null) {
+                jScrollPane3.setPreferredSize(new Dimension(450, 300));
+                jScrollPane3.setViewportView(jPanel);
+                jScrollPane3.repaint();
+            }
         }
 
+        if (this.classResponse != null) {
+            className.setText(classResponse.getName());
+            classCode.setText(classResponse.getCode());
+            RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
+            jButton1.setText("EDIT");
+
+             List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
+            if (checkBoxs != null && checkBoxs.size() > 0) {
+                for(JCheckBox jcb: checkBoxs){                 
+                    for(StreamResponse sr: srs){
+                        if(jcb.getActionCommand().equals(sr.getId().toString())){
+                            jcb.setSelected(true);
+                        }
+                        
+//                        JOptionPane.showMessageDialog(null, "SIZE : " + checkBoxs.size());
+                    }
+                }
+                
+            }
+        }
+
+    }
+
+    public void resetJCheckBoxes() {
+        for(JCheckBox jcb: checkBoxs){
+            jcb.setSelected(false);
+        }
     }
 
     /**
@@ -98,16 +147,8 @@ public final class AddClassUI extends javax.swing.JPanel {
      */
     public void edit(ClassResponse classResponse) {
         this.classResponse = classResponse;
-        className.setText(classResponse.getName());
-        classCode.setText(classResponse.getCode());
-        RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
-        jButton1.setText("EDIT");
-    }
+        fetchPermissions();
 
-    public void initData() {
-        initRankComboBox();
-        resetForm();
-        jButton1.setText("SAVE");
     }
 
     public void initRankComboBox() {
@@ -235,6 +276,7 @@ public final class AddClassUI extends javax.swing.JPanel {
 
         });
 
+        checkBoxs.add(jCheckBoxx);
         return jCheckBoxx;
     }
 
@@ -298,6 +340,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         permissionsJpanel.setBackground(new java.awt.Color(255, 153, 102));
 
         jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));

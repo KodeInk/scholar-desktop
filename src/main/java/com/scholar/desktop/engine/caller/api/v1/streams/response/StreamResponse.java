@@ -5,7 +5,6 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.streams.response;
 
-import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Objects;
 
 /**

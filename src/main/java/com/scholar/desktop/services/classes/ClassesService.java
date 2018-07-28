@@ -153,7 +153,8 @@ public class ClassesService extends AbstractService {
         classesMap.put("name", classes.getName());
         classesMap.put("code", classes.getCode());
         classesMap.put("ranking", classes.getRanking());
-
+        ArrayList<Integer> streamList = new ArrayList<>(Arrays.asList(classes.getStreams()));
+        classesMap.put("streams", streamList);
         System.out.println("==================================");
         System.out.println(classesMap);
         System.out.println("==================================");
