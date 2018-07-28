@@ -82,10 +82,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
-
         final String message = "     Processsing ...     ";
-//        Utilities.ShowDialogMessage(message);
-
         fetchData(offset, limit);
         page = 1;
         pageCounter.setText(page.toString());
