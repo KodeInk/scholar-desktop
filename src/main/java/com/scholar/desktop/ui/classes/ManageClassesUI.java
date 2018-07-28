@@ -6,13 +6,17 @@
 package main.java.com.scholar.desktop.ui.classes;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
 
@@ -25,6 +29,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
+    public DefaultListModel demoList;
     private static ManageClassesUI instance;
 
     /**
@@ -53,6 +58,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
             };
 
         }
+        demoList = new DefaultListModel();
 
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -69,15 +75,14 @@ public class ManageClassesUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
-       
+
         if (list != null) {
             populateJTable(list);
         }
 
-         offset = Utilities.default_offset;
-         limit = Utilities.default_limit;
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
 
-        
         final String message = "     Processsing ...     ";
 //        Utilities.ShowDialogMessage(message);
 
@@ -185,7 +190,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
         tableModel.fireTableDataChanged();
 
 //        Utilities.hideDialog();
-
     }
 
     /**
@@ -217,11 +221,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        selectClassStreamsList = new javax.swing.JList<>();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerLocation(300);
@@ -403,20 +403,9 @@ public class ManageClassesUI extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("STREAMS");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jButton1.setText("EDIT CLASS");
-
-        jButton2.setText("ATTACH STREAM");
-
-        jButton3.setText("DISABLE CLASS");
+        selectClassStreamsList.setModel(demoList);
+        selectClassStreamsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(selectClassStreamsList);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -424,38 +413,19 @@ public class ManageClassesUI extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                .addContainerGap(339, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -499,28 +469,41 @@ public class ManageClassesUI extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Integer row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, 0).toString();
+
         if (rowselect == row) {
             mouseClick++;
 
+            //selectClassStreamsList
         } else {
             mouseClick = 1;
         }
 
+        selectClassStreamsList.removeAll();
+        demoList.removeAllElements();
+        list.forEach(response -> {
+            if (response.getId() == Integer.parseInt(value)) {
+                if (response.getStreamResponses() != null) {
+                    List<StreamResponse> str = Arrays.asList(response.getStreamResponses());
+
+                    str.forEach((sr) -> {
+                        demoList.addElement(sr.getName());
+                    });
+                    selectClassStreamsList.repaint();
+                    // selectClassStreamsList.add(value, this)
+                }
+            }
+        });
+
         if (mouseClick % 2 == 0) {
-            String value = jTable1.getModel().getValueAt(row, 0).toString();
-         
-            
-   
+
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
-                     ClassesUI.getInstace(schoolData).editClass(response);
+                    ClassesUI.getInstace(schoolData).editClass(response);
                 }
             });
-                    ;
-            
-            
+            ;
 
-           
         }
 
         rowselect = row;
@@ -556,15 +539,11 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -573,7 +552,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel nextLabel;
@@ -581,5 +559,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
     private javax.swing.JLabel prevLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbox;
+    public javax.swing.JList<String> selectClassStreamsList;
     // End of variables declaration//GEN-END:variables
 }

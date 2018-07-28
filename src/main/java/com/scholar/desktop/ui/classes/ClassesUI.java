@@ -79,7 +79,7 @@ public class ClassesUI extends javax.swing.JPanel {
                     break;
 
                 case 3:
-                    AddStreamUI.getInstance(schoolData);
+                    AddStreamUI.getInstance(schoolData).initData();
                     break;
                 default:
 

@@ -43,7 +43,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     private static AddClassUI instance;
     private SchoolData schoolData;
     private ClassResponse classResponse;
-    private List<StreamResponse> permissionsResponses;
+    private List<StreamResponse> streamResponses;
     List<Integer> streamList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
 
@@ -58,6 +58,20 @@ public final class AddClassUI extends javax.swing.JPanel {
         
     }
 
+       /**
+     *
+     * @param schoolData
+     * @return
+     */
+    public static AddClassUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddClassUI(schoolData);
+            instance.initData();
+        }
+        return instance;
+    }
+    
+    
     public void initData() {
         initRankComboBox();
         resetForm();
@@ -69,11 +83,11 @@ public final class AddClassUI extends javax.swing.JPanel {
     }
 
     public void fetchPermissions() {
-        if (permissionsResponses == null || permissionsResponses.size() <= 0) {
+        if (streamResponses == null || streamResponses.size() <= 0) {
             SwingWorker swingWorker = new SwingWorker() {
                 @Override
                 protected Object doInBackground() throws Exception {
-                    permissionsResponses = StreamsService.getInstance(schoolData).list(0, 10000);
+                    streamResponses = StreamsService.getInstance(schoolData).list(0, 10000);
                     populate();
                     return null;
                 }
@@ -89,8 +103,8 @@ public final class AddClassUI extends javax.swing.JPanel {
         if (checkBoxs != null && checkBoxs.size() == 0) {
             JPanel jPanel = null;
 
-            if (permissionsResponses != null) {
-                jPanel = getJpanel("STREAMS", permissionsResponses);
+            if (streamResponses != null) {
+                jPanel = getJpanel("STREAMS", streamResponses);
 
             }
             if (jPanel != null) {
@@ -129,17 +143,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    /**
-     *
-     * @param schoolData
-     * @return
-     */
-    public static AddClassUI getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new AddClassUI(schoolData);
-        }
-        return instance;
-    }
+ 
 
     /**
      *

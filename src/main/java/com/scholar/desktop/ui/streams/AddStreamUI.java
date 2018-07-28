@@ -37,11 +37,17 @@ public class AddStreamUI extends javax.swing.JPanel {
     public AddStreamUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        
     }
 
+    public void initData(){
+         jButton1.setText("SAVE");
+         resetForm();
+    }
     public static AddStreamUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddStreamUI(schoolData);
+            
         }
 
         return instance;
