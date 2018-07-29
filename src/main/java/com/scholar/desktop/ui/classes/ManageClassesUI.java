@@ -90,14 +90,14 @@ public class ManageClassesUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
-    public void next() {
+    protected void next() {
         offset = offset + limit;
         fetchData();
         page++;
         pageCounter.setText(page.toString());
     }
 
-    public void prev() {
+    protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
             fetchData();
@@ -107,21 +107,24 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
     }
 
-    public void enableNextPrevLabels() {
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
         searchButton.setEnabled(true);
     }
 
-    public void disableNextPrevLabels() {
+    protected void disableNextPrevLabels() {
         searchbox.setEnabled(false);
         searchButton.setEnabled(false);
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
 
-    public void fetchData() {
+    /**
+     *
+     */
+    protected void fetchData() {
         if (search != null) {
             fetchData(search, offset, limit);
         } else {
@@ -129,7 +132,13 @@ public class ManageClassesUI extends javax.swing.JPanel {
         }
     }
 
-    public void fetchData(String search, Integer offset, Integer limit) {
+    /**
+     *
+     * @param search
+     * @param offset
+     * @param limit
+     */
+    protected void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -144,7 +153,12 @@ public class ManageClassesUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void fetchData(Integer offset, Integer limit) {
+    /**
+     *
+     * @param offset
+     * @param limit
+     */
+    protected void fetchData(Integer offset, Integer limit) {
         disableNextPrevLabels();
         SwingWorker swingWorker = new SwingWorker() {
 
@@ -162,13 +176,16 @@ public class ManageClassesUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void populateJTable(List<ClassResponse> list) {
+    /**
+     *
+     * @param list
+     */
+    protected void populateJTable(List<ClassResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (ClassResponse ur : list) {
-
+            list.stream().map((ur) -> {
                 String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
@@ -178,12 +195,12 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 if (ur.getDate_created() != null) {
                     date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
-
                 String author = ur.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, ranking, status, date_Created, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -498,7 +515,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
-                    ClassesUI.getInstace(schoolData).editClass(response);
+                    ClassesUI.getInstance(schoolData).editClass(response);
                 }
             });
             ;

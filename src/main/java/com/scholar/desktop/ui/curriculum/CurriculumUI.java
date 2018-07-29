@@ -9,10 +9,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.ui.classes.AddClassUI;
-import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
-import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
-import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
 
 /**
  *

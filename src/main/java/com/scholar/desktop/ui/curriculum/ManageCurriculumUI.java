@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -68,13 +69,14 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     public final void initData() {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
-        fetchData();
+        fetchData(offset, limit);
         page = 1;
         pageCounter.setText(page.toString());
 
     }
 
-    public void fetchData() {
+    protected void fetchData(Integer offset, Integer limit) {
+        JOptionPane.showMessageDialog(null, "OFFSET :" + offset);
         disableNextPrevLabels();
         final String message = "     Processsing ...     ";
         jLabel1.setText("Processing....");
@@ -91,7 +93,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void populateJTable(List<CurriculumResponse> list) {
+    protected void populateJTable(List<CurriculumResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
@@ -114,22 +116,22 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         tableModel.fireTableDataChanged();
 
-        Utilities.hideDialog();
+       
 
     }
 
-    public void enableNextPrevLabels() {
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
-        nextLabel.setEnabled(true);
-        prevLabel.setEnabled(true);
+        NextLabel.setEnabled(true);
+        PrevLabel.setEnabled(true);
         searchButton.setEnabled(true);
     }
 
-    public void disableNextPrevLabels() {
+    protected void disableNextPrevLabels() {
         searchbox.setEnabled(false);
         searchButton.setEnabled(false);
-        nextLabel.setEnabled(false);
-        prevLabel.setEnabled(false);
+        NextLabel.setEnabled(false);
+        PrevLabel.setEnabled(false);
     }
 
     /**
@@ -155,9 +157,9 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        prevLabel = new javax.swing.JLabel();
+        PrevLabel = new javax.swing.JLabel();
         pageCounter = new javax.swing.JLabel();
-        nextLabel = new javax.swing.JLabel();
+        NextLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         jSplitPane1.setDividerLocation(300);
@@ -261,19 +263,19 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        prevLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/prev.png"))); // NOI18N
-        prevLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        PrevLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/prev.png"))); // NOI18N
+        PrevLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                prevLabelMouseClicked(evt);
+                PrevLabelMouseClicked(evt);
             }
         });
 
         pageCounter.setText("12");
 
-        nextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/next.png"))); // NOI18N
-        nextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        NextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/next.png"))); // NOI18N
+        NextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nextLabelMouseClicked(evt);
+                NextLabelMouseClicked(evt);
             }
         });
 
@@ -283,17 +285,17 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(prevLabel)
+                .addComponent(PrevLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pageCounter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nextLabel)
+                .addComponent(NextLabel)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(prevLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-            .addComponent(nextLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PrevLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(NextLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pageCounter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -359,38 +361,34 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+    private void NextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextLabelMouseClicked
         // TODO add your handling code here:
-          next();
-    }//GEN-LAST:event_nextLabelMouseClicked
+        next();
+    }//GEN-LAST:event_NextLabelMouseClicked
 
-    private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
+    private void PrevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrevLabelMouseClicked
         // TODO add your handling code here:
         prev();
-    }//GEN-LAST:event_prevLabelMouseClicked
+    }//GEN-LAST:event_PrevLabelMouseClicked
 
-    
-    
-    public void next() {
+    protected void next() {
         offset = offset + limit;
-        fetchData();
+        fetchData(offset, limit);
         page++;
         pageCounter.setText(page.toString());
     }
 
-    public void prev() {
+    protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
-            fetchData();
+            fetchData(offset, limit);
             page--;
             pageCounter.setText(page.toString());
         }
 
     }
 
-    
-    
-    public void searchQuery() {
+    protected void searchQuery() {
         // TODO add your handling code here:
 //        if (!searchbox.getText().isEmpty()) {
 //
@@ -413,6 +411,8 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel NextLabel;
+    protected javax.swing.JLabel PrevLabel;
     public java.awt.Label jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
@@ -426,9 +426,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel nextLabel;
     private javax.swing.JLabel pageCounter;
-    private javax.swing.JLabel prevLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbox;
     // End of variables declaration//GEN-END:variables

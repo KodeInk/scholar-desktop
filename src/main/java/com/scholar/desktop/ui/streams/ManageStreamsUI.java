@@ -68,9 +68,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     public final void initData() {
 
-//        if (list != null) {
-//            populateJTable(list);
-//        }
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
 
@@ -81,7 +78,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
-    public void fetchData(String search, Integer offset, Integer limit) {
+    protected void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -96,7 +93,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void fetchData(Integer offset, Integer limit) {
+    protected void fetchData(Integer offset, Integer limit) {
         disableNextPrevLabels();
         SwingWorker swingWorker = new SwingWorker() {
 
@@ -114,13 +111,12 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-    public void populateJTable(List<StreamResponse> list) {
+    protected void populateJTable(List<StreamResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (StreamResponse ur : list) {
-
+            list.stream().map((ur) -> {
                 String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
@@ -129,12 +125,12 @@ public class ManageStreamsUI extends javax.swing.JPanel {
                 if (ur.getDate_created() != null) {
                     date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
-
                 String author = ur.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, status, date_Created, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -382,7 +378,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    public void searchQuery() {
+    protected void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
@@ -408,7 +404,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
 
-        
         Integer row = jTable1.getSelectedRow();
         if (rowselect == row) {
             mouseClick++;
@@ -422,7 +417,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
-                    ClassesUI.getInstace(schoolData).editStream(response);
+                    ClassesUI.getInstance(schoolData).editStream(response);
                 }
             });
         }
@@ -441,7 +436,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
-    public void next() {
+    protected void next() {
         offset = offset + limit;
         if (search != null) {
             fetchData(search, offset, limit);
@@ -453,7 +448,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
-    public void prev() {
+    protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
             if (search != null) {
@@ -468,14 +463,14 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
     }
 
-    public void enableNextPrevLabels() {
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
         searchButton.setEnabled(true);
     }
 
-    public void disableNextPrevLabels() {
+    protected void disableNextPrevLabels() {
         searchbox.setEnabled(false);
         searchButton.setEnabled(false);
         nextLabel.setEnabled(false);

@@ -34,7 +34,7 @@ public class ClassesUI extends javax.swing.JPanel {
         jTabbedPane1.addChangeListener(changeListener);
     }
 
-    public static ClassesUI getInstace(SchoolData schoolData) {
+    public static ClassesUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ClassesUI(schoolData);
         }
