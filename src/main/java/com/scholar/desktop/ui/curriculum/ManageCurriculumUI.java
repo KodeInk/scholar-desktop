@@ -34,6 +34,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCurriculum
+     *
      * @param schoolData
      */
     public ManageCurriculumUI(SchoolData schoolData) {
@@ -63,14 +64,10 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     }
 
     public final void fetchData(SchoolData schoolData1) {
-
-        if (list != null) {
-            populateJTable(list);
-        }
-
+       
         final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
 
+        jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -78,6 +75,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
                 list = CurriculumService.getInstance(schoolData).list();
 
                 populateJTable(list);
+               jLabel1.setText("Manage Curriculum");
                 return null;
             }
         };
@@ -124,7 +122,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
+        jLabel1 = new java.awt.Label();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -160,9 +158,9 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        label1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 153, 0));
-        label1.setText("Manage Curriculum");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel1.setText("Manage Curriculum");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -170,12 +168,12 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -324,7 +322,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
-     public void searchQuery() {
+    public void searchQuery() {
         // TODO add your handling code here:
 //        if (!searchbox.getText().isEmpty()) {
 //
@@ -345,8 +343,9 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 //        jLabel1.setText("Manage Classes");
     }
 
-     
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public java.awt.Label jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -362,7 +361,6 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
-    private java.awt.Label label1;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbox;
     // End of variables declaration//GEN-END:variables
