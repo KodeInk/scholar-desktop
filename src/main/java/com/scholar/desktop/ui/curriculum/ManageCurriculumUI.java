@@ -15,6 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
+import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
  *
@@ -51,6 +52,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         }
 
         initComponents();
+        jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
     }
@@ -67,23 +69,22 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         fetchData();
-         page = 1;
+        page = 1;
         pageCounter.setText(page.toString());
-        
+
     }
 
     public void fetchData() {
+        disableNextPrevLabels();
         final String message = "     Processsing ...     ";
-
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-
                 list = CurriculumService.getInstance(schoolData).list(offset, limit);
-
                 populateJTable(list);
                 jLabel1.setText("Manage Curriculum");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -94,20 +95,21 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
-            for (CurriculumResponse ur : list) {
+            list.stream().map((ur) -> {
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
                 String description = ur.getDescription().toUpperCase();
-                String status = ur.getStatus();
-                String author = ur.getAuthor();
+                String status = ur.getStatus().toUpperCase();
+                String author = ur.getAuthor().toUpperCase();
                 String date_created = " - ";
                 if (ur.getDate_created() != null) {
-                    date_created = new Date(ur.getDate_created()).toString();
+                    date_created = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
-
                 Object[] data = {name, code, description, status, date_created, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -116,8 +118,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
     }
 
-    
-     public void enableNextPrevLabels() {
+    public void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
@@ -130,9 +131,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,8 +190,8 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
