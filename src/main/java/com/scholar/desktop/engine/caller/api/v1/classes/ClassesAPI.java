@@ -10,16 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
-import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
-import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
 
