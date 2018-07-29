@@ -17,6 +17,7 @@ import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.streams.StreamsService;
 import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.ScrollBarOrientation;
+import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 
         Utilities.hideColumn(0, jTable1);
-        ScrollBarOrientation.getInstance().initVerticalScrollBar(jScrollPane1);
+        jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
     public static ManageStreamsUI getInstance(SchoolData schoolData) {

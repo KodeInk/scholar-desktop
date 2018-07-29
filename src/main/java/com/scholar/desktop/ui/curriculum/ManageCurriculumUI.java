@@ -254,6 +254,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
+        jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(jTable1);
@@ -261,10 +262,20 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         prevLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/prev.png"))); // NOI18N
+        prevLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevLabelMouseClicked(evt);
+            }
+        });
 
         pageCounter.setText("12");
 
         nextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/next.png"))); // NOI18N
+        nextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -348,6 +359,37 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+        // TODO add your handling code here:
+          next();
+    }//GEN-LAST:event_nextLabelMouseClicked
+
+    private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_prevLabelMouseClicked
+
+    
+    
+    public void next() {
+        offset = offset + limit;
+        fetchData();
+        page++;
+        pageCounter.setText(page.toString());
+    }
+
+    public void prev() {
+        offset = offset - limit;
+        if (offset >= 0) {
+            fetchData();
+            page--;
+            pageCounter.setText(page.toString());
+        }
+
+    }
+
+    
+    
     public void searchQuery() {
         // TODO add your handling code here:
 //        if (!searchbox.getText().isEmpty()) {

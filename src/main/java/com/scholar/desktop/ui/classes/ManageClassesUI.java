@@ -19,6 +19,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.Class
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
+import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
  *
@@ -64,6 +65,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
         Utilities.hideColumn(0, jTable1);
+        jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
     public static ManageClassesUI getInstance(SchoolData schoolData) {

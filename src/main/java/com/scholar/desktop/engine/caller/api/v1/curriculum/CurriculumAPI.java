@@ -15,10 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.response.UserResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
-import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
-import static main.java.com.scholar.desktop.helper.Utilities.getOffset;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
 
@@ -40,8 +37,6 @@ public class CurriculumAPI extends AbstractAPI {
     }
 
     public CurriculumResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);

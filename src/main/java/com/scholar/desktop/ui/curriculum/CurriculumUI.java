@@ -25,10 +25,19 @@ public class CurriculumUI extends javax.swing.JPanel {
      */
     private SchoolData schoolData;
 
+    private static CurriculumUI instance;
+
     public CurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
         jTabbedPane1.addChangeListener(changeListener);
+    }
+
+    public static CurriculumUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new CurriculumUI(schoolData);
+        }
+        return instance;
     }
 
     ChangeListener changeListener = new ChangeListener() {
