@@ -253,7 +253,10 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
             .addComponent(searchbox, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
+        jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
+        jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
