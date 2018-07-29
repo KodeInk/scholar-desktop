@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -17,6 +16,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.Strea
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.streams.StreamsService;
 import main.java.com.scholar.desktop.ui.classes.ClassesUI;
+import main.java.com.scholar.desktop.ui.helper.ScrollBarOrientation;
 
 /**
  *
@@ -54,6 +54,7 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 
         Utilities.hideColumn(0, jTable1);
+        ScrollBarOrientation.getInstance().initVerticalScrollBar(jScrollPane1);
     }
 
     public static ManageStreamsUI getInstance(SchoolData schoolData) {

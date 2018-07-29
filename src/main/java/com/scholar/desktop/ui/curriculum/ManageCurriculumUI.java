@@ -34,6 +34,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCurriculum
+     * @param schoolData
      */
     public ManageCurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;

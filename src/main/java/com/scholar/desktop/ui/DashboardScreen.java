@@ -6,19 +6,32 @@
 package main.java.com.scholar.desktop.ui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.Box;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import static java.awt.SystemColor.scrollbar;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.ui.helper.DashboardViews;
+import main.java.com.scholar.desktop.ui.helper.ScrollBarOrientation;
+import main.java.com.scholar.desktop.ui.helper.ScrollBarUI;
 
 /**
  *
  * @author mover
  */
-public class DashboardScreen extends javax.swing.JFrame implements DashboardScreenInterface {
+public final class DashboardScreen extends javax.swing.JFrame implements DashboardScreenInterface {
 
     /**
      * Creates new form DashboardScreen
@@ -28,6 +41,9 @@ public class DashboardScreen extends javax.swing.JFrame implements DashboardScre
     public DashboardScreen(SchoolData data) {
         this.schoolData = data;
         initComponents();
+
+        ScrollBarOrientation.getInstance().initVerticalScrollBar(jScrollPane1);
+
     }
 
     public SchoolData getSchoolData() {
