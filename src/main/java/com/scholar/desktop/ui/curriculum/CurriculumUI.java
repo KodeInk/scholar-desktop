@@ -27,6 +27,7 @@ public class CurriculumUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
         jTabbedPane1.addChangeListener(changeListener);
+        
     }
 
     public static CurriculumUI getInstance(SchoolData schoolData) {
@@ -43,7 +44,7 @@ public class CurriculumUI extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageCurriculumUI.getInstance(schoolData).initData();
+                    ManageCurriculumUI.getInstance(schoolData);
                     break;
                 case 1:
                     AddCurriculumUI.getInstance(schoolData);

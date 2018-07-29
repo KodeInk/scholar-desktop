@@ -13,13 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.CurriculumAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request._Curriculum;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request.Curriculum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
 
 /**
  *
@@ -40,35 +37,31 @@ public class CurriculumService extends AbstractService {
     }
 
     public static CurriculumService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new CurriculumService(schoolData);
-        }
+        instance = new CurriculumService(schoolData);
         return instance;
     }
 
     public List<CurriculumResponse> list(Integer offset, Integer limit) {
 
-         
         list = new ArrayList<>();
 
         CurriculumResponse[] responses = curriculumAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
-        IncreaseOffsetLimit();
+
         return list;
     }
 
-    
-     public CurriculumResponse create(_Curriculum curriculum, String logId) throws IOException {
+    public CurriculumResponse create(Curriculum curriculum, String logId) throws IOException {
         if (curriculum != null) {
             Map curriculumMap = getCurriculumMap(curriculum);
             return curriculumAPI.create(curriculumMap, logId);
         }
         return null;
     }
-     
-        public Map getCurriculumMap(_Curriculum curriculum) {
+
+    public Map getCurriculumMap(Curriculum curriculum) {
 
         Map curriculumMap = new HashMap<>();
         curriculumMap.put("name", curriculum.getName());
@@ -81,5 +74,5 @@ public class CurriculumService extends AbstractService {
 
         return curriculumMap;
     }
-        
+
 }

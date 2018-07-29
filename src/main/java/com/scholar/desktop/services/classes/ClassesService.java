@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
@@ -78,17 +77,14 @@ public class ClassesService extends AbstractService {
      * @return
      */
     public List<ClassResponse> list(Integer offset, Integer limit) {
-
-//        if (list == null) {
-//            list = new ArrayList<>();
-//        }
+ 
         list = new ArrayList<>();
 
         ClassResponse[] responses = classesAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
-//        IncreaseOffsetLimit();
+ 
 
         return list;
     }

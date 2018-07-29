@@ -10,13 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request._Curriculum;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request.Curriculum;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AddCurriculumUI extends javax.swing.JPanel {
 
@@ -198,7 +198,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
     }
 
     protected void submit(String name, String code, String description) throws IOException {
-        _Curriculum curriculum = new _Curriculum();
+        Curriculum curriculum = new Curriculum();
         curriculum.setName(name);
         curriculum.setCode(code);
         curriculum.setDescription(description);

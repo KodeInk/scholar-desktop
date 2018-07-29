@@ -27,13 +27,13 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-    private static ManageCurriculumUI instance;
+    private static ManageCurriculumUI instance= null;
     private Integer page;
     private Integer offset;
     private Integer limit;
     private String search = null;
     private List<CurriculumResponse> list = null;
-
+ 
     /**
      * Creates new form ManageCurriculum
      *
@@ -69,20 +69,20 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     public final void initData() {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
-        fetchData(offset, limit);
+        fetchData();
         page = 1;
         pageCounter.setText(page.toString());
 
     }
-
-    protected void fetchData(Integer offset, Integer limit) {
-        JOptionPane.showMessageDialog(null, "OFFSET :" + offset);
+  
+    protected void fetchData() {
         disableNextPrevLabels();
         final String message = "     Processsing ...     ";
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+              
                 list = CurriculumService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 jLabel1.setText("Manage Curriculum");
@@ -115,8 +115,6 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         }
 
         tableModel.fireTableDataChanged();
-
-       
 
     }
 
@@ -373,7 +371,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
     protected void next() {
         offset = offset + limit;
-        fetchData(offset, limit);
+        fetchData();
         page++;
         pageCounter.setText(page.toString());
     }
@@ -381,7 +379,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
     protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
-            fetchData(offset, limit);
+            fetchData();
             page--;
             pageCounter.setText(page.toString());
         }

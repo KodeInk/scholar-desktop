@@ -15,7 +15,7 @@ import java.util.Objects;
  * @author mover
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _Curriculum {
+public class Curriculum {
 
     private Integer id;
     private String name;
@@ -25,10 +25,10 @@ public class _Curriculum {
     private Date date_created;
     private Integer author_id;
 
-    public _Curriculum() {
+    public Curriculum() {
     }
 
-    public _Curriculum(Integer id) {
+    public Curriculum(Integer id) {
         this.id = id;
     }
 
@@ -112,7 +112,7 @@ public class _Curriculum {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _Curriculum other = (_Curriculum) obj;
+        final Curriculum other = (Curriculum) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }

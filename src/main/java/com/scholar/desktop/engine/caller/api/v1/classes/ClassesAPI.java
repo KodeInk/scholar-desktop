@@ -41,10 +41,8 @@ public class ClassesAPI extends AbstractAPI {
     }
 
     public ClassResponse[] list(Integer offset, Integer limit) {
-//        offset = getOffset(offset);
-//        limit = getLimit(limit);
-
-        Map<String, String> queryParameter = new HashMap<>();
+ 
+        Map<String, String> queryParameter = new HashMap<>();        
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
