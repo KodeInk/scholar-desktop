@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.CurriculumAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request.Curriculum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
@@ -52,6 +53,21 @@ public class CurriculumService extends AbstractService {
 
         return list;
     }
+    
+     public List<CurriculumResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<CurriculumResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            CurriculumResponse[] responses = curriculumAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                classResponses.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return classResponses;
+    }
+     
+     
 
     public CurriculumResponse create(Curriculum curriculum, String logId) throws IOException {
         if (curriculum != null) {

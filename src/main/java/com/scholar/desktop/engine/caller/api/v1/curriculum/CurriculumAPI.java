@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -43,6 +44,32 @@ public class CurriculumAPI extends AbstractAPI {
         queryParameter.put("limit", "" + limit);
 
         Response response = engineCaller.get("curriculum/v1/", queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                CurriculumResponse[] curriculumResponse = response.readEntity(CurriculumResponse[].class);
+                return curriculumResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+
+    public CurriculumResponse[] list(String query, Integer offset, Integer limit) {
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("curriculum/v1/search/" + query, queryParameter);
 
         switch (response.getStatus()) {
             case 400:

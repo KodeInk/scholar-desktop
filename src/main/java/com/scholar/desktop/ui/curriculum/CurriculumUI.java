@@ -44,7 +44,7 @@ public class CurriculumUI extends javax.swing.JPanel {
             int index = sourceTabbedPane.getSelectedIndex();
             switch (index) {
                 case 0:
-                    ManageCurriculumUI.getInstance(schoolData);
+                    ManageCurriculumUI.getInstance(schoolData).initData();
                     break;
                 case 1:
                     AddCurriculumUI.getInstance(schoolData);

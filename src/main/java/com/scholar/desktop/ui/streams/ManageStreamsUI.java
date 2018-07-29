@@ -12,11 +12,12 @@ import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.streams.StreamsService;
 import main.java.com.scholar.desktop.ui.classes.ClassesUI;
-import main.java.com.scholar.desktop.ui.helper.ScrollBarOrientation;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -111,6 +112,8 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
+     
+       
     protected void populateJTable(List<StreamResponse> list) {
 
         if (list != null) {
