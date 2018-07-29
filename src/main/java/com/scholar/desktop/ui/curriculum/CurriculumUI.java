@@ -5,7 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.curriculum;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
+import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
+import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
+import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
 
 /**
  *
@@ -17,10 +24,33 @@ public class CurriculumUI extends javax.swing.JPanel {
      * Creates new form CurriculumUI
      */
     private SchoolData schoolData;
+
     public CurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageCurriculumUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddCurriculumUI.getInstance(schoolData);
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.

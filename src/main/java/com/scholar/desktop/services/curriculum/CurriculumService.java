@@ -46,11 +46,9 @@ public class CurriculumService extends AbstractService {
         return instance;
     }
 
-    public List<CurriculumResponse> list() {
+    public List<CurriculumResponse> list(Integer offset, Integer limit) {
 
-        if (list != null) {
-            return list;
-        }
+         
         list = new ArrayList<>();
 
         CurriculumResponse[] responses = curriculumAPI.list(offset, limit);

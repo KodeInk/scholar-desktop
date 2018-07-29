@@ -5,7 +5,6 @@
  */
 package main.java.com.scholar.desktop.ui.classes;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
