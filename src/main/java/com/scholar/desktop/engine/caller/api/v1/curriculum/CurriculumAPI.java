@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
@@ -116,11 +117,10 @@ public class CurriculumAPI extends AbstractAPI {
 
     }
 
-    
-     public CurriculumResponse update(Map body, String logId) throws IOException {
+    public CurriculumResponse update(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.put("curriculum/v1/", body, logId);
-
+        JOptionPane.showMessageDialog(null, "karma");
         switch (response.getStatus()) {
             case 400:
                 message = getMessage(response);
@@ -143,8 +143,5 @@ public class CurriculumAPI extends AbstractAPI {
         }
 
     }
-   
-     
-     
-     
+
 }

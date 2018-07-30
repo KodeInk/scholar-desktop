@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.CurriculumAPI;
@@ -77,6 +78,7 @@ public class CurriculumService extends AbstractService {
 
     public CurriculumResponse edit(Curriculum curriculum, String logId) throws IOException {
         if (curriculum != null) {
+            JOptionPane.showMessageDialog(null, "karma");
             Map curriculumMap = getCurriculumMap(curriculum);
             return curriculumAPI.update(curriculumMap, logId);
         }
