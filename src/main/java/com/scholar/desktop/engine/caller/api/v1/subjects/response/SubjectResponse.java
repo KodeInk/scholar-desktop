@@ -17,6 +17,7 @@ public class SubjectResponse {
     private Integer id;
     private String name;
     private String code;
+    private String category;
     private String status;
     private Long date_created;
     private String author;
@@ -47,6 +48,14 @@ public class SubjectResponse {
 
     public String getCode() {
         return code;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setCode(String code) {
