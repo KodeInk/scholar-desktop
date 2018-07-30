@@ -193,23 +193,22 @@ public class AddCurriculumUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        validateCurriculum();
-        String name = curriculumName.getText();
-        String code = curriculumCode.getText();
-        String description = curriculumDescription.getText();
-
         try {
+            validateCurriculum();
+            String name = curriculumName.getText();
+            String code = curriculumCode.getText();
+            String description = curriculumDescription.getText();
+
             //saveButton
             Curriculum curriculum = getCurriculum(name, code, description);
             String btnText = saveButton.getText();
             submitData(btnText, curriculum);
-            JOptionPane.showMessageDialog(null, "Record Saved Succesfully ");
-            resetForm();
 
         } catch (IOException ex) {
             Logger.getLogger(AddCurriculumUI.class.getName()).log(Level.SEVERE, null, ex);
-            new BadRequestException("Something went wrong, could not submit data to server");
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
+
 
     }//GEN-LAST:event_saveButtonActionPerformed
 

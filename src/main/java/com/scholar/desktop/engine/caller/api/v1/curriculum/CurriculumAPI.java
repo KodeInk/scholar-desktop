@@ -120,7 +120,6 @@ public class CurriculumAPI extends AbstractAPI {
     public CurriculumResponse update(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.put("curriculum/v1/", body, logId);
-        JOptionPane.showMessageDialog(null, "karma");
         switch (response.getStatus()) {
             case 400:
                 message = getMessage(response);

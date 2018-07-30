@@ -78,7 +78,6 @@ public class CurriculumService extends AbstractService {
 
     public CurriculumResponse edit(Curriculum curriculum, String logId) throws IOException {
         if (curriculum != null) {
-            JOptionPane.showMessageDialog(null, "karma");
             Map curriculumMap = getCurriculumMap(curriculum);
             return curriculumAPI.update(curriculumMap, logId);
         }
