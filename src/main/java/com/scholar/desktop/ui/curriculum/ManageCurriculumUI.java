@@ -6,7 +6,6 @@
 package main.java.com.scholar.desktop.ui.curriculum;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -14,10 +13,8 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
-import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -26,7 +23,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageCurriculumUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DESCRIPTION", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageCurriculumUI instance = null;
@@ -55,6 +52,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         }
 
         initComponents();
+        Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
@@ -126,6 +124,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
             list.stream().map((ur) -> {
+                String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
                 String description = ur.getDescription().toUpperCase();
@@ -135,7 +134,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
                 if (ur.getDate_created() != null) {
                     date_created = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
-                Object[] data = {name, code, description, status, date_created, author};
+                Object[] data = {id, name, code, description, status, date_created, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
@@ -402,7 +401,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         prev();
     }//GEN-LAST:event_PrevLabelMouseClicked
 
-      Integer rowselect = 0;
+    Integer rowselect = 0;
     Integer mouseClick = 0;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -417,8 +416,6 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
         } else {
             mouseClick = 1;
         }
-
-        
 
         if (mouseClick % 2 == 0) {
 

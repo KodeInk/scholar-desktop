@@ -116,4 +116,35 @@ public class CurriculumAPI extends AbstractAPI {
 
     }
 
+    
+     public CurriculumResponse update(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.put("curriculum/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                CurriculumResponse curriculumResponse = response.readEntity(CurriculumResponse.class);
+                return curriculumResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
+    }
+   
+     
+     
+     
 }

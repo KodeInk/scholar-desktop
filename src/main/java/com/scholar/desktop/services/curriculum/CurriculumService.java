@@ -53,8 +53,8 @@ public class CurriculumService extends AbstractService {
 
         return list;
     }
-    
-     public List<CurriculumResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+    public List<CurriculumResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
         List<CurriculumResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
@@ -66,8 +66,6 @@ public class CurriculumService extends AbstractService {
 
         return classResponses;
     }
-     
-     
 
     public CurriculumResponse create(Curriculum curriculum, String logId) throws IOException {
         if (curriculum != null) {
@@ -77,9 +75,20 @@ public class CurriculumService extends AbstractService {
         return null;
     }
 
+    public CurriculumResponse edit(Curriculum curriculum, String logId) throws IOException {
+        if (curriculum != null) {
+            Map curriculumMap = getCurriculumMap(curriculum);
+            return curriculumAPI.update(curriculumMap, logId);
+        }
+        return null;
+    }
+
     public Map getCurriculumMap(Curriculum curriculum) {
 
         Map curriculumMap = new HashMap<>();
+        if (curriculum.getId() != null) {
+            curriculumMap.put("id", curriculum.getId());
+        }
         curriculumMap.put("name", curriculum.getName());
         curriculumMap.put("code", curriculum.getCode());
         curriculumMap.put("description", curriculum.getDescription());

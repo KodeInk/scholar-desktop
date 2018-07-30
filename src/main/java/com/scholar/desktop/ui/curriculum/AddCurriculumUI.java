@@ -10,11 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request.Curriculum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -27,10 +27,14 @@ public class AddCurriculumUI extends javax.swing.JPanel {
      */
     private static AddCurriculumUI instance;
     private final SchoolData schoolData;
+    private CurriculumResponse curriculumResponse = null;
 
     public AddCurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        curriculumResponse = null;
+        saveButton.setText("SAVE");
+        curriculumDescription.setLineWrap(true);
     }
 
     public static AddCurriculumUI getInstance(SchoolData schoolData) {
@@ -41,11 +45,17 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         return instance;
     }
 
-     public void edit(CurriculumResponse curriculumResponse) {
-//        this.curriculumResponse = curriculumResponse;
-//        fetchPermissions();
+    public void edit(CurriculumResponse curriculumResponse) {
+        this.curriculumResponse = curriculumResponse;
+        if (this.curriculumResponse != null) {
+            curriculumName.setText(this.curriculumResponse.getName());
+            curriculumCode.setText(this.curriculumResponse.getCode());
+            curriculumDescription.setText(this.curriculumResponse.getDescription());
+            saveButton.setText("EDIT");
+        }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,7 +77,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         curriculumDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -91,6 +101,8 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         curriculumDescription.setColumns(20);
         curriculumDescription.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         curriculumDescription.setRows(5);
+        curriculumDescription.setWrapStyleWord(true);
+        curriculumDescription.setAutoscrolls(false);
         jScrollPane2.setViewportView(curriculumDescription);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -99,10 +111,10 @@ public class AddCurriculumUI extends javax.swing.JPanel {
 
         jButton1.setText("CANCEL");
 
-        jButton2.setText("SAVE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -132,7 +144,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
                         .addComponent(curriculumName, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(166, Short.MAX_VALUE))
@@ -161,7 +173,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
                         .addComponent(jLabel4)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
@@ -180,14 +192,17 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateCurriculum();
         String name = curriculumName.getText();
         String code = curriculumCode.getText();
         String description = curriculumDescription.getText();
 
         try {
-            submit(name, code, description);
+            //saveButton
+            Curriculum curriculum = getCurriculum(name, code, description);
+            String btnText = saveButton.getText();
+            submitData(btnText, curriculum);
             JOptionPane.showMessageDialog(null, "Record Saved Succesfully ");
             resetForm();
 
@@ -196,7 +211,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
             new BadRequestException("Something went wrong, could not submit data to server");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     protected void resetForm() {
         curriculumName.setText("");
@@ -204,12 +219,53 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         curriculumDescription.setText("");
     }
 
-    protected void submit(String name, String code, String description) throws IOException {
+    protected void submitData(String btnText, Curriculum curriculum) throws IOException {
+        switch (btnText) {
+            case "SAVE":
+                saveCurriculum(curriculum);
+                break;
+            case "EDIT":
+                editCurriculum(curriculum);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void editCurriculum(Curriculum curriculum) throws IOException {
+        try {
+            if (curriculumResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+            curriculum.setId(curriculumResponse.getId());
+            CurriculumService.getInstance(schoolData).edit(curriculum, "logId");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+            resetForm();
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+
+    }
+
+    public void saveCurriculum(Curriculum curriculum) throws IOException {
+        try {
+            CurriculumService.getInstance(schoolData).create(curriculum, "logId");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+            resetForm();
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
+
+    public Curriculum getCurriculum(String name, String code, String description) {
         Curriculum curriculum = new Curriculum();
         curriculum.setName(name);
         curriculum.setCode(code);
         curriculum.setDescription(description);
-        CurriculumService.getInstance(schoolData).create(curriculum, "logId");
+        return curriculum;
     }
 
     protected void validateCurriculum() throws BadRequestException {
@@ -231,7 +287,6 @@ public class AddCurriculumUI extends javax.swing.JPanel {
     private javax.swing.JTextArea curriculumDescription;
     private javax.swing.JTextField curriculumName;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,5 +295,6 @@ public class AddCurriculumUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
