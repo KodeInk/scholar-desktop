@@ -23,7 +23,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageSubjectsUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"NAME", "CODE", "STATUS", "DATE CREATED ", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "CATEGORY", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<SubjectResponse> list = null;
@@ -49,6 +49,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData(schoolData);
+         Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
@@ -86,15 +87,17 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
             for (SubjectResponse ur : list) {
+                String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
+                String category = ur.getCategory().toUpperCase();
                 String status = ur.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (ur.getDate_created() != null) {
                     dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {name, code, status, dateCreated, author};
+                Object[] data = {id, name, code, category, status, dateCreated, author};
                 tableModel.addRow(data);
             }
         }
