@@ -9,6 +9,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -36,7 +38,14 @@ public class CurriculumUI extends javax.swing.JPanel {
         }
         return instance;
     }
+ 
+    public void edit(CurriculumResponse curriculumResponse) {
 
+        jTabbedPane1.setSelectedIndex(1);
+        // AddClassUI.getInstance(schoolData).initData();
+        AddCurriculumUI.getInstance(schoolData).edit(curriculumResponse);
+
+    }
     ChangeListener changeListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {

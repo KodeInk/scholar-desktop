@@ -42,7 +42,7 @@ public class ClassesUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public void editClass(ClassResponse classResponse) {
+    public void edit(ClassResponse classResponse) {
 
         jTabbedPane1.setSelectedIndex(1);
         // AddClassUI.getInstance(schoolData).initData();

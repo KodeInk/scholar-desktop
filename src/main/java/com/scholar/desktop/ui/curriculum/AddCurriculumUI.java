@@ -10,7 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.request.Curriculum;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 
@@ -39,6 +41,11 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         return instance;
     }
 
+     public void edit(CurriculumResponse curriculumResponse) {
+//        this.curriculumResponse = curriculumResponse;
+//        fetchPermissions();
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
