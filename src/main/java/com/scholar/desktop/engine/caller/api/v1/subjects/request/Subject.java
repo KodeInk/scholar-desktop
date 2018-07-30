@@ -18,6 +18,7 @@ public class Subject {
     private Integer id;
     private String name;
     private String code;
+    private SubjectCategoryEnum category;
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
@@ -51,6 +52,14 @@ public class Subject {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public SubjectCategoryEnum getCategory() {
+        return category;
+    }
+
+    public void setCategory(SubjectCategoryEnum category) {
+        this.category = category;
     }
 
     public StatusEnum getStatus() {
@@ -125,6 +134,7 @@ public class Subject {
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
+                + ", category=" + category.name()
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
