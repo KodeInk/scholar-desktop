@@ -31,16 +31,24 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageSubjects
+     *
      * @param schoolData
      */
     public ManageSubjectsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         if (tableModel == null) {
-            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0);
+            tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;//This causes all cells to be not editable
+                }
+
+            };
+
         }
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        fetchData(schoolData);
+        initData(schoolData);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
@@ -52,19 +60,20 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void initData(SchoolData schoolData1) {
         if (list != null) {
             populateJTable(list);
         }
 
         final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
 
+        jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 list = SubjectsService.getInstance(schoolData).list();
                 populateJTable(list);
+                jLabel1.setText("Manage Subjects");
                 return null;
             }
         };
@@ -77,14 +86,14 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
             for (SubjectResponse ur : list) {
-                String name = ur.getName();
-                String code = ur.getCode();
-                String status = ur.getStatus();
+                String name = ur.getName().toUpperCase();
+                String code = ur.getCode().toUpperCase();
+                String status = ur.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (ur.getDate_created() != null) {
-                    dateCreated = new Date(ur.getDate_created()).toString();
+                    dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
-                String author = ur.getAuthor();
+                String author = ur.getAuthor().toUpperCase();
                 Object[] data = {name, code, status, dateCreated, author};
                 tableModel.addRow(data);
             }
@@ -180,8 +189,8 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -243,7 +252,10 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             .addComponent(searchbox, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
+        jTable1.setCellSelectionEnabled(true);
+        jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
