@@ -13,14 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.SubjectAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
 
 /**
  *
@@ -40,14 +36,12 @@ public class SubjectsService extends AbstractService {
     }
 
     public static SubjectsService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new SubjectsService(schoolData);
-        }
+        instance = new SubjectsService(schoolData);
         return instance;
     }
 
     public List<SubjectResponse> list(Integer offset, Integer limit) {
-        
+
         list = new ArrayList<>();
 
         SubjectResponse[] responses = subjectAPI.list(offset, limit);
@@ -57,12 +51,12 @@ public class SubjectsService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-    
+
     public List<SubjectResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
         List<SubjectResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
-            SubjectResponse[] responses = classesAPI.list(searchQuery, offset, limit);
+            SubjectResponse[] responses = subjectAPI.list(searchQuery, offset, limit);
             if (responses != null) {
                 classResponses.addAll(Arrays.asList(responses));
             }
@@ -70,22 +64,20 @@ public class SubjectsService extends AbstractService {
 
         return classResponses;
     }
-    
-    
-     public SubjectResponse create(Subject subject, String logId) throws IOException {
+
+    public SubjectResponse create(Subject subject, String logId) throws IOException {
         if (subject != null) {
             Map subjectMap = getSubjectMap(subject);
             return subjectAPI.create(subjectMap, logId);
         }
         return null;
     }
-     
-     
-     public Map getSubjectMap(Subject subject) {
+
+    public Map getSubjectMap(Subject subject) {
 
         Map subjectMap = new HashMap<>();
         subjectMap.put("name", subject.getName());
-        subjectMap.put("code", subject.getCode());        
+        subjectMap.put("code", subject.getCode());
 
         System.out.println("==================================");
         System.out.println(subjectMap);

@@ -28,7 +28,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
     public DefaultTableModel tableModel;
     List<SubjectResponse> list = null;
     private static ManageSubjectsUI instance;
-     private Integer page;
+    private Integer page;
     private Integer offset;
     private Integer limit;
     private String search = null;
@@ -52,8 +52,8 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         }
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        initData(schoolData);
-         Utilities.hideColumn(0, jTable1);
+        initData();
+        Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
@@ -65,14 +65,17 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void initData(SchoolData schoolData1) {
+    public final void initData() {
         if (list != null) {
             populateJTable(list);
         }
-
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
         final String message = "     Processsing ...     ";
 
         fetchData(offset, limit);
+        page = 1;
+        pageCounter.setText(page.toString());
 
     }
 
@@ -89,13 +92,13 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         };
         swingWorker.execute();
     }
-    
-    public void fetchData(String search,Integer offset, Integer limIt) {
+
+    public void fetchData(String search, Integer offset, Integer limIt) {
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = SubjectsService.getInstance(schoolData).list(offset, limit);
+                list = SubjectsService.getInstance(schoolData).search(search, offset, limit, search);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
                 return null;
@@ -103,10 +106,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         };
         swingWorker.execute();
     }
-    
-    
 
-    
     protected void fetchData() {
         if (search != null) {
             fetchData(search, offset, limit);
@@ -114,8 +114,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             fetchData(offset, limit);
         }
     }
-    
-    
+
     public void populateJTable(List<SubjectResponse> list) {
 
         if (list != null) {
@@ -556,7 +555,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
-      protected void next() {
+    protected void next() {
         offset = offset + limit;
         fetchData();
         page++;
@@ -572,9 +571,8 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         }
 
     }
-    
-    
-       public void searchQuery() {
+
+    public void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
@@ -595,8 +593,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         jLabel1.setText("Manage Classes");
     }
 
-       
-       
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
