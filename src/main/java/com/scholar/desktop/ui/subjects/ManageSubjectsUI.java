@@ -582,7 +582,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             pageCounter.setText(page.toString());
 
             search = searchbox.getText();
-
+            jLabel1.setText("Processing....");
             fetchData();
 
         } else {
@@ -590,7 +590,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             jLabel1.setText("Processing....");
             initData();
         }
-        jLabel1.setText("Manage Classes");
+
     }
 
 
