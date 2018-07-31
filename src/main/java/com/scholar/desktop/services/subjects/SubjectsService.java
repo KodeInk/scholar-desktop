@@ -45,11 +45,9 @@ public class SubjectsService extends AbstractService {
         return instance;
     }
 
-    public List<SubjectResponse> list() {
+    public List<SubjectResponse> list(Integer offset, Integer limit) {
 
-        if (list != null) {
-            return list;
-        }
+        
         list = new ArrayList<>();
 
         SubjectResponse[] responses = subjectAPI.list(offset, limit);
