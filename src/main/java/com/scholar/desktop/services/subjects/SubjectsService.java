@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.SubjectAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
@@ -46,7 +47,6 @@ public class SubjectsService extends AbstractService {
     }
 
     public List<SubjectResponse> list(Integer offset, Integer limit) {
-
         
         list = new ArrayList<>();
 
@@ -57,6 +57,20 @@ public class SubjectsService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
+    
+    public List<SubjectResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<SubjectResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            SubjectResponse[] responses = classesAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                classResponses.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return classResponses;
+    }
+    
     
      public SubjectResponse create(Subject subject, String logId) throws IOException {
         if (subject != null) {
