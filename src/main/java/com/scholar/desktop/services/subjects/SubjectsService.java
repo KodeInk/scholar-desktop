@@ -78,6 +78,7 @@ public class SubjectsService extends AbstractService {
         Map subjectMap = new HashMap<>();
         subjectMap.put("name", subject.getName());
         subjectMap.put("code", subject.getCode());
+        subjectMap.put("category", subject.getCategory().name());
 
         System.out.println("==================================");
         System.out.println(subjectMap);
