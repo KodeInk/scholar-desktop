@@ -515,6 +515,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
                     ClassesUI.getInstance(schoolData).edit(response);
+                    
                 }
             });
             ;

@@ -9,12 +9,14 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
+import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -66,7 +68,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
- 
+
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         final String message = "     Processsing ...     ";
@@ -121,7 +123,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
-            for (SubjectResponse ur : list) {
+            list.stream().map((ur) -> {
                 String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
@@ -133,8 +135,10 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
                 }
                 String author = ur.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, category, status, dateCreated, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -297,6 +301,11 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -557,6 +566,18 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+            // TODO add your handling code here:
+
+        Integer row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, 0).toString();
+
+   
+        rowselect = row;
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
     protected void next() {
         offset = offset + limit;
         fetchData();
@@ -594,8 +615,8 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         }
 
     }
-    
-     protected void enableNextPrevLabels() {
+
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
@@ -608,7 +629,14 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
-    
+
+    Integer rowselect = 0;
+    Integer mouseClick = 0;
+
+    public void resetCounter() {
+        rowselect = 0;
+        mouseClick = 0;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

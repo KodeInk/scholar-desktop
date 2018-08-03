@@ -5,14 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.subjects;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.ui.classes.AddClassUI;
-import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
-import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
-import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 
 /**
  *
@@ -41,10 +39,14 @@ public class SubjectsUI extends javax.swing.JPanel {
     }
 
     ChangeListener changeListener = new ChangeListener() {
+
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
+
             JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
             int index = sourceTabbedPane.getSelectedIndex();
+            
+
             switch (index) {
                 case 0:
                     ManageSubjectsUI.getInstance(schoolData).initData();
@@ -60,6 +62,13 @@ public class SubjectsUI extends javax.swing.JPanel {
 
         }
     };
+
+    public void edit(SubjectResponse subjectResponse) {
+//        jTabbedPane1.setSelectedIndex(1);
+//        AddSubjectUI.getInstance(schoolData).edit(subjectResponse);
+        JOptionPane.showMessageDialog(null, subjectResponse.getName());
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

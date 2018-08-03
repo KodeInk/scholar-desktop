@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectCategoryEnum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
@@ -27,6 +28,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
      */
     private SchoolData schoolData;
     private static AddSubjectUI instance = null;
+    private SubjectResponse subjectResponse;
 
     public AddSubjectUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -40,11 +42,16 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
         return instance;
     }
-    
-    public void initData(){
-    //todo: nothing implemented yet    
+
+    public void initData() {
+        //todo: nothing implemented yet   
+        JOptionPane.showMessageDialog(null, "Karma");
     }
+
     
+    public void edit(SubjectResponse subjectResponse) {
+        this.subjectResponse = subjectResponse;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,14 +187,13 @@ public class AddSubjectUI extends javax.swing.JPanel {
         }
 
         Subject subject = getSubject();
-        
-        
+
         try {
-            SubjectResponse subjectResponse =   submit(subject);
+            SubjectResponse subjectResponse = submit(subject);
             JOptionPane.showMessageDialog(this, "Record Saved Successfully");
-            
+
             resetForm();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Could not save the record to the server, something went wrong");
@@ -202,7 +208,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     }
 
     private SubjectResponse submit(Subject subject) throws IOException {
-        return   SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+        return SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
     }
 
     private Subject getSubject() {
