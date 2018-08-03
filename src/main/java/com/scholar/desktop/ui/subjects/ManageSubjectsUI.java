@@ -81,12 +81,14 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
 
     public void fetchData(Integer offset, Integer limIt) {
         jLabel1.setText("Processing....");
+        disableNextPrevLabels();
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 list = SubjectsService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -95,12 +97,14 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
 
     public void fetchData(String search, Integer offset, Integer limIt) {
         jLabel1.setText("Processing....");
+        disableNextPrevLabels();
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 list = SubjectsService.getInstance(schoolData).search(search, offset, limit, search);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -592,6 +596,21 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         }
 
     }
+    
+     protected void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
+        nextLabel.setEnabled(true);
+        prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
+    }
+
+    protected void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
+        nextLabel.setEnabled(false);
+        prevLabel.setEnabled(false);
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
