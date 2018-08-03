@@ -46,11 +46,18 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     public void initData() {
         //todo: nothing implemented yet   
+        saveButton.setText("SAVE");
+
+        resetForm();
+
     }
 
-    
     public void edit(SubjectResponse subjectResponse) {
         this.subjectResponse = subjectResponse;
+        subjectName.setText(subjectResponse.getName());
+        subjectCode.setText(subjectResponse.getCode());
+        category.setSelectedItem(subjectResponse.getCategory());
+        saveButton.setText("EDIT");
     }
 
     /**
@@ -205,6 +212,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private void resetForm() {
         subjectName.setText("");
         subjectCode.setText("");
+        category.setSelectedIndex(-1);
     }
 
     private SubjectResponse submit(Subject subject) throws IOException {
