@@ -40,6 +40,11 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
         return instance;
     }
+    
+    public void initData(){
+    //todo: nothing implemented yet    
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

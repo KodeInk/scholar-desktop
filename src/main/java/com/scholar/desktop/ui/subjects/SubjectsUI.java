@@ -5,7 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.subjects;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
+import main.java.com.scholar.desktop.ui.classes.ManageClassesUI;
+import main.java.com.scholar.desktop.ui.streams.AddStreamUI;
+import main.java.com.scholar.desktop.ui.streams.ManageStreamsUI;
 
 /**
  *
@@ -16,11 +23,43 @@ public class SubjectsUI extends javax.swing.JPanel {
     /**
      * Creates new form SubjectsUI
      */
-    private SchoolData  schoolData;
+    private SchoolData schoolData;
+    private static SubjectsUI instance;
+
     public SubjectsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
+
+    public static SubjectsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new SubjectsUI(schoolData);
+        }
+
+        return instance;
+    }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageSubjectsUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddSubjectUI.getInstance(schoolData).initData();
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
