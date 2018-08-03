@@ -26,13 +26,13 @@ import main.java.com.scholar.desktop.helper.exceptions.Message;
  *
  * @author mover 3/11/2018
  */
-public class SubjectAPI extends AbstractAPI  {
+public class SubjectAPI extends AbstractAPI {
 
     private static final Logger LOG = Logger.getLogger(SubjectAPI.class.getName());
     private final SchoolData schoolData;
     private static SubjectAPI instance;
     private final EngineCaller engineCaller;
-     private Message message = null;
+    private Message message = null;
 
     public SubjectAPI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -73,14 +73,13 @@ public class SubjectAPI extends AbstractAPI  {
         return null;
     }
 
+    public SubjectResponse[] list(String query, Integer offset, Integer limit) {
 
-  public SubjectResponse[] list(String query,Integer offset, Integer limit) {
- 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        Response response = engineCaller.get("subjects/v1/search/"+query, queryParameter);
+        Response response = engineCaller.get("subjects/v1/search/" + query, queryParameter);
 
         switch (response.getStatus()) {
             case 400:
@@ -99,10 +98,7 @@ public class SubjectAPI extends AbstractAPI  {
 
         return null;
     }
-   
-  
-  
-    
+
     public SubjectResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("subjects/v1/", body, logId);
@@ -129,6 +125,32 @@ public class SubjectAPI extends AbstractAPI  {
         }
 
     }
-    
-    
+
+    public SubjectResponse update(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.put("subjects/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                SubjectResponse subjectResponse = response.readEntity(SubjectResponse.class);
+                return subjectResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
+    }
+
 }

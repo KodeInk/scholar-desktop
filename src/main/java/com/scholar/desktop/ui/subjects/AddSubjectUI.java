@@ -5,11 +5,13 @@
  */
 package main.java.com.scholar.desktop.ui.subjects;
 
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectCategoryEnum;
@@ -193,21 +195,30 @@ public class AddSubjectUI extends javax.swing.JPanel {
             throw new BadRequestException("Subject code is   mandatory");
         }
 
+        if (category.getSelectedIndex() == -1) {
+            throw new BadRequestException("Subject category is mandatory");
+        }
+
         Subject subject = getSubject();
 
-        try {
-            SubjectResponse subjectResponse = submit(subject);
-            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
-
-            resetForm();
-
-        } catch (IOException ex) {
-            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BadRequestException("Could not save the record to the server, something went wrong");
-        }
+        SubmitData(saveButton.getText(), subject);
 
 
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    public void SubmitData(String btnText, Subject subject) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveSubject(subject);
+                break;
+            case "EDIT":
+                editSubject(subject);
+                break;
+            default:
+                break;
+        }
+
+    }
 
     private void resetForm() {
         subjectName.setText("");
@@ -215,8 +226,32 @@ public class AddSubjectUI extends javax.swing.JPanel {
         category.setSelectedIndex(-1);
     }
 
-    private SubjectResponse submit(Subject subject) throws IOException {
-        return SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+    private void saveSubject(Subject subject) throws HeadlessException {
+        try {
+
+            SubjectResponse subjectResponse = SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
+    }
+
+    private void editSubject(Subject subject) throws HeadlessException {
+        try {
+
+            SubjectResponse subjectResponse = SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
     }
 
     private Subject getSubject() {
