@@ -19,7 +19,7 @@ import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AddSubjectUI extends javax.swing.JPanel {
 
@@ -33,6 +33,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     public AddSubjectUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        initData();
     }
 
     public static AddSubjectUI getInstance(SchoolData schoolData) {
@@ -45,7 +46,6 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     public void initData() {
         //todo: nothing implemented yet   
-        JOptionPane.showMessageDialog(null, "Karma");
     }
 
     

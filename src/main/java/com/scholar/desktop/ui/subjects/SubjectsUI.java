@@ -44,8 +44,7 @@ public class SubjectsUI extends javax.swing.JPanel {
         public void stateChanged(ChangeEvent changeEvent) {
 
             JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
-            int index = sourceTabbedPane.getSelectedIndex();
-            
+            Integer index = sourceTabbedPane.getSelectedIndex();
 
             switch (index) {
                 case 0:
@@ -64,9 +63,8 @@ public class SubjectsUI extends javax.swing.JPanel {
     };
 
     public void edit(SubjectResponse subjectResponse) {
-//        jTabbedPane1.setSelectedIndex(1);
-//        AddSubjectUI.getInstance(schoolData).edit(subjectResponse);
-        JOptionPane.showMessageDialog(null, subjectResponse.getName());
+        jTabbedPane1.setSelectedIndex(1);
+        AddSubjectUI.getInstance(schoolData).edit(subjectResponse);
 
     }
 

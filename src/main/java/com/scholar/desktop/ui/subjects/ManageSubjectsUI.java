@@ -9,14 +9,12 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
-import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -568,14 +566,32 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-            // TODO add your handling code here:
+        // TODO add your handling code here:
 
         Integer row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, 0).toString();
 
-   
+        if (rowselect == row) {
+            mouseClick++;
+
+            //selectClassStreamsList
+        } else {
+            mouseClick = 1;
+        }
+
+        if (mouseClick % 2 == 0) {
+
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                    SubjectsUI.getInstance(schoolData).edit(response);
+
+                }
+            });
+
+        }
+
         rowselect = row;
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     protected void next() {
