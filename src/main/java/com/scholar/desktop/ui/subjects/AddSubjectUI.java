@@ -243,7 +243,12 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private void editSubject(Subject subject) throws HeadlessException {
         try {
 
-            SubjectResponse subjectResponse = SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
+            if (subjectResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            subject.setId(subjectResponse.getId());
+            SubjectsService.getInstance(schoolData).edit(subject, "LOG ID");
             JOptionPane.showMessageDialog(this, "Record Saved Successfully");
             resetForm();
 

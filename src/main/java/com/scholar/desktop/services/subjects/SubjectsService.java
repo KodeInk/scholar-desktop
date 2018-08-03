@@ -75,17 +75,21 @@ public class SubjectsService extends AbstractService {
         return null;
     }
 
-     public SubjectResponse edit(Subject subject, String logId) throws IOException {
+    public SubjectResponse edit(Subject subject, String logId) throws IOException {
         if (subject != null) {
             Map subjectMap = getSubjectMap(subject);
             return subjectAPI.update(subjectMap, logId);
         }
         return null;
     }
-     
+
     public Map getSubjectMap(Subject subject) {
 
         Map subjectMap = new HashMap<>();
+        if (subject.getId() != null) {
+            subjectMap.put("id", subject.getId());
+        }
+
         subjectMap.put("name", subject.getName());
         subjectMap.put("code", subject.getCode());
         subjectMap.put("category", subject.getCategory().name());
