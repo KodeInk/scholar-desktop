@@ -5,12 +5,13 @@
  */
 package main.java.com.scholar.desktop.ui.subjects;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
+import main.java.com.scholar.desktop.ui.subjects.papers.AddSubjectPaperUI;
+import main.java.com.scholar.desktop.ui.subjects.papers.ManageSubjectPaperUI;
 
 /**
  *
@@ -83,6 +84,8 @@ public class SubjectsUI extends javax.swing.JPanel {
 
         jTabbedPane1.add("Manage Subjects", ManageSubjectsUI.getInstance(schoolData));
         jTabbedPane1.add("Add Subject", AddSubjectUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Subject Papers", ManageSubjectPaperUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Subject Paper", AddSubjectPaperUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -5,6 +5,8 @@
  */
 package main.java.com.scholar.desktop.ui.subjects.papers;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
  * @author Manny
@@ -14,8 +16,19 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageSubjectPaperUI
      */
-    public ManageSubjectPaperUI() {
+    private static ManageSubjectPaperUI instance;
+    private SchoolData schoolData;
+
+    public ManageSubjectPaperUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static ManageSubjectPaperUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageSubjectPaperUI(schoolData);
+        }
+        return instance;
     }
 
     /**

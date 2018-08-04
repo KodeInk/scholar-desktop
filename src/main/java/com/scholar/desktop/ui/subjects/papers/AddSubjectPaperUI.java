@@ -5,17 +5,30 @@
  */
 package main.java.com.scholar.desktop.ui.subjects.papers;
 
+import main.java.com.scholar.desktop.config.entities.SchoolData;
+
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     /**
      * Creates new form AddSubjectPaperUI
      */
-    public AddSubjectPaperUI() {
+    private static AddSubjectPaperUI instance;
+    private SchoolData schoolData;
+
+    public AddSubjectPaperUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
+    }
+
+    public static AddSubjectPaperUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddSubjectPaperUI(schoolData);
+        }
+        return instance;
     }
 
     /**
