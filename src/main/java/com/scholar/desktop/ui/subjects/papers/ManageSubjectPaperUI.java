@@ -13,9 +13,8 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.subjects.SubjectsService;
+import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
 
 /**
  *
@@ -75,7 +74,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = SubjectsService.getInstance(schoolData).list(offset, limit);
+                list = SubjectPapersService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
                 enableNextPrevLabels();
@@ -91,7 +90,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = SubjectsService.getInstance(schoolData).search(search, offset, limit, search);
+                list = SubjectPapersService.getInstance(schoolData).search(search, offset, limit, search);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
                 enableNextPrevLabels();
@@ -109,7 +108,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
         }
     }
 
-    public void populateJTable(List<SubjectResponse> list) {
+    public void populateJTable(List<SubjectPaperResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
@@ -117,14 +116,14 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
                 String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
-                String category = ur.getCategory().toUpperCase();
+                String subject = ur.getSubject().getName().toUpperCase();
                 String status = ur.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (ur.getDate_created() != null) {
                     dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, name, code, category, status, dateCreated, author};
+                Object[] data = {id, name, code, subject, status, dateCreated, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
