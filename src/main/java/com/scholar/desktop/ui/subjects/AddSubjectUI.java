@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectCategoryEnum;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectTypeEnum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
@@ -56,7 +56,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         this.subjectResponse = subjectResponse;
         subjectName.setText(subjectResponse.getName());
         subjectCode.setText(subjectResponse.getCode());
-        category.setSelectedItem(subjectResponse.getCategory());
+        category.setSelectedItem(subjectResponse.getType());
         saveButton.setText("EDIT");
     }
 
@@ -113,7 +113,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MAJOR", "ELECTIVE" }));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Category  : *");
+        jLabel4.setText("Type  : *");
         jLabel4.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -141,7 +141,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +261,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         Subject subject = new Subject();
         subject.setName(subjectName.getText());
         subject.setCode(subjectCode.getText());
-        subject.setCategory(SubjectCategoryEnum.fromString(category.getSelectedItem().toString()));
+        subject.setType(SubjectTypeEnum.fromString(category.getSelectedItem().toString()));
         return subject;
     }
 

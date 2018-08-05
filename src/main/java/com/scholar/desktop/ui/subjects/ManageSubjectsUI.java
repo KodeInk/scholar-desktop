@@ -23,7 +23,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageSubjectsUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "CATEGORY", "STATUS", "DATE CREATED ", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "TYPE", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
    private  List<SubjectResponse> list = null;
@@ -126,7 +126,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
                 String id = ur.getId().toString();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
-                String category = ur.getCategory().toUpperCase();
+                String category = ur.getType().toUpperCase();
                 String status = ur.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (ur.getDate_created() != null) {

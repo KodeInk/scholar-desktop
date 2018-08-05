@@ -18,7 +18,7 @@ public class Subject {
     private Integer id;
     private String name;
     private String code;
-    private SubjectCategoryEnum category;
+    private SubjectTypeEnum type;
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
@@ -54,12 +54,12 @@ public class Subject {
         this.code = code;
     }
 
-    public SubjectCategoryEnum getCategory() {
-        return category;
+    public SubjectTypeEnum getType() {
+        return type;
     }
 
-    public void setCategory(SubjectCategoryEnum category) {
-        this.category = category;
+    public void setType(SubjectTypeEnum type) {
+        this.type = type;
     }
 
     public StatusEnum getStatus() {
@@ -134,7 +134,7 @@ public class Subject {
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
-                + ", category=" + category.name()
+                + ", category=" + type.name()
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
