@@ -26,7 +26,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "CATEGORY", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-    List<SubjectResponse> list = null;
+   private  List<SubjectResponse> list = null;
     private static ManageSubjectsUI instance;
     private Integer page;
     private Integer offset;

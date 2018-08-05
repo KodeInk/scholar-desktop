@@ -5,9 +5,12 @@
  */
 package main.java.com.scholar.desktop.ui.subjects.papers;
 
+import java.util.List;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
  *
@@ -18,8 +21,12 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     /**
      * Creates new form AddSubjectPaperUI
      */
+    private Integer offset;
+    private Integer limit;
+
     private static AddSubjectPaperUI instance;
     private SchoolData schoolData;
+    private List<SubjectResponse> list = null;
 
     public AddSubjectPaperUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -27,10 +34,33 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     }
 
     public static AddSubjectPaperUI getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new AddSubjectPaperUI(schoolData);
-        }
+        instance = new AddSubjectPaperUI(schoolData);
         return instance;
+    }
+
+    public void initData() {
+        offset = 0;
+        limit = 10000;
+        fetchSubjects(offset, limit);
+    }
+
+    public void fetchSubjects(Integer offset, Integer limIt) {
+
+        subject.removeAll();
+        subject.addItem("Processing ... ");
+        jLabel1.setText("Processing ... ");
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                list = SubjectsService.getInstance(schoolData).list(offset, limit);
+
+                jLabel1.setText("Subject Paper  Information");
+
+                return null;
+            }
+        };
+        swingWorker.execute();
     }
 
     /**
@@ -52,7 +82,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         subjectName = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        category = new javax.swing.JComboBox<>();
+        subject = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -82,8 +112,6 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         });
 
         cancelButton.setText("CANCEL");
-
-        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MAJOR", "ELECTIVE" }));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Subject  : *");
@@ -117,7 +145,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(subject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,7 +157,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subject, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,12 +198,11 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
             throw new BadRequestException("Subject code is   mandatory");
         }
 
-        if (category.getSelectedIndex() == -1) {
+        if (subject.getSelectedIndex() == -1) {
             throw new BadRequestException("Subject category is mandatory");
         }
 
 //        Subject subject = getSubject();
-
 //        SubmitData(saveButton.getText(), subject);
 
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -183,7 +210,6 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox<String> category;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -192,6 +218,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton saveButton;
+    private javax.swing.JComboBox<String> subject;
     private javax.swing.JTextField subjectCode;
     private javax.swing.JTextField subjectName;
     // End of variables declaration//GEN-END:variables
