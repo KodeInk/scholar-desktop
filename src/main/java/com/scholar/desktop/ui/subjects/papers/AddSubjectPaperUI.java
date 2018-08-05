@@ -9,6 +9,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectTypeEnum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
@@ -27,7 +31,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     private static AddSubjectPaperUI instance;
     private SchoolData schoolData;
-    private List<SubjectResponse> list = null;
+    private List<SubjectResponse> subjectResponse = null;
 
     public AddSubjectPaperUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -59,7 +63,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = SubjectsService.getInstance(schoolData).list(offset, limit);
+                subjectResponse = SubjectsService.getInstance(schoolData).list(offset, limit);
                 jLabel1.setText("Subject Paper  Information");
                 populateSubjectsCombo();
 
@@ -72,8 +76,8 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     public void populateSubjectsCombo() {
         resetSubjectCombo();
-        if (list != null) {
-            list.forEach((response) -> {
+        if (subjectResponse != null) {
+            subjectResponse.forEach((response) -> {
                 subject.addItem(response.getName());
             });
         }
@@ -223,10 +227,19 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
             throw new BadRequestException("Subject category is mandatory");
         }
 
-//        Subject subject = getSubject();
-//        SubmitData(saveButton.getText(), subject);
+        SubjectPaper subject = getSubjectPaper();
+        SubmitData(saveButton.getText(), subject);
 
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private SubjectPaper getSubjectPaper() {
+        SubjectPaper subjectpaper = new SubjectPaper();
+        subjectpaper.setName(paperName.getText());
+        subjectpaper.setCode(paperCode.getText());
+        SubjectResponse roleResponse = subjectResponse.get(subject.getSelectedIndex());
+        subjectpaper.setSubject_id(roleResponse.getId());
+        return subjectpaper;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
