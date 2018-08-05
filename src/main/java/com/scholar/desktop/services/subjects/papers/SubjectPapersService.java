@@ -5,7 +5,6 @@
  */
 package main.java.com.scholar.desktop.services.subjects.papers;
 
-import main.java.com.scholar.desktop.services.subjects.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.SubjectAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.SubjectPaperAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 
 /**
@@ -28,12 +27,12 @@ public class SubjectPapersService extends AbstractService {
     private static final Logger LOG = Logger.getLogger(SubjectPapersService.class.getName());
     private final SchoolData schoolData;
     private static SubjectPapersService instance;
-    private List<SubjectResponse> list = null;
-    SubjectAPI subjectAPI;
+    private List<SubjectPaperResponse> list = null;
+    private SubjectPaperAPI subjectPaperAPI;
 
     public SubjectPapersService(SchoolData schoolData) {
         this.schoolData = schoolData;
-        subjectAPI = new SubjectAPI(schoolData);
+        subjectPaperAPI = new SubjectPaperAPI(schoolData);
     }
 
     public static SubjectPapersService getInstance(SchoolData schoolData) {
@@ -41,11 +40,11 @@ public class SubjectPapersService extends AbstractService {
         return instance;
     }
 
-    public List<SubjectResponse> list(Integer offset, Integer limit) {
+    public List<SubjectPaperResponse> list(Integer offset, Integer limit) {
 
         list = new ArrayList<>();
 
-        SubjectResponse[] responses = subjectAPI.list(offset, limit);
+        SubjectPaperResponse[] responses = subjectPaperAPI.list(offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
@@ -53,45 +52,45 @@ public class SubjectPapersService extends AbstractService {
         return list;
     }
 
-    public List<SubjectResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+    public List<SubjectPaperResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
-        List<SubjectResponse> classResponses = new ArrayList<>();
+        List<SubjectPaperResponse> subjectResponse = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
-            SubjectResponse[] responses = subjectAPI.list(searchQuery, offset, limit);
+            SubjectPaperResponse[] responses = subjectPaperAPI.list(searchQuery, offset, limit);
             if (responses != null) {
-                classResponses.addAll(Arrays.asList(responses));
+                subjectResponse.addAll(Arrays.asList(responses));
             }
         }
 
-        return classResponses;
+        return subjectResponse;
     }
 
-    public SubjectResponse create(Subject subject, String logId) throws IOException {
-        if (subject != null) {
-            Map subjectMap = getSubjectMap(subject);
-            return subjectAPI.create(subjectMap, logId);
+    public SubjectPaperResponse create(SubjectPaper subjectpaper, String logId) throws IOException {
+        if (subjectpaper != null) {
+            Map subjectMap = getSubjectMap(subjectpaper);
+            return subjectPaperAPI.create(subjectMap, logId);
         }
         return null;
     }
 
-    public SubjectResponse edit(Subject subject, String logId) throws IOException {
-        if (subject != null) {
-            Map subjectMap = getSubjectMap(subject);
-            return subjectAPI.update(subjectMap, logId);
+    public SubjectPaperResponse edit(SubjectPaper subjectpaper, String logId) throws IOException {
+        if (subjectpaper != null) {
+            Map subjectMap = getSubjectMap(subjectpaper);
+            return subjectPaperAPI.update(subjectMap, logId);
         }
         return null;
     }
 
-    public Map getSubjectMap(Subject subject) {
+    public Map getSubjectMap(SubjectPaper subjectpaper) {
 
         Map subjectMap = new HashMap<>();
-        if (subject.getId() != null) {
-            subjectMap.put("id", subject.getId());
+        if (subjectpaper.getId() != null) {
+            subjectMap.put("id", subjectpaper.getId());
         }
 
-        subjectMap.put("name", subject.getName());
-        subjectMap.put("code", subject.getCode());
-        subjectMap.put("category", subject.getCategory().name());
+        subjectMap.put("name", subjectpaper.getName());
+        subjectMap.put("code", subjectpaper.getCode());
+        subjectMap.put("subject_id", subjectpaper.getSubject_id().toString());
 
         System.out.println("==================================");
         System.out.println(subjectMap);

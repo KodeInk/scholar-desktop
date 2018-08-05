@@ -54,15 +54,15 @@ public class SubjectsService extends AbstractService {
 
     public List<SubjectResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
-        List<SubjectResponse> classResponses = new ArrayList<>();
+        List<SubjectResponse> subjectResponse = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
             SubjectResponse[] responses = subjectAPI.list(searchQuery, offset, limit);
             if (responses != null) {
-                classResponses.addAll(Arrays.asList(responses));
+                subjectResponse.addAll(Arrays.asList(responses));
             }
         }
 
-        return classResponses;
+        return subjectResponse;
     }
 
     public SubjectResponse create(Subject subject, String logId) throws IOException {
