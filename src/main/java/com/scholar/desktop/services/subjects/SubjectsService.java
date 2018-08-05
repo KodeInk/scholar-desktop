@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.SubjectAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;

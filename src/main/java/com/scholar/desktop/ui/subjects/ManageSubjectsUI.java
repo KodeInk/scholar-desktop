@@ -50,6 +50,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             };
 
         }
+        
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
