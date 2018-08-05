@@ -15,6 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
+import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
  *
@@ -27,7 +28,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
      */
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "SUBJECT", "STATUS", "DATE CREATED ", "AUTHOR"};
     private static ManageSubjectPaperUI instance;
-     List<SubjectPaperResponse> list = null;
+    List<SubjectPaperResponse> list = null;
     private SchoolData schoolData;
     public DefaultTableModel tableModel;
     private Integer page;
@@ -54,6 +55,8 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
+        Utilities.hideColumn(0, jTable1);
+        jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
 
     public final void initData() {
@@ -76,7 +79,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 list = SubjectPapersService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
-                jLabel1.setText("Manage Subjects");
+                jLabel1.setText("Manage Subject Papers");
                 enableNextPrevLabels();
                 return null;
             }
@@ -92,7 +95,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 list = SubjectPapersService.getInstance(schoolData).search(search, offset, limit, search);
                 populateJTable(list);
-                jLabel1.setText("Manage Subjects");
+                jLabel1.setText("Manage Subject Papers ");
                 enableNextPrevLabels();
                 return null;
             }
