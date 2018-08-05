@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.subjects.papers;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
@@ -31,14 +32,19 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     public AddSubjectPaperUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+
     }
 
     public static AddSubjectPaperUI getInstance(SchoolData schoolData) {
-        instance = new AddSubjectPaperUI(schoolData);
+        if (instance == null) {
+            instance = new AddSubjectPaperUI(schoolData);
+        }
+
         return instance;
     }
 
     public void initData() {
+
         offset = 0;
         limit = 10000;
         fetchSubjects(offset, limit);
@@ -46,7 +52,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     public void fetchSubjects(Integer offset, Integer limIt) {
 
-        subject.removeAll();
+        resetSubjectCombo();
         subject.addItem("Processing ... ");
         jLabel1.setText("Processing ... ");
 
@@ -54,13 +60,28 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 list = SubjectsService.getInstance(schoolData).list(offset, limit);
-
                 jLabel1.setText("Subject Paper  Information");
+                populateSubjectsCombo();
 
                 return null;
             }
+
         };
         swingWorker.execute();
+    }
+
+    public void populateSubjectsCombo() {
+        resetSubjectCombo();
+        if (list != null) {
+            list.forEach((response) -> {
+                subject.addItem(response.getName());
+            });
+        }
+        subject.setSelectedIndex(-1);
+    }
+
+    public void resetSubjectCombo() {
+        subject.removeAllItems();
     }
 
     /**
