@@ -54,7 +54,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        initData();
+        
         Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
@@ -599,7 +599,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
     protected void next() {
         offset = offset + limit;
-//        fetchData();
+        fetchData();
         page++;
         pageCounter.setText(page.toString());
     }
@@ -607,7 +607,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
     protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
-//            fetchData();
+            fetchData();
             page--;
             pageCounter.setText(page.toString());
         }

@@ -54,6 +54,9 @@ public class SubjectsUI extends javax.swing.JPanel {
                 case 1:
                     AddSubjectUI.getInstance(schoolData).initData();
                     break;
+                case 2:
+                    ManageSubjectPaperUI.getInstance(schoolData).initData();
+                    break;
 
                 default:
 
