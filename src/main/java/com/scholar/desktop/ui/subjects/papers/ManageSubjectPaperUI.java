@@ -26,7 +26,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageSubjectPaperUI
      */
-    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "SUBJECT", "STATUS", "DATE CREATED ", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "SUBJECT", "NAME", "CODE", "STATUS", "DATE CREATED ", "AUTHOR"};
     private static ManageSubjectPaperUI instance;
     List<SubjectPaperResponse> list = null;
     private SchoolData schoolData;
@@ -126,7 +126,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
                     dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, name, code, subject, status, dateCreated, author};
+                Object[] data = {id,subject, name, code,  status, dateCreated, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
