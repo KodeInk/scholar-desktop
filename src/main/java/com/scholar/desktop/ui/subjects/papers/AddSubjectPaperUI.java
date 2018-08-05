@@ -5,17 +5,22 @@
  */
 package main.java.com.scholar.desktop.ui.subjects.papers;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.role.response.RoleResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectTypeEnum;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
+import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
+import main.java.com.scholar.desktop.ui.subjects.AddSubjectUI;
 
 /**
  *
@@ -227,11 +232,65 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
             throw new BadRequestException("Subject category is mandatory");
         }
 
-        SubjectPaper subject = getSubjectPaper();
-        SubmitData(saveButton.getText(), subject);
+        SubjectPaper subjectpaper = getSubjectPaper();
+        SubmitData(saveButton.getText(), subjectpaper);
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    public void SubmitData(String btnText, SubjectPaper subjectpaper) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveSubjectPaper(subjectpaper);
+                break;
+            case "EDIT":
+//                editSubject(subjectpaper);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void resetForm() {
+        paperName.setText("");
+        paperCode.setText("");
+        subject.setSelectedIndex(-1);
+    }
+
+    private void saveSubjectPaper(SubjectPaper subjectpaper) throws HeadlessException {
+        try {
+
+            SubjectPaperResponse subjectPaperResponse = SubjectPapersService.getInstance(schoolData).create(subjectpaper, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (HeadlessException | IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
+    }
+
+    /*
+    private void editSubject(Subject subject) throws HeadlessException {
+        try {
+
+            if (subjectPaperResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            subject.setId(subjectPaperResponse.getId());
+            SubjectsService.getInstance(schoolData).edit(subject, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
+    }
+     */
     private SubjectPaper getSubjectPaper() {
         SubjectPaper subjectpaper = new SubjectPaper();
         subjectpaper.setName(paperName.getText());
