@@ -54,7 +54,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        
+
         Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
     }
@@ -126,7 +126,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
                     dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 }
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id,subject, name, code,  status, dateCreated, author};
+                Object[] data = {id, subject, name, code, status, dateCreated, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
@@ -376,11 +376,11 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -451,12 +451,12 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
             search = searchbox.getText();
             jLabel1.setText("Processing....");
-//            fetchData();
+            fetchData();
 
         } else {
             search = null;
             jLabel1.setText("Processing....");
-//            initData();
+            initData();
         }
 
     }
