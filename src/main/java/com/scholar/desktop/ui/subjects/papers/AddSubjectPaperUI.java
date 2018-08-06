@@ -65,6 +65,9 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         resetSubjectCombo();
         subject.addItem("Processing ... ");
         jLabel1.setText("Processing ... ");
+        if (subjectResponse != null) {
+            populateSubjectsCombo();
+        }
 
         SwingWorker swingWorker = new SwingWorker() {
             @Override
@@ -88,7 +91,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
             });
         }
 
-        if (subjectpaperresponse != null) {      
+        if (subjectpaperresponse != null) {
             subject.setSelectedItem(subjectpaperresponse.getSubject().getName());
         } else {
             subject.setSelectedIndex(-1);
