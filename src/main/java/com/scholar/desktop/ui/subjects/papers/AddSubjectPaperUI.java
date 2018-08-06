@@ -53,9 +53,10 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-
+        this.subjectpaperresponse = null;
         offset = 0;
         limit = 10000;
+        resetForm();
         fetchSubjects(offset, limit);
     }
 
@@ -86,7 +87,12 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                 subject.addItem(response.getName());
             });
         }
-        subject.setSelectedIndex(-1);
+
+        if (subjectpaperresponse != null) {      
+            subject.setSelectedItem(subjectpaperresponse.getSubject().getName());
+        } else {
+            subject.setSelectedIndex(-1);
+        }
     }
 
     public void resetSubjectCombo() {
