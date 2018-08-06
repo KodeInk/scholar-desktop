@@ -260,7 +260,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                 saveSubjectPaper(subjectpaper);
                 break;
             case "EDIT":
-//                editSubject(subjectpaper);
+                editSubject(subjectpaper);
                 break;
             default:
                 break;
@@ -272,6 +272,25 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         paperName.setText("");
         paperCode.setText("");
         subject.setSelectedIndex(-1);
+    }
+
+    private void editSubject(SubjectPaper subjectpaper) throws HeadlessException {
+        try {
+
+            if (subjectpaperresponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            subjectpaper.setId(subjectpaperresponse.getId());
+            SubjectPapersService.getInstance(schoolData).edit(subjectpaper, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
     }
 
     private void saveSubjectPaper(SubjectPaper subjectpaper) throws HeadlessException {
