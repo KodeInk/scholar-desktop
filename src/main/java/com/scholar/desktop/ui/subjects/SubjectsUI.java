@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.ui.subjects.papers.AddSubjectPaperUI;
 import main.java.com.scholar.desktop.ui.subjects.papers.ManageSubjectPaperUI;
@@ -74,6 +75,14 @@ public class SubjectsUI extends javax.swing.JPanel {
         AddSubjectUI.getInstance(schoolData).edit(subjectResponse);
 
     }
+    
+     public void edit(SubjectPaperResponse subjectResponse) {
+        jTabbedPane1.setSelectedIndex(3);
+        AddSubjectPaperUI.getInstance(schoolData).edit(subjectResponse);
+
+    }
+     
+     
 
     /**
      * This method is called from within the constructor to initialize the form.

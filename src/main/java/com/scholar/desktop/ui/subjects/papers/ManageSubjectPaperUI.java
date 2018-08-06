@@ -16,6 +16,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.Subj
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
+import main.java.com.scholar.desktop.ui.subjects.SubjectsUI;
 
 /**
  *
@@ -176,7 +177,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jSplitPane1.setDividerLocation(550);
+        jSplitPane1.setDividerLocation(570);
         jSplitPane1.setDividerSize(2);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -342,7 +343,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -357,7 +358,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -400,14 +401,15 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
 
         if (mouseClick % 2 == 0) {
 
-            /*
+            
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
+                    
                     SubjectsUI.getInstance(schoolData).edit(response);
 
                 }
             });
-             */
+             
         }
 
         rowselect = row;

@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
@@ -37,6 +36,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     private static AddSubjectPaperUI instance;
     private SchoolData schoolData;
     private List<SubjectResponse> subjectResponse = null;
+    private SubjectPaperResponse subjectpaperresponse = null;
 
     public AddSubjectPaperUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -91,6 +91,14 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     public void resetSubjectCombo() {
         subject.removeAllItems();
+    }
+
+    public void edit(SubjectPaperResponse subjectpaperresponse) {
+        this.subjectpaperresponse = subjectpaperresponse;
+        subject.setSelectedItem(subjectpaperresponse.getSubject().getName());
+        paperName.setText(subjectpaperresponse.getName());
+        paperCode.setText(subjectpaperresponse.getCode());
+        saveButton.setText("EDIT");
     }
 
     /**
