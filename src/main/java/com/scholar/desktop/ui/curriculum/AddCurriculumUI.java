@@ -39,6 +39,7 @@ public class AddCurriculumUI extends javax.swing.JPanel {
         curriculumResponse = null;
         saveButton.setText("SAVE");
         curriculumDescription.setLineWrap(true);
+        resetForm();
     }
 
     public static AddCurriculumUI getInstance(SchoolData schoolData) {
