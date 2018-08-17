@@ -56,7 +56,7 @@ public class CurriculumUI extends javax.swing.JPanel {
                     ManageCurriculumUI.getInstance(schoolData).initData();
                     break;
                 case 1:
-                    AddCurriculumUI.getInstance(schoolData);
+                    AddCurriculumUI.getInstance(schoolData).initData();
                     break;
 
                 default:

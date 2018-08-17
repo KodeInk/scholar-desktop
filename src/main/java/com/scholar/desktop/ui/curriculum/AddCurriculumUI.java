@@ -32,6 +32,10 @@ public class AddCurriculumUI extends javax.swing.JPanel {
     public AddCurriculumUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        initData();
+    }
+
+    public void initData() {
         curriculumResponse = null;
         saveButton.setText("SAVE");
         curriculumDescription.setLineWrap(true);
