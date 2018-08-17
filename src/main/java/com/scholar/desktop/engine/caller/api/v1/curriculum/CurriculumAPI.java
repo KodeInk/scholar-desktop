@@ -100,6 +100,8 @@ public class CurriculumAPI extends AbstractAPI {
                 throw new BadRequestException(message.getMessage());
 
             case 500:
+                
+               
                 message = getMessage(response);
                 throw new BadRequestException(message.getMessage());
 

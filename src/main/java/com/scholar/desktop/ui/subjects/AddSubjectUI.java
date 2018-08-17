@@ -33,7 +33,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     public AddSubjectUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        initData();
+         
     }
 
     public static AddSubjectUI getInstance(SchoolData schoolData) {
@@ -44,10 +44,9 @@ public class AddSubjectUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public void initData() {
+    public   void initData() {
         //todo: nothing implemented yet   
         saveButton.setText("SAVE");
-
         resetForm();
 
     }

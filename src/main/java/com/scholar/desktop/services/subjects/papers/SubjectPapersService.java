@@ -90,7 +90,7 @@ public class SubjectPapersService extends AbstractService {
 
         subjectMap.put("name", subjectpaper.getName());
         subjectMap.put("code", subjectpaper.getCode());
-        subjectMap.put("subject_id", subjectpaper.getSubject_id().toString());
+        subjectMap.put("subject_id", subjectpaper.getSubject_id());
 
         System.out.println("==================================");
         System.out.println(subjectMap);
