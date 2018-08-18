@@ -265,7 +265,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(tableModel);
-        jTable1.setCellSelectionEnabled(true);
         jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
