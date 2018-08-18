@@ -5,11 +5,14 @@
  */
 package main.java.com.scholar.desktop.ui.grading;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class GradingUI extends javax.swing.JPanel {
 
@@ -17,10 +20,40 @@ public class GradingUI extends javax.swing.JPanel {
      * Creates new form GradingUI
      */
     private SchoolData schoolData;
+    private static GradingUI instance;
+
     public GradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
+
+    public static GradingUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new GradingUI(schoolData);
+        }
+        return instance;
+    }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageGradingUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddGradingUI.getInstance(schoolData).initData();
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.

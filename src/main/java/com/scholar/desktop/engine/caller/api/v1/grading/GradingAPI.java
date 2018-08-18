@@ -40,9 +40,6 @@ public class GradingAPI extends AbstractAPI {
     }
 
     public GradingResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
-
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);

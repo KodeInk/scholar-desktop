@@ -40,17 +40,12 @@ public class GradingService extends AbstractService {
     }
 
     public static GradingService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new GradingService(schoolData);
-        }
+        instance = new GradingService(schoolData);
         return instance;
     }
 
     public List<GradingResponse> list() {
 
-        if (list != null) {
-            return list;
-        }
         list = new ArrayList<>();
 
         GradingResponse[] responses = gradingAPI.list(offset, limit);
@@ -61,17 +56,27 @@ public class GradingService extends AbstractService {
         return list;
     }
 
-    
-     public GradingResponse create(Grading grading, String logId) throws IOException {
+    public List<GradingResponse> list(Integer offset, Integer limit) {
+
+        list = new ArrayList<>();
+
+        GradingResponse[] responses = gradingAPI.list(offset, limit);
+        if (responses != null) {
+            list.addAll(Arrays.asList(responses));
+        }
+        IncreaseOffsetLimit();
+        return list;
+    }
+
+    public GradingResponse create(Grading grading, String logId) throws IOException {
         if (grading != null) {
             Map gradingMap = getGradingMap(grading);
             return gradingAPI.create(gradingMap, logId);
         }
         return null;
     }
-     
-     
-      public Map getGradingMap(Grading grading) {
+
+    public Map getGradingMap(Grading grading) {
 
         Map gradingMap = new HashMap<>();
         gradingMap.put("name", grading.getName());

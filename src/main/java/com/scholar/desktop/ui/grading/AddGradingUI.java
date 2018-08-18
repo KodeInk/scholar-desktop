@@ -31,6 +31,10 @@ public class AddGradingUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
     }
+    
+    public void initData(){
+        
+    }
 
     public static AddGradingUI getInstance(SchoolData schoolData) {
         if (instance == null) {
