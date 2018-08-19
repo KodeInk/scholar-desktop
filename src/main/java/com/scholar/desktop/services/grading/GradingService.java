@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
@@ -70,12 +71,12 @@ public class GradingService extends AbstractService {
      * @throws IOException
      */
     public List<GradingResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
-
+ 
         List<GradingResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
             GradingResponse[] responses = gradingAPI.list(searchQuery, offset, limit);
             if (responses != null) {
-                list.addAll(Arrays.asList(responses));
+                classResponses.addAll(Arrays.asList(responses));
             }
         }
 

@@ -204,7 +204,6 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
         tableModel.fireTableDataChanged();
 
-//        Utilities.hideDialog();
     }
 
     /**

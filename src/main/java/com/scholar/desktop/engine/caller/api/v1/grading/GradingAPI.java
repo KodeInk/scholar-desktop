@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
@@ -76,7 +77,7 @@ public class GradingAPI extends AbstractAPI {
             case 400:
                 ShowAlertMessage(response);
                 break;
-            case 200:
+            case 200:               
                 GradingResponse[] gradingResponse = response.readEntity(GradingResponse[].class);
                 return gradingResponse;
             case 401:

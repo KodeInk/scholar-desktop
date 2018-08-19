@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -91,12 +92,12 @@ public class ManageGradingUI extends javax.swing.JPanel {
      * @param limit
      */
     public final void fetchData(String search, Integer offset, Integer limit) {
-        jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = GradingService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
-                populateJTable(list);
+                jLabel1.setText("Processing....");
+                List<GradingResponse> GRS = GradingService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(GRS);
                 repaint();
                 jLabel1.setText("Manage Grading");
                 return null;
@@ -112,10 +113,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
      * @param limit
      */
     public final void fetchData(Integer offset, Integer limit) {
-        jLabel1.setText("Processing....");
+
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                jLabel1.setText("Processing....");
                 list = GradingService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 repaint();
@@ -152,8 +154,6 @@ public class ManageGradingUI extends javax.swing.JPanel {
         }
 
         tableModel.fireTableDataChanged();
-
-        Utilities.hideDialog();
 
     }
 
@@ -473,7 +473,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
             pageCounter.setText(page.toString());
 
             search = searchbox.getText();
-
+            jLabel1.setText("Processing....");
             fetchData();
 
         } else {
