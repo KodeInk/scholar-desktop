@@ -44,6 +44,10 @@ public class GradingService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<GradingResponse> list() {
 
         list = new ArrayList<>();
@@ -56,6 +60,34 @@ public class GradingService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param searchQuery
+     * @param offset
+     * @param limit
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public List<GradingResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<GradingResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            GradingResponse[] responses = gradingAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                list.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return classResponses;
+    }
+
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
     public List<GradingResponse> list(Integer offset, Integer limit) {
 
         list = new ArrayList<>();
@@ -68,6 +100,13 @@ public class GradingService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param grading
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public GradingResponse create(Grading grading, String logId) throws IOException {
         if (grading != null) {
             Map gradingMap = getGradingMap(grading);

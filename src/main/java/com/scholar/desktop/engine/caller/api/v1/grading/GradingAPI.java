@@ -64,6 +64,32 @@ public class GradingAPI extends AbstractAPI {
         return null;
     }
 
+       public GradingResponse[] list(String query,Integer offset, Integer limit) {
+ 
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("grading/v1/search/"+query, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                GradingResponse[] gradingResponse = response.readEntity(GradingResponse[].class);
+                return gradingResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+   
     public GradingResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("grading/v1/", body, logId);
