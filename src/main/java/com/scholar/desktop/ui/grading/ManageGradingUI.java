@@ -23,7 +23,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageGradingUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"ID","NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private List<GradingResponse> list = null;
@@ -42,7 +42,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
     public ManageGradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
-       if (tableModel == null) {
+        if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -58,7 +58,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         jTable2.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         Utilities.hideColumn(0, jTable1);
-        
+
     }
 
     public static ManageGradingUI getInstance(SchoolData schoolData) {
@@ -79,18 +79,23 @@ public class ManageGradingUI extends javax.swing.JPanel {
         limit = Utilities.default_limit;
         final String message = "     Processsing ...     ";
         fetchData(offset, limit);
-         page = 1;
-         pageCounter.setText(page.toString());
-         
+        page = 1;
+        pageCounter.setText(page.toString());
 
     }
 
-      public final void fetchData(String search, Integer offset, Integer limit) {
+    /**
+     *
+     * @param search
+     * @param offset
+     * @param limit
+     */
+    public final void fetchData(String search, Integer offset, Integer limit) {
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = GradingService.getInstance(schoolData).list(offset, limit);
+                list = GradingService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(list);
                 repaint();
                 jLabel1.setText("Manage Grading");
@@ -101,7 +106,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
     }
 
-      
+    /**
+     *
+     * @param offset
+     * @param limit
+     */
     public final void fetchData(Integer offset, Integer limit) {
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
@@ -118,12 +127,16 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     * @param list
+     */
     public void populateJTable(List<GradingResponse> list) {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (GradingResponse ur : list) {
+            list.stream().map((ur) -> {
                 Integer id = ur.getId();
                 String name = ur.getName().toUpperCase();
                 String code = ur.getCode().toUpperCase();
@@ -131,11 +144,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
                 String status = ur.getStatus().name().toUpperCase();
                 Date date_Created = new Date(ur.getDateCreated());
                 String author = ur.getAuthor().toUpperCase();
-
-                Object[] data = {id,name, code, details, status, date_Created.toString().toUpperCase(), author};
+                Object[] data = {id, name, code, details, status, date_Created.toString().toUpperCase(), author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -144,15 +157,15 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
     }
 
-      protected void fetchData() {
+    protected void fetchData() {
         if (search != null) {
             fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
     }
-      
-        protected void prev() {
+
+    protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
             fetchData();
@@ -162,16 +175,13 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
     }
 
-        
-        
-      
-     protected void next() {
+    protected void next() {
         offset = offset + limit;
         fetchData();
         page++;
         pageCounter.setText(page.toString());
     }
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -453,7 +463,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
         prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
-     public void searchQuery() {
+    public void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
