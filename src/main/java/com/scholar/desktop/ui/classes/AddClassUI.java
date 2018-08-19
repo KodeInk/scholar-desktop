@@ -75,7 +75,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     public void initData() {
         initRankComboBox();
         resetForm();
-        jButton1.setText("SAVE");
+        saveButton.setText("SAVE");
         this.classResponse = null;
 
         fetchPermissions();
@@ -118,7 +118,7 @@ public final class AddClassUI extends javax.swing.JPanel {
             className.setText(classResponse.getName());
             classCode.setText(classResponse.getCode());
             RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
-            jButton1.setText("EDIT");
+            saveButton.setText("EDIT");
 
              List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
             if (checkBoxs != null && checkBoxs.size() > 0) {
@@ -306,7 +306,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         permissionsJpanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -364,10 +364,10 @@ public final class AddClassUI extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setText("SAVE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -402,7 +402,7 @@ public final class AddClassUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -437,7 +437,7 @@ public final class AddClassUI extends javax.swing.JPanel {
                     .addComponent(permissionsJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -460,7 +460,18 @@ public final class AddClassUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_classCodeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        validateForm();
+        Classes schoolClass = getSchoolClass();
+
+        String btnText = saveButton.getText();
+
+        SubmitData(btnText, schoolClass);
+
+
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    public void validateForm() throws BadRequestException {
         // TODO add your handling code here:
         //todo: form validation
         if (className.getText().isEmpty()) {
@@ -472,14 +483,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         if (RankJComboBox.getSelectedIndex() <= 1) {
             throw new BadRequestException("Rank   is   mandatory");
         }
-        Classes schoolClass = getSchoolClass();
-
-        String btnText = jButton1.getText();
-
-        SubmitData(btnText, schoolClass);
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -494,17 +498,17 @@ public final class AddClassUI extends javax.swing.JPanel {
     public void SubmitData(String btnText, Classes schoolClass) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
-                saveClass(schoolClass);
+                saveRecord(schoolClass);
                 break;
             case "EDIT":
-                editClass(schoolClass);
+                editRecord(schoolClass);
                 break;
             default:
                 break;
         }
     }
 
-    private void editClass(Classes schoolClass) throws HeadlessException {
+    private void editRecord(Classes schoolClass) throws HeadlessException {
         try {
             //todo: get the clas_id
             if (classResponse == null) {
@@ -523,7 +527,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
     }
 
-    private void saveClass(Classes schoolClass) throws HeadlessException {
+    private void saveRecord(Classes schoolClass) throws HeadlessException {
         try {
             //todi:  submit to sever
             ClassesService.getInstance(schoolData).create(schoolClass, "LOG_ID");
@@ -558,7 +562,6 @@ public final class AddClassUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> RankJComboBox;
     private javax.swing.JTextField classCode;
     private javax.swing.JTextField className;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -571,5 +574,6 @@ public final class AddClassUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel permissionsJpanel;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }

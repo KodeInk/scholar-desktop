@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 
 /**
  *
@@ -21,9 +22,10 @@ public class GradingUI extends javax.swing.JPanel {
      */
     private SchoolData schoolData;
     private static GradingUI instance;
-
+JTabbedPane jTabbedPane;
     public GradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
+         jTabbedPane = new javax.swing.JTabbedPane();
         initComponents();
         jTabbedPane1.addChangeListener(changeListener);
     }
@@ -54,6 +56,14 @@ public class GradingUI extends javax.swing.JPanel {
 
         }
     };
+
+    public void edit(GradingResponse gradingResponse) {
+
+        jTabbedPane1.setSelectedIndex(1);
+        // AddClassUI.getInstance(schoolData).initData();
+        AddGradingUI.getInstance(schoolData).edit(gradingResponse);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

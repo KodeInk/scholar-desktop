@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.Grading;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.grading.GradingService;
 
@@ -26,21 +27,42 @@ public class AddGradingUI extends javax.swing.JPanel {
      */
     private static AddGradingUI instance;
     private final SchoolData schoolData;
+    private GradingResponse gradingResponse;
 
     public AddGradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
-    
-    public void initData(){
-        
+
+    public void initData() {
+        resetForm();
+        saveButton.setText("SAVE");
     }
 
+    /**
+     *
+     * @param schoolData
+     * @return
+     */
     public static AddGradingUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddGradingUI(schoolData);
         }
         return instance;
+    }
+
+    /**
+     *
+     * @param gradingResponse
+     */
+    public void edit(GradingResponse gradingResponse) {
+        this.gradingResponse = gradingResponse;
+        //todo: set the form details
+        gradingName.setText(gradingResponse.getName());
+        gradingCode.setText(gradingResponse.getCode());
+        gradingDescription.setText(gradingResponse.getDescription());
+        saveButton.setText("EDIT");
+
     }
 
     /**
@@ -174,7 +196,10 @@ public class AddGradingUI extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateGrading();
         Grading grading = getGrading();
-        submitRecord(grading);
+
+        String btnText = saveButton.getText();
+
+        SubmitData(btnText, grading);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
@@ -195,24 +220,72 @@ public class AddGradingUI extends javax.swing.JPanel {
 
     /**
      *
+     * @param btnText
      * @param grading
      * @throws HeadlessException
-     * @throws BadRequestException
      */
-    protected void submitRecord(Grading grading) throws HeadlessException, BadRequestException {
+    public void SubmitData(String btnText, Grading grading) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveRecord(grading);
+                break;
+            case "EDIT":
+                editRecord(grading);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     *
+     * @param grading
+     */
+    public void saveRecord(Grading grading) {
         try {
             //todo: submit to the server
             GradingService.getInstance(schoolData).create(grading, "LOG_ID");
             //todo: Success Message
             JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
-            //todo: reset and fnish
-            gradingName.setText("");
-            gradingCode.setText("");
-            gradingDescription.setText("");
+            resetForm();
         } catch (IOException ex) {
             Logger.getLogger(AddGradingUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Sorry,Record was not saved succesfuly, something went wrong");
         }
+    }
+
+    /**
+     *
+     * @param grading
+     */
+    public void editRecord(Grading grading) {
+        try {
+            //todo: get the clas_id
+            if (gradingResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            grading.setId(gradingResponse.getId());
+
+            //todo: submit to the server
+            GradingService.getInstance(schoolData).edit(grading, "LOG_ID");
+            //todo: Success Message
+            JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
+            resetForm();
+        } catch (IOException ex) {
+            Logger.getLogger(AddGradingUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Sorry,Record was not saved succesfuly, something went wrong");
+        }
+    }
+
+    /**
+     *
+     */
+    public void resetForm() {
+        //todo: reset and fnish
+        gradingName.setText("");
+        gradingCode.setText("");
+        gradingDescription.setText("");
     }
 
     /**

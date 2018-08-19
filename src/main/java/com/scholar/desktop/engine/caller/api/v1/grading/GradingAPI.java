@@ -117,5 +117,36 @@ public class GradingAPI extends AbstractAPI {
         }
 
     }
+    
+     public GradingResponse update(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.put("grading/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                GradingResponse gradingResponse = response.readEntity(GradingResponse.class);
+                return gradingResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
+    }
+      
+    
+     
+     
 
 }

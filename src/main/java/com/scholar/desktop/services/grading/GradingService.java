@@ -116,9 +116,22 @@ public class GradingService extends AbstractService {
         return null;
     }
 
+     public GradingResponse edit(Grading grading, String logId) throws IOException {
+        if (grading != null) {
+            Map gradingMap = getGradingMap(grading);
+            return gradingAPI.update(gradingMap, logId);
+        }
+        return null;
+    }
+     
+     
     public Map getGradingMap(Grading grading) {
 
         Map gradingMap = new HashMap<>();
+         if (grading.getId() != null) {
+            gradingMap.put("id", grading.getId());
+        }
+         
         gradingMap.put("name", grading.getName());
         gradingMap.put("code", grading.getCode());
         gradingMap.put("description", grading.getDescription());

@@ -141,11 +141,13 @@ public class ManageClassesUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
                 jLabel1.setText("Processing....");
                 List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(crs);
                 repaint();
                 jLabel1.setText("Manage Classes");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -163,6 +165,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
             @Override
             protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
                 jLabel1.setText("Processing....");
                 list = ClassesService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
