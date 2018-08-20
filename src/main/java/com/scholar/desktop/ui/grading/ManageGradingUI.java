@@ -25,7 +25,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
-    public DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     private List<GradingResponse> list = null;
     private static ManageGradingUI instance = null;
 

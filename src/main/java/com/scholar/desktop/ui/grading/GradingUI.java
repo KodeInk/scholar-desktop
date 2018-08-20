@@ -22,10 +22,11 @@ public class GradingUI extends javax.swing.JPanel {
      */
     private SchoolData schoolData;
     private static GradingUI instance;
-JTabbedPane jTabbedPane;
+    JTabbedPane jTabbedPane;
+
     public GradingUI(SchoolData schoolData) {
         this.schoolData = schoolData;
-         jTabbedPane = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
         initComponents();
         jTabbedPane1.addChangeListener(changeListener);
     }
@@ -49,6 +50,13 @@ JTabbedPane jTabbedPane;
                 case 1:
                     AddGradingUI.getInstance(schoolData).initData();
                     break;
+                case 2:
+                    ManageGradingDetailUI.getInstance(schoolData);
+                    break;
+                case 3:
+                    AddGradingDetailUI.getInstance(schoolData);
+                    break;
+
                 default:
 
                     break;
@@ -80,6 +88,8 @@ JTabbedPane jTabbedPane;
 
         jTabbedPane1.add("Manage Grading", ManageGradingUI.getInstance(schoolData));
         jTabbedPane1.add("Add Grading", AddGradingUI.getInstance(schoolData));
+        jTabbedPane1.add("Manage Grading Details ", ManageGradingDetailUI.getInstance(schoolData));
+        jTabbedPane1.add("Add Grading Detail", AddGradingDetailUI.getInstance(schoolData));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
