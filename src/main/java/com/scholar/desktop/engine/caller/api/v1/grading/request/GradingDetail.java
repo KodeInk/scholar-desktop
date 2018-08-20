@@ -15,12 +15,10 @@ import java.util.Date;
 public class GradingDetail {
 
     private Integer id;
-    private Integer grading_id;
     private Integer grading_scale;
     private String symbol;
     private Integer min_grade;
     private Integer max_grade;
-    private String value;
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
@@ -38,14 +36,6 @@ public class GradingDetail {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getGrading_id() {
-        return grading_id;
-    }
-
-    public void setGrading_id(Integer grading_id) {
-        this.grading_id = grading_id;
     }
 
     public Integer getGrading_scale() {
@@ -80,14 +70,6 @@ public class GradingDetail {
         this.max_grade = max_grade;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public StatusEnum getStatus() {
         return status;
     }
@@ -116,12 +98,10 @@ public class GradingDetail {
     public String toString() {
         return "GradingDetail{"
                 + "id=" + id
-                + ", grading_id=" + grading_id
                 + ", grading_scale=" + grading_scale
                 + ", symbol=" + symbol
                 + ", min_grade=" + min_grade
                 + ", max_grade=" + max_grade
-                + ", value=" + value
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
