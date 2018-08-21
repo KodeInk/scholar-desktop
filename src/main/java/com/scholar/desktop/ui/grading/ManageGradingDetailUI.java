@@ -127,7 +127,7 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
 
     }
 
-      protected void fetchData(String search, Integer offset, Integer limit) {
+    protected void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
