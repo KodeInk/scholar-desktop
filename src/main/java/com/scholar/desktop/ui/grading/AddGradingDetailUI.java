@@ -16,11 +16,9 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.GradingDetail;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingDetailResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.grading.GradingDetailService;
 import main.java.com.scholar.desktop.services.grading.GradingService;
-import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
 import main.java.com.scholar.desktop.ui.subjects.AddSubjectUI;
 
 /**
@@ -44,9 +42,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-//        resetForm();
-//        saveButton.setText("SAVE");
-
+        resetForm();
+        saveButton.setText("SAVE");
+        gradingDetailResponse = null;
         fetchGradingDetails(0, 10000);
         populateMiniGradeAndMaximumGadeCombos();
     }
@@ -91,6 +89,10 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         }
         gradingScaleField.setSelectedIndex(-1);
 
+        if (gradingDetailResponse != null) {
+            gradingScaleField.setSelectedItem(gradingDetailResponse.getGradingScale());
+        }
+
     }
 
     public void resetGradingScaleCombo() {
@@ -106,12 +108,12 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 
     public void edit(GradingDetailResponse gradingDetailResponse) {
         this.gradingDetailResponse = gradingDetailResponse;
-        //todo: set the form details
-//        gradingName.setText(gradingDetailResponse.getName());
-//        gradingCode.setText(gradingDetailResponse.getCode());
-//        gradingDescription.setText(gradingDetailResponse.getDescription());
-//        saveButton.setText("EDIT");
+        symbolField.setText(gradingDetailResponse.getSymbol());
 
+        minigradeField.setSelectedItem("" + gradingDetailResponse.getMin_grade().intValue());
+        maxgradeField.setSelectedItem("" + gradingDetailResponse.getMax_grade().intValue());
+
+        saveButton.setText("EDIT");
     }
 
     /**
@@ -260,12 +262,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 
         validateForm();
 
-        GradingDetail gradingDetail = new GradingDetail();
-        GradingResponse gradingScale = gradingScales.get(gradingScaleField.getSelectedIndex());
-        gradingDetail.setGrading_scale(gradingScale.getId());
-        gradingDetail.setSymbol(symbolField.getText());
-        gradingDetail.setMin_grade(Integer.parseInt(minigradeField.getSelectedItem().toString()));
-        gradingDetail.setMax_grade(Integer.parseInt(maxgradeField.getSelectedItem().toString()));
+        GradingDetail gradingDetail = getEntity();
 
 //        GradingDetailService.getInstance(schoolData).create(gradingDetail, "LOG_ID");
 //        Grading grading = getGrading();
@@ -304,9 +301,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     }
 
     public void resetForm() {
-        gradingScaleField.setSelectedIndex(-1);
-        minigradeField.setSelectedIndex(-1);
-        maxgradeField.setSelectedIndex(-1);
+//        gradingScaleField.setSelectedIndex(-1);
+//        minigradeField.setSelectedIndex(-1);
+//        maxgradeField.setSelectedIndex(-1);
         symbolField.setText("");
     }
 
@@ -353,6 +350,20 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
             throw new BadRequestException("Minimum grading should not be greater than maximum grading " + minimum + " > " + maximum);
         }
 
+    }
+
+    /**
+     *
+     * @return @throws NumberFormatException
+     */
+    public GradingDetail getEntity() throws NumberFormatException {
+        GradingDetail gradingDetail = new GradingDetail();
+        GradingResponse gradingScale = gradingScales.get(gradingScaleField.getSelectedIndex());
+        gradingDetail.setGrading_scale(gradingScale.getId());
+        gradingDetail.setSymbol(symbolField.getText());
+        gradingDetail.setMin_grade(Integer.parseInt(minigradeField.getSelectedItem().toString()));
+        gradingDetail.setMax_grade(Integer.parseInt(maxgradeField.getSelectedItem().toString()));
+        return gradingDetail;
     }
 
 
