@@ -267,17 +267,17 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     public void SubmitData(String btnText, GradingDetail gradingDetail) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
-                saveSubjectPaper(gradingDetail);
+                saveGradingDetail(gradingDetail);
                 break;
             case "EDIT":
-                editSubject(gradingDetail);
+                editGradingDetail(gradingDetail);
                 break;
             default:
                 break;
         }
     }
 
-    private void saveSubjectPaper(GradingDetail subjectpaper) throws HeadlessException {
+    private void saveGradingDetail(GradingDetail subjectpaper) throws HeadlessException {
         try {
 
             GradingDetailResponse gradingDetailresponse = GradingDetailService.getInstance(schoolData).create(subjectpaper, "LOG ID");
@@ -298,7 +298,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         symbolField.setText("");
     }
 
-    private void editSubject(GradingDetail gradingDetail) throws HeadlessException {
+    private void editGradingDetail(GradingDetail gradingDetail) throws HeadlessException {
         try {
 
             if (gradingDetailResponse == null) {
