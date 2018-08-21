@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.grading.response;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Objects;
  */
 public class GradingResponse {
 
+    
     private Integer id;
     private String name;
     private String code;
@@ -21,13 +23,9 @@ public class GradingResponse {
     private StatusEnum status;
     private Long dateCreated;
     private String author;
-    private GradingDetailResponse[] detailResponses;
+    private List<GradingDetailResponse> gradingDetailResponses;
 
     public GradingResponse() {
-    }
-
-    public GradingResponse(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -86,16 +84,25 @@ public class GradingResponse {
         this.author = author;
     }
 
+    public List<GradingDetailResponse> getGradingDetailResponses() {
+        return gradingDetailResponses;
+    }
+
+    public void setGradingDetailResponses(List<GradingDetailResponse> gradingDetailResponses) {
+        this.gradingDetailResponses = gradingDetailResponses;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.code);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + Objects.hashCode(this.status);
-        hash = 71 * hash + Objects.hashCode(this.dateCreated);
-        hash = 71 * hash + Objects.hashCode(this.author);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.code);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.status);
+        hash = 97 * hash + Objects.hashCode(this.dateCreated);
+        hash = 97 * hash + Objects.hashCode(this.author);
+        hash = 97 * hash + Objects.hashCode(this.gradingDetailResponses);
         return hash;
     }
 
@@ -120,6 +127,9 @@ public class GradingResponse {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -129,7 +139,13 @@ public class GradingResponse {
         if (!Objects.equals(this.dateCreated, other.dateCreated)) {
             return false;
         }
-        return Objects.equals(this.author, other.author);
+        return Objects.equals(this.gradingDetailResponses, other.gradingDetailResponses);
     }
+
+    @Override
+    public String toString() {
+        return "GradingResponse{" + "id=" + id + ", name=" + name + ", code=" + code + ", description=" + description + ", status=" + status + ", dateCreated=" + dateCreated + ", author=" + author + ", gradingDetailResponses=" + gradingDetailResponses + '}';
+    }
+
 
 }
