@@ -5,13 +5,16 @@
  */
 package main.java.com.scholar.desktop.ui.grading;
 
+import java.util.List;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingDetailResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
+import main.java.com.scholar.desktop.services.grading.GradingService;
 
 /**
  *
- * @author mover 
+ * @author mover
  */
 public class AddGradingDetailUI extends javax.swing.JPanel {
 
@@ -20,12 +23,67 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
      * Creates new form AddGradingDetailUI
      */
     private static AddGradingDetailUI instance;
-    public AddGradingDetailUI() {
+    private final SchoolData schoolData;
+
+    private List<GradingResponse> gradingScales = null;
+
+    public AddGradingDetailUI(SchoolData schoolData) {
+        this.schoolData = schoolData;
         initComponents();
     }
 
-    
-      public void edit(GradingDetailResponse gradingDetailResponse) {
+    public void initData() {
+//        resetForm();
+//        saveButton.setText("SAVE");
+
+        fetchGradingDetails(0, 10000);
+    }
+
+    public void fetchGradingDetails(Integer offset, Integer limit) {
+
+        resetGradingScaleCombo();
+        gradingScaleField.addItem("Processing ... ");
+        jLabel1.setText("Processing ... ");
+        if (gradingScales != null) {
+            populateSubjectsCombo();
+        }
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                gradingScales = GradingService.getInstance(schoolData).list(offset, limit);
+                jLabel1.setText("Grading Detail  Information");
+                populateSubjectsCombo();
+
+                return null;
+            }
+
+        };
+        swingWorker.execute();
+    }
+
+    public void populateSubjectsCombo() {
+        resetGradingScaleCombo();
+        if (gradingScales != null) {
+            gradingScales.forEach((response) -> {
+                gradingScaleField.addItem(response.getName());
+            });
+        }
+
+    }
+
+    public void resetGradingScaleCombo() {
+        gradingScaleField.removeAllItems();
+    }
+
+    public static AddGradingDetailUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddGradingDetailUI(schoolData);
+        }
+        return instance;
+    }
+
+    public void edit(GradingDetailResponse gradingDetailResponse) {
         this.gradingDetailResponse = gradingDetailResponse;
         //todo: set the form details
 //        gradingName.setText(gradingDetailResponse.getName());
@@ -34,7 +92,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 //        saveButton.setText("EDIT");
 
     }
-      
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,14 +107,14 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        gradingCode = new javax.swing.JTextField();
+        symbolField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        maxgradeField = new javax.swing.JComboBox<>();
+        gradingScaleField = new javax.swing.JComboBox<>();
+        minigradeField = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -69,7 +127,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("Grading Scale");
+        jLabel2.setText("Grading Scale : *");
         jLabel2.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -77,7 +135,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         jLabel3.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Minimum Grade");
+        jLabel4.setText("Minimum Grade : *");
         jLabel4.setToolTipText("");
 
         saveButton.setText("SAVE");
@@ -89,14 +147,8 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 
         cancelButton.setText("CANCEL");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Maximum Grade");
+        jLabel5.setText("Maximum Grade : *");
         jLabel5.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -106,9 +158,6 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
             .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -123,11 +172,14 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
                                 .addGap(28, 28, 28)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(gradingCode)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(159, Short.MAX_VALUE))
+                                .addComponent(symbolField)
+                                .addComponent(gradingScaleField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(maxgradeField, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(minigradeField, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,20 +190,20 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gradingScaleField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gradingCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(symbolField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(minigradeField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maxgradeField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,28 +226,18 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+
 //        validateGrading();
 //        Grading grading = getGrading();
-
 //        String btnText = saveButton.getText();
 //
 //        SubmitData(btnText, grading);
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    public static AddGradingDetailUI getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new AddGradingDetailUI();
-        }
-        return instance;
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField gradingCode;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> gradingScaleField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -204,6 +246,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JComboBox<String> maxgradeField;
+    private javax.swing.JComboBox<String> minigradeField;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField symbolField;
     // End of variables declaration//GEN-END:variables
 }
