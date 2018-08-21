@@ -301,9 +301,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     }
 
     public void resetForm() {
-//        gradingScaleField.setSelectedIndex(-1);
-//        minigradeField.setSelectedIndex(-1);
-//        maxgradeField.setSelectedIndex(-1);
+        gradingScaleField.setSelectedIndex(-1);
+        minigradeField.setSelectedIndex(-1);
+        maxgradeField.setSelectedIndex(-1);
         symbolField.setText("");
     }
 
