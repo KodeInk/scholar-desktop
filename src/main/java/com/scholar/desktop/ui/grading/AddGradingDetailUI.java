@@ -6,6 +6,8 @@
 package main.java.com.scholar.desktop.ui.grading;
 
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingDetailResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 
 /**
  *
@@ -13,6 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
  */
 public class AddGradingDetailUI extends javax.swing.JPanel {
 
+    private GradingDetailResponse gradingDetailResponse;
     /**
      * Creates new form AddGradingDetailUI
      */
@@ -21,6 +24,17 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         initComponents();
     }
 
+    
+      public void edit(GradingDetailResponse gradingDetailResponse) {
+        this.gradingDetailResponse = gradingDetailResponse;
+        //todo: set the form details
+//        gradingName.setText(gradingDetailResponse.getName());
+//        gradingCode.setText(gradingDetailResponse.getCode());
+//        gradingDescription.setText(gradingDetailResponse.getDescription());
+//        saveButton.setText("EDIT");
+
+    }
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

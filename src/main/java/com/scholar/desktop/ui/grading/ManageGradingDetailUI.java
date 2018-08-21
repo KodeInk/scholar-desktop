@@ -419,9 +419,37 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
         jLabel1.setText("Manage Classes");
     }
 
-
+    Integer rowselect = 0;
+    Integer mouseClick = 0;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JOptionPane.showMessageDialog(null, "Greater Than Life");
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+
+        Integer row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, 0).toString();
+
+        if (rowselect == row) {
+            mouseClick++;
+
+            //selectClassStreamsList
+        } else {
+            mouseClick = 1;
+        }
+
+        if (mouseClick % 2 == 0) {
+
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                    GradingUI.getInstance(schoolData).edit(response);
+
+                }
+            });
+            ;
+
+        }
+
+        rowselect = row;
+
 
     }//GEN-LAST:event_jTable1MouseClicked
 
