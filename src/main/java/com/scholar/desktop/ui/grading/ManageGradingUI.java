@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingDetailResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.grading.GradingService;
@@ -24,8 +25,10 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 public class ManageGradingUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS1 = {"SYMBOL", "MIN GRADE", "MAX GRADE"};
+
     SchoolData schoolData = null;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel, tableModel1;
     private List<GradingResponse> list = null;
     private static ManageGradingUI instance = null;
 
@@ -52,6 +55,18 @@ public class ManageGradingUI extends javax.swing.JPanel {
             };
 
         }
+
+        if (tableModel1 == null) {
+            tableModel1 = new DefaultTableModel(COLUMN_HEADERS1, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;//This causes all cells to be not editable
+                }
+
+            };
+
+        }
+
         initComponents();
         initData();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -409,17 +424,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable2.setModel(tableModel1);
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -488,6 +493,9 @@ public class ManageGradingUI extends javax.swing.JPanel {
             mouseClick = 1;
         }
 
+        populateGradingDetail(value);
+
+        //todo: populate entity two 
         if (mouseClick % 2 == 0) {
 
             list.forEach(response -> {
@@ -503,6 +511,31 @@ public class ManageGradingUI extends javax.swing.JPanel {
         rowselect = row;
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    public void populateGradingDetail(String selectedValue) {
+        Utilities.removeRowsFromDefaultModel(tableModel1);
+        if (list != null) {
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(selectedValue)) {
+                    List<GradingDetailResponse> gdrs = response.getGradingDetailResponses();
+
+                    gdrs.stream().map((gdr) -> {
+                        String symbol = gdr.getSymbol();
+                        String mingrade = gdr.getMin_grade().toString();
+                        String maxgrade = gdr.getMax_grade().toString();
+                        Object[] data = {symbol, mingrade, maxgrade};
+                        return data;
+                    }).map((data) -> {
+                        tableModel1.addRow(data);
+                        return data;
+                    }).forEachOrdered((_item) -> {
+                        repaint();
+                    });
+
+                }
+            });
+        }
+    }
 
     public void searchQuery() {
         // TODO add your handling code here:
