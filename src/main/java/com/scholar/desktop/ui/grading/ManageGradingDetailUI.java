@@ -54,10 +54,8 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
 
         }
 
-        
         initComponents();
-       
-        
+
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         Utilities.hideColumn(0, jTable1);
@@ -90,16 +88,16 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
             list.stream().map((ur) -> {
-                Integer  id =    ur.getId();
+                Integer id = ur.getId();
                 String gradingScale = ur.getGradingScale().toUpperCase();
- 
-                String symbol =  ur.getSymbol().toUpperCase();
-                Long minGrade =  ur.getMin_grade();
-                Long  maxGrade =  ur.getMax_grade();
-                String status =  ur.getStatus().toUpperCase();
-                String date_Created =  new Date(ur.getDate_created()).toString();
+
+                String symbol = ur.getSymbol().toUpperCase();
+                Long minGrade = ur.getMin_grade();
+                Long maxGrade = ur.getMax_grade();
+                String status = ur.getStatus().toUpperCase();
+                String date_Created = new Date(ur.getDate_created()).toString();
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, gradingScale, symbol, minGrade, maxGrade, status,  date_Created, author};
+                Object[] data = {id, gradingScale, symbol, minGrade, maxGrade, status, date_Created, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
@@ -109,8 +107,8 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
         tableModel.fireTableDataChanged();
 
     }
-    
-     public final void fetchData(Integer offset, Integer limit) {
+
+    public final void fetchData(Integer offset, Integer limit) {
 
         SwingWorker swingWorker = new SwingWorker() {
             @Override
@@ -129,12 +127,24 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
 
     }
 
-     
-     
+      protected void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
+                jLabel1.setText("Processing....");
+                List<GradingDetailResponse> gradingDetailsResponse = GradingDetailService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(gradingDetailsResponse);
+                repaint();
+                jLabel1.setText("Manage Classes");
+                enableNextPrevLabels();
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
 
-     
-     
-      protected void enableNextPrevLabels() {
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
@@ -147,8 +157,7 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this symbol. The content of this method is always
@@ -382,12 +391,34 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling symbol here:
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    public void searchQuery() {
+        // TODO add your handling code here:
+        if (!searchbox.getText().isEmpty()) {
+
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
+
+            search = searchbox.getText();
+
+            fetchData();
+
+        } else {
+            search = null;
+            jLabel1.setText("Processing....");
+            initData();
+        }
+        jLabel1.setText("Manage Classes");
+    }
+
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         JOptionPane.showMessageDialog(null, "Greater Than Life");
@@ -404,18 +435,15 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
-
-     protected void fetchData() {
+    protected void fetchData() {
         if (search != null) {
-//            fetchData(search, offset, limit);
+            fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
     }
 
-     
-     
-     protected void next() {
+    protected void next() {
         offset = offset + limit;
         fetchData();
         page++;
@@ -432,8 +460,7 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
 
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
