@@ -259,18 +259,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-
         validateForm();
-
         GradingDetail gradingDetail = getEntity();
-
-//        GradingDetailService.getInstance(schoolData).create(gradingDetail, "LOG_ID");
-//        Grading grading = getGrading();
-//        String btnText = saveButton.getText();
-//
-//        SubmitData(btnText, grading);
         SubmitData(saveButton.getText(), gradingDetail);
-
     }//GEN-LAST:event_saveButtonActionPerformed
 
     public void SubmitData(String btnText, GradingDetail gradingDetail) throws HeadlessException {
@@ -279,7 +270,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
                 saveSubjectPaper(gradingDetail);
                 break;
             case "EDIT":
-//                editSubject(gradingDetail);
+                editSubject(gradingDetail);
                 break;
             default:
                 break;
@@ -307,24 +298,26 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         symbolField.setText("");
     }
 
-//    private void editSubject(SubjectPaper subjectpaper) throws HeadlessException {
-//        try {
-//
-//            if (subjectpaperresponse == null) {
-//                throw new BadRequestException("Could update record, missing data");
-//            }
-//
-//            subjectpaper.setId(subjectpaperresponse.getId());
-//            SubjectPapersService.getInstance(schoolData).edit(subjectpaper, "LOG ID");
-//            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
-//            resetForm();
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new BadRequestException("Could not save the record to the server, something went wrong");
-//        }
-//
-//    }
+    private void editSubject(GradingDetail gradingDetail) throws HeadlessException {
+        try {
+
+            if (gradingDetailResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            gradingDetail.setId(gradingDetailResponse.getId());
+            GradingDetailService.getInstance(schoolData).edit(gradingDetail, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
+    }
+    
+    
     public void validateForm() throws NumberFormatException, BadRequestException {
         //todo: validate mandatories
         if (gradingScaleField.getSelectedIndex() == -1) {
