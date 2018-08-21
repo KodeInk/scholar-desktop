@@ -51,7 +51,7 @@ public class GradingUI extends javax.swing.JPanel {
                     AddGradingUI.getInstance(schoolData).initData();
                     break;
                 case 2:
-                    ManageGradingDetailUI.getInstance(schoolData);
+                    ManageGradingDetailUI.getInstance(schoolData).initData();
                     break;
                 case 3:
                     AddGradingDetailUI.getInstance(schoolData);

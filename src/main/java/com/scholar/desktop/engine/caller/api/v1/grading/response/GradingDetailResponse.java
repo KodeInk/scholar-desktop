@@ -13,11 +13,11 @@ import java.util.Objects;
  */
 public class GradingDetailResponse {
 
-    private Integer id;
+     private Integer id;
     private String gradingScale;
     private String symbol;
     private Long min_grade;
-    private Long max_grade;
+    private Long max_grade;    
     private String status;
     private Long date_created;
     private String author;
@@ -65,6 +65,8 @@ public class GradingDetailResponse {
         this.max_grade = max_grade;
     }
 
+    
+
     public String getStatus() {
         return status;
     }
@@ -92,14 +94,14 @@ public class GradingDetailResponse {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        hash = 19 * hash + Objects.hashCode(this.gradingScale);
-        hash = 19 * hash + Objects.hashCode(this.symbol);
-        hash = 19 * hash + Objects.hashCode(this.min_grade);
-        hash = 19 * hash + Objects.hashCode(this.max_grade);
-        hash = 19 * hash + Objects.hashCode(this.status);
-        hash = 19 * hash + Objects.hashCode(this.date_created);
-        hash = 19 * hash + Objects.hashCode(this.author);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.gradingScale);
+        hash = 59 * hash + Objects.hashCode(this.symbol);
+        hash = 59 * hash + Objects.hashCode(this.min_grade);
+        hash = 59 * hash + Objects.hashCode(this.max_grade);       
+        hash = 59 * hash + Objects.hashCode(this.status);
+        hash = 59 * hash + Objects.hashCode(this.date_created);
+        hash = 59 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -115,12 +117,10 @@ public class GradingDetailResponse {
             return false;
         }
         final GradingDetailResponse other = (GradingDetailResponse) obj;
-        if (!Objects.equals(this.gradingScale, other.gradingScale)) {
-            return false;
-        }
         if (!Objects.equals(this.symbol, other.symbol)) {
             return false;
         }
+        
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
@@ -130,27 +130,35 @@ public class GradingDetailResponse {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.gradingScale, other.gradingScale)) {
+            return false;
+        }
         if (!Objects.equals(this.min_grade, other.min_grade)) {
             return false;
         }
         if (!Objects.equals(this.max_grade, other.max_grade)) {
             return false;
         }
-        return Objects.equals(this.date_created, other.date_created);
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "GradingDetailResponse{"
+        return "GradingDetailResponse"
+                + "{"
                 + "id=" + id
                 + ", gradingScale=" + gradingScale
                 + ", symbol=" + symbol
                 + ", min_grade=" + min_grade
-                + ", max_grade=" + max_grade
+                + ", max_grade=" + max_grade               
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author=" + author
                 + '}';
     }
+
 
 }

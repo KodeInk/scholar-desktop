@@ -42,7 +42,7 @@ public class GradingDetailAPI extends AbstractAPI {
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        Response response = engineCaller.get("grading/v1/", queryParameter);
+        Response response = engineCaller.get("grading/details/v1/", queryParameter);
 
         switch (response.getStatus()) {
             case 400:
@@ -68,7 +68,7 @@ public class GradingDetailAPI extends AbstractAPI {
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        Response response = engineCaller.get("grading/v1/search/"+query, queryParameter);
+        Response response = engineCaller.get("grading/details/v1/search/"+query, queryParameter);
 
         switch (response.getStatus()) {
             case 400:
@@ -90,7 +90,7 @@ public class GradingDetailAPI extends AbstractAPI {
    
     public GradingResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
-        Response response = engineCaller.post("grading/v1/", body, logId);
+        Response response = engineCaller.post("grading/details/v1/", body, logId);
 
         switch (response.getStatus()) {
             case 400:
@@ -117,7 +117,7 @@ public class GradingDetailAPI extends AbstractAPI {
     
      public GradingDetailResponse update(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
-        Response response = engineCaller.put("grading/v1/", body, logId);
+        Response response = engineCaller.put("grading/details/v1/", body, logId);
 
         switch (response.getStatus()) {
             case 400:
