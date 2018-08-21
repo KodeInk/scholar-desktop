@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.scholar.desktop.ui.subjects.papers;
+package main.java.com.scholar.desktop.ui.subjects;
 
 import java.awt.HeadlessException;
 import java.io.IOException;

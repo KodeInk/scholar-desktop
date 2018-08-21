@@ -11,8 +11,6 @@ import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectPaperResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
-import main.java.com.scholar.desktop.ui.subjects.papers.AddSubjectPaperUI;
-import main.java.com.scholar.desktop.ui.subjects.papers.ManageSubjectPaperUI;
 
 /**
  *
