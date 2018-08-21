@@ -5,12 +5,23 @@
  */
 package main.java.com.scholar.desktop.ui.grading;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.GradingDetail;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingDetailResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectPaper;
+import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.grading.GradingDetailService;
 import main.java.com.scholar.desktop.services.grading.GradingService;
+import main.java.com.scholar.desktop.services.subjects.papers.SubjectPapersService;
+import main.java.com.scholar.desktop.ui.subjects.AddSubjectUI;
 
 /**
  *
@@ -37,6 +48,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 //        saveButton.setText("SAVE");
 
         fetchGradingDetails(0, 10000);
+        populateMiniGradeAndMaximumGadeCombos();
     }
 
     public void fetchGradingDetails(Integer offset, Integer limit) {
@@ -62,6 +74,14 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
+    public void populateMiniGradeAndMaximumGadeCombos() {
+        for (int x = 0; x <= 100; x++) {
+            minigradeField.addItem("" + x);
+            maxgradeField.addItem("" + x);
+        }
+
+    }
+
     public void populateSubjectsCombo() {
         resetGradingScaleCombo();
         if (gradingScales != null) {
@@ -69,6 +89,7 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
                 gradingScaleField.addItem(response.getName());
             });
         }
+        gradingScaleField.setSelectedIndex(-1);
 
     }
 
@@ -130,14 +151,17 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
         jLabel2.setText("Grading Scale : *");
         jLabel2.setToolTipText("");
 
+        symbolField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Symbol : *");
+        jLabel3.setText("Grading Symbol : *");
         jLabel3.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Minimum Grade : *");
         jLabel4.setToolTipText("");
 
+        saveButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         saveButton.setText("SAVE");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +169,14 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
             }
         });
 
+        cancelButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cancelButton.setText("CANCEL");
+
+        maxgradeField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        gradingScaleField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        minigradeField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Maximum Grade : *");
@@ -194,9 +225,9 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(symbolField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(symbolField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(minigradeField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,12 +258,102 @@ public class AddGradingDetailUI extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
-//        validateGrading();
+        validateForm();
+
+        GradingDetail gradingDetail = new GradingDetail();
+        GradingResponse gradingScale = gradingScales.get(gradingScaleField.getSelectedIndex());
+        gradingDetail.setGrading_scale(gradingScale.getId());
+        gradingDetail.setSymbol(symbolField.getText());
+        gradingDetail.setMin_grade(Integer.parseInt(minigradeField.getSelectedItem().toString()));
+        gradingDetail.setMax_grade(Integer.parseInt(maxgradeField.getSelectedItem().toString()));
+
+//        GradingDetailService.getInstance(schoolData).create(gradingDetail, "LOG_ID");
 //        Grading grading = getGrading();
 //        String btnText = saveButton.getText();
 //
 //        SubmitData(btnText, grading);
+        SubmitData(saveButton.getText(), gradingDetail);
+
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    public void SubmitData(String btnText, GradingDetail gradingDetail) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveSubjectPaper(gradingDetail);
+                break;
+            case "EDIT":
+//                editSubject(gradingDetail);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void saveSubjectPaper(GradingDetail subjectpaper) throws HeadlessException {
+        try {
+
+            GradingDetailResponse gradingDetailresponse = GradingDetailService.getInstance(schoolData).create(subjectpaper, "LOG ID");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            resetForm();
+
+        } catch (HeadlessException | IOException ex) {
+            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+
+    }
+
+    public void resetForm() {
+        gradingScaleField.setSelectedIndex(-1);
+        minigradeField.setSelectedIndex(-1);
+        maxgradeField.setSelectedIndex(-1);
+        symbolField.setText("");
+    }
+
+//    private void editSubject(SubjectPaper subjectpaper) throws HeadlessException {
+//        try {
+//
+//            if (subjectpaperresponse == null) {
+//                throw new BadRequestException("Could update record, missing data");
+//            }
+//
+//            subjectpaper.setId(subjectpaperresponse.getId());
+//            SubjectPapersService.getInstance(schoolData).edit(subjectpaper, "LOG ID");
+//            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+//            resetForm();
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new BadRequestException("Could not save the record to the server, something went wrong");
+//        }
+//
+//    }
+    public void validateForm() throws NumberFormatException, BadRequestException {
+        //todo: validate mandatories
+        if (gradingScaleField.getSelectedIndex() == -1) {
+            throw new BadRequestException("Grading Scale  is mandatory");
+        }
+
+        if (minigradeField.getSelectedIndex() == -1) {
+            throw new BadRequestException("Minimum Grading is mandatory");
+        }
+
+        if (maxgradeField.getSelectedIndex() == -1) {
+            throw new BadRequestException("Maximum Grading is mandatory");
+        }
+
+        if (symbolField.getText().isEmpty()) {
+            throw new BadRequestException("Grading Symbol is mandatory");
+        }
+
+        Integer minimum = Integer.parseInt(minigradeField.getSelectedItem().toString());
+        Integer maximum = Integer.parseInt(maxgradeField.getSelectedItem().toString());
+
+        if (minimum > maximum) {
+            throw new BadRequestException("Minimum grading should not be greater than maximum grading " + minimum + " > " + maximum);
+        }
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

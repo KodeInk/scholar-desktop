@@ -107,7 +107,7 @@ public class GradingDetailService extends AbstractService {
      * @return
      * @throws IOException
      */
-    public GradingResponse create(GradingDetail gradingDetail, String logId) throws IOException {
+    public GradingDetailResponse create(GradingDetail gradingDetail, String logId) throws IOException {
         if (gradingDetail != null) {
             Map gradingMap = getGradingMap(gradingDetail);
             return gradingAPI.create(gradingMap, logId);

@@ -63,7 +63,7 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     public void fetchSubjects(Integer offset, Integer limIt) {
 
         resetSubjectCombo();
-        subject.addItem("Processing ... ");
+        subjectField.addItem("Processing ... ");
         jLabel1.setText("Processing ... ");
         if (subjectResponse != null) {
             populateSubjectsCombo();
@@ -87,26 +87,26 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         resetSubjectCombo();
         if (subjectResponse != null) {
             subjectResponse.forEach((response) -> {
-                subject.addItem(response.getName());
+                subjectField.addItem(response.getName());
             });
         }
 
         if (subjectpaperresponse != null) {
-            subject.setSelectedItem(subjectpaperresponse.getSubject().getName());
+            subjectField.setSelectedItem(subjectpaperresponse.getSubject().getName());
         } else {
-            subject.setSelectedIndex(-1);
+            subjectField.setSelectedIndex(-1);
         }
     }
 
     public void resetSubjectCombo() {
-        subject.removeAllItems();
+        subjectField.removeAllItems();
     }
 
     public void edit(SubjectPaperResponse subjectpaperresponse) {
         this.subjectpaperresponse = subjectpaperresponse;
-        subject.setSelectedItem(subjectpaperresponse.getSubject().getName());
-        paperName.setText(subjectpaperresponse.getName());
-        paperCode.setText(subjectpaperresponse.getCode());
+        subjectField.setSelectedItem(subjectpaperresponse.getSubject().getName());
+        paperNameField.setText(subjectpaperresponse.getName());
+        paperCodeField.setText(subjectpaperresponse.getCode());
         saveButton.setText("EDIT");
     }
 
@@ -124,12 +124,12 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        paperCode = new javax.swing.JTextField();
+        paperCodeField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        paperName = new javax.swing.JTextField();
+        paperNameField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        subject = new javax.swing.JComboBox<>();
+        subjectField = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -186,13 +186,13 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                                 .addComponent(jLabel4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(paperName, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                            .addComponent(paperCode, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(paperNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(paperCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(subject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(subjectField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,16 +204,16 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(subject, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subjectField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(paperName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paperNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(paperCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paperCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,14 +238,14 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         //todo: form validation
-        if (paperName.getText().isEmpty()) {
+        if (paperNameField.getText().isEmpty()) {
             throw new BadRequestException("Subject name is   mandatory");
         }
-        if (paperCode.getText().isEmpty()) {
+        if (paperCodeField.getText().isEmpty()) {
             throw new BadRequestException("Subject code is   mandatory");
         }
 
-        if (subject.getSelectedIndex() == -1) {
+        if (subjectField.getSelectedIndex() == -1) {
             throw new BadRequestException("Subject category is mandatory");
         }
 
@@ -269,9 +269,9 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     }
 
     private void resetForm() {
-        paperName.setText("");
-        paperCode.setText("");
-        subject.setSelectedIndex(-1);
+        paperNameField.setText("");
+        paperCodeField.setText("");
+        subjectField.setSelectedIndex(-1);
     }
 
     private void editSubject(SubjectPaper subjectpaper) throws HeadlessException {
@@ -307,31 +307,11 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
 
     }
 
-    /*
-    private void editSubject(Subject subject) throws HeadlessException {
-        try {
-
-            if (subjectPaperResponse == null) {
-                throw new BadRequestException("Could update record, missing data");
-            }
-
-            subject.setId(subjectPaperResponse.getId());
-            SubjectsService.getInstance(schoolData).edit(subject, "LOG ID");
-            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
-            resetForm();
-
-        } catch (IOException ex) {
-            Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BadRequestException("Could not save the record to the server, something went wrong");
-        }
-
-    }
-     */
     private SubjectPaper getSubjectPaper() {
         SubjectPaper subjectpaper = new SubjectPaper();
-        subjectpaper.setName(paperName.getText());
-        subjectpaper.setCode(paperCode.getText());
-        SubjectResponse roleResponse = subjectResponse.get(subject.getSelectedIndex());
+        subjectpaper.setName(paperNameField.getText());
+        subjectpaper.setCode(paperCodeField.getText());
+        SubjectResponse roleResponse = subjectResponse.get(subjectField.getSelectedIndex());
         subjectpaper.setSubject_id(roleResponse.getId());
         return subjectpaper;
     }
@@ -346,9 +326,9 @@ public class AddSubjectPaperUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField paperCode;
-    private javax.swing.JTextField paperName;
+    private javax.swing.JTextField paperCodeField;
+    private javax.swing.JTextField paperNameField;
     private javax.swing.JButton saveButton;
-    private javax.swing.JComboBox<String> subject;
+    private javax.swing.JComboBox<String> subjectField;
     // End of variables declaration//GEN-END:variables
 }

@@ -88,7 +88,7 @@ public class GradingDetailAPI extends AbstractAPI {
         return null;
     }
    
-    public GradingResponse create(Map body, String logId) throws IOException {
+    public GradingDetailResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("grading/details/v1/", body, logId);
 
@@ -102,8 +102,8 @@ public class GradingDetailAPI extends AbstractAPI {
                 throw new BadRequestException(message.getMessage());
 
             case 200:
-                GradingResponse gradingResponse = response.readEntity(GradingResponse.class);
-                return gradingResponse;
+                GradingDetailResponse gradingDetailResponse = response.readEntity(GradingDetailResponse.class);
+                return gradingDetailResponse;
             case 401:
                 message = getMessage(response);
                 throw new BadRequestException(message.getMessage());
