@@ -176,6 +176,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
     }
 
     protected void fetchData() {
+        Utilities.removeRowsFromDefaultModel(tableModel1);
         if (search != null) {
             fetchData(search, offset, limit);
         } else {
@@ -198,6 +199,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
         fetchData();
         page++;
         pageCounter.setText(page.toString());
+
     }
 
     /**
@@ -330,9 +332,24 @@ public class ManageGradingUI extends javax.swing.JPanel {
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jTable1MouseMoved(evt);
+            }
+        });
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -485,32 +502,55 @@ public class ManageGradingUI extends javax.swing.JPanel {
         Integer row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, 0).toString();
 
-        if (rowselect == row) {
-            mouseClick++;
-
-            //selectClassStreamsList
-        } else {
-            mouseClick = 1;
-        }
-
+//        if (rowselect == row) {
+//            mouseClick++;
+//
+//            //selectClassStreamsList
+//        } else {
+//            mouseClick = 1;
+//        }
         populateGradingDetail(value);
 
         //todo: populate entity two 
-        if (mouseClick % 2 == 0) {
-
-            list.forEach(response -> {
-                if (response.getId() == Integer.parseInt(value)) {
-                    GradingUI.getInstance(schoolData).edit(response);
-
-                }
-            });
-            ;
-
-        }
-
+//        if (mouseClick % 2 == 0) {
+//
+//            list.forEach(response -> {
+//                if (response.getId() == Integer.parseInt(value)) {
+//                    GradingUI.getInstance(schoolData).edit(response);
+//
+//                }
+//            });
+//            
+//
+//        }
         rowselect = row;
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
+        // TODO add your handling code here:
+//         Integer row = jTable1.getSelectedRow();
+//        String value = jTable1.getModel().getValueAt(row, 0).toString();
+//        populateGradingDetail(value);
+
+    }//GEN-LAST:event_jTable1MouseMoved
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+        // TODO add your handling code here:
+//         Integer row = jTable1.getSelectedRow();
+//        String value = jTable1.getModel().getValueAt(row, 0).toString();
+//        populateGradingDetail(value);
+//        
+
+    }//GEN-LAST:event_jTable1FocusGained
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        // TODO add your handling code here:
+//         Integer row = jTable1.getSelectedRow();
+//        String value = jTable1.getModel().getValueAt(row, 0).toString();
+//        populateGradingDetail(value);
+
+    }//GEN-LAST:event_jTable1KeyPressed
 
     public void populateGradingDetail(String selectedValue) {
         Utilities.removeRowsFromDefaultModel(tableModel1);
@@ -529,7 +569,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
                         tableModel1.addRow(data);
                         return data;
                     }).forEachOrdered((_item) -> {
-                        repaint();
+//                        repaint();
                     });
 
                 }
