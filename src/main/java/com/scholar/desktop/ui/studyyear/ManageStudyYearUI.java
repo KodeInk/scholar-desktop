@@ -33,6 +33,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     List<StudyYearResponse> list = null;
     private static ManageStudyYearUI instance;
 
+    private Integer page;
+    private Integer offset;
+    private Integer limit;
+    private String search = null;
+
     public ManageStudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
@@ -51,7 +56,6 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
-        fetchData(schoolData);
 
     }
 
@@ -63,7 +67,19 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void initData() {
+
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+
+        final String message = "     Processsing ...     ";
+
+        fetchData(offset, limit);
+        page = 1;
+        pageCounter.setText(page.toString());
+    }
+
+    public final void fetchData(Integer offset, Integer limit) {
 
         if (list != null) {
             populateJTable(list);
@@ -74,7 +90,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = StudyYearService.getInstance(schoolData1).list();
+                list = StudyYearService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 return null;
             }
