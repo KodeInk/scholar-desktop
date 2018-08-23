@@ -501,28 +501,26 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
         Integer row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, 0).toString();
-
-//        if (rowselect == row) {
-//            mouseClick++;
-//
-//            //selectClassStreamsList
-//        } else {
-//            mouseClick = 1;
-//        }
         populateGradingDetail(value);
+        if (rowselect == row) {
+            mouseClick++;
+
+            //selectClassStreamsList
+        } else {
+            mouseClick = 1;
+        }
 
         //todo: populate entity two 
-//        if (mouseClick % 2 == 0) {
-//
-//            list.forEach(response -> {
-//                if (response.getId() == Integer.parseInt(value)) {
-//                    GradingUI.getInstance(schoolData).edit(response);
-//
-//                }
-//            });
-//            
-//
-//        }
+        if (mouseClick % 2 == 0) {
+
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                    GradingUI.getInstance(schoolData).edit(response);
+
+                }
+            });
+
+        }
         rowselect = row;
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -557,20 +555,23 @@ public class ManageGradingUI extends javax.swing.JPanel {
         if (list != null) {
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(selectedValue)) {
+
                     List<GradingDetailResponse> gdrs = response.getGradingDetailResponses();
 
-                    gdrs.stream().map((gdr) -> {
-                        String symbol = gdr.getSymbol();
-                        String mingrade = gdr.getMin_grade().toString();
-                        String maxgrade = gdr.getMax_grade().toString();
-                        Object[] data = {symbol, mingrade, maxgrade};
-                        return data;
-                    }).map((data) -> {
-                        tableModel1.addRow(data);
-                        return data;
-                    }).forEachOrdered((_item) -> {
+                    if (gdrs != null && gdrs.size() > 0) {
+                        gdrs.stream().map((gdr) -> {
+                            String symbol = gdr.getSymbol();
+                            String mingrade = gdr.getMin_grade().toString();
+                            String maxgrade = gdr.getMax_grade().toString();
+                            Object[] data = {symbol, mingrade, maxgrade};
+                            return data;
+                        }).map((data) -> {
+                            tableModel1.addRow(data);
+                            return data;
+                        }).forEachOrdered((_item) -> {
 //                        repaint();
-                    });
+                        });
+                    }
 
                 }
             });
