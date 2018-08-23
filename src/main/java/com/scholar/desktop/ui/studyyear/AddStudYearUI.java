@@ -76,7 +76,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
                 streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateStreams();
-//                jLabel1.setText("Class Information");
+                jLabel1.setText("Study Period  Information");
 
                 return null;
             }
@@ -98,7 +98,6 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
             if (streamResponses != null) {
                 jPanel = getJpanel("CURRICULA", streamResponses);
-
             }
             if (jPanel != null) {
                 jScrollPane3.setPreferredSize(new Dimension(450, 300));
@@ -134,10 +133,10 @@ public class AddStudYearUI extends javax.swing.JPanel {
         JPanel container1 = new JPanel();
         container1.setBackground(new java.awt.Color(204, 204, 204));
 
-        container1.setPreferredSize(new Dimension(450, 300));
+        container1.setPreferredSize(new Dimension(450, 200));
 
         JPanel container2 = new JPanel();
-        container2.setSize(600, 200);
+        container2.setSize(400, 10);
         container2.setBackground(new java.awt.Color(255, 255, 255));
         JLabel groupLabel = new JLabel();
         groupLabel.setFont(new java.awt.Font("Arial", 0, 12));
@@ -323,13 +322,15 @@ public class AddStudYearUI extends javax.swing.JPanel {
         curriculumJpanel.setLayout(curriculumJpanelLayout);
         curriculumJpanelLayout.setHorizontalGroup(
             curriculumJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+            .addGroup(curriculumJpanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         curriculumJpanelLayout.setVerticalGroup(
             curriculumJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(curriculumJpanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -363,14 +364,15 @@ public class AddStudYearUI extends javax.swing.JPanel {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(curriculumJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(418, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                                        .addGap(14, 14, 14)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,15 +395,13 @@ public class AddStudYearUI extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(curriculumJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(curriculumJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
