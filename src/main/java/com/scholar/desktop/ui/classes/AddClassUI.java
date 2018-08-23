@@ -55,10 +55,10 @@ public final class AddClassUI extends javax.swing.JPanel {
         this.schoolData = schoolData;
         initComponents();
         streamList = new ArrayList<>();
-        
+
     }
 
-       /**
+    /**
      *
      * @param schoolData
      * @return
@@ -66,41 +66,44 @@ public final class AddClassUI extends javax.swing.JPanel {
     public static AddClassUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddClassUI(schoolData);
-            instance.initData();
         }
         return instance;
     }
-    
-    
+
     public void initData() {
         initRankComboBox();
         resetForm();
         saveButton.setText("SAVE");
         this.classResponse = null;
 
-        fetchPermissions();
-        
+        fetchStreams();
+
     }
 
-    public void fetchPermissions() {
-        if (streamResponses == null || streamResponses.size() <= 0) {
-            SwingWorker swingWorker = new SwingWorker() {
-                @Override
-                protected Object doInBackground() throws Exception {
-                    streamResponses = StreamsService.getInstance(schoolData).list(0, 10000);
-                    populate();
-                    return null;
-                }
-            };
-            swingWorker.execute();
-        } else {
-            populate();
+    public void fetchStreams() {
+        jLabel1.setText("Processing...");
+        if (streamResponses != null && streamResponses.size() > 0) {
+            populateStreams();
         }
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+
+                streamResponses = StreamsService.getInstance(schoolData).list(0, 10000);
+                populateStreams();
+                jLabel1.setText("Class Information");
+
+                return null;
+            }
+        };
+        swingWorker.execute();
+
     }
 
-    public void populate() {
+    public void populateStreams() {
         resetJCheckBoxes();
-        if (checkBoxs != null && checkBoxs.size() == 0) {
+        if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
 
             if (streamResponses != null) {
@@ -120,30 +123,27 @@ public final class AddClassUI extends javax.swing.JPanel {
             RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
             saveButton.setText("EDIT");
 
-             List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
+            List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
             if (checkBoxs != null && checkBoxs.size() > 0) {
-                for(JCheckBox jcb: checkBoxs){                 
-                    for(StreamResponse sr: srs){
-                        if(jcb.getActionCommand().equals(sr.getId().toString())){
+                for (JCheckBox jcb : checkBoxs) {
+                    for (StreamResponse sr : srs) {
+                        if (jcb.getActionCommand().equals(sr.getId().toString())) {
                             jcb.setSelected(true);
                         }
-                        
-//                        JOptionPane.showMessageDialog(null, "SIZE : " + checkBoxs.size());
+
                     }
                 }
-                
+
             }
         }
 
     }
 
     public void resetJCheckBoxes() {
-        for(JCheckBox jcb: checkBoxs){
+        for (JCheckBox jcb : checkBoxs) {
             jcb.setSelected(false);
         }
     }
-
- 
 
     /**
      *
@@ -151,7 +151,7 @@ public final class AddClassUI extends javax.swing.JPanel {
      */
     public void edit(ClassResponse classResponse) {
         this.classResponse = classResponse;
-        fetchPermissions();
+        fetchStreams();
 
     }
 
