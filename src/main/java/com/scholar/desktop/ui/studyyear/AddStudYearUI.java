@@ -43,12 +43,12 @@ public class AddStudYearUI extends javax.swing.JPanel {
      */
     private static AddStudYearUI instance;
     private final SchoolData schoolData;
-    private List<Integer> curriculaList;
+    private List<Integer> curriculaList = new ArrayList<>();
     private List<JCheckBox> checkBoxs = new ArrayList<>();
     private List<CurriculumResponse> streamResponses;
 
     public AddStudYearUI(SchoolData schoolData) {
-        this.schoolData = schoolData;
+        this.schoolData = schoolData;       
         initComponents();
     }
 
@@ -237,7 +237,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
             Add curriculum to the curriculum List at selection 
              */
             Integer curriculum = Integer.parseInt(xx.getActionCommand());
-            curriculaList.remove(curriculum);
+            if (curriculaList != null) {
+                curriculaList.remove(curriculum);
+            }
 
             if (xx.isSelected()) {
                 curriculaList.add(curriculum);

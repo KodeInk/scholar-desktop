@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,7 @@ public class StudyYear {
     private StatusEnum status;
     private Integer author_id;
     private Long date_created;
+    private List<Integer> curriculaList;
 
     public StudyYear() {
     }
@@ -85,16 +87,25 @@ public class StudyYear {
         this.date_created = date_created;
     }
 
+    public List<Integer> getCurriculaList() {
+        return curriculaList;
+    }
+
+    public void setCurriculaList(List<Integer> curriculaList) {
+        this.curriculaList = curriculaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + Objects.hashCode(this.theme);
-        hash = 73 * hash + Objects.hashCode(this.start_date);
-        hash = 73 * hash + Objects.hashCode(this.end_date);
-        hash = 73 * hash + Objects.hashCode(this.status);
-        hash = 73 * hash + Objects.hashCode(this.author_id);
-        hash = 73 * hash + Objects.hashCode(this.date_created);
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.theme);
+        hash = 53 * hash + Objects.hashCode(this.start_date);
+        hash = 53 * hash + Objects.hashCode(this.end_date);
+        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.author_id);
+        hash = 53 * hash + Objects.hashCode(this.date_created);
+        hash = 53 * hash + Objects.hashCode(this.curriculaList);
         return hash;
     }
 
@@ -128,12 +139,15 @@ public class StudyYear {
         if (!Objects.equals(this.author_id, other.author_id)) {
             return false;
         }
-        return Objects.equals(this.date_created, other.date_created);
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return Objects.equals(this.curriculaList, other.curriculaList);
     }
 
     @Override
     public String toString() {
-        return "_StudyYear{"
+        return "StudyYear{"
                 + "id=" + id
                 + ", theme=" + theme
                 + ", start_date=" + start_date
@@ -141,7 +155,8 @@ public class StudyYear {
                 + ", status=" + status
                 + ", author_id=" + author_id
                 + ", date_created=" + date_created
-                + "}";
+                + ", curriculaList=" + curriculaList
+                + '}';
     }
 
 }
