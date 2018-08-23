@@ -64,8 +64,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     public static ManageStudyYearUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ManageStudyYearUI(schoolData);
-        }
-        
+        }        
         return instance;
     }
     
@@ -352,14 +351,43 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
-//        prev();
+        prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         // TODO add your handling code here:
-//        next();
+        next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
+    protected void next() {
+        offset = offset + limit;
+        if (search != null) {
+//            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+
+        page++;
+        pageCounter.setText(page.toString());
+    }
+
+    protected void prev() {
+        offset = offset - limit;
+        if (offset >= 0) {
+            if (search != null) {
+//                fetchData(search, offset, limit);
+            } else {
+                fetchData(offset, limit);
+            }
+
+            page--;
+            pageCounter.setText(page.toString());
+        }
+
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
