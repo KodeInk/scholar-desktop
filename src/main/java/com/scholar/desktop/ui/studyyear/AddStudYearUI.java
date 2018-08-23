@@ -48,7 +48,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private List<CurriculumResponse> streamResponses;
 
     public AddStudYearUI(SchoolData schoolData) {
-        this.schoolData = schoolData;       
+        this.schoolData = schoolData;
         initComponents();
     }
 
@@ -456,6 +456,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
         studyYear.setTheme(theme.getText());
         studyYear.setStart_date(startDate.getDate().getTime());
         studyYear.setEnd_date(endDate.getDate().getTime());
+        if (curriculaList != null && curriculaList.size() > 0) {
+            studyYear.setCurriculaList(curriculaList);
+        }
         return studyYear;
     }
 
