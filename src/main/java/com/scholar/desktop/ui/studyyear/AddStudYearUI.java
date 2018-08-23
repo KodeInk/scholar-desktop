@@ -21,11 +21,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
+import main.java.com.scholar.desktop.services.streams.StreamsService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 
 /**
@@ -39,9 +43,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
      */
     private static AddStudYearUI instance;
     private final SchoolData schoolData;
-    private List<Integer> streamList;
+    private List<Integer> curriculaList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
-    private List<StreamResponse> streamResponses;
+    private List<CurriculumResponse> streamResponses;
 
     public AddStudYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -57,16 +61,43 @@ public class AddStudYearUI extends javax.swing.JPanel {
     }
 
     public void initData() {
+        fetchStreams();
+    }
+
+    public void fetchStreams() {
+        jLabel1.setText("Processing...");
+        if (streamResponses != null && streamResponses.size() > 0) {
+            populateStreams();
+        }
+
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+
+                streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
+                populateStreams();
+//                jLabel1.setText("Class Information");
+
+                return null;
+            }
+        };
+        swingWorker.execute();
 
     }
 
+    public void resetJCheckBoxes() {
+        for (JCheckBox jcb : checkBoxs) {
+            jcb.setSelected(false);
+        }
+    }
+
     public void populateStreams() {
-//        resetJCheckBoxes();
+        resetJCheckBoxes();
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
 
             if (streamResponses != null) {
-                jPanel = getJpanel("STREAMS", streamResponses);
+                jPanel = getJpanel("CURRICULA", streamResponses);
 
             }
             if (jPanel != null) {
@@ -98,7 +129,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         } */
     }
 
-       public JPanel getJpanel(String grouping, List<StreamResponse> list) {
+    public JPanel getJpanel(String grouping, List<CurriculumResponse> list) {
 
         JPanel container1 = new JPanel();
         container1.setBackground(new java.awt.Color(204, 204, 204));
@@ -136,7 +167,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         SequentialGroup sequentialGroup = groupLayout2.createSequentialGroup();
         sequentialGroup.addContainerGap();
 
-        for (StreamResponse pr : list) {
+        for (CurriculumResponse pr : list) {
 
             JCheckBox jCheckBoxx = getCheckBox(pr);
 
@@ -196,21 +227,21 @@ public class AddStudYearUI extends javax.swing.JPanel {
         return jPanel3;
     }
 
-        private JCheckBox getCheckBox(StreamResponse pr) {
+    private JCheckBox getCheckBox(CurriculumResponse curricula) {
         JCheckBox jCheckBoxx = new JCheckBox();
-        jCheckBoxx.setText(pr.getName());
-        jCheckBoxx.setActionCommand(pr.getId().toString());
+        jCheckBoxx.setText(curricula.getName());
+        jCheckBoxx.setActionCommand(curricula.getId().toString());
         jCheckBoxx.addActionListener((ActionEvent e) -> {
             JCheckBox xx = (JCheckBox) e.getSource();
 
             /*
-            Add permission to the permission List at selection 
+            Add curriculum to the curriculum List at selection 
              */
-            Integer permission = Integer.parseInt(xx.getActionCommand());
-            streamList.remove(permission);
+            Integer curriculum = Integer.parseInt(xx.getActionCommand());
+            curriculaList.remove(curriculum);
 
             if (xx.isSelected()) {
-                streamList.add(permission);
+                curriculaList.add(curriculum);
             }
 
         });
