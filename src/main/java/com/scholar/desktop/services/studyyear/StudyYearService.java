@@ -48,9 +48,7 @@ public class StudyYearService extends AbstractService {
      * @return
      */
     public static StudyYearService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new StudyYearService(schoolData);
-        }
+        instance = new StudyYearService(schoolData);
         return instance;
     }
 
@@ -72,9 +70,9 @@ public class StudyYearService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-    
-     public List<StudyYearResponse> list(Integer offset,Integer limit) {
-        
+
+    public List<StudyYearResponse> list(Integer offset, Integer limit) {
+
         list = new ArrayList<>();
 
         StudyYearResponse[] responses = studyYearAPI.list(offset, limit);
@@ -84,7 +82,6 @@ public class StudyYearService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-     
 
     /**
      *
@@ -100,19 +97,18 @@ public class StudyYearService extends AbstractService {
         }
         return null;
     }
-     
+
     /**
      *
      * @param studyYear
      * @return
      */
     public Map getStudyYearMap(StudyYear studyYear) {
-         
+
         Map studyYearMap = new HashMap<>();
         studyYearMap.put("theme", studyYear.getTheme());
         studyYearMap.put("start_date", studyYear.getStart_date());
-         studyYearMap.put("end_date", studyYear.getEnd_date());
-        
+        studyYearMap.put("end_date", studyYear.getEnd_date());
 
         System.out.println("==================================");
         System.out.println(studyYearMap);
@@ -120,6 +116,5 @@ public class StudyYearService extends AbstractService {
 
         return studyYearMap;
     }
-
 
 }

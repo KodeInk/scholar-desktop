@@ -81,11 +81,13 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
                 jLabel1.setText("Processing....");
                 List<StreamResponse> crs = StreamsService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(crs);
                 repaint();
                 jLabel1.setText("Manage Streams");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -110,8 +112,6 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-     
-       
     protected void populateJTable(List<StreamResponse> list) {
 
         if (list != null) {

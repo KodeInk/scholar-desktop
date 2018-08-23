@@ -5,6 +5,9 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
@@ -17,10 +20,34 @@ public class StudyYearUI extends javax.swing.JPanel {
      * Creates new form StudyYearUI
      */
     private SchoolData schoolData;
+
     public StudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
+
     }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageStudyYearUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddStudYearUI.getInstance(schoolData).initData();
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -27,47 +27,47 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
      * Creates new form ManageStudyYear
      */
     private static final String[] COLUMN_HEADERS = {"THEME", "START DATE", "END DATE", "CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
-    
+
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<StudyYearResponse> list = null;
     private static ManageStudyYearUI instance;
-    
+
     private Integer page;
     private Integer offset;
     private Integer limit;
     private String search = null;
-    
+
     public ManageStudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
-        
+
         if (tableModel == null) {
             tableModel = new DefaultTableModel(COLUMN_HEADERS, 0) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;//This causes all cells to be not editable
                 }
-                
+
             };
-            
+
         }
-        
+
         initComponents();
-        
+
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
-        
+
         initData();
-        
+
     }
-    
+
     public static ManageStudyYearUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new ManageStudyYearUI(schoolData);
-        }        
+        }
         return instance;
     }
-    
+
     public final void initData() {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
@@ -75,48 +75,64 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         page = 1;
         pageCounter.setText(page.toString());
     }
-    
+
     public final void fetchData(Integer offset, Integer limit) {
-        
+
         if (list != null) {
             populateJTable(list);
         }
-        
+
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
                 jLabel1.setText("Processing....");
                 list = StudyYearService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 jLabel1.setText("MANAGE STUDY PERIOD");
+                enableNextPrevLabels();
                 return null;
             }
         };
         swingWorker.execute();
-        
+
     }
-    
+
     public void populateJTable(List<StudyYearResponse> list) {
         if (list != null) {
-            
+
             Utilities.removeRowsFromDefaultModel(tableModel);
-            
+
             for (StudyYearResponse response : list) {
-                
+
                 String theme = response.getTheme().toUpperCase();
                 String start_date = new Date(response.getStart_date()).toString().toUpperCase();
                 String end_date = new Date(response.getEnd_date()).toString().toUpperCase();
                 String status = response.getStatus().toUpperCase();
                 String DateCreated = new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
-                
+
                 Object[] data = {theme, start_date, end_date, "- ", status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }
-        
+
         tableModel.fireTableDataChanged();
-        
+
+    }
+
+    protected void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
+        nextLabel.setEnabled(true);
+        prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
+    }
+
+    protected void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
+        nextLabel.setEnabled(false);
+        prevLabel.setEnabled(false);
     }
 
     /**
@@ -240,6 +256,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         );
 
         jTable1.setModel(tableModel);
+        jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
@@ -386,8 +403,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
