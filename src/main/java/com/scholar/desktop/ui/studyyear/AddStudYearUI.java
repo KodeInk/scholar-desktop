@@ -5,12 +5,24 @@
  */
 package main.java.com.scholar.desktop.ui.studyyear;
 
+import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -26,15 +38,15 @@ public class AddStudYearUI extends javax.swing.JPanel {
      * Creates new form AddStudYear
      */
     private static AddStudYearUI instance;
-
     private final SchoolData schoolData;
+    private List<Integer> streamList;
+    private List<JCheckBox> checkBoxs = new ArrayList<>();
+    private List<StreamResponse> streamResponses;
 
     public AddStudYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
-    
-    
 
     public static AddStudYearUI getInstance(SchoolData schoolData) {
         if (instance == null) {
@@ -44,12 +56,169 @@ public class AddStudYearUI extends javax.swing.JPanel {
         return instance;
     }
 
-    
-    public void initData(){
-        
+    public void initData() {
+
     }
-    
-    
+
+    public void populateStreams() {
+//        resetJCheckBoxes();
+        if (checkBoxs != null && checkBoxs.isEmpty()) {
+            JPanel jPanel = null;
+
+            if (streamResponses != null) {
+                jPanel = getJpanel("STREAMS", streamResponses);
+
+            }
+            if (jPanel != null) {
+                jScrollPane3.setPreferredSize(new Dimension(450, 300));
+                jScrollPane3.setViewportView(jPanel);
+                jScrollPane3.repaint();
+            }
+        }
+
+        /*
+        if (this.classResponse != null) {
+            className.setText(classResponse.getName());
+            classCode.setText(classResponse.getCode());
+            RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
+            saveButton.setText("EDIT");
+
+            List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
+            if (checkBoxs != null && checkBoxs.size() > 0) {
+                for (JCheckBox jcb : checkBoxs) {
+                    for (StreamResponse sr : srs) {
+                        if (jcb.getActionCommand().equals(sr.getId().toString())) {
+                            jcb.setSelected(true);
+                        }
+
+                    }
+                }
+
+            }
+        } */
+    }
+
+       public JPanel getJpanel(String grouping, List<StreamResponse> list) {
+
+        JPanel container1 = new JPanel();
+        container1.setBackground(new java.awt.Color(204, 204, 204));
+
+        container1.setPreferredSize(new Dimension(450, 300));
+
+        JPanel container2 = new JPanel();
+        container2.setSize(600, 200);
+        container2.setBackground(new java.awt.Color(255, 255, 255));
+        JLabel groupLabel = new JLabel();
+        groupLabel.setFont(new java.awt.Font("Arial", 0, 12));
+        groupLabel.setText(grouping);
+
+        javax.swing.GroupLayout groupLayout1 = new javax.swing.GroupLayout(container2);
+        container2.setLayout(groupLayout1);
+        groupLayout1.setHorizontalGroup(groupLayout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupLayout1.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(groupLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        groupLayout1.setVerticalGroup(groupLayout1.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupLayout1.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(groupLabel)
+                        .addContainerGap())
+        );
+
+        JPanel container3 = new JPanel();
+        container3.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout groupLayout2 = new javax.swing.GroupLayout(container3);
+        container3.setLayout(groupLayout2);
+        ParallelGroup parallelGroup = groupLayout2.createParallelGroup(GroupLayout.Alignment.LEADING);
+        SequentialGroup sequentialGroup = groupLayout2.createSequentialGroup();
+        sequentialGroup.addContainerGap();
+
+        for (StreamResponse pr : list) {
+
+            JCheckBox jCheckBoxx = getCheckBox(pr);
+
+            parallelGroup.addComponent(jCheckBoxx, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE);
+            sequentialGroup.addComponent(jCheckBoxx);
+            sequentialGroup.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+
+        }
+
+        //182 
+        sequentialGroup.addContainerGap(154, Short.MAX_VALUE);
+
+        groupLayout2.setHorizontalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupLayout2.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(parallelGroup)
+                        .addContainerGap())
+        );
+        groupLayout2.setVerticalGroup(groupLayout2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sequentialGroup)
+        );
+
+        JScrollPane scollPane1 = new JScrollPane();
+        scollPane1.setViewportView(container3);
+        JPanel jPanel9 = new JPanel();
+
+        javax.swing.GroupLayout groupLayout3 = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(groupLayout3);
+        groupLayout3.setHorizontalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scollPane1)
+        );
+        groupLayout3.setVerticalGroup(groupLayout3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scollPane1)
+        );
+
+        javax.swing.GroupLayout groupLayout4 = new javax.swing.GroupLayout(container1);
+        container1.setLayout(groupLayout4);
+        groupLayout4.setHorizontalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupLayout4.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(container2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+        );
+        groupLayout4.setVerticalGroup(groupLayout4.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupLayout4.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(container2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+        );
+
+        jPanel3.add(container1);
+
+        return jPanel3;
+    }
+
+        private JCheckBox getCheckBox(StreamResponse pr) {
+        JCheckBox jCheckBoxx = new JCheckBox();
+        jCheckBoxx.setText(pr.getName());
+        jCheckBoxx.setActionCommand(pr.getId().toString());
+        jCheckBoxx.addActionListener((ActionEvent e) -> {
+            JCheckBox xx = (JCheckBox) e.getSource();
+
+            /*
+            Add permission to the permission List at selection 
+             */
+            Integer permission = Integer.parseInt(xx.getActionCommand());
+            streamList.remove(permission);
+
+            if (xx.isSelected()) {
+                streamList.add(permission);
+            }
+
+        });
+
+        checkBoxs.add(jCheckBoxx);
+        return jCheckBoxx;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
