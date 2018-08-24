@@ -19,7 +19,7 @@ public class StudyYearResponse {
     private String theme;
     private Long start_date;
     private Long end_date;
-      private List<CurriculumResponse> curricula;
+    private List<CurriculumResponse> curricula;
     private String status;
     private String author;
     private Long date_created;
@@ -147,9 +147,6 @@ public class StudyYearResponse {
         }
         return true;
     }
-    
-    
-    
 
     @Override
     public String toString() {

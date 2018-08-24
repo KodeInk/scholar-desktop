@@ -26,7 +26,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageStudyYear
      */
-    private static final String[] COLUMN_HEADERS = {"THEME", "START DATE", "END DATE", "CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"THEME", "START DATE", "END DATE", "# CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
 
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
@@ -111,8 +111,9 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
                 String status = response.getStatus().toUpperCase();
                 String DateCreated = new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
+                Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0 );
 
-                Object[] data = {theme, start_date, end_date, "- ", status, DateCreated, author};
+                Object[] data = {theme, start_date, end_date, numberOfCurriculum , status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }
