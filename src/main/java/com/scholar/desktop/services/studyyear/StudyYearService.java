@@ -109,7 +109,7 @@ public class StudyYearService extends AbstractService {
         studyYearMap.put("theme", studyYear.getTheme());
         studyYearMap.put("start_date", studyYear.getStart_date());
         studyYearMap.put("end_date", studyYear.getEnd_date());
-         studyYearMap.put("curricula", studyYear.getCurricula());
+        studyYearMap.put("curricula", studyYear.getCurricula());
 
         System.out.println("==================================");
         System.out.println(studyYearMap);
