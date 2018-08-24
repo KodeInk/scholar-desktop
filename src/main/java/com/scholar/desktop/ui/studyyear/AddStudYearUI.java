@@ -24,12 +24,10 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
-import main.java.com.scholar.desktop.services.streams.StreamsService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 
 /**
@@ -457,7 +455,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         studyYear.setStart_date(startDate.getDate().getTime());
         studyYear.setEnd_date(endDate.getDate().getTime());
         if (curriculaList != null && curriculaList.size() > 0) {
-            studyYear.setCurriculaList(curriculaList);
+            studyYear.setCurricula(curriculaList);
         }
         return studyYear;
     }

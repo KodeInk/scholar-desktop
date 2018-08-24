@@ -22,7 +22,7 @@ public class StudyYear {
     private StatusEnum status;
     private Integer author_id;
     private Long date_created;
-    private List<Integer> curriculaList;
+    private List<Integer> curricula;
 
     public StudyYear() {
     }
@@ -87,12 +87,12 @@ public class StudyYear {
         this.date_created = date_created;
     }
 
-    public List<Integer> getCurriculaList() {
-        return curriculaList;
+    public List<Integer> getCurricula() {
+        return curricula;
     }
 
-    public void setCurriculaList(List<Integer> curriculaList) {
-        this.curriculaList = curriculaList;
+    public void setCurricula(List<Integer> curricula) {
+        this.curricula = curricula;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class StudyYear {
         hash = 53 * hash + Objects.hashCode(this.status);
         hash = 53 * hash + Objects.hashCode(this.author_id);
         hash = 53 * hash + Objects.hashCode(this.date_created);
-        hash = 53 * hash + Objects.hashCode(this.curriculaList);
+        hash = 53 * hash + Objects.hashCode(this.curricula);
         return hash;
     }
 
@@ -142,7 +142,7 @@ public class StudyYear {
         if (!Objects.equals(this.date_created, other.date_created)) {
             return false;
         }
-        return Objects.equals(this.curriculaList, other.curriculaList);
+        return Objects.equals(this.curricula, other.curricula);
     }
 
     @Override
@@ -155,7 +155,7 @@ public class StudyYear {
                 + ", status=" + status
                 + ", author_id=" + author_id
                 + ", date_created=" + date_created
-                + ", curriculaList=" + curriculaList
+                + ", curriculaList=" + curricula
                 + '}';
     }
 
