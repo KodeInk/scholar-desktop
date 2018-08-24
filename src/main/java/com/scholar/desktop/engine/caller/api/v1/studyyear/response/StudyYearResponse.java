@@ -5,6 +5,10 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response;
 
+import java.util.List;
+import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+
 /**
  *
  * @author mover 12/20/2017
@@ -15,6 +19,7 @@ public class StudyYearResponse {
     private String theme;
     private Long start_date;
     private Long end_date;
+      private List<CurriculumResponse> curricula;
     private String status;
     private String author;
     private Long date_created;
@@ -82,6 +87,70 @@ public class StudyYearResponse {
         this.date_created = date_created;
     }
 
+    public List<CurriculumResponse> getCurricula() {
+        return curricula;
+    }
+
+    public void setCurricula(List<CurriculumResponse> curricula) {
+        this.curricula = curricula;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.theme);
+        hash = 47 * hash + Objects.hashCode(this.start_date);
+        hash = 47 * hash + Objects.hashCode(this.end_date);
+        hash = 47 * hash + Objects.hashCode(this.curricula);
+        hash = 47 * hash + Objects.hashCode(this.status);
+        hash = 47 * hash + Objects.hashCode(this.author);
+        hash = 47 * hash + Objects.hashCode(this.date_created);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StudyYearResponse other = (StudyYearResponse) obj;
+        if (!Objects.equals(this.theme, other.theme)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.start_date, other.start_date)) {
+            return false;
+        }
+        if (!Objects.equals(this.end_date, other.end_date)) {
+            return false;
+        }
+        if (!Objects.equals(this.curricula, other.curricula)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_created, other.date_created)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
+
     @Override
     public String toString() {
         return "StudyYearResponse{"
@@ -89,6 +158,7 @@ public class StudyYearResponse {
                 + ", theme=" + theme
                 + ", start_date=" + start_date
                 + ", end_date=" + end_date
+                + ", curricula=" + curricula
                 + ", status=" + status
                 + ", author_id=" + author
                 + ", date_created=" + date_created
