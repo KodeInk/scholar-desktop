@@ -117,16 +117,16 @@ public class ManageStreamsUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            list.stream().map((ur) -> {
-                String id = ur.getId().toString();
-                String name = ur.getName().toUpperCase();
-                String code = ur.getCode().toUpperCase();
-                String status = ur.getStatus().toUpperCase();
+            list.stream().map((response) -> {
+                String id = response.getId().toString();
+                String name = response.getName().toUpperCase();
+                String code = response.getCode().toUpperCase();
+                String status = response.getStatus().toUpperCase();
                 String date_Created = " - ";
-                if (ur.getDate_created() != null) {
-                    date_Created = new Date(ur.getDate_created()).toString().toUpperCase();
+                if (response.getDate_created() != null) {
+                    date_Created = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
                 }
-                String author = ur.getAuthor().toUpperCase();
+                String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, status, date_Created, author};
                 return data;
             }).forEachOrdered((data) -> {
