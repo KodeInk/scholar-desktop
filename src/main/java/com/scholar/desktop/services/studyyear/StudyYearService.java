@@ -13,12 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.StudyYearAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.user.request.User;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
 import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
@@ -85,8 +82,7 @@ public class StudyYearService extends AbstractService {
         return list;
     }
 
-    
-      public List<StudyYearResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+    public List<StudyYearResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
         List<StudyYearResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
@@ -99,8 +95,6 @@ public class StudyYearService extends AbstractService {
         return classResponses;
     }
 
-      
-      
     /**
      *
      * @param studyYear
