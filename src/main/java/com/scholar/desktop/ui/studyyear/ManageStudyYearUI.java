@@ -81,7 +81,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
     protected void fetchData() {
         if (search != null) {
-//            fetchData(search, offset, limit);
+            fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
