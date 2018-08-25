@@ -9,10 +9,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
+import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class StudyYearUI extends javax.swing.JPanel {
 
@@ -20,12 +24,21 @@ public class StudyYearUI extends javax.swing.JPanel {
      * Creates new form StudyYearUI
      */
     private SchoolData schoolData;
+    private static StudyYearUI instance;
 
     public StudyYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
         jTabbedPane1.addChangeListener(changeListener);
 
+    }
+
+    public static StudyYearUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new StudyYearUI(schoolData);
+        }
+
+        return instance;
     }
 
     ChangeListener changeListener = new ChangeListener() {
@@ -48,6 +61,12 @@ public class StudyYearUI extends javax.swing.JPanel {
 
         }
     };
+
+    public void edit(StudyYearResponse classResponse) {
+        jTabbedPane1.setSelectedIndex(1);
+        AddStudYearUI.getInstance(schoolData).edit(classResponse);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

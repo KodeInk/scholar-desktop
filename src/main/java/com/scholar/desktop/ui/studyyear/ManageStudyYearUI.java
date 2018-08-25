@@ -16,6 +16,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -110,8 +111,8 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
                 String start_date = Utilities.getSimpleDate(response.getStart_date()).toUpperCase();
                 String end_date = Utilities.getSimpleDate(response.getEnd_date()).toUpperCase();
                 String status = response.getStatus().toUpperCase();
-                String DateCreated =  Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
-                        //new Date(response.getDate_created()).toString().toUpperCase();
+                String DateCreated = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                //new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
                 Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0);
 
@@ -263,6 +264,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -378,6 +384,33 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
+
+    Integer rowselect = 0;
+    Integer mouseClick = 0;
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        Integer row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, 0).toString();
+
+        if (rowselect == row) {
+            mouseClick++;
+
+            //selectClassStreamsList
+        } else {
+            mouseClick = 1;
+        }
+
+        if (mouseClick % 2 == 0) {
+
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                    StudyYearUI.getInstance(schoolData).edit(response);
+                }
+            });
+        }
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     protected void next() {
         offset = offset + limit;

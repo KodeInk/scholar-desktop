@@ -519,9 +519,10 @@ public class ManageClassesUI extends javax.swing.JPanel {
 
                 }
             });
-            ;
+            
 
         }
+        
 
         rowselect = row;
 

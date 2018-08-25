@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
@@ -44,6 +45,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private List<Integer> curriculaList = new ArrayList<>();
     private List<JCheckBox> checkBoxs = new ArrayList<>();
     private List<CurriculumResponse> streamResponses;
+    private StudyYearResponse studyYearResponse;
 
     public AddStudYearUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -59,13 +61,19 @@ public class AddStudYearUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-        fetchStreams();
+        fetchCurricula();
     }
 
-    public void fetchStreams() {
+    public void edit(StudyYearResponse studyYearResponse) {
+        this.studyYearResponse = studyYearResponse;
+        fetchCurricula();
+
+    }
+
+    public void fetchCurricula() {
         jLabel1.setText("Processing...");
         if (streamResponses != null && streamResponses.size() > 0) {
-            populateStreams();
+            populateCarricula();
         }
 
         SwingWorker swingWorker = new SwingWorker() {
@@ -73,7 +81,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
 
                 streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
-                populateStreams();
+                populateCarricula();
                 jLabel1.setText("Study Period  Information");
 
                 return null;
@@ -89,7 +97,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         }
     }
 
-    public void populateStreams() {
+    public void populateCarricula() {
         resetJCheckBoxes();
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
