@@ -24,12 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.ui.classes.AddClassUI;
@@ -47,7 +45,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private final SchoolData schoolData;
     private List<Integer> curriculaList = new ArrayList<>();
     private List<JCheckBox> checkBoxs = new ArrayList<>();
-    private List<CurriculumResponse> streamResponses;
+    private List<CurriculumResponse> curriculaResponse;
     private StudyYearResponse studyYearResponse;
 
     public AddStudYearUI(SchoolData schoolData) {
@@ -59,11 +57,12 @@ public class AddStudYearUI extends javax.swing.JPanel {
         if (instance == null) {
             instance = new AddStudYearUI(schoolData);
         }
-
         return instance;
     }
 
     public void initData() {
+        studyYearResponse = null;
+        resetForm();
         fetchCurricula();
     }
 
@@ -79,18 +78,18 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
     public void fetchCurricula() {
         jLabel1.setText("Processing...");
-        if (streamResponses != null && streamResponses.size() > 0) {
+        if (curriculaResponse != null && curriculaResponse.size() > 0) {
             populateCarricula();
         }
 
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-
-                streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
+                disableMandatories();
+                curriculaResponse = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateCarricula();
                 jLabel1.setText("Study Period  Information");
-
+                enableMandatories();
                 return null;
             }
         };
@@ -104,13 +103,31 @@ public class AddStudYearUI extends javax.swing.JPanel {
         }
     }
 
+    public void enableMandatories() {
+        saveButton.setEnabled(true);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(true);
+            });
+        }
+    }
+
+    public void disableMandatories() {
+        saveButton.setEnabled(false);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(false);
+            });
+        }
+    }
+
     public void populateCarricula() {
         resetJCheckBoxes();
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
 
-            if (streamResponses != null) {
-                jPanel = getJpanel("CURRICULA", streamResponses);
+            if (curriculaResponse != null) {
+                jPanel = getJpanel("CURRICULA", curriculaResponse);
             }
             if (jPanel != null) {
                 jScrollPane3.setPreferredSize(new Dimension(450, 300));
@@ -486,6 +503,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
         themeField.setText("");
         startDate.setDate(null);
         endDate.setDate(null);
+        resetJCheckBoxes();
+        saveButton.setText("SAVE");
+
     }
 
     /**
