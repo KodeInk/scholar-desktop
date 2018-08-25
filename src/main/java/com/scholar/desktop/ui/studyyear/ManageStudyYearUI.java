@@ -6,6 +6,7 @@
 package main.java.com.scholar.desktop.ui.studyyear;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -106,14 +107,15 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
             for (StudyYearResponse response : list) {
 
                 String theme = response.getTheme().toUpperCase();
-                String start_date = new Date(response.getStart_date()).toString().toUpperCase();
-                String end_date = new Date(response.getEnd_date()).toString().toUpperCase();
+                String start_date = Utilities.getSimpleDate(response.getStart_date()).toUpperCase();
+                String end_date = Utilities.getSimpleDate(response.getEnd_date()).toUpperCase();
                 String status = response.getStatus().toUpperCase();
-                String DateCreated = new Date(response.getDate_created()).toString().toUpperCase();
+                String DateCreated =  Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                        //new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
-                Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0 );
+                Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0);
 
-                Object[] data = {theme, start_date, end_date, numberOfCurriculum , status, DateCreated, author};
+                Object[] data = {theme, start_date, end_date, numberOfCurriculum, status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }
@@ -164,7 +166,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         nextLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
-        jSplitPane1.setDividerLocation(300);
+        jSplitPane1.setDividerLocation(570);
         jSplitPane1.setDividerSize(2);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -324,7 +326,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -341,7 +343,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);

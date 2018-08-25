@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.xml.ws.Response;
+import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 /**
@@ -35,7 +36,7 @@ public class Utilities {
     public static final Integer default_offset = 0;
     public static final Integer default_limit = 20;
     private static JDialog dialog;
-    private final static String DATE_FORMAT = "E MMM dd";
+    private final static String DATE_FORMAT = "dd MMM, yyyy";
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -168,10 +169,20 @@ public class Utilities {
 
         return null;
     }
-    
-      public static void hideColumn(Integer columnIndex,JTable jTable) {
+
+    public static void hideColumn(Integer columnIndex, JTable jTable) {
         TableColumn tc = jTable.getColumnModel().getColumn(columnIndex);
         jTable.removeColumn(tc);
+    }
+
+    public static String getSimpleDate(Long longDate) {
+        if (longDate != null) {
+            Date date = new Date(longDate);
+            SimpleDateFormat df2 = new SimpleDateFormat(DATE_FORMAT);
+            String start_date = df2.format(date);
+            return start_date;
+        }
+        return "-";
     }
 
 }
