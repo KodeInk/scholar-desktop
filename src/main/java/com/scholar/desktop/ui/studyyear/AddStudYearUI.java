@@ -10,7 +10,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,13 +24,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -431,27 +432,60 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
         StudyYear studyYear = populateEntity();
-        submit(studyYear);
+        String btnText = saveButton.getText();
+        SubmitData(btnText, studyYear);
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    /**
-     *
-     * @param studyYear
-     * @throws BadRequestException
-     * @throws HeadlessException
-     */
-    public void submit(StudyYear studyYear) throws BadRequestException, HeadlessException {
+    public void SubmitData(String btnText, StudyYear studyYear) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveRecord(studyYear);
+                break;
+            case "EDIT":
+                editRecord(studyYear);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void editRecord(StudyYear studyYear) throws HeadlessException {
+        try {
+            //todo: get the clas_id
+            if (studyYearResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
+
+            studyYear.setId(studyYearResponse.getId());
+            StudyYearService.getInstance(schoolData).edit(studyYear, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
+
+    private void saveRecord(StudyYear studyYear) throws HeadlessException {
+
         try {
             StudyYearResponse studyYearResponse = StudyYearService.getInstance(schoolData).create(studyYear, "log_id");
             JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
-            themeField.setText("");
-            startDate.setDate(null);
-            endDate.setDate(null);
+            resetForm();
         } catch (IOException ex) {
             Logger.getLogger(AddStudYearUI.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BadRequestException("Something went wrong, record could not be saved");
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
+
+    }
+
+    public void resetForm() {
+        themeField.setText("");
+        startDate.setDate(null);
+        endDate.setDate(null);
     }
 
     /**

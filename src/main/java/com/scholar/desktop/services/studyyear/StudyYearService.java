@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.StudyYearAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
@@ -98,6 +100,14 @@ public class StudyYearService extends AbstractService {
         return null;
     }
 
+    public StudyYearResponse edit(StudyYear studyYear, String logId) throws IOException {
+        if (studyYear != null) {
+            Map classesMap = getStudyYearMap(studyYear);
+            return studyYearAPI.update(classesMap, logId);
+        }
+        return null;
+    }
+
     /**
      *
      * @param studyYear
@@ -106,6 +116,10 @@ public class StudyYearService extends AbstractService {
     public Map getStudyYearMap(StudyYear studyYear) {
 
         Map studyYearMap = new HashMap<>();
+        if (studyYear.getId() != null) {
+            studyYearMap.put("id", studyYear.getId());
+        }
+
         studyYearMap.put("theme", studyYear.getTheme());
         studyYearMap.put("start_date", studyYear.getStart_date());
         studyYearMap.put("end_date", studyYear.getEnd_date());

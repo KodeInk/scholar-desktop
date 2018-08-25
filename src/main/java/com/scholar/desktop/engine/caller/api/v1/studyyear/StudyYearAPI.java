@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
@@ -25,7 +26,7 @@ import main.java.com.scholar.desktop.helper.exceptions.Message;
  *
  * @author mover 3/14/2018
  */
-public class StudyYearAPI  extends AbstractAPI{
+public class StudyYearAPI extends AbstractAPI {
 
     private static final Logger LOG = Logger.getLogger(StudyYearAPI.class.getName());
     private final SchoolData schoolData;
@@ -69,7 +70,7 @@ public class StudyYearAPI  extends AbstractAPI{
 
         return null;
     }
-    
+
     public StudyYearResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("studyyear/v1/", body, logId);
@@ -96,8 +97,32 @@ public class StudyYearAPI  extends AbstractAPI{
         }
 
     }
-    
-    
-    
+
+    public StudyYearResponse update(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.put("studyyear/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                StudyYearResponse studyYearResponse = response.readEntity(StudyYearResponse.class);
+                return studyYearResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
+    }
 
 }
