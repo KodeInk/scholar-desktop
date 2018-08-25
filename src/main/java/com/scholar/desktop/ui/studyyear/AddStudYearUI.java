@@ -145,6 +145,11 @@ public class AddStudYearUI extends javax.swing.JPanel {
                     for (CurriculumResponse sr : curriculumResponses) {
                         if (jcb.getActionCommand().equals(sr.getId().toString())) {
                             jcb.setSelected(true);
+                            perfomAction(jcb);
+//                            JOptionPane.showMessageDialog(null, sr.getId().toString());
+//                            curriculaList.add(sr.getId());
+//                            jcb.setSelected(true);
+//                            ddd
                         }
 
                     }
@@ -259,22 +264,26 @@ public class AddStudYearUI extends javax.swing.JPanel {
         jCheckBoxx.addActionListener((ActionEvent e) -> {
             JCheckBox xx = (JCheckBox) e.getSource();
 
-            /*
-            Add curriculum to the curriculum List at selection 
-             */
-            Integer curriculum = Integer.parseInt(xx.getActionCommand());
-            if (curriculaList != null) {
-                curriculaList.remove(curriculum);
-            }
-
-            if (xx.isSelected()) {
-                curriculaList.add(curriculum);
-            }
+            perfomAction(xx);
 
         });
 
         checkBoxs.add(jCheckBoxx);
         return jCheckBoxx;
+    }
+
+    public void perfomAction(JCheckBox xx) throws NumberFormatException {
+        /*
+        Add curriculum to the curriculum List at selection
+        */
+        Integer curriculum = Integer.parseInt(xx.getActionCommand());
+        if (curriculaList != null) {
+            curriculaList.remove(curriculum);
+        }
+        
+        if (xx.isSelected()) {
+            curriculaList.add(curriculum);
+        }
     }
 
     /**
@@ -503,6 +512,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         themeField.setText("");
         startDate.setDate(null);
         endDate.setDate(null);
+//        curriculaList = null;
         resetJCheckBoxes();
         saveButton.setText("SAVE");
 
