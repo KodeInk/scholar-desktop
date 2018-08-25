@@ -123,16 +123,16 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
 
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
-            list.stream().map((ur) -> {
-                String id = ur.getId().toString();
-                String name = ur.getName().toUpperCase();
-                String code = ur.getCode().toUpperCase();
-                String description = ur.getDescription().toUpperCase();
-                String status = ur.getStatus().toUpperCase();
-                String author = ur.getAuthor().toUpperCase();
+            list.stream().map((response) -> {
+                String id = response.getId().toString();
+                String name = response.getName().toUpperCase();
+                String code = response.getCode().toUpperCase();
+                String description = response.getDescription().toUpperCase();
+                String status = response.getStatus().toUpperCase();
+                String author = response.getAuthor().toUpperCase();
                 String date_created = " - ";
-                if (ur.getDate_created() != null) {
-                    date_created = new Date(ur.getDate_created()).toString().toUpperCase();
+                if (response.getDate_created() != null) {
+                    date_created =  Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
                 }
                 Object[] data = {id, name, code, description, status, date_created, author};
                 return data;
