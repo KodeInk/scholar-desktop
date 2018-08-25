@@ -6,19 +6,17 @@
 package main.java.com.scholar.desktop.ui.studyyear;
 
 import java.awt.Color;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
-import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -83,6 +81,31 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
+    protected void fetchData() {
+        if (search != null) {
+//            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+    }
+
+    protected void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
+                jLabel1.setText("Processing....");
+                List<StudyYearResponse> crs = StudyYearService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(crs);
+                repaint();
+                jLabel1.setText("MANAGE STUDY PERIOD");
+                enableNextPrevLabels();
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+
     public final void fetchData(Integer offset, Integer limit) {
 
         if (list != null) {
@@ -110,8 +133,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (StudyYearResponse response : list) {
-
+            list.stream().map((response) -> {
                 Integer id = response.getId();
                 String theme = response.getTheme().toUpperCase();
                 String start_date = Utilities.getSimpleDate(response.getStart_date()).toUpperCase();
@@ -121,10 +143,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
                 //new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
                 Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0);
-
                 Object[] data = {id, theme, start_date, end_date, numberOfCurriculum, status, DateCreated, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-            }
+            });
         }
 
         tableModel.fireTableDataChanged();
@@ -374,11 +397,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
@@ -390,6 +413,27 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
+
+    public void searchQuery() {
+        // TODO add your handling code here:
+        if (!searchbox.getText().isEmpty()) {
+
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
+
+            search = searchbox.getText();
+
+            fetchData();
+
+        } else {
+            search = null;
+            jLabel1.setText("Processing....");
+            initData();
+        }
+        jLabel1.setText("Manage Classes");
+    }
 
     Integer rowselect = 0;
     Integer mouseClick = 0;
@@ -406,7 +450,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         }
 
         if (mouseClick % 2 == 0) {
-            list.forEach(response -> { 
+            list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
                     StudyYearUI.getInstance(schoolData).edit(response);
                 }
@@ -419,9 +463,9 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     protected void next() {
         offset = offset + limit;
         if (search != null) {
-//            fetchData(search, offset, limit);
+            fetchData();
         } else {
-            fetchData(offset, limit);
+            fetchData();
         }
 
         page++;
@@ -432,9 +476,9 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         offset = offset - limit;
         if (offset >= 0) {
             if (search != null) {
-//                fetchData(search, offset, limit);
+                fetchData();
             } else {
-                fetchData(offset, limit);
+                fetchData();
             }
 
             page--;

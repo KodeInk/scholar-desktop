@@ -137,9 +137,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         }
 
         if (this.studyYearResponse != null) {
-
             List<CurriculumResponse> curriculumResponses = studyYearResponse.getCurricula();
-
             if (checkBoxs != null && checkBoxs.size() > 0) {
                 checkBoxs.forEach((jcb) -> {
                     curriculumResponses.stream().filter((sr) -> (jcb.getActionCommand().equals(sr.getId().toString()))).map((_item) -> {

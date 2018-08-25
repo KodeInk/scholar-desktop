@@ -37,13 +37,11 @@ public class ClassesAPI extends AbstractAPI {
     }
 
     public ClassResponse[] list(Integer offset, Integer limit) {
- 
-        Map<String, String> queryParameter = new HashMap<>();        
+
+        Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-             
-         
         Response response = engineCaller.get("classes/v1/", queryParameter);
 
         switch (response.getStatus()) {
@@ -63,14 +61,14 @@ public class ClassesAPI extends AbstractAPI {
 
         return null;
     }
-    
-     public ClassResponse[] list(String query,Integer offset, Integer limit) {
- 
+
+    public ClassResponse[] list(String query, Integer offset, Integer limit) {
+
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
 
-        Response response = engineCaller.get("classes/v1/search/"+query, queryParameter);
+        Response response = engineCaller.get("classes/v1/search/" + query, queryParameter);
 
         switch (response.getStatus()) {
             case 400:
@@ -89,7 +87,6 @@ public class ClassesAPI extends AbstractAPI {
 
         return null;
     }
-         
 
     public ClassResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
@@ -117,7 +114,7 @@ public class ClassesAPI extends AbstractAPI {
         }
 
     }
-    
+
     public ClassResponse update(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.put("classes/v1/", body, logId);
@@ -144,7 +141,5 @@ public class ClassesAPI extends AbstractAPI {
         }
 
     }
-      
-      
 
 }

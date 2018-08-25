@@ -85,6 +85,22 @@ public class StudyYearService extends AbstractService {
         return list;
     }
 
+    
+      public List<StudyYearResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<StudyYearResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            StudyYearResponse[] responses = studyYearAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                classResponses.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return classResponses;
+    }
+
+      
+      
     /**
      *
      * @param studyYear

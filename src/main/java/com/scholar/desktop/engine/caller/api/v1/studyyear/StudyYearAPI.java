@@ -73,6 +73,41 @@ public class StudyYearAPI extends AbstractAPI {
 
     /**
      *
+     * @param query
+     * @param offset
+     * @param limit
+     * @return
+     */
+    public StudyYearResponse[] list(String query,Integer offset, Integer limit) {
+ 
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("studyyear/v1/search/"+query, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                StudyYearResponse[] studyYearResponse = response.readEntity(StudyYearResponse[].class);
+                return studyYearResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+        
+     
+     
+    /**
+     *
      * @param body
      * @param logId
      * @return
