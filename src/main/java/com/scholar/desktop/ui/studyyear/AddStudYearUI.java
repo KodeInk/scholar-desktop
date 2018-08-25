@@ -142,13 +142,12 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
             if (checkBoxs != null && checkBoxs.size() > 0) {
                 checkBoxs.forEach((jcb) -> {
-                    for (CurriculumResponse sr : curriculumResponses) {
-                        if (jcb.getActionCommand().equals(sr.getId().toString())) {
-                            jcb.setSelected(true);
-                            perfomAction(jcb);
-                        }
-
-                    }
+                    curriculumResponses.stream().filter((sr) -> (jcb.getActionCommand().equals(sr.getId().toString()))).map((_item) -> {
+                        jcb.setSelected(true);
+                        return _item;
+                    }).forEachOrdered((_item) -> {
+                        perfomAction(jcb);
+                    });
                 });
 
             }
