@@ -83,7 +83,7 @@ public class DesktopSwitcher {
                 break;
 
             case "STUDY_PERIOD":
-                dashboardScreen.getjSplitPane1().setRightComponent(new StudyYearUI(schoolData));
+                dashboardScreen.getjSplitPane1().setRightComponent(StudyYearUI.getInstance(schoolData));
                 break;
 
             case "TERMS":

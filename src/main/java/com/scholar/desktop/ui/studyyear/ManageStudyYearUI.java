@@ -28,11 +28,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageStudyYear
      */
-    private static final String[] COLUMN_HEADERS = {"THEME", "START DATE", "END DATE", "# CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "THEME", "START DATE", "END DATE", "# CURRICULUM", "STATUS", "DATE CREATED", "AUTHOR"};
 
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-    List<StudyYearResponse> list = null;
+      List<StudyYearResponse> list = null;
     private static ManageStudyYearUI instance;
 
     private Integer page;
@@ -55,12 +55,10 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         }
 
         initComponents();
-
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
-
         initData();
-
+        Utilities.hideColumn(0, jTable1);
     }
 
     public static ManageStudyYearUI getInstance(SchoolData schoolData) {
@@ -71,6 +69,13 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
+        
+        if (list != null) {
+            populateJTable(list);
+        }
+
+        
+        
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         fetchData(offset, limit);
@@ -107,6 +112,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
             for (StudyYearResponse response : list) {
 
+                Integer id = response.getId();
                 String theme = response.getTheme().toUpperCase();
                 String start_date = Utilities.getSimpleDate(response.getStart_date()).toUpperCase();
                 String end_date = Utilities.getSimpleDate(response.getEnd_date()).toUpperCase();
@@ -116,7 +122,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
                 String author = response.getAuthor().toUpperCase();
                 Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0);
 
-                Object[] data = {theme, start_date, end_date, numberOfCurriculum, status, DateCreated, author};
+                Object[] data = {id, theme, start_date, end_date, numberOfCurriculum, status, DateCreated, author};
                 tableModel.addRow(data);
             }
         }
