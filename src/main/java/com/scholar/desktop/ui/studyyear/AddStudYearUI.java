@@ -10,6 +10,8 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.request.StudyYear;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -66,6 +68,10 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
     public void edit(StudyYearResponse studyYearResponse) {
         this.studyYearResponse = studyYearResponse;
+        themeField.setText(studyYearResponse.getTheme());
+        startDate.setDate(new Date(studyYearResponse.getStart_date()));
+        endDate.setDate(new Date(studyYearResponse.getEnd_date()));
+        saveButton.setText("EDIT");
         fetchCurricula();
 
     }
@@ -112,26 +118,22 @@ public class AddStudYearUI extends javax.swing.JPanel {
             }
         }
 
-        /*
-        if (this.classResponse != null) {
-            className.setText(classResponse.getName());
-            classCode.setText(classResponse.getCode());
-            RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
-            saveButton.setText("EDIT");
+        if (this.studyYearResponse != null) {
 
-            List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
+            List<CurriculumResponse> curriculumResponses = studyYearResponse.getCurricula();
+
             if (checkBoxs != null && checkBoxs.size() > 0) {
-                for (JCheckBox jcb : checkBoxs) {
-                    for (StreamResponse sr : srs) {
+                checkBoxs.forEach((jcb) -> {
+                    for (CurriculumResponse sr : curriculumResponses) {
                         if (jcb.getActionCommand().equals(sr.getId().toString())) {
                             jcb.setSelected(true);
                         }
 
                     }
-                }
+                });
 
             }
-        } */
+        }
     }
 
     public JPanel getJpanel(String grouping, List<CurriculumResponse> list) {
@@ -270,14 +272,14 @@ public class AddStudYearUI extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        theme = new javax.swing.JTextField();
+        themeField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         startDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         endDate = new org.jdesktop.swingx.JXDatePicker();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         curriculumJpanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -307,14 +309,14 @@ public class AddStudYearUI extends javax.swing.JPanel {
         jLabel4.setText("End  Date : *");
         jLabel4.setToolTipText("");
 
-        jButton1.setText("SAVE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CANCEL");
+        cancelButton.setText("CANCEL");
 
         curriculumJpanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -364,7 +366,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(startDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(theme, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
+                                    .addComponent(themeField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -373,9 +375,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(curriculumJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
@@ -392,7 +394,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(themeField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,8 +409,8 @@ public class AddStudYearUI extends javax.swing.JPanel {
                     .addComponent(curriculumJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -426,12 +428,12 @@ public class AddStudYearUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
         StudyYear studyYear = populateEntity();
         submit(studyYear);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      *
@@ -443,7 +445,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         try {
             StudyYearResponse studyYearResponse = StudyYearService.getInstance(schoolData).create(studyYear, "log_id");
             JOptionPane.showMessageDialog(this, "Record Saved Succesfully");
-            theme.setText("");
+            themeField.setText("");
             startDate.setDate(null);
             endDate.setDate(null);
         } catch (IOException ex) {
@@ -459,7 +461,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     public StudyYear populateEntity() {
         //todo:populate template
         StudyYear studyYear = new StudyYear();
-        studyYear.setTheme(theme.getText());
+        studyYear.setTheme(themeField.getText());
         studyYear.setStart_date(startDate.getDate().getTime());
         studyYear.setEnd_date(endDate.getDate().getTime());
         if (curriculaList != null && curriculaList.size() > 0) {
@@ -470,7 +472,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
     private void validateForm() throws BadRequestException {
         //todo: validate the form
-        if (theme.getText().isEmpty()) {
+        if (themeField.getText().isEmpty()) {
             throw new BadRequestException("Theme is mandatory");
         }
         try {
@@ -489,10 +491,9 @@ public class AddStudYearUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JPanel curriculumJpanel;
     private org.jdesktop.swingx.JXDatePicker endDate;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -503,7 +504,8 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton saveButton;
     private org.jdesktop.swingx.JXDatePicker startDate;
-    private javax.swing.JTextField theme;
+    private javax.swing.JTextField themeField;
     // End of variables declaration//GEN-END:variables
 }

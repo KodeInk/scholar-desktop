@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
@@ -32,7 +34,7 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
 
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-      List<StudyYearResponse> list = null;
+    List<StudyYearResponse> list = null;
     private static ManageStudyYearUI instance;
 
     private Integer page;
@@ -69,13 +71,11 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
     }
 
     public final void initData() {
-        
+
         if (list != null) {
             populateJTable(list);
         }
 
-        
-        
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         fetchData(offset, limit);
@@ -398,24 +398,22 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
         Integer row = jTable1.getSelectedRow();
         String value = jTable1.getModel().getValueAt(row, 0).toString();
 
-        if (rowselect == row) {
+        if (Objects.equals(rowselect, row)) {
             mouseClick++;
-
             //selectClassStreamsList
         } else {
             mouseClick = 1;
         }
 
         if (mouseClick % 2 == 0) {
-
-            list.forEach(response -> {
+            list.forEach(response -> { 
                 if (response.getId() == Integer.parseInt(value)) {
                     StudyYearUI.getInstance(schoolData).edit(response);
                 }
             });
         }
 
-
+        rowselect = row;
     }//GEN-LAST:event_jTable1MouseClicked
 
     protected void next() {
