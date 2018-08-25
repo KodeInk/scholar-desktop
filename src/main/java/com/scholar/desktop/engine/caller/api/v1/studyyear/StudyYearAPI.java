@@ -71,6 +71,13 @@ public class StudyYearAPI extends AbstractAPI {
         return null;
     }
 
+    /**
+     *
+     * @param body
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public StudyYearResponse create(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.post("studyyear/v1/", body, logId);
@@ -98,6 +105,13 @@ public class StudyYearAPI extends AbstractAPI {
 
     }
 
+    /**
+     *
+     * @param body
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public StudyYearResponse update(Map body, String logId) throws IOException {
         LOG.log(Level.INFO, body.toString());
         Response response = engineCaller.put("studyyear/v1/", body, logId);
