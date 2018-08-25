@@ -146,10 +146,6 @@ public class AddStudYearUI extends javax.swing.JPanel {
                         if (jcb.getActionCommand().equals(sr.getId().toString())) {
                             jcb.setSelected(true);
                             perfomAction(jcb);
-//                            JOptionPane.showMessageDialog(null, sr.getId().toString());
-//                            curriculaList.add(sr.getId());
-//                            jcb.setSelected(true);
-//                            ddd
                         }
 
                     }
