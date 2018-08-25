@@ -156,15 +156,15 @@ public class ManageGradingUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            list.stream().map((ur) -> {
-                Integer id = ur.getId();
-                String name = ur.getName().toUpperCase();
-                String code = ur.getCode().toUpperCase();
-                String details = ur.getDescription().toUpperCase();
-                String status = ur.getStatus().name().toUpperCase();
-                Date date_Created = new Date(ur.getDateCreated());
-                String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, name, code, details, status, date_Created.toString().toUpperCase(), author};
+            list.stream().map((response) -> {
+                Integer id = response.getId();
+                String name = response.getName().toUpperCase();
+                String code = response.getCode().toUpperCase();
+                String details = response.getDescription().toUpperCase();
+                String status = response.getStatus().name().toUpperCase();
+                String date_Created = Utilities.getSimpleDate(response.getDateCreated()).toUpperCase();
+                String author = response.getAuthor().toUpperCase();
+                Object[] data = {id, name, code, details, status, date_Created.toUpperCase(), author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);

@@ -87,16 +87,16 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
         if (list != null) {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            list.stream().map((ur) -> {
-                Integer id = ur.getId();
-                String gradingScale = ur.getGradingScale().toUpperCase();
+            list.stream().map((response) -> {
+                Integer id = response.getId();
+                String gradingScale = response.getGradingScale().toUpperCase();
 
-                String symbol = ur.getSymbol().toUpperCase();
-                Long minGrade = ur.getMin_grade();
-                Long maxGrade = ur.getMax_grade();
-                String status = ur.getStatus().toUpperCase();
-                String date_Created = new Date(ur.getDate_created()).toString();
-                String author = ur.getAuthor().toUpperCase();
+                String symbol = response.getSymbol().toUpperCase();
+                Long minGrade = response.getMin_grade();
+                Long maxGrade = response.getMax_grade();
+                String status = response.getStatus().toUpperCase();
+                String date_Created = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, gradingScale, symbol, minGrade, maxGrade, status, date_Created, author};
                 return data;
             }).forEachOrdered((data) -> {
