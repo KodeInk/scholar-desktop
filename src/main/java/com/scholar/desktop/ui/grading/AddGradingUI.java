@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout;
@@ -557,7 +558,7 @@ public class AddGradingUI extends javax.swing.JPanel {
         if (this.gradingResponse != null) {
             List<SubjectResponse> subjectResponses = gradingResponse.getSubjectResponses();
             if (checkBoxs != null && checkBoxs.size() > 0) {
-                checkBoxs.forEach((jcb) -> {
+                checkBoxs.stream().filter((jcb) -> (subjectResponses != null)).forEachOrdered((jcb) -> {
                     subjectResponses.stream().filter((sr) -> (jcb.getActionCommand().equals(sr.getId().toString()))).map((_item) -> {
                         jcb.setSelected(true);
                         return _item;
