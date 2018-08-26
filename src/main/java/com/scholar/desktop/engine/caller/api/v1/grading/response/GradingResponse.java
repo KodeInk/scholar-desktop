@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.grading.response;
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.List;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 
 /**
  *
@@ -15,7 +16,6 @@ import java.util.Objects;
  */
 public class GradingResponse {
 
-    
     private Integer id;
     private String name;
     private String code;
@@ -24,6 +24,7 @@ public class GradingResponse {
     private Long dateCreated;
     private String author;
     private List<GradingDetailResponse> gradingDetailResponses;
+    private List<SubjectResponse> subjectResponses;
 
     public GradingResponse() {
     }
@@ -92,6 +93,14 @@ public class GradingResponse {
         this.gradingDetailResponses = gradingDetailResponses;
     }
 
+    public List<SubjectResponse> getSubjectResponses() {
+        return subjectResponses;
+    }
+
+    public void setSubjectResponses(List<SubjectResponse> subjectResponses) {
+        this.subjectResponses = subjectResponses;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -146,6 +155,5 @@ public class GradingResponse {
     public String toString() {
         return "GradingResponse{" + "id=" + id + ", name=" + name + ", code=" + code + ", description=" + description + ", status=" + status + ", dateCreated=" + dateCreated + ", author=" + author + ", gradingDetailResponses=" + gradingDetailResponses + '}';
     }
-
 
 }

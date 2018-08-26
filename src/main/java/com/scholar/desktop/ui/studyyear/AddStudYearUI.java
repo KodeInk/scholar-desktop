@@ -45,7 +45,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     private final SchoolData schoolData;
     private List<Integer> curriculaList = new ArrayList<>();
     private List<JCheckBox> checkBoxs = new ArrayList<>();
-    private List<CurriculumResponse> curriculaResponse;
+    private List<CurriculumResponse> curriculaResponses;
     private StudyYearResponse studyYearResponse;
     
     public AddStudYearUI(SchoolData schoolData) {
@@ -78,7 +78,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
     
     public void fetchCurricula() {
         jLabel1.setText("Processing...");
-        if (curriculaResponse != null && curriculaResponse.size() > 0) {
+        if (curriculaResponses != null && curriculaResponses.size() > 0) {
             populateCarricula();
         }
         
@@ -86,7 +86,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 disableMandatories();
-                curriculaResponse = CurriculumService.getInstance(schoolData).list(0, 10000);
+                curriculaResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateCarricula();
                 jLabel1.setText("Study Period  Information");
                 enableMandatories();
@@ -102,6 +102,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
             jcb.setSelected(false);
         });
     }
+    
     
     public void enableMandatories() {
         saveButton.setEnabled(true);
@@ -132,8 +133,8 @@ public class AddStudYearUI extends javax.swing.JPanel {
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
             
-            if (curriculaResponse != null) {
-                jPanel = getJpanel("CURRICULA", curriculaResponse);
+            if (curriculaResponses != null) {
+                jPanel = getJpanel("CURRICULA", curriculaResponses);
             }
             if (jPanel != null) {
                 jScrollPane3.setPreferredSize(new Dimension(450, 300));
