@@ -6,7 +6,6 @@
 package main.java.com.scholar.desktop.ui.grading;
 
 import java.awt.Color;
-import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
@@ -24,7 +23,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageGradingUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DETAILS", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "DETAILS", "#SUBJECTS", "STATUS", "DATE CREATED", "AUTHOR"};
     private static final String[] COLUMN_HEADERS1 = {"SYMBOL", "MIN GRADE", "MAX GRADE"};
 
     SchoolData schoolData = null;
@@ -161,10 +160,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
                 String name = response.getName().toUpperCase();
                 String code = response.getCode().toUpperCase();
                 String details = response.getDescription().toUpperCase();
+                Integer numSubjects = (response.getSubjectResponses() == null) ? 0 : response.getSubjectResponses().size();
                 String status = response.getStatus().name().toUpperCase();
                 String date_Created = Utilities.getSimpleDate(response.getDateCreated()).toUpperCase();
                 String author = response.getAuthor().toUpperCase();
-                Object[] data = {id, name, code, details, status, date_Created.toUpperCase(), author};
+                Object[] data = {id, name, code, details, numSubjects, status, date_Created.toUpperCase(), author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
