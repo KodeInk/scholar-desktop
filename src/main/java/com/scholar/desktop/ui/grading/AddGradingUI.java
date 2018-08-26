@@ -21,12 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.Grading;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
-import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 import main.java.com.scholar.desktop.services.grading.GradingService;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
@@ -43,7 +41,7 @@ public class AddGradingUI extends javax.swing.JPanel {
     private final SchoolData schoolData;
     private GradingResponse gradingResponse;
 
-    private List<Integer> curriculaList = new ArrayList<>();
+    private List<Integer> subjectsList = new ArrayList<>();
     private List<JCheckBox> checkBoxs = new ArrayList<>();
     private List<SubjectResponse> subjectResponse;
 
@@ -55,6 +53,7 @@ public class AddGradingUI extends javax.swing.JPanel {
     public void initData() {
         resetForm();
         saveButton.setText("SAVE");
+        fetchCurricula();
     }
 
     /**
@@ -69,7 +68,7 @@ public class AddGradingUI extends javax.swing.JPanel {
         return instance;
     }
 
-    public void fetchCurricula() {
+    private void fetchCurricula() {
         jLabel1.setText("Processing...");
         if (subjectResponse != null && subjectResponse.size() > 0) {
             populateCarricula();
@@ -507,12 +506,12 @@ public class AddGradingUI extends javax.swing.JPanel {
         Add curriculum to the curriculum List at selection
          */
         Integer curriculum = Integer.parseInt(xx.getActionCommand());
-        if (curriculaList != null) {
-            curriculaList.remove(curriculum);
+        if (subjectsList != null) {
+            subjectsList.remove(curriculum);
         }
 
         if (xx.isSelected()) {
-            curriculaList.add(curriculum);
+            subjectsList.add(curriculum);
         }
     }
 
@@ -546,7 +545,7 @@ public class AddGradingUI extends javax.swing.JPanel {
             JPanel jPanel = null;
 
             if (subjectResponse != null) {
-                jPanel = getJpanel("CURRICULA", subjectResponse);
+                jPanel = getJpanel("SUBJECTS", subjectResponse);
             }
             if (jPanel != null) {
                 jScrollPane3.setPreferredSize(new Dimension(450, 300));
