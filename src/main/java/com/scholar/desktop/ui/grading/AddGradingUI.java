@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout;
@@ -274,7 +273,7 @@ public class AddGradingUI extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateGrading();
-        Grading grading = getGrading();
+        Grading grading = populateEntity();
 
         String btnText = saveButton.getText();
 
@@ -285,7 +284,7 @@ public class AddGradingUI extends javax.swing.JPanel {
      *
      * @return
      */
-    protected Grading getGrading() {
+    protected Grading populateEntity() {
         //todo: populae the entity
         String gradeName = gradingNameField.getText();
         String gradeCode = gradingCodeField.getText();
@@ -294,6 +293,10 @@ public class AddGradingUI extends javax.swing.JPanel {
         grading.setCode(gradeCode);
         grading.setName(gradeName);
         grading.setDescription(gradeDesc);
+        if (subjectsList != null && subjectsList.size() > 0) {
+            grading.setSubjects(subjectsList);
+        }
+
         return grading;
     }
 
@@ -365,6 +368,8 @@ public class AddGradingUI extends javax.swing.JPanel {
         gradingNameField.setText("");
         gradingCodeField.setText("");
         gradingDescriptionField.setText("");
+        resetJCheckBoxes();
+        saveButton.setText("SAVE");
     }
 
     /**

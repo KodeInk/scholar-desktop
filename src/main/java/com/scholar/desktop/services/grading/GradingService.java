@@ -12,10 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.GradingAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.request.Grading;
 import main.java.com.scholar.desktop.engine.caller.api.v1.grading.response.GradingResponse;
@@ -71,7 +68,7 @@ public class GradingService extends AbstractService {
      * @throws IOException
      */
     public List<GradingResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
- 
+
         List<GradingResponse> classResponses = new ArrayList<>();
         if (!searchQuery.isEmpty()) {
             GradingResponse[] responses = gradingAPI.list(searchQuery, offset, limit);
@@ -116,25 +113,25 @@ public class GradingService extends AbstractService {
         return null;
     }
 
-     public GradingResponse edit(Grading grading, String logId) throws IOException {
+    public GradingResponse edit(Grading grading, String logId) throws IOException {
         if (grading != null) {
             Map gradingMap = getGradingMap(grading);
             return gradingAPI.update(gradingMap, logId);
         }
         return null;
     }
-     
-     
+
     public Map getGradingMap(Grading grading) {
 
         Map gradingMap = new HashMap<>();
-         if (grading.getId() != null) {
+        if (grading.getId() != null) {
             gradingMap.put("id", grading.getId());
         }
-         
+
         gradingMap.put("name", grading.getName());
         gradingMap.put("code", grading.getCode());
         gradingMap.put("description", grading.getDescription());
+        gradingMap.put("subjects", grading.getSubjects());
 
         System.out.println("==================================");
         System.out.println(gradingMap);
