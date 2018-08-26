@@ -512,7 +512,7 @@ public class AddStudYearUI extends javax.swing.JPanel {
         themeField.setText("");
         startDateField.setDate(null);
         endDateField.setDate(null);
-//        curriculaList = null;
+        curriculaList =  new ArrayList<>();
         resetJCheckBoxes();
         saveButton.setText("SAVE");
         

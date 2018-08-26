@@ -368,6 +368,7 @@ public class AddGradingUI extends javax.swing.JPanel {
         gradingNameField.setText("");
         gradingCodeField.setText("");
         gradingDescriptionField.setText("");
+        subjectsList = new ArrayList<>();
         resetJCheckBoxes();
         saveButton.setText("SAVE");
     }
