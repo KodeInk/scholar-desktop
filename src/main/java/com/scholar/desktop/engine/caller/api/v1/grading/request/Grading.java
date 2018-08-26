@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.grading.request;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,7 @@ public class Grading {
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
+    private List<Integer> subjects;
 
     public Grading() {
     }
@@ -85,6 +87,16 @@ public class Grading {
     public void setAuthor_id(Integer author_id) {
         this.author_id = author_id;
     }
+
+    public List<Integer> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Integer> subjects) {
+        this.subjects = subjects;
+    }
+    
+    
 
     @Override
     public int hashCode() {
