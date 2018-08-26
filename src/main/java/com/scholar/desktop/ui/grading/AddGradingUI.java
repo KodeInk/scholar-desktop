@@ -30,7 +30,7 @@ import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AddGradingUI extends javax.swing.JPanel {
 
