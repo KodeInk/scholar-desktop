@@ -25,12 +25,13 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.Subject;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request.SubjectTypeEnum;
 import main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response.SubjectResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
-import main.java.com.scholar.desktop.services.streams.StreamsService;
+import main.java.com.scholar.desktop.services.curriculum.CurriculumService;
 import main.java.com.scholar.desktop.services.subjects.SubjectsService;
 
 /**
@@ -46,7 +47,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private static AddSubjectUI instance = null;
     private SubjectResponse subjectResponse;
 
-    private List<StreamResponse> streamResponses;
+    private List<CurriculumResponse> streamResponses;
     List<Integer> streamList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
     private ClassResponse classResponse;
@@ -68,6 +69,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
     public void initData() {
         saveButton.setText("SAVE");
         resetForm();
+        fetchStreams();
     }
 
     public void edit(SubjectResponse subjectResponse) {
@@ -88,7 +90,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
 
-                streamResponses = StreamsService.getInstance(schoolData).list(0, 10000);
+                streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateStreams();
                 jLabel1.setText("Class Information");
 
@@ -105,7 +107,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
             JPanel jPanel = null;
 
             if (streamResponses != null) {
-                jPanel = getJpanel("STREAMS", streamResponses);
+                jPanel = getJpanel("CURRICULUM", streamResponses);
 
             }
             if (jPanel != null) {
@@ -137,7 +139,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     }
 
-    public JPanel getJpanel(String grouping, List<StreamResponse> list) {
+    public JPanel getJpanel(String grouping, List<CurriculumResponse> list) {
 
         JPanel container1 = new JPanel();
         container1.setBackground(new java.awt.Color(204, 204, 204));
@@ -175,7 +177,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         SequentialGroup sequentialGroup = groupLayout2.createSequentialGroup();
         sequentialGroup.addContainerGap();
 
-        for (StreamResponse pr : list) {
+        for (CurriculumResponse pr : list) {
 
             JCheckBox jCheckBoxx = getCheckBox(pr);
 
@@ -241,7 +243,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         }
     }
 
-    private JCheckBox getCheckBox(StreamResponse pr) {
+    private JCheckBox getCheckBox(CurriculumResponse pr) {
         JCheckBox jCheckBoxx = new JCheckBox();
         jCheckBoxx.setText(pr.getName());
         jCheckBoxx.setActionCommand(pr.getId().toString());
@@ -348,7 +350,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         );
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Classes  : ");
+        jLabel5.setText("Curriculum : ");
         jLabel5.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -379,7 +381,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
                                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
