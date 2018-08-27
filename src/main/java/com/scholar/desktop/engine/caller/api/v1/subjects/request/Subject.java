@@ -7,6 +7,7 @@ package main.java.com.scholar.desktop.engine.caller.api.v1.subjects.request;
 
 import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,7 @@ public class Subject {
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
+    private List<Integer> curriculumList;
 
     public Subject() {
     }
@@ -86,6 +88,16 @@ public class Subject {
         this.author_id = author_id;
     }
 
+    public List<Integer> getCurriculumList() {
+        return curriculumList;
+    }
+
+    public void setCurriculumList(List<Integer> curriculumList) {
+        this.curriculumList = curriculumList;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;
