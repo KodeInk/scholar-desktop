@@ -451,6 +451,12 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    /**
+     *
+     * @param btnText
+     * @param subject
+     * @throws HeadlessException
+     */
     public void SubmitData(String btnText, Subject subject) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
