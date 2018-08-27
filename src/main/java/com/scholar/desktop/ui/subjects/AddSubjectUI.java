@@ -47,8 +47,8 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private static AddSubjectUI instance = null;
     private SubjectResponse subjectResponse;
 
-    private List<CurriculumResponse> streamResponses;
-    List<Integer> streamList;
+    private List<CurriculumResponse> curriculumResponses;
+    private List<Integer> curriculumList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
     private ClassResponse classResponse;
 
@@ -82,7 +82,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     public void fetchStreams() {
         jLabel1.setText("Processing...");
-        if (streamResponses != null && streamResponses.size() > 0) {
+        if (curriculumResponses != null && curriculumResponses.size() > 0) {
             populateStreams();
         }
 
@@ -90,9 +90,9 @@ public class AddSubjectUI extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
 
-                streamResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
+                curriculumResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateStreams();
-                jLabel1.setText("Class Information");
+                jLabel1.setText("Subject Information");
 
                 return null;
             }
@@ -106,8 +106,8 @@ public class AddSubjectUI extends javax.swing.JPanel {
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
 
-            if (streamResponses != null) {
-                jPanel = getJpanel("CURRICULUM", streamResponses);
+            if (curriculumResponses != null) {
+                jPanel = getJpanel("CURRICULUM", curriculumResponses);
 
             }
             if (jPanel != null) {
@@ -254,10 +254,10 @@ public class AddSubjectUI extends javax.swing.JPanel {
             Add permission to the permission List at selection 
              */
             Integer permission = Integer.parseInt(xx.getActionCommand());
-            streamList.remove(permission);
+            curriculumList.remove(permission);
 
             if (xx.isSelected()) {
-                streamList.add(permission);
+                curriculumList.add(permission);
             }
 
         });
