@@ -40,6 +40,12 @@ public class SubjectsService extends AbstractService {
         return instance;
     }
 
+    /**
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
     public List<SubjectResponse> list(Integer offset, Integer limit) {
 
         list = new ArrayList<>();
@@ -52,6 +58,15 @@ public class SubjectsService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param searchQuery
+     * @param offset
+     * @param limit
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public List<SubjectResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
 
         List<SubjectResponse> subjectResponse = new ArrayList<>();
@@ -65,6 +80,13 @@ public class SubjectsService extends AbstractService {
         return subjectResponse;
     }
 
+    /**
+     *
+     * @param subject
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public SubjectResponse create(Subject subject, String logId) throws IOException {
         if (subject != null) {
             Map subjectMap = getSubjectMap(subject);
@@ -73,6 +95,13 @@ public class SubjectsService extends AbstractService {
         return null;
     }
 
+    /**
+     *
+     * @param subject
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public SubjectResponse edit(Subject subject, String logId) throws IOException {
         if (subject != null) {
             Map subjectMap = getSubjectMap(subject);
@@ -81,6 +110,11 @@ public class SubjectsService extends AbstractService {
         return null;
     }
 
+    /**
+     *
+     * @param subject
+     * @return
+     */
     public Map getSubjectMap(Subject subject) {
 
         Map subjectMap = new HashMap<>();
