@@ -52,8 +52,9 @@ public class AddGradingUI extends javax.swing.JPanel {
 
     public void initData() {
         resetForm();
+        resetList();
         saveButton.setText("SAVE");
-        fetchCurricula();
+
     }
 
     /**
@@ -64,14 +65,15 @@ public class AddGradingUI extends javax.swing.JPanel {
     public static AddGradingUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddGradingUI(schoolData);
+            instance.fetchSubjects();
         }
         return instance;
     }
 
-    private void fetchCurricula() {
+    private void fetchSubjects() {
         jLabel1.setText("Processing...");
         if (subjectResponse != null && subjectResponse.size() > 0) {
-            populateCarricula();
+            populateSubjects();
         }
 
         SwingWorker swingWorker = new SwingWorker() {
@@ -79,9 +81,10 @@ public class AddGradingUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 disableMandatories();
                 subjectResponse = SubjectsService.getInstance(schoolData).list(0, 10000);
-                populateCarricula();
+                populateSubjects();
                 jLabel1.setText("Study Period  Information");
                 enableMandatories();
+                repaint();
                 return null;
             }
         };
@@ -100,6 +103,7 @@ public class AddGradingUI extends javax.swing.JPanel {
         gradingCodeField.setText(gradingResponse.getCode());
         gradingDescriptionField.setText(gradingResponse.getDescription());
         saveButton.setText("EDIT");
+        fetchSubjects();
 
     }
 
@@ -368,9 +372,19 @@ public class AddGradingUI extends javax.swing.JPanel {
         gradingNameField.setText("");
         gradingCodeField.setText("");
         gradingDescriptionField.setText("");
-        subjectsList = new ArrayList<>();
+        resetList();
+//        subjectsList.removeAll();
+//        subjectsList = new ArrayList<>();
         resetJCheckBoxes();
         saveButton.setText("SAVE");
+    }
+
+    public void resetList() {
+        if (subjectsList != null) {
+            for (Integer x = 0; x < subjectsList.size(); x++) {
+                subjectsList.remove(x);
+            }
+        }
     }
 
     /**
@@ -543,8 +557,8 @@ public class AddGradingUI extends javax.swing.JPanel {
         }
     }
 
-    public void populateCarricula() {
-        resetJCheckBoxes();
+    public void populateSubjects() {
+//        resetJCheckBoxes();
         if (checkBoxs != null && checkBoxs.isEmpty()) {
             JPanel jPanel = null;
 
@@ -561,6 +575,16 @@ public class AddGradingUI extends javax.swing.JPanel {
         if (this.gradingResponse != null) {
             List<SubjectResponse> subjectResponses = gradingResponse.getSubjectResponses();
             if (checkBoxs != null && checkBoxs.size() > 0) {
+
+                if (subjectResponses != null) {
+                    for (SubjectResponse subjectResponse : subjectResponses) {
+                        for (JCheckBox jcb : checkBoxs) {
+
+                        }
+//                    (jcb.getActionCommand().equals(sr.getId().toString()))
+                    }
+                }
+
                 checkBoxs.stream().filter((jcb) -> (subjectResponses != null)).forEachOrdered((jcb) -> {
                     subjectResponses.stream().filter((sr) -> (jcb.getActionCommand().equals(sr.getId().toString()))).map((_item) -> {
                         jcb.setSelected(true);

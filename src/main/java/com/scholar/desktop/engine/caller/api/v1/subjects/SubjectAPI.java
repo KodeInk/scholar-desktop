@@ -46,9 +46,7 @@ public class SubjectAPI extends AbstractAPI {
      * @return
      */
     public SubjectResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
-
+        
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);
