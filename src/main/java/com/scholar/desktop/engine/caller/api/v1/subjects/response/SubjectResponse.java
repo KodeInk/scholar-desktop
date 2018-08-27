@@ -105,20 +105,18 @@ public class SubjectResponse {
         this.curriculumResponses = curriculumResponses;
     }
 
-    
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.code);
-        hash = 53 * hash + Objects.hashCode(this.status);
-        hash = 53 * hash + Objects.hashCode(this.date_created);
-        hash = 53 * hash + Objects.hashCode(this.author);
-        hash = 53 * hash + Arrays.deepHashCode(this.subjectPaperResponses);
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + Objects.hashCode(this.code);
+        hash = 61 * hash + Objects.hashCode(this.type);
+        hash = 61 * hash + Objects.hashCode(this.status);
+        hash = 61 * hash + Objects.hashCode(this.date_created);
+        hash = 61 * hash + Objects.hashCode(this.author);
+        hash = 61 * hash + Objects.hashCode(this.subjectPaperResponses);
+        hash = 61 * hash + Objects.hashCode(this.curriculumResponses);
         return hash;
     }
 
@@ -140,6 +138,9 @@ public class SubjectResponse {
         if (!Objects.equals(this.code, other.code)) {
             return false;
         }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
@@ -152,7 +153,13 @@ public class SubjectResponse {
         if (!Objects.equals(this.date_created, other.date_created)) {
             return false;
         }
-        return Arrays.deepEquals(this.subjectPaperResponses, other.subjectPaperResponses);
+        if (!Objects.equals(this.subjectPaperResponses, other.subjectPaperResponses)) {
+            return false;
+        }
+        if (!Objects.equals(this.curriculumResponses, other.curriculumResponses)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -161,10 +168,12 @@ public class SubjectResponse {
                 + "id=" + id
                 + ", name=" + name
                 + ", code=" + code
+                + ", type=" + type
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author=" + author
-                + ", subjectPaperResponses=" + Arrays.toString(subjectPaperResponses)
+                + ", subjectPaperResponses=" + subjectPaperResponses
+                + ", curriculumResponses=" + curriculumResponses
                 + '}';
     }
 
