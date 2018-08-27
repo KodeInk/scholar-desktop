@@ -51,10 +51,11 @@ public class AddGradingUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-        resetForm();
-        resetList();
+       gradingResponse = null;
         saveButton.setText("SAVE");
-
+        fetchSubjects();
+         resetForm();
+        resetList();
     }
 
     /**
@@ -65,7 +66,7 @@ public class AddGradingUI extends javax.swing.JPanel {
     public static AddGradingUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddGradingUI(schoolData);
-            instance.fetchSubjects();
+
         }
         return instance;
     }
@@ -372,9 +373,7 @@ public class AddGradingUI extends javax.swing.JPanel {
         gradingNameField.setText("");
         gradingCodeField.setText("");
         gradingDescriptionField.setText("");
-        resetList();
-//        subjectsList.removeAll();
-//        subjectsList = new ArrayList<>();
+        resetList(); 
         resetJCheckBoxes();
         saveButton.setText("SAVE");
     }
