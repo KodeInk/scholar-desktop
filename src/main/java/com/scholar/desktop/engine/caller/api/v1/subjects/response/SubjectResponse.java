@@ -6,7 +6,9 @@
 package main.java.com.scholar.desktop.engine.caller.api.v1.subjects.response;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import main.java.com.scholar.desktop.engine.caller.api.v1.curriculum.response.CurriculumResponse;
 
 /**
  *
@@ -21,7 +23,8 @@ public class SubjectResponse {
     private String status;
     private Long date_created;
     private String author;
-    private SubjectPaperResponse[] subjectPaperResponses;
+    private List<SubjectPaperResponse> subjectPaperResponses;
+    private List<CurriculumResponse> curriculumResponses;
 
     public SubjectResponse() {
     }
@@ -86,13 +89,25 @@ public class SubjectResponse {
         this.author = author;
     }
 
-    public SubjectPaperResponse[] getSubjectPaperResponses() {
+    public List<SubjectPaperResponse> getSubjectPaperResponses() {
         return subjectPaperResponses;
     }
 
-    public void setSubjectPaperResponses(SubjectPaperResponse[] subjectPaperResponses) {
+    public void setSubjectPaperResponses(List<SubjectPaperResponse> subjectPaperResponses) {
         this.subjectPaperResponses = subjectPaperResponses;
     }
+
+    public List<CurriculumResponse> getCurriculumResponses() {
+        return curriculumResponses;
+    }
+
+    public void setCurriculumResponses(List<CurriculumResponse> curriculumResponses) {
+        this.curriculumResponses = curriculumResponses;
+    }
+
+    
+    
+    
 
     @Override
     public int hashCode() {

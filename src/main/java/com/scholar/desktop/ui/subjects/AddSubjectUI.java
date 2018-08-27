@@ -68,6 +68,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
 
     public void initData() {
         saveButton.setText("SAVE");
+        curriculumList = new ArrayList<>();
         resetForm();
         fetchStreams();
     }
@@ -254,6 +255,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
             Add permission to the permission List at selection 
              */
             Integer permission = Integer.parseInt(xx.getActionCommand());
+
             curriculumList.remove(permission);
 
             if (xx.isSelected()) {
@@ -515,6 +517,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
         subject.setName(subjectNameField.getText());
         subject.setCode(subjectCodeField.getText());
         subject.setType(SubjectTypeEnum.fromString(categoryField.getSelectedItem().toString()));
+        subject.setCurricula(curriculumList);
         return subject;
     }
 

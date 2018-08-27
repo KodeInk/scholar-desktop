@@ -23,7 +23,7 @@ public class Subject {
     private StatusEnum status;
     private Date date_created;
     private Integer author_id;
-    private List<Integer> curriculum_list;
+    private List<Integer> curricula;
 
     public Subject() {
     }
@@ -88,12 +88,12 @@ public class Subject {
         this.author_id = author_id;
     }
 
-    public List<Integer> getCurriculum_list() {
-        return curriculum_list;
+    public List<Integer> getCurricula() {
+        return curricula;
     }
 
-    public void setCurriculum_list(List<Integer> curriculum_list) {
-        this.curriculum_list = curriculum_list;
+    public void setCurricula(List<Integer> curricula) {
+        this.curricula = curricula;
     }
 
     @Override
