@@ -26,7 +26,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
     private static final String[] COLUMN_HEADERS = {"ID", "NAME", "CODE", "TYPE", "STATUS", "DATE CREATED ", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
-   private  List<SubjectResponse> list = null;
+    public List<SubjectResponse> list;
     private static ManageSubjectsUI instance;
     private Integer page;
     private Integer offset;
@@ -50,7 +50,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
             };
 
         }
-        
+
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         initData();
