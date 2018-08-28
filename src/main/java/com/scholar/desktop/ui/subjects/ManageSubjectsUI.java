@@ -6,7 +6,6 @@
 package main.java.com.scholar.desktop.ui.subjects;
 
 import java.awt.Color;
-import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;

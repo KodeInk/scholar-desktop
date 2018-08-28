@@ -10,7 +10,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +49,6 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private List<CurriculumResponse> curriculumResponses;
     private List<Integer> curriculumList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
-    private ClassResponse classResponse;
 
     public AddSubjectUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -118,16 +116,12 @@ public class AddSubjectUI extends javax.swing.JPanel {
             }
         }
 
-        if (this.classResponse != null) {
-            subjectNameField.setText(classResponse.getName());
-            subjectCodeField.setText(classResponse.getCode());
-            categoryField.setSelectedItem(classResponse.getRanking().toString());
-            saveButton.setText("EDIT");
+        if (this.subjectResponse != null) {
+            List<CurriculumResponse> srs = subjectResponse.getCurriculumResponses();
 
-            List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
             if (checkBoxs != null && checkBoxs.size() > 0) {
                 for (JCheckBox jcb : checkBoxs) {
-                    for (StreamResponse sr : srs) {
+                    for (CurriculumResponse sr : srs) {
                         if (jcb.getActionCommand().equals(sr.getId().toString())) {
                             jcb.setSelected(true);
                         }
