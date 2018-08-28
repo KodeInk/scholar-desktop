@@ -44,7 +44,7 @@ public final class AddClassUI extends javax.swing.JPanel {
     private SchoolData schoolData;
     private ClassResponse classResponse;
     private List<StreamResponse> streamResponses;
-    List<Integer> streamList;
+    List<Integer> curriculumList;
     private List<JCheckBox> checkBoxs = new ArrayList<>();
 
     /**
@@ -54,8 +54,51 @@ public final class AddClassUI extends javax.swing.JPanel {
     public AddClassUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        streamList = new ArrayList<>();
+        curriculumList = new ArrayList<>();
 
+    }
+
+    public void initData() {
+        initRankComboBox();
+        resetForm();
+        saveButton.setText("SAVE");
+        this.classResponse = null;
+        fetchStreams();
+        resetForm();
+        resetList();
+
+    }
+
+    public void resetList() {
+        if (curriculumList != null) {
+            for (Integer x = 0; x < curriculumList.size(); x++) {
+                curriculumList.remove(x);
+            }
+        }
+    }
+
+    public void enableMandatories() {
+        saveButton.setEnabled(true);
+        classNameField.setEnabled(true);
+        classCodeField.setEnabled(true);
+        RankJComboBoxField.setEnabled(true);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(true);
+            });
+        }
+    }
+
+    public void disableMandatories() {
+        saveButton.setEnabled(false);
+        classNameField.setEnabled(false);
+        classCodeField.setEnabled(false);
+        RankJComboBoxField.setEnabled(false);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(false);
+            });
+        }
     }
 
     /**
@@ -68,16 +111,6 @@ public final class AddClassUI extends javax.swing.JPanel {
             instance = new AddClassUI(schoolData);
         }
         return instance;
-    }
-
-    public void initData() {
-        initRankComboBox();
-        resetForm();
-        saveButton.setText("SAVE");
-        this.classResponse = null;
-
-        fetchStreams();
-
     }
 
     public void fetchStreams() {
@@ -118,9 +151,9 @@ public final class AddClassUI extends javax.swing.JPanel {
         }
 
         if (this.classResponse != null) {
-            className.setText(classResponse.getName());
-            classCode.setText(classResponse.getCode());
-            RankJComboBox.setSelectedItem(classResponse.getRanking().toString());
+            classNameField.setText(classResponse.getName());
+            classCodeField.setText(classResponse.getCode());
+            RankJComboBoxField.setSelectedItem(classResponse.getRanking().toString());
             saveButton.setText("EDIT");
 
             List<StreamResponse> srs = Arrays.asList(classResponse.getStreamResponses());
@@ -156,11 +189,11 @@ public final class AddClassUI extends javax.swing.JPanel {
     }
 
     public void initRankComboBox() {
-        RankJComboBox.addItem("Select Option");
+        RankJComboBoxField.addItem("Select Option");
         for (int x = 0; x <= 10000; x++) {
-            RankJComboBox.addItem("" + x);
+            RankJComboBoxField.addItem("" + x);
         }
-        RankJComboBox.setSelectedIndex(1);
+        RankJComboBoxField.setSelectedIndex(1);
     }
 
     public JPanel getJpanel(String grouping, List<StreamResponse> list) {
@@ -272,10 +305,10 @@ public final class AddClassUI extends javax.swing.JPanel {
             Add permission to the permission List at selection 
              */
             Integer permission = Integer.parseInt(xx.getActionCommand());
-            streamList.remove(permission);
+            curriculumList.remove(permission);
 
             if (xx.isSelected()) {
-                streamList.add(permission);
+                curriculumList.add(permission);
             }
 
         });
@@ -298,11 +331,11 @@ public final class AddClassUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        classCode = new javax.swing.JTextField();
+        classCodeField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        className = new javax.swing.JTextField();
+        classNameField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        RankJComboBox = new javax.swing.JComboBox<>();
+        RankJComboBoxField = new javax.swing.JComboBox<>();
         permissionsJpanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -325,9 +358,9 @@ public final class AddClassUI extends javax.swing.JPanel {
         jLabel2.setText("Name : *");
         jLabel2.setToolTipText("");
 
-        classCode.addActionListener(new java.awt.event.ActionListener() {
+        classCodeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                classCodeActionPerformed(evt);
+                classCodeFieldActionPerformed(evt);
             }
         });
 
@@ -339,7 +372,7 @@ public final class AddClassUI extends javax.swing.JPanel {
         jLabel4.setText("Rank  : *");
         jLabel4.setToolTipText("");
 
-        RankJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        RankJComboBoxField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         permissionsJpanel.setBackground(new java.awt.Color(255, 153, 102));
 
@@ -407,9 +440,9 @@ public final class AddClassUI extends javax.swing.JPanel {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(permissionsJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RankJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 462, Short.MAX_VALUE)
-                                .addComponent(classCode, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(className, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                .addComponent(RankJComboBoxField, javax.swing.GroupLayout.Alignment.LEADING, 0, 462, Short.MAX_VALUE)
+                                .addComponent(classCodeField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(classNameField, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -422,15 +455,15 @@ public final class AddClassUI extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(className, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(classNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classCode, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(classCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(RankJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RankJComboBoxField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -456,9 +489,9 @@ public final class AddClassUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void classCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classCodeActionPerformed
+    private void classCodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classCodeFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_classCodeActionPerformed
+    }//GEN-LAST:event_classCodeFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
@@ -474,13 +507,13 @@ public final class AddClassUI extends javax.swing.JPanel {
     public void validateForm() throws BadRequestException {
         // TODO add your handling code here:
         //todo: form validation
-        if (className.getText().isEmpty()) {
+        if (classNameField.getText().isEmpty()) {
             throw new BadRequestException("Class name is   mandatory");
         }
-        if (classCode.getText().isEmpty()) {
+        if (classCodeField.getText().isEmpty()) {
             throw new BadRequestException("Class code is   mandatory");
         }
-        if (RankJComboBox.getSelectedIndex() <= 1) {
+        if (RankJComboBoxField.getSelectedIndex() <= 1) {
             throw new BadRequestException("Rank   is   mandatory");
         }
     }
@@ -542,26 +575,26 @@ public final class AddClassUI extends javax.swing.JPanel {
     }
 
     private void resetForm() {
-        className.setText("");
-        classCode.setText("");
-        RankJComboBox.setSelectedIndex(1);
+        classNameField.setText("");
+        classCodeField.setText("");
+        RankJComboBoxField.setSelectedIndex(1);
     }
 
     public Classes getSchoolClass() throws NumberFormatException {
         Classes schoolClass = new Classes();
-        schoolClass.setName(className.getText());
-        schoolClass.setCode(classCode.getText());
-        schoolClass.setRanking(Integer.valueOf(RankJComboBox.getSelectedItem().toString()));
-        Integer[] streamArray = new Integer[streamList.size()];
-        schoolClass.setStreams(streamList.toArray(streamArray));
+        schoolClass.setName(classNameField.getText());
+        schoolClass.setCode(classCodeField.getText());
+        schoolClass.setRanking(Integer.valueOf(RankJComboBoxField.getSelectedItem().toString()));
+        Integer[] streamArray = new Integer[curriculumList.size()];
+        schoolClass.setStreams(curriculumList.toArray(streamArray));
         return schoolClass;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> RankJComboBox;
-    private javax.swing.JTextField classCode;
-    private javax.swing.JTextField className;
+    private javax.swing.JComboBox<String> RankJComboBoxField;
+    private javax.swing.JTextField classCodeField;
+    private javax.swing.JTextField classNameField;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

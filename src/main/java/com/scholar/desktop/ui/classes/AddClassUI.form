@@ -74,9 +74,9 @@
                                   </Group>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="permissionsJpanel" max="32767" attributes="0"/>
-                                      <Component id="RankJComboBox" alignment="0" pref="462" max="32767" attributes="0"/>
-                                      <Component id="classCode" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="className" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="RankJComboBoxField" alignment="0" pref="462" max="32767" attributes="0"/>
+                                      <Component id="classCodeField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="classNameField" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -95,17 +95,17 @@
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="className" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="classNameField" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="classCode" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="classCodeField" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RankJComboBox" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="RankJComboBoxField" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -147,9 +147,9 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="classCode">
+            <Component class="javax.swing.JTextField" name="classCodeField">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="classCodeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="classCodeFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -161,7 +161,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="className">
+            <Component class="javax.swing.JTextField" name="classNameField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -172,7 +172,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="RankJComboBox">
+            <Component class="javax.swing.JComboBox" name="RankJComboBoxField">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
