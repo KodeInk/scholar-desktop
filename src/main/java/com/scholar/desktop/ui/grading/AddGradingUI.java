@@ -556,6 +556,8 @@ public class AddGradingUI extends javax.swing.JPanel {
         }
     }
 
+    
+    
     public void populateSubjects() {
 //        resetJCheckBoxes();
         if (checkBoxs != null && checkBoxs.isEmpty()) {

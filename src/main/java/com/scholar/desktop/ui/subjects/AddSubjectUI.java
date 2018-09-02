@@ -88,11 +88,11 @@ public class AddSubjectUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-
+                disableMandatories();
                 curriculumResponses = CurriculumService.getInstance(schoolData).list(0, 10000);
                 populateStreams();
                 jLabel1.setText("Subject Information");
-
+                enableMandatories();
                 return null;
             }
         };
@@ -476,13 +476,17 @@ public class AddSubjectUI extends javax.swing.JPanel {
     private void saveSubject(Subject subject) throws HeadlessException {
         try {
 
+            disableMandatories();
             SubjectResponse subjectResponse = SubjectsService.getInstance(schoolData).create(subject, "LOG ID");
-            JOptionPane.showMessageDialog(this, "Record Saved Successfully");
+            JOptionPane.showMessageDialog(this, "Record Saved Successfully");          
             resetForm();
 
         } catch (IOException ex) {
             Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }
+        finally{
+              enableMandatories();
         }
 
     }
@@ -495,6 +499,7 @@ public class AddSubjectUI extends javax.swing.JPanel {
             }
 
             subject.setId(subjectResponse.getId());
+             disableMandatories();
             SubjectsService.getInstance(schoolData).edit(subject, "LOG ID");
             JOptionPane.showMessageDialog(this, "Record Saved Successfully");
             resetForm();
@@ -502,6 +507,8 @@ public class AddSubjectUI extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(AddSubjectUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Could not save the record to the server, something went wrong");
+        }finally{
+             enableMandatories();
         }
 
     }
@@ -513,6 +520,30 @@ public class AddSubjectUI extends javax.swing.JPanel {
         subject.setType(SubjectTypeEnum.fromString(categoryField.getSelectedItem().toString()));
         subject.setCurricula(curriculumList);
         return subject;
+    }
+
+    public void enableMandatories() {
+        saveButton.setEnabled(true);
+        subjectNameField.setEnabled(true);
+        subjectCodeField.setEnabled(true);
+        categoryField.setEnabled(true);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(true);
+            });
+        }
+    }
+
+    public void disableMandatories() {
+        saveButton.setEnabled(false);
+        subjectNameField.setEnabled(false);
+        subjectCodeField.setEnabled(false);
+        categoryField.setEnabled(false);
+        if (checkBoxs != null) {
+            checkBoxs.forEach((jcb) -> {
+                jcb.setEnabled(false);
+            });
+        }
     }
 
 

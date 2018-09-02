@@ -99,6 +99,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                
                 list = SubjectsService.getInstance(schoolData).search(search, offset, limit, search);
                 populateJTable(list);
                 jLabel1.setText("Manage Subjects");
