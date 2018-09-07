@@ -32,6 +32,12 @@ public class ManageTermsUI extends javax.swing.JPanel {
     List<TermResponse> list = null;
     private static ManageTermsUI instance;
 
+    private Integer page;
+    private Integer offset;
+    private Integer limit;
+    private String search = null;
+    private static ManageTermsUI instance;
+
     public ManageTermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
 
@@ -41,7 +47,6 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 public boolean isCellEditable(int row, int column) {
                     return false;//This causes all cells to be not editable
                 }
-
             };
 
         }
@@ -52,6 +57,14 @@ public class ManageTermsUI extends javax.swing.JPanel {
         Utilities.hideColumn(0, jTable1);
         jTable1.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
 
+    }
+
+    public static ManageTermsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new ManageTermsUI(schoolData);
+        }
+
+        return instance;
     }
 
     public void initData() {
