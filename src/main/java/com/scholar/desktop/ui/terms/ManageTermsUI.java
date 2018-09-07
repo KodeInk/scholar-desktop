@@ -108,7 +108,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
             Utilities.removeRowsFromDefaultModel(tableModel);
 
-            for (TermResponse ur : list) {
+            list.stream().map((ur) -> {
                 String name = ur.getName();
                 String start_date = new Date(ur.getStart_date()).toString();
                 String end_date = new Date(ur.getEnd_date()).toString();
@@ -116,10 +116,11 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 String status = ur.getStatus();
                 String dateCreated = new Date(ur.getDate_created()).toString();
                 String author = ur.getAuthor();
-
                 Object[] data = {name, start_date, end_date, ranking, status, dateCreated, author};
+                return data;
+            }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
-            }
+            });
         }
         tableModel.fireTableDataChanged();
     }
