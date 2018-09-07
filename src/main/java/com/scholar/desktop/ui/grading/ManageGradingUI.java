@@ -373,6 +373,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
 
         nextLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/com/scholar/desktop/ui/images/next.png"))); // NOI18N
+        nextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -549,6 +554,11 @@ public class ManageGradingUI extends javax.swing.JPanel {
 //        populateGradingDetail(value);
 
     }//GEN-LAST:event_jTable1KeyPressed
+
+    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_nextLabelMouseClicked
 
     public void populateGradingDetail(String selectedValue) {
         Utilities.removeRowsFromDefaultModel(tableModel1);

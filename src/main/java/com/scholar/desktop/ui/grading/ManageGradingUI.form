@@ -308,6 +308,9 @@
                       <Image iconType="3" name="/main/java/com/scholar/desktop/ui/images/next.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextLabelMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
