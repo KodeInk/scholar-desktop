@@ -36,7 +36,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
     private Integer offset;
     private Integer limit;
     private String search = null;
-    private static ManageTermsUI instance;
+  
 
     public ManageTermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -59,18 +59,6 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     }
 
-    public static ManageTermsUI getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new ManageTermsUI(schoolData);
-        }
-
-        return instance;
-    }
-
-    public void initData() {
-        fetchData(schoolData);
-    }
-
     /**
      *
      * @param schoolData
@@ -83,6 +71,11 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
         return instance;
     }
+
+    public void initData() {
+        fetchData(schoolData);
+    }
+ 
 
     public final void fetchData(SchoolData schoolData1) {
 
