@@ -109,12 +109,11 @@ public class ManageTermsUI extends javax.swing.JPanel {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
             for (TermResponse ur : list) {
-
                 String name = ur.getName();
                 String start_date = new Date(ur.getStart_date()).toString();
                 String end_date = new Date(ur.getEnd_date()).toString();
                 String ranking = ur.getRanking().toString();
-                String status = ur.getStatus().toString();
+                String status = ur.getStatus();
                 String dateCreated = new Date(ur.getDate_created()).toString();
                 String author = ur.getAuthor();
 
