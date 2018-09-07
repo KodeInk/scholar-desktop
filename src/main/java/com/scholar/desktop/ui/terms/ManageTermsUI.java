@@ -79,6 +79,15 @@ public class ManageTermsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
 
     }
+    
+  protected void fetchData() {        
+        if (search != null) {
+//            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+    }
+
 
     public final void fetchData(Integer offset, Integer limit) {
 
@@ -109,13 +118,13 @@ public class ManageTermsUI extends javax.swing.JPanel {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
             list.stream().map((ur) -> {
-                String name = ur.getName();
-                String start_date = new Date(ur.getStart_date()).toString();
-                String end_date = new Date(ur.getEnd_date()).toString();
-                String ranking = ur.getRanking().toString();
-                String status = ur.getStatus();
-                String dateCreated = new Date(ur.getDate_created()).toString();
-                String author = ur.getAuthor();
+                String name = ur.getName().toUpperCase();
+                String start_date = new Date(ur.getStart_date()).toString().toUpperCase();
+                String end_date = new Date(ur.getEnd_date()).toString().toUpperCase();
+                String ranking = ur.getRanking().toString().toUpperCase();
+                String status = ur.getStatus().toUpperCase();
+                String dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
+                String author = ur.getAuthor().toUpperCase();
                 Object[] data = {name, start_date, end_date, ranking, status, dateCreated, author};
                 return data;
             }).forEachOrdered((data) -> {
@@ -167,7 +176,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
         nextLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
-        jSplitPane1.setDividerLocation(300);
+        jSplitPane1.setDividerLocation(570);
         jSplitPane1.setDividerSize(2);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -258,6 +267,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
         jTable1.setModel(tableModel);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
+        jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
@@ -326,7 +336,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -343,7 +353,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -371,14 +381,36 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
-//        prev();
+        prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         // TODO add your handling code here:
-//          next();
+          next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
+    
+     protected void prev() {
+        offset = offset - limit;
+        if (offset >= 0) {
+            fetchData();
+            page--;
+            pageCounter.setText(page.toString());
+        }
+
+    }
+
+    protected void next() {
+        offset = offset + limit;
+        fetchData();
+        page++;
+        pageCounter.setText(page.toString());
+
+    }
+
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

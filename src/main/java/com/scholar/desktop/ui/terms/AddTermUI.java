@@ -36,7 +36,7 @@ public final class AddTermUI extends javax.swing.JPanel {
     public AddTermUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        initRankComboBox(); 
+        initRankComboBox();
     }
 
     public static AddTermUI getInstance(SchoolData schoolData) {
@@ -61,17 +61,37 @@ public final class AddTermUI extends javax.swing.JPanel {
             populateStudyYearComboBox(studyYearResponses);
         }
 
-        
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
+                disableMandatories();
                 studyYearResponses = StudyYearService.getInstance(schoolData1).list();
                 populateStudyYearComboBox(studyYearResponses);
+                enableMandatories();
                 return null;
             }
         };
         swingWorker.execute();
 
+    }
+
+    public void enableMandatories() {
+        saveButton.setEnabled(true);
+        StudyYearComboField.setEnabled(true);
+        termNameField.setEnabled(true);
+        startDateField.setEnabled(true);
+        endDateField.setEnabled(true);
+        termRankingField.setEnabled(true);
+
+    }
+
+    public void disableMandatories() {
+        saveButton.setEnabled(false);
+        StudyYearComboField.setEnabled(false);
+        termNameField.setEnabled(false);
+        startDateField.setEnabled(false);
+        endDateField.setEnabled(false);
+        termRankingField.setEnabled(false);
     }
 
     /**
@@ -80,11 +100,11 @@ public final class AddTermUI extends javax.swing.JPanel {
      */
     public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
         //StudyYearCombo
-        StudyYearCombo.removeAllItems();
+        StudyYearComboField.removeAllItems();
         for (StudyYearResponse syr : studyYearResponses) {
             try {
-                StudyYearCombo.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
-                StudyYearCombo.setActionCommand(syr.getId().toString());
+                StudyYearComboField.addItem(syr.getTheme().concat(" [ ").concat(new Date(syr.getStart_date()).toString()).concat(" - ").concat(new Date(syr.getEnd_date()).toString()));
+                StudyYearComboField.setActionCommand(syr.getId().toString());
 
             } catch (Exception er) {
 
@@ -93,11 +113,11 @@ public final class AddTermUI extends javax.swing.JPanel {
     }
 
     public void initRankComboBox() {
-        termRanking.addItem("Select Option");
+        termRankingField.addItem("Select Option");
         for (int x = 0; x <= 500; x++) {
-            termRanking.addItem("" + x);
+            termRankingField.addItem("" + x);
         }
-        termRanking.setSelectedIndex(1);
+        termRankingField.setSelectedIndex(1);
     }
 
     private List<StudyYearResponse> fetchRoles(SchoolData schoolData) {
@@ -122,14 +142,14 @@ public final class AddTermUI extends javax.swing.JPanel {
 
     public void populate() {
         //   StudyYearCombo
-        StudyYearCombo.removeAllItems();
+        StudyYearComboField.removeAllItems();
         if (studyYearResponses.size() > 0) {
             for (StudyYearResponse syr : studyYearResponses) {
-                StudyYearCombo.addItem("Testme");
+                StudyYearComboField.addItem("Testme");
             }
         }
 
-        StudyYearCombo.repaint();
+        StudyYearComboField.repaint();
     }
 
     /**
@@ -158,14 +178,14 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        termName = new javax.swing.JTextField();
-        startDate = new org.jdesktop.swingx.JXDatePicker();
-        StudyYearCombo = new javax.swing.JComboBox<>();
+        termNameField = new javax.swing.JTextField();
+        startDateField = new org.jdesktop.swingx.JXDatePicker();
+        StudyYearComboField = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        endDate = new org.jdesktop.swingx.JXDatePicker();
-        termRanking = new javax.swing.JComboBox<>();
+        endDateField = new org.jdesktop.swingx.JXDatePicker();
+        termRankingField = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -185,7 +205,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel2.setText("Study Year : *");
         jLabel2.setToolTipText("");
 
-        StudyYearCombo.setAutoscrolls(true);
+        StudyYearComboField.setAutoscrolls(true);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText(" Name : *");
@@ -199,13 +219,13 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel5.setText(" Start Date : *");
         jLabel5.setToolTipText("");
 
-        endDate.addActionListener(new java.awt.event.ActionListener() {
+        endDateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endDateActionPerformed(evt);
+                endDateFieldActionPerformed(evt);
             }
         });
 
-        termRanking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        termRankingField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Ranking : *");
@@ -244,8 +264,8 @@ public final class AddTermUI extends javax.swing.JPanel {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(termRanking, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
+                                    .addComponent(termRankingField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(endDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -258,9 +278,9 @@ public final class AddTermUI extends javax.swing.JPanel {
                                         .addComponent(jLabel4)
                                         .addGap(10, 10, 10)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(termName, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(StudyYearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(termNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(StudyYearComboField, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(154, 154, 154)
@@ -279,22 +299,22 @@ public final class AddTermUI extends javax.swing.JPanel {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(StudyYearCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(StudyYearComboField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(termName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(termNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(termRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(termRankingField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -317,9 +337,9 @@ public final class AddTermUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void endDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateActionPerformed
+    private void endDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_endDateActionPerformed
+    }//GEN-LAST:event_endDateFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
@@ -339,38 +359,38 @@ public final class AddTermUI extends javax.swing.JPanel {
     public Term populateEntity() {
         //todo: populate Entity
         Term term = new Term();
-        StudyYearResponse studyYearResponse = studyYearResponses.get(StudyYearCombo.getSelectedIndex());
+        StudyYearResponse studyYearResponse = studyYearResponses.get(StudyYearComboField.getSelectedIndex());
         term.setStudy_year(studyYearResponse.getId());
-        term.setStart_date(startDate.getDate().getTime());
-        term.setEnd_date(endDate.getDate().getTime());
-        term.setRanking(Integer.parseInt(termRanking.getSelectedItem().toString()));
-        term.setName(termName.getText());
+        term.setStart_date(startDateField.getDate().getTime());
+        term.setEnd_date(endDateField.getDate().getTime());
+        term.setRanking(Integer.parseInt(termRankingField.getSelectedItem().toString()));
+        term.setName(termNameField.getText());
         return term;
     }
 
     public void validateForm() throws BadRequestException {
         //todo: validate form
-        if (StudyYearCombo.getSelectedIndex() < 0) {
+        if (StudyYearComboField.getSelectedIndex() < 0) {
             throw new BadRequestException("Study Year is mandatory ");
         }
 
-        if (termName.getText().isEmpty()) {
+        if (termNameField.getText().isEmpty()) {
             throw new BadRequestException("Term Name is Mandatory");
         }
 
         try {
-            startDate.getDate().toString();
+            startDateField.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Start date is Madantory");
         }
 
         try {
-            endDate.getDate().toString();
+            endDateField.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("End date is Madantory");
         }
 
-        if (termRanking.getSelectedIndex() <= 1) {
+        if (termRankingField.getSelectedIndex() <= 1) {
             throw new BadRequestException("Ranking is Mandatory");
         }
 
@@ -384,9 +404,9 @@ public final class AddTermUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> StudyYearCombo;
+    private javax.swing.JComboBox<String> StudyYearComboField;
     private javax.swing.JButton cancelButton;
-    private org.jdesktop.swingx.JXDatePicker endDate;
+    private org.jdesktop.swingx.JXDatePicker endDateField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -397,8 +417,8 @@ public final class AddTermUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton saveButton;
-    private org.jdesktop.swingx.JXDatePicker startDate;
-    private javax.swing.JTextField termName;
-    private javax.swing.JComboBox<String> termRanking;
+    private org.jdesktop.swingx.JXDatePicker startDateField;
+    private javax.swing.JTextField termNameField;
+    private javax.swing.JComboBox<String> termRankingField;
     // End of variables declaration//GEN-END:variables
 }

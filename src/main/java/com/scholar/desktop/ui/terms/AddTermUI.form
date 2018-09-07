@@ -65,8 +65,8 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="termRanking" max="32767" attributes="0"/>
-                                          <Component id="endDate" pref="450" max="32767" attributes="0"/>
+                                          <Component id="termRankingField" max="32767" attributes="0"/>
+                                          <Component id="endDateField" pref="450" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -85,9 +85,9 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="termName" min="-2" pref="450" max="-2" attributes="0"/>
-                                          <Component id="StudyYearCombo" min="-2" pref="450" max="-2" attributes="0"/>
-                                          <Component id="startDate" min="-2" pref="450" max="-2" attributes="0"/>
+                                          <Component id="termNameField" min="-2" pref="450" max="-2" attributes="0"/>
+                                          <Component id="StudyYearComboField" min="-2" pref="450" max="-2" attributes="0"/>
+                                          <Component id="startDateField" min="-2" pref="450" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -114,26 +114,26 @@
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="StudyYearCombo" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="StudyYearComboField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="termName" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="termNameField" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="startDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="startDateField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="endDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="endDateField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="termRanking" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="termRankingField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -171,11 +171,11 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="termName">
+            <Component class="javax.swing.JTextField" name="termNameField">
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="startDate">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="startDateField">
             </Component>
-            <Component class="javax.swing.JComboBox" name="StudyYearCombo">
+            <Component class="javax.swing.JComboBox" name="StudyYearComboField">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -213,12 +213,12 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="endDate">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="endDateField">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endDateActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endDateFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="termRanking">
+            <Component class="javax.swing.JComboBox" name="termRankingField">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
