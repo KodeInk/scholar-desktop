@@ -40,15 +40,12 @@ public class TermsService extends AbstractService {
     }
 
     public static TermsService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new TermsService(schoolData);
-        }
+        instance = new TermsService(schoolData);
         return instance;
     }
 
     public List<TermResponse> list() {
 
-        
         list = new ArrayList<>();
 
         TermResponse[] responses = termsAPI.list(offset, limit);
@@ -58,21 +55,18 @@ public class TermsService extends AbstractService {
         IncreaseOffsetLimit();
         return list;
     }
-    
-     public List<TermResponse> list(Integer studyYear) {
 
-      
-        List<TermResponse>  list = new ArrayList<>();
+    public List<TermResponse> list(Integer studyYear) {
 
-        TermResponse[] responses = termsAPI.list(studyYear,offset, limit);
+        List<TermResponse> list = new ArrayList<>();
+
+        TermResponse[] responses = termsAPI.list(studyYear, offset, limit);
         if (responses != null) {
             list.addAll(Arrays.asList(responses));
         }
         IncreaseOffsetLimit();
         return list;
     }
-     
-     
 
     public TermResponse create(Term term, String logId) throws IOException {
         if (term != null) {

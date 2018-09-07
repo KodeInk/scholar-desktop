@@ -25,6 +25,7 @@ public class TermsUI extends javax.swing.JPanel {
     public TermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
+        jTabbedPane1.addChangeListener(changeListener);
     }
 
     public static TermsUI getInstance(SchoolData schoolData) {

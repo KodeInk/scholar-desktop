@@ -36,9 +36,7 @@ public final class AddTermUI extends javax.swing.JPanel {
     public AddTermUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
-        initRankComboBox();
-        //todo: fetch study Year and populate it 
-        initData();
+        initRankComboBox(); 
     }
 
     public static AddTermUI getInstance(SchoolData schoolData) {
@@ -63,8 +61,7 @@ public final class AddTermUI extends javax.swing.JPanel {
             populateStudyYearComboBox(studyYearResponses);
         }
 
-        final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
+        
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
