@@ -12,7 +12,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 
 /**
  *
- * @author Manny
+ * @author mover 9/7/2018
  */
 public class TermsUI extends javax.swing.JPanel {
 
