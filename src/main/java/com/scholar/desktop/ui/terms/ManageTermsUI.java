@@ -72,23 +72,30 @@ public class ManageTermsUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-        fetchData(schoolData);
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+        fetchData(offset, limit);
+        page = 1;
+        pageCounter.setText(page.toString());
+
     }
 
-    public final void fetchData(SchoolData schoolData1) {
+    public final void fetchData(Integer offset, Integer limit) {
 
         if (list != null) {
             populateJTable(list);
         }
 
         jLabel1.setText("Processing....");
+        disableNextPrevLabels();
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = TermsService.getInstance(schoolData1).list();
+                list = TermsService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
                 repaint();
                 jLabel1.setText("Manage Terms");
+                enableNextPrevLabels();
                 return null;
             }
         };
@@ -116,6 +123,20 @@ public class ManageTermsUI extends javax.swing.JPanel {
             }
         }
         tableModel.fireTableDataChanged();
+    }
+
+    protected void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
+        nextLabel.setEnabled(true);
+        prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
+    }
+
+    protected void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
+        nextLabel.setEnabled(false);
+        prevLabel.setEnabled(false);
     }
 
     /**

@@ -44,7 +44,7 @@ public class TermsService extends AbstractService {
         return instance;
     }
 
-    public List<TermResponse> list() {
+    public List<TermResponse> list(Integer offset, Integer limit) {
 
         list = new ArrayList<>();
 
