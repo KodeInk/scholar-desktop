@@ -132,7 +132,7 @@ public class ManageCurriculumUI extends javax.swing.JPanel {
                 String author = response.getAuthor().toUpperCase();
                 String date_created = " - ";
                 if (response.getDate_created() != null) {
-                    date_created =  Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                    date_created =  Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 }
                 Object[] data = {id, name, code, description, status, date_created, author};
                 return data;

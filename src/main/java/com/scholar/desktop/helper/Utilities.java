@@ -22,7 +22,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.xml.ws.Response;
-import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.Message;
 
 /**
@@ -37,6 +36,7 @@ public class Utilities {
     public static final Integer default_limit = 20;
     private static JDialog dialog;
     private final static String DATE_FORMAT = "dd MMM, yyyy";
+    private final static String DATE_YEAR_FORMAT = "yyyy";
 
     public static void throwAndReturnSanizedErrorMessages(Response response) {
 
@@ -175,14 +175,38 @@ public class Utilities {
         jTable.removeColumn(tc);
     }
 
-    public static String getSimpleDate(Long longDate) {
+    public static String getFullDateString(Long longDate) {
         if (longDate != null) {
             Date date = new Date(longDate);
-            SimpleDateFormat df2 = new SimpleDateFormat(DATE_FORMAT);
-            String start_date = df2.format(date);
+            final String date_format = DATE_FORMAT;
+            String start_date = getSimpleDateFormat(date, date_format);
             return start_date;
         }
         return "-";
+    }
+
+    /**
+     *
+     * @param longDate
+     * @return
+     */
+    public static Integer getYearString(Long longDate) {
+        if (longDate != null) {
+            Date date = new Date(longDate);
+            final String date_format = DATE_YEAR_FORMAT;
+            String yearString = getSimpleDateFormat(date, date_format);
+            return Integer.parseInt(yearString);
+        }
+        return 0;
+    }
+
+    public static String getSimpleDateFormat(Date date, String date_format) {
+        String start_date = "";
+        if (date_format != null && !date_format.isEmpty()  && !date_format.equals("")) {
+            SimpleDateFormat df2 = new SimpleDateFormat(date_format);
+            start_date = df2.format(date);
+        }
+        return start_date;
     }
 
 }

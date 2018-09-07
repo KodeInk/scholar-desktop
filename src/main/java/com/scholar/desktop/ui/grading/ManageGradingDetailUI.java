@@ -95,7 +95,7 @@ public class ManageGradingDetailUI extends javax.swing.JPanel {
                 Long minGrade = response.getMin_grade();
                 Long maxGrade = response.getMax_grade();
                 String status = response.getStatus().toUpperCase();
-                String date_Created = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                String date_Created = Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, gradingScale, symbol, minGrade, maxGrade, status, date_Created, author};
                 return data;

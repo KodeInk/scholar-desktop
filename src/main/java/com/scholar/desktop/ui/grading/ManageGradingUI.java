@@ -162,7 +162,7 @@ public class ManageGradingUI extends javax.swing.JPanel {
                 String details = response.getDescription().toUpperCase();
                 Integer numSubjects = (response.getSubjectResponses() == null) ? 0 : response.getSubjectResponses().size();
                 String status = response.getStatus().name().toUpperCase();
-                String date_Created = Utilities.getSimpleDate(response.getDateCreated()).toUpperCase();
+                String date_Created = Utilities.getFullDateString(response.getDateCreated()).toUpperCase();
                 String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, details, numSubjects, status, date_Created.toUpperCase(), author};
                 return data;

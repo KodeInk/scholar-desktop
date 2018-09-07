@@ -134,10 +134,10 @@ public class ManageStudyYearUI extends javax.swing.JPanel {
             list.stream().map((response) -> {
                 Integer id = response.getId();
                 String theme = response.getTheme().toUpperCase();
-                String start_date = Utilities.getSimpleDate(response.getStart_date()).toUpperCase();
-                String end_date = Utilities.getSimpleDate(response.getEnd_date()).toUpperCase();
+                String start_date = Utilities.getFullDateString(response.getStart_date()).toUpperCase();
+                String end_date = Utilities.getFullDateString(response.getEnd_date()).toUpperCase();
                 String status = response.getStatus().toUpperCase();
-                String DateCreated = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                String DateCreated = Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 //new Date(response.getDate_created()).toString().toUpperCase();
                 String author = response.getAuthor().toUpperCase();
                 Integer numberOfCurriculum = (response.getCurricula() != null ? response.getCurricula().size() : 0);

@@ -124,7 +124,7 @@ public class ManageSubjectPaperUI extends javax.swing.JPanel {
                 String status = response.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (response.getDate_created() != null) {
-                    dateCreated = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                    dateCreated = Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 }
                 String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, subject, name, code, status, dateCreated, author};

@@ -130,7 +130,7 @@ public class ManageSubjectsUI extends javax.swing.JPanel {
                 String status = response.getStatus().toUpperCase();
                 String dateCreated = "";
                 if (response.getDate_created() != null) {
-                    dateCreated = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                    dateCreated = Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 }
                 String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, category, status, dateCreated, author};

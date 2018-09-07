@@ -194,7 +194,7 @@ public class ManageClassesUI extends javax.swing.JPanel {
                 String status = response.getStatus().toUpperCase();
                 String date_Created = " - ";
                 if (response.getDate_created() != null) {
-                    date_Created = Utilities.getSimpleDate(response.getDate_created()).toUpperCase();
+                    date_Created = Utilities.getFullDateString(response.getDate_created()).toUpperCase();
                 }
                 String author = response.getAuthor().toUpperCase();
                 Object[] data = {id, name, code, ranking, status, date_Created, author};
