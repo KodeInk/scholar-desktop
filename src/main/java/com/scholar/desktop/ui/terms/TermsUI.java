@@ -5,7 +5,15 @@
  */
 package main.java.com.scholar.desktop.ui.terms;
 
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.ui.grading.AddGradingDetailUI;
+import main.java.com.scholar.desktop.ui.grading.AddGradingUI;
+import main.java.com.scholar.desktop.ui.grading.GradingUI;
+import main.java.com.scholar.desktop.ui.grading.ManageGradingDetailUI;
+import main.java.com.scholar.desktop.ui.grading.ManageGradingUI;
 
 /**
  *
@@ -17,10 +25,40 @@ public class TermsUI extends javax.swing.JPanel {
      * Creates new form TermsUI
      */
     private final SchoolData schoolData;
+    private static TermsUI instance;
+
     public TermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
     }
+
+    public static TermsUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new TermsUI(schoolData);
+        }
+        return instance;
+    }
+
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+            int index = sourceTabbedPane.getSelectedIndex();
+            switch (index) {
+                case 0:
+                    ManageTermsUI.getInstance(schoolData).initData();
+                    break;
+                case 1:
+                    AddTermUI.getInstance(schoolData).initData();
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.

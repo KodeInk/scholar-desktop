@@ -38,6 +38,18 @@ public final class AddTermUI extends javax.swing.JPanel {
         initComponents();
         initRankComboBox();
         //todo: fetch study Year and populate it 
+        initData();
+    }
+
+    public static AddTermUI getInstance(SchoolData schoolData) {
+        if (instance == null) {
+            instance = new AddTermUI(schoolData);
+        }
+
+        return instance;
+    }
+
+    public void initData() {
         initStudyYear(schoolData);
     }
 
