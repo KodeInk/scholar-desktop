@@ -9,11 +9,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.ui.grading.AddGradingDetailUI;
-import main.java.com.scholar.desktop.ui.grading.AddGradingUI;
-import main.java.com.scholar.desktop.ui.grading.GradingUI;
-import main.java.com.scholar.desktop.ui.grading.ManageGradingDetailUI;
-import main.java.com.scholar.desktop.ui.grading.ManageGradingUI;
 
 /**
  *
