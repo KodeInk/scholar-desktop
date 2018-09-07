@@ -45,8 +45,6 @@ public class UtilitiesTest {
     public void tearDown() {
     }
 
-   
-
     /**
      * Test of getYearString method, of class Utilities.
      */

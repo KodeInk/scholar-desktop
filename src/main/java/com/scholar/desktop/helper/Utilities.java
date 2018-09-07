@@ -202,7 +202,7 @@ public class Utilities {
 
     public static String getSimpleDateFormat(Date date, String date_format) {
         String start_date = "";
-        if (date_format != null && !date_format.isEmpty()  && !date_format.equals("")) {
+        if (date_format != null && !date_format.isEmpty() && !date_format.equals("")) {
             SimpleDateFormat df2 = new SimpleDateFormat(date_format);
             start_date = df2.format(date);
         }

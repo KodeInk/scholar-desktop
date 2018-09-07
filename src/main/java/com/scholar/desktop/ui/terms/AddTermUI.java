@@ -107,8 +107,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         StudyYearComboField.removeAllItems();
         for (StudyYearResponse syr : studyYearResponses) {
              
-//            String start_date = Utilities.getYearString(syr.getStart_date());
-//            String end_string = Utilities.getYearString(syr.getStart_date());
+            Integer start_date = Utilities.getYearString(syr.getStart_date());
+            Integer end_string = Utilities.getYearString(syr.getStart_date());
             
             
             StudyYearComboField.addItem(syr.getTheme());
