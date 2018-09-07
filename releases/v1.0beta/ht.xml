@@ -2,16 +2,6 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <obj>w32api/crt2.o</obj>
-  <obj>head/guihead.o</obj>
-  <obj>head/head.o</obj>
-  <lib>w32api/libmingw32.a</lib>
-  <lib>w32api/libgcc.a</lib>
-  <lib>w32api/libmsvcrt.a</lib>
-  <lib>w32api/libkernel32.a</lib>
-  <lib>w32api/libuser32.a</lib>
-  <lib>w32api/libadvapi32.a</lib>
-  <lib>w32api/libshell32.a</lib>
   <jar>E:\codemovers\scholar-desktop\dist\scholar-desktop.jar</jar>
   <outfile>E:\codemovers\scholar-desktop\dist\scholar.exe</outfile>
   <errTitle></errTitle>
@@ -24,10 +14,6 @@
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
   <icon></icon>
-  <singleInstance>
-    <mutexName>mover</mutexName>
-    <windowTitle>mover</windowTitle>
-  </singleInstance>
   <classPath>
     <mainClass>main.java.com.scholar.desktop.Application</mainClass>
     <cp>lib/AbsoluteLayout.jar</cp>
@@ -100,11 +86,4 @@
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>64/32</runtimeBits>
   </jre>
-  <messages>
-    <startupErr>An error occurred while starting the application.</startupErr>
-    <bundledJreErr>This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.</bundledJreErr>
-    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
-    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
-    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
-  </messages>
 </launch4jConfig>

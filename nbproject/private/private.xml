@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/ui/subjects/AddSubjectUI.java</file>
+            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/ui/subjects/ManageSubjectsUI.java</file>
+            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/ui/grading/AddGradingUI.java</file>
+            <file>file:/E:/codemovers/scholar-desktop/src/main/java/com/scholar/desktop/ui/classes/AddClassUI.java</file>
+        </group>
     </open-files>
 </project-private>
