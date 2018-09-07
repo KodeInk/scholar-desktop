@@ -49,9 +49,7 @@ public class TermsAPI  extends AbstractAPI{
      * @param limit
      * @return
      */
-    public TermResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
+    public TermResponse[] list(Integer offset, Integer limit) {      
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
@@ -78,9 +76,7 @@ public class TermsAPI  extends AbstractAPI{
     }
     
      public TermResponse[] list(Integer studyYear,Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
-
+       
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
         queryParameter.put("limit", "" + limit);

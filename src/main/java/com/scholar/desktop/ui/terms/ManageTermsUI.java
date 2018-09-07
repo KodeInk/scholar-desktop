@@ -36,7 +36,6 @@ public class ManageTermsUI extends javax.swing.JPanel {
     private Integer offset;
     private Integer limit;
     private String search = null;
-  
 
     public ManageTermsUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -75,7 +74,6 @@ public class ManageTermsUI extends javax.swing.JPanel {
     public void initData() {
         fetchData(schoolData);
     }
- 
 
     public final void fetchData(SchoolData schoolData1) {
 
@@ -83,13 +81,14 @@ public class ManageTermsUI extends javax.swing.JPanel {
             populateJTable(list);
         }
 
-        final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
+        jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 list = TermsService.getInstance(schoolData1).list();
                 populateJTable(list);
+                repaint();
+                jLabel1.setText("Manage Terms");
                 return null;
             }
         };
@@ -116,11 +115,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 tableModel.addRow(data);
             }
         }
-
         tableModel.fireTableDataChanged();
-
-        Utilities.hideDialog();
-
     }
 
     /**
@@ -281,8 +276,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

@@ -48,9 +48,7 @@ public class TermsService extends AbstractService {
 
     public List<TermResponse> list() {
 
-        if (list != null) {
-            return list;
-        }
+        
         list = new ArrayList<>();
 
         TermResponse[] responses = termsAPI.list(offset, limit);
