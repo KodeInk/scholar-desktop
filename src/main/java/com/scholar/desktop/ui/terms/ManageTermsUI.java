@@ -26,7 +26,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageTerms
      */
-    private static final String[] COLUMN_HEADERS = {"NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "STUDY YEAR", "TERM NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<TermResponse> list = null;
@@ -117,6 +117,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
             Utilities.removeRowsFromDefaultModel(tableModel);
 
             list.stream().map((ur) -> {
+                Integer id = ur.getId();
+                String studyYear = ur.getStudy_year().toUpperCase();
                 String name = ur.getName().toUpperCase();
                 String start_date = Utilities.getFullDateString(ur.getStart_date()).toUpperCase();
                 String end_date = Utilities.getFullDateString(ur.getEnd_date()).toUpperCase();
@@ -124,7 +126,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 String status = ur.getStatus().toUpperCase();
                 String dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {name, start_date, end_date, ranking, status, dateCreated, author};
+                Object[] data = {id, studyYear, name, start_date, end_date, ranking, status, dateCreated, author};
                 return data;
             }).forEachOrdered((data) -> {
                 tableModel.addRow(data);
