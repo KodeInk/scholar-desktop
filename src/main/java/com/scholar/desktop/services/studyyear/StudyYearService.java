@@ -57,9 +57,7 @@ public class StudyYearService extends AbstractService {
      */
     public List<StudyYearResponse> list() {
 
-        if (list != null) {
-            return list;
-        }
+       
         list = new ArrayList<>();
 
         StudyYearResponse[] responses = studyYearAPI.list(offset, limit);

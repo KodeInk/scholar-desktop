@@ -79,15 +79,14 @@ public class ManageTermsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
 
     }
-    
-  protected void fetchData() {        
+
+    protected void fetchData() {
         if (search != null) {
 //            fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
     }
-
 
     public final void fetchData(Integer offset, Integer limit) {
 
@@ -119,8 +118,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
             list.stream().map((ur) -> {
                 String name = ur.getName().toUpperCase();
-                String start_date = new Date(ur.getStart_date()).toString().toUpperCase();
-                String end_date = new Date(ur.getEnd_date()).toString().toUpperCase();
+                String start_date = Utilities.getFullDateString(ur.getStart_date()).toUpperCase();
+                String end_date = Utilities.getFullDateString(ur.getEnd_date()).toUpperCase();
                 String ranking = ur.getRanking().toString().toUpperCase();
                 String status = ur.getStatus().toUpperCase();
                 String dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
@@ -386,11 +385,10 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         // TODO add your handling code here:
-          next();
+        next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
-    
-     protected void prev() {
+    protected void prev() {
         offset = offset - limit;
         if (offset >= 0) {
             fetchData();
@@ -408,9 +406,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     }
 
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

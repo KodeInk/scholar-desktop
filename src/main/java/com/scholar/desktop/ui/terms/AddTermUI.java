@@ -66,7 +66,7 @@ public final class AddTermUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 jLabel1.setText("Processsing...");
                 disableMandatories();
-                studyYearResponses = StudyYearService.getInstance(schoolData1).list();
+                studyYearResponses = StudyYearService.getInstance(schoolData1).list(0,100000);
                 populateStudyYearComboBox(studyYearResponses);
                 enableMandatories();
                 jLabel1.setText("Terms Information");
