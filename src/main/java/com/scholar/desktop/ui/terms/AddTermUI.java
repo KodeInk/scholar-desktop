@@ -40,43 +40,48 @@ public final class AddTermUI extends javax.swing.JPanel {
     private final SchoolData schoolData;
     private List<StudyYearResponse> studyYearResponses = null;
     private TermResponse termResponse = null;
-
+    
     public AddTermUI(SchoolData schoolData) {
         this.schoolData = schoolData;
         initComponents();
         initRankComboBox();
     }
-
+    
     public static AddTermUI getInstance(SchoolData schoolData) {
         if (instance == null) {
             instance = new AddTermUI(schoolData);
         }
-
+        
         return instance;
     }
-
+    
     public void initData() {
-        resetForm();
         initStudyYear();
     }
-
+    
+    /**
+     *
+     * @param termResponse
+     */
     public void edit(TermResponse termResponse) {
         this.termResponse = termResponse;
         initRankComboBox();
-
         termNameField.setText(termResponse.getName());
         startDateField.setDate(new Date(termResponse.getStart_date()));
         endDateField.setDate(new Date(termResponse.getEnd_date()));
-//        termRankingField.setSelectedItem(termResponse.getRanking());
-
+        saveButton.setText("EDIT");
+        
     }
-
+    
+    /**
+     *
+     */
     public final void initStudyYear() {
-
+        
         if (studyYearResponses != null) {
             populateStudyYearComboBox(studyYearResponses);
         }
-
+        
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -90,9 +95,12 @@ public final class AddTermUI extends javax.swing.JPanel {
             }
         };
         swingWorker.execute();
-
+        
     }
-
+    
+    /**
+     *
+     */
     public void enableMandatories() {
         saveButton.setEnabled(true);
         StudyYearComboField.setEnabled(true);
@@ -100,9 +108,12 @@ public final class AddTermUI extends javax.swing.JPanel {
         startDateField.setEnabled(true);
         endDateField.setEnabled(true);
         termRankingField.setEnabled(true);
-
+        
     }
-
+    
+    /**
+     *
+     */
     public void disableMandatories() {
         saveButton.setEnabled(false);
         StudyYearComboField.setEnabled(false);
@@ -117,7 +128,7 @@ public final class AddTermUI extends javax.swing.JPanel {
      * @param studyYearResponses
      */
     public void populateStudyYearComboBox(List<StudyYearResponse> studyYearResponses) {
-
+        
         StudyYearComboField.removeAllItems();
         studyYearResponses.stream().map((syr) -> {
             Integer start_date = Utilities.getYearString(syr.getStart_date());
@@ -127,12 +138,15 @@ public final class AddTermUI extends javax.swing.JPanel {
         }).forEachOrdered((themed) -> {
             StudyYearComboField.addItem(themed);
         });
-
+        
         if (this.termResponse != null) {
             StudyYearComboField.setSelectedItem(termResponse.getStudy_year());
         }
     }
-
+    
+    /**
+     *
+     */
     public void initRankComboBox() {
         termRankingField.addItem("Select Option");
         for (int x = 0; x <= 500; x++) {
@@ -144,13 +158,13 @@ public final class AddTermUI extends javax.swing.JPanel {
             termRankingField.setSelectedIndex(1);
         }
     }
-
+    
     private List<StudyYearResponse> fetchRoles(SchoolData schoolData) {
-
+        
         if (studyYearResponses != null && studyYearResponses.size() > 0) {
             populate();
         }
-
+        
         final String message = "     Processsing ...     ";
         Utilities.ShowDialogMessage(message);
         SwingWorker swingWorker = new SwingWorker() {
@@ -164,7 +178,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         swingWorker.execute();
         return null;
     }
-
+    
     public void populate() {
         //   StudyYearCombo
         StudyYearComboField.removeAllItems();
@@ -173,7 +187,7 @@ public final class AddTermUI extends javax.swing.JPanel {
                 StudyYearComboField.addItem("Testme");
             }
         }
-
+        
         StudyYearComboField.repaint();
     }
 
@@ -376,10 +390,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         Term term = populateEntity();
         String btnText = saveButton.getText();
         saveRecord(term);
-
-
     }//GEN-LAST:event_saveButtonActionPerformed
-
+    
     public void SubmitData(String btnText, Term term) throws HeadlessException {
         switch (btnText) {
             case "SAVE":
@@ -392,7 +404,7 @@ public final class AddTermUI extends javax.swing.JPanel {
                 break;
         }
     }
-
+    
     public void saveRecord(Term term) throws HeadlessException, BadRequestException {
         try {
             TermsService.getInstance(schoolData).create(term, "LOG_ID");
@@ -403,26 +415,26 @@ public final class AddTermUI extends javax.swing.JPanel {
             throw new BadRequestException("Sorry, something went wrong, record could not be saved");
         }
     }
-
+    
     private void editRecord(Term term) throws HeadlessException {
         try {
             //todo: get the clas_id
             if (this.termResponse == null) {
                 throw new BadRequestException("Could update record, missing data");
             }
-
+            
             term.setId(termResponse.getId());
             TermsService.getInstance(schoolData).edit(term, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved succesfully");
-
+            
             resetForm();
-
+            
         } catch (IOException ex) {
             Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
         }
     }
-
+    
     private void resetForm() {
         termNameField.setText("");
         startDateField.setDate(null);
@@ -430,7 +442,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         termRankingField.setSelectedIndex(1);
         StudyYearComboField.setSelectedIndex(1);
     }
-
+    
     public Term populateEntity() {
         //todo: populate Entity
         Term term = new Term();
@@ -442,29 +454,29 @@ public final class AddTermUI extends javax.swing.JPanel {
         term.setName(termNameField.getText());
         return term;
     }
-
+    
     public void validateForm() throws BadRequestException {
         //todo: validate form
         if (StudyYearComboField.getSelectedIndex() < 0) {
             throw new BadRequestException("Study Year is mandatory ");
         }
-
+        
         if (termNameField.getText().isEmpty()) {
             throw new BadRequestException("Term Name is Mandatory");
         }
-
+        
         try {
             startDateField.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("Start date is Madantory");
         }
-
+        
         try {
             endDateField.getDate().toString();
         } catch (NullPointerException er) {
             throw new BadRequestException("End date is Madantory");
         }
-
+        
         if (termRankingField.getSelectedIndex() <= 1) {
             throw new BadRequestException("Ranking is Mandatory");
         }
