@@ -99,8 +99,23 @@ public class TermsService extends AbstractService {
      */
     public TermResponse create(Term term, String logId) throws IOException {
         if (term != null) {
-            Map classesMap = getTermMap(term);
-            return termsAPI.create(classesMap, logId);
+            Map termsMap = getTermMap(term);
+            return termsAPI.create(termsMap, logId);
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param term
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public TermResponse edit(Term term, String logId) throws IOException {
+        if (term != null) {
+            Map termsMap = getTermMap(term);
+            return termsAPI.update(termsMap, logId);
         }
         return null;
     }
@@ -113,6 +128,10 @@ public class TermsService extends AbstractService {
     public Map getTermMap(Term term) {
 
         Map termMap = new HashMap<>();
+        if (term.getId() != null) {
+            termMap.put("id", term.getId());
+        }
+
         termMap.put("study_year", term.getStudy_year());
         termMap.put("name", term.getName());
         termMap.put("start_date", term.getStart_date());

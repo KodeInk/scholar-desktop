@@ -412,7 +412,7 @@ public final class AddTermUI extends javax.swing.JPanel {
             }
 
             term.setId(termResponse.getId());
-            ClassesService.getInstance(schoolData).edit(term, "LOG_ID");
+            TermsService.getInstance(schoolData).edit(term, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved succesfully");
 
             resetForm();

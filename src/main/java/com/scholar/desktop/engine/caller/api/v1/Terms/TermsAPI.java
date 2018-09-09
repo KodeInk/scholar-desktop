@@ -165,5 +165,38 @@ public class TermsAPI  extends AbstractAPI{
 
     }
 
-       
+    /**
+     *
+     * @param body
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public TermResponse update(Map body, String logId) throws IOException {
+        LOG.log(Level.INFO, body.toString());
+        Response response = engineCaller.put("terms/v1/", body, logId);
+
+        switch (response.getStatus()) {
+            case 400:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 500:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            case 200:
+                TermResponse termResponse = response.readEntity(TermResponse.class);
+                return termResponse;
+            case 401:
+                message = getMessage(response);
+                throw new BadRequestException(message.getMessage());
+
+            default:
+                return null;
+
+        }
+
+    }
+
 }
