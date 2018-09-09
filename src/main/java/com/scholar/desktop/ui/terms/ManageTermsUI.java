@@ -73,6 +73,9 @@ public class ManageTermsUI extends javax.swing.JPanel {
         return instance;
     }
 
+    /**
+     *
+     */
     public void initData() {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
@@ -90,6 +93,11 @@ public class ManageTermsUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *
+     * @param offset
+     * @param limit
+     */
     public final void fetchData(Integer offset, Integer limit) {
 
         if (list != null) {
@@ -113,6 +121,12 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     * @param search
+     * @param offset
+     * @param limit
+     */
     protected void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
