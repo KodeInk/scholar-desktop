@@ -113,14 +113,14 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     }
 
-      protected void fetchData(String search, Integer offset, Integer limit) {
+    protected void fetchData(String search, Integer offset, Integer limit) {
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 disableNextPrevLabels();
                 jLabel1.setText("Processing....");
-                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
-                populateJTable(crs);
+                List<TermResponse> termResponses = TermsService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(termResponses);
                 repaint();
                 jLabel1.setText("Manage Classes");
                 enableNextPrevLabels();
@@ -130,7 +130,6 @@ public class ManageTermsUI extends javax.swing.JPanel {
         swingWorker.execute();
     }
 
-      
     public void populateJTable(List<TermResponse> list) {
         if (list != null) {
 
@@ -402,7 +401,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
         searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
-      public void searchQuery() {
+    public void searchQuery() {
         // TODO add your handling code here:
         if (!searchbox.getText().isEmpty()) {
 
@@ -423,9 +422,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
         jLabel1.setText("Manage Terms");
     }
 
-      
-      
-      
+
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
         prev();
