@@ -8,6 +8,7 @@ package main.java.com.scholar.desktop.ui.terms;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,6 @@ import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.request.Term;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -57,6 +57,12 @@ public final class AddTermUI extends javax.swing.JPanel {
 
     public void edit(TermResponse termResponse) {
         this.termResponse = termResponse;
+        initRankComboBox();
+
+        termNameField.setText(termResponse.getName());
+        startDateField.setDate(new Date(termResponse.getStart_date()));
+        endDateField.setDate(new Date(termResponse.getEnd_date()));
+//        termRankingField.setSelectedItem(termResponse.getRanking());
 
     }
 
@@ -116,6 +122,10 @@ public final class AddTermUI extends javax.swing.JPanel {
         }).forEachOrdered((themed) -> {
             StudyYearComboField.addItem(themed);
         });
+
+        if (this.termResponse != null) {
+            StudyYearComboField.setSelectedItem(termResponse.getStudy_year());
+        }
     }
 
     public void initRankComboBox() {
@@ -123,7 +133,11 @@ public final class AddTermUI extends javax.swing.JPanel {
         for (int x = 0; x <= 500; x++) {
             termRankingField.addItem("" + x);
         }
-        termRankingField.setSelectedIndex(1);
+        if (this.termResponse != null) {
+            termRankingField.setSelectedItem("" + termResponse.getRanking());
+        } else {
+            termRankingField.setSelectedIndex(1);
+        }
     }
 
     private List<StudyYearResponse> fetchRoles(SchoolData schoolData) {
