@@ -83,9 +83,6 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -116,7 +113,27 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         classesPanel1 = new javax.swing.JPanel();
         classes_highlight1 = new javax.swing.JPanel();
         classes_menu1 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        SchoolSetupMenuPanel1 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
+        classesPanel2 = new javax.swing.JPanel();
+        classes_highlight2 = new javax.swing.JPanel();
+        classes_menu2 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        classesPanel3 = new javax.swing.JPanel();
+        classes_highlight3 = new javax.swing.JPanel();
+        classes_menu3 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        SchoolSetupMenuPanel2 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        classesPanel4 = new javax.swing.JPanel();
+        classes_highlight4 = new javax.swing.JPanel();
+        classes_menu4 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        classesPanel5 = new javax.swing.JPanel();
+        classes_highlight5 = new javax.swing.JPanel();
+        classes_menu5 = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -229,13 +246,13 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             .add(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel1)
-                .add(18, 18, 18)
+                .add(36, 36, 36)
                 .add(jLabel4)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 376, Short.MAX_VALUE)
+                .add(155, 155, 155)
                 .add(jLabel5)
-                .add(81, 81, 81)
+                .add(142, 142, 142)
                 .add(jLabel6)
-                .add(63, 63, 63)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel2)
                 .add(73, 73, 73)
                 .add(jLabel7)
@@ -251,33 +268,6 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         jLabel10.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 204, 102));
         jLabel10.setText("SETTINGS");
-
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Manage Curriculum");
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Manage Subjects");
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Manage Grading");
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel14MouseClicked(evt);
-            }
-        });
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 204, 102));
@@ -465,7 +455,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Manage Classes");
+        jLabel11.setText("   Manage Classes");
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -476,10 +466,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         classes_menu.setLayout(classes_menuLayout);
         classes_menuLayout.setHorizontalGroup(
             classes_menuLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(classes_menuLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(5, 5, 5))
+            .add(jLabel11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
         );
         classes_menuLayout.setVerticalGroup(
             classes_menuLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -495,8 +482,8 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             classesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(classesPanelLayout.createSequentialGroup()
                 .add(classes_highlight, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(classes_menu, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(classes_menu, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
         classesPanelLayout.setVerticalGroup(
             classesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -522,12 +509,12 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         classes_menu1.setBackground(new java.awt.Color(102, 102, 102));
         classes_menu1.setPreferredSize(new java.awt.Dimension(100, 43));
 
-        jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("Manage Classes");
-        jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("   Manage Curriculum");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel33MouseClicked(evt);
+                jLabel12MouseClicked(evt);
             }
         });
 
@@ -535,17 +522,14 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         classes_menu1.setLayout(classes_menu1Layout);
         classes_menu1Layout.setHorizontalGroup(
             classes_menu1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(classes_menu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel33, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(5, 5, 5))
+            .add(jLabel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         classes_menu1Layout.setVerticalGroup(
             classes_menu1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, classes_menu1Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jLabel33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .add(classes_menu1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout classesPanel1Layout = new org.jdesktop.layout.GroupLayout(classesPanel1);
@@ -555,7 +539,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             .add(classesPanel1Layout.createSequentialGroup()
                 .add(classes_highlight1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(classes_menu1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .add(classes_menu1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
         );
         classesPanel1Layout.setVerticalGroup(
             classesPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -586,6 +570,288 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        SchoolSetupMenuPanel1.setBackground(new java.awt.Color(0, 51, 51));
+
+        jLabel33.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 204, 102));
+        jLabel33.setText("MANAGE SUBJECTS");
+
+        classesPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        classes_highlight2.setBackground(new java.awt.Color(102, 102, 0));
+
+        org.jdesktop.layout.GroupLayout classes_highlight2Layout = new org.jdesktop.layout.GroupLayout(classes_highlight2);
+        classes_highlight2.setLayout(classes_highlight2Layout);
+        classes_highlight2Layout.setHorizontalGroup(
+            classes_highlight2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 8, Short.MAX_VALUE)
+        );
+        classes_highlight2Layout.setVerticalGroup(
+            classes_highlight2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+
+        classes_menu2.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu2.setPreferredSize(new java.awt.Dimension(100, 43));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("  Manage Subjects");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout classes_menu2Layout = new org.jdesktop.layout.GroupLayout(classes_menu2);
+        classes_menu2.setLayout(classes_menu2Layout);
+        classes_menu2Layout.setHorizontalGroup(
+            classes_menu2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jLabel13, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+        );
+        classes_menu2Layout.setVerticalGroup(
+            classes_menu2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_menu2Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        org.jdesktop.layout.GroupLayout classesPanel2Layout = new org.jdesktop.layout.GroupLayout(classesPanel2);
+        classesPanel2.setLayout(classesPanel2Layout);
+        classesPanel2Layout.setHorizontalGroup(
+            classesPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanel2Layout.createSequentialGroup()
+                .add(classes_highlight2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(classes_menu2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+        classesPanel2Layout.setVerticalGroup(
+            classesPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        );
+
+        classesPanel3.setBackground(new java.awt.Color(204, 204, 204));
+
+        classes_highlight3.setBackground(new java.awt.Color(102, 102, 0));
+
+        org.jdesktop.layout.GroupLayout classes_highlight3Layout = new org.jdesktop.layout.GroupLayout(classes_highlight3);
+        classes_highlight3.setLayout(classes_highlight3Layout);
+        classes_highlight3Layout.setHorizontalGroup(
+            classes_highlight3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 8, Short.MAX_VALUE)
+        );
+        classes_highlight3Layout.setVerticalGroup(
+            classes_highlight3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+
+        classes_menu3.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu3.setPreferredSize(new java.awt.Dimension(100, 43));
+
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("  Manage Grading");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout classes_menu3Layout = new org.jdesktop.layout.GroupLayout(classes_menu3);
+        classes_menu3.setLayout(classes_menu3Layout);
+        classes_menu3Layout.setHorizontalGroup(
+            classes_menu3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jLabel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        classes_menu3Layout.setVerticalGroup(
+            classes_menu3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, classes_menu3Layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jLabel14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        org.jdesktop.layout.GroupLayout classesPanel3Layout = new org.jdesktop.layout.GroupLayout(classesPanel3);
+        classesPanel3.setLayout(classesPanel3Layout);
+        classesPanel3Layout.setHorizontalGroup(
+            classesPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanel3Layout.createSequentialGroup()
+                .add(classes_highlight3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classes_menu3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+        );
+        classesPanel3Layout.setVerticalGroup(
+            classesPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        );
+
+        org.jdesktop.layout.GroupLayout SchoolSetupMenuPanel1Layout = new org.jdesktop.layout.GroupLayout(SchoolSetupMenuPanel1);
+        SchoolSetupMenuPanel1.setLayout(SchoolSetupMenuPanel1Layout);
+        SchoolSetupMenuPanel1Layout.setHorizontalGroup(
+            SchoolSetupMenuPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel33)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(classesPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classesPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        SchoolSetupMenuPanel1Layout.setVerticalGroup(
+            SchoolSetupMenuPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel33)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classesPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classesPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        SchoolSetupMenuPanel2.setBackground(new java.awt.Color(0, 51, 51));
+
+        jLabel37.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 204, 102));
+        jLabel37.setText("STUDY YEAR");
+
+        classesPanel4.setBackground(new java.awt.Color(204, 204, 204));
+
+        classes_highlight4.setBackground(new java.awt.Color(102, 102, 0));
+
+        org.jdesktop.layout.GroupLayout classes_highlight4Layout = new org.jdesktop.layout.GroupLayout(classes_highlight4);
+        classes_highlight4.setLayout(classes_highlight4Layout);
+        classes_highlight4Layout.setHorizontalGroup(
+            classes_highlight4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 8, Short.MAX_VALUE)
+        );
+        classes_highlight4Layout.setVerticalGroup(
+            classes_highlight4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+
+        classes_menu4.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu4.setPreferredSize(new java.awt.Dimension(100, 43));
+
+        jLabel38.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("  Manage Subjects");
+        jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel38MouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout classes_menu4Layout = new org.jdesktop.layout.GroupLayout(classes_menu4);
+        classes_menu4.setLayout(classes_menu4Layout);
+        classes_menu4Layout.setHorizontalGroup(
+            classes_menu4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jLabel38, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+        );
+        classes_menu4Layout.setVerticalGroup(
+            classes_menu4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_menu4Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel38, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        org.jdesktop.layout.GroupLayout classesPanel4Layout = new org.jdesktop.layout.GroupLayout(classesPanel4);
+        classesPanel4.setLayout(classesPanel4Layout);
+        classesPanel4Layout.setHorizontalGroup(
+            classesPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanel4Layout.createSequentialGroup()
+                .add(classes_highlight4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(classes_menu4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+        classesPanel4Layout.setVerticalGroup(
+            classesPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        );
+
+        classesPanel5.setBackground(new java.awt.Color(204, 204, 204));
+
+        classes_highlight5.setBackground(new java.awt.Color(102, 102, 0));
+
+        org.jdesktop.layout.GroupLayout classes_highlight5Layout = new org.jdesktop.layout.GroupLayout(classes_highlight5);
+        classes_highlight5.setLayout(classes_highlight5Layout);
+        classes_highlight5Layout.setHorizontalGroup(
+            classes_highlight5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 8, Short.MAX_VALUE)
+        );
+        classes_highlight5Layout.setVerticalGroup(
+            classes_highlight5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+
+        classes_menu5.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu5.setPreferredSize(new java.awt.Dimension(100, 43));
+
+        jLabel39.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("  Manage Grading");
+        jLabel39.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel39MouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout classes_menu5Layout = new org.jdesktop.layout.GroupLayout(classes_menu5);
+        classes_menu5.setLayout(classes_menu5Layout);
+        classes_menu5Layout.setHorizontalGroup(
+            classes_menu5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jLabel39, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        classes_menu5Layout.setVerticalGroup(
+            classes_menu5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, classes_menu5Layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jLabel39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        org.jdesktop.layout.GroupLayout classesPanel5Layout = new org.jdesktop.layout.GroupLayout(classesPanel5);
+        classesPanel5.setLayout(classesPanel5Layout);
+        classesPanel5Layout.setHorizontalGroup(
+            classesPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanel5Layout.createSequentialGroup()
+                .add(classes_highlight5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classes_menu5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+        );
+        classesPanel5Layout.setVerticalGroup(
+            classesPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        );
+
+        org.jdesktop.layout.GroupLayout SchoolSetupMenuPanel2Layout = new org.jdesktop.layout.GroupLayout(SchoolSetupMenuPanel2);
+        SchoolSetupMenuPanel2.setLayout(SchoolSetupMenuPanel2Layout);
+        SchoolSetupMenuPanel2Layout.setHorizontalGroup(
+            SchoolSetupMenuPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel37)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(classesPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classesPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        SchoolSetupMenuPanel2Layout.setVerticalGroup(
+            SchoolSetupMenuPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel37)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classesPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classesPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -612,28 +878,25 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel26, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel23, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel22, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel13, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .add(0, 74, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel22, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                .add(0, 0, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, SchoolSetupMenuPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(jPanel9Layout.createSequentialGroup()
                 .add(jLabel18)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, SchoolSetupMenuPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, SchoolSetupMenuPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9Layout.createSequentialGroup()
                 .add(27, 27, 27)
                 .add(SchoolSetupMenuPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(27, 27, 27)
+                .add(SchoolSetupMenuPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(27, 27, 27)
+                .add(SchoolSetupMenuPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jLabel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jLabel14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(11, 11, 11)
                 .add(jLabel16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -843,9 +1106,13 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
 
     }//GEN-LAST:event_jLabel29MouseClicked
 
-    private void jLabel33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseClicked
+    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel33MouseClicked
+    }//GEN-LAST:event_jLabel38MouseClicked
+
+    private void jLabel39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel39MouseClicked
 
     /**
      * @param args the command line arguments
@@ -912,12 +1179,26 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SchoolSetupMenuPanel;
+    private javax.swing.JPanel SchoolSetupMenuPanel1;
+    private javax.swing.JPanel SchoolSetupMenuPanel2;
     private javax.swing.JPanel classesPanel;
     private javax.swing.JPanel classesPanel1;
+    private javax.swing.JPanel classesPanel2;
+    private javax.swing.JPanel classesPanel3;
+    private javax.swing.JPanel classesPanel4;
+    private javax.swing.JPanel classesPanel5;
     private javax.swing.JPanel classes_highlight;
     private javax.swing.JPanel classes_highlight1;
+    private javax.swing.JPanel classes_highlight2;
+    private javax.swing.JPanel classes_highlight3;
+    private javax.swing.JPanel classes_highlight4;
+    private javax.swing.JPanel classes_highlight5;
     private javax.swing.JPanel classes_menu;
     private javax.swing.JPanel classes_menu1;
+    private javax.swing.JPanel classes_menu2;
+    private javax.swing.JPanel classes_menu3;
+    private javax.swing.JPanel classes_menu4;
+    private javax.swing.JPanel classes_menu5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -948,6 +1229,9 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
