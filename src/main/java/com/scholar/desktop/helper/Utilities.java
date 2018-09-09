@@ -42,6 +42,16 @@ public class Utilities {
 
     }
 
+    public static String getDATE_FORMAT() {
+        return DATE_FORMAT;
+    }
+
+    public static String getDATE_YEAR_FORMAT() {
+        return DATE_YEAR_FORMAT;
+    }
+
+    
+    
     public static String getParameterForLogging(Map parameter) {
         try {
 

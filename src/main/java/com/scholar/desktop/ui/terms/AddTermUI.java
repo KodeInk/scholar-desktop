@@ -6,7 +6,8 @@
 package main.java.com.scholar.desktop.ui.terms;
 
 import java.io.IOException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -164,7 +165,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         }
         return instance;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,6 +206,9 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Study Year : *");
         jLabel2.setToolTipText("");
+
+        startDateField.setDate(Calendar.getInstance().getTime());
+        startDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_YEAR_FORMAT()));
 
         StudyYearComboField.setAutoscrolls(true);
 

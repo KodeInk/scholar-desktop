@@ -26,7 +26,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
     /**
      * Creates new form ManageTerms
      */
-    private static final String[] COLUMN_HEADERS = {"ID", "STUDY YEAR", "TERM NAME", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "STUDY YEAR", "TERM", "START DATE", "END DATE", "RANKING", "STATUS", "DATE CREATED", "AUTHOR"};
     SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     List<TermResponse> list = null;
@@ -124,7 +124,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 String end_date = Utilities.getFullDateString(ur.getEnd_date()).toUpperCase();
                 String ranking = ur.getRanking().toString().toUpperCase();
                 String status = ur.getStatus().toUpperCase();
-                String dateCreated = new Date(ur.getDate_created()).toString().toUpperCase();
+                String dateCreated = Utilities.getFullDateString(ur.getDate_created()).toUpperCase();
+//                        new Date(ur.getDate_created()).toString().toUpperCase();
                 String author = ur.getAuthor().toUpperCase();
                 Object[] data = {id, studyYear, name, start_date, end_date, ranking, status, dateCreated, author};
                 return data;
@@ -267,6 +268,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
         jLabel1.setText("Manage Terms");
 
         jTable1.setModel(tableModel);
+        jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
