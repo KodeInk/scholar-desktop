@@ -471,7 +471,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
             list.forEach(response -> {
                 if (response.getId() == Integer.parseInt(value)) {
-                    ClassesUI.getInstance(schoolData).edit(response);
+                    TermsUI.getInstance(schoolData).edit(response);
 
                 }
             });

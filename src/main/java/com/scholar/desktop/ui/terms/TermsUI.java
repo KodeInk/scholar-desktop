@@ -59,7 +59,11 @@ public class TermsUI extends javax.swing.JPanel {
         }
     };
 
-     public void edit(TermResponse termResponse) {
+    /**
+     *
+     * @param termResponse
+     */
+    public void edit(TermResponse termResponse) {
         jTabbedPane1.setSelectedIndex(1); 
         AddTermUI.getInstance(schoolData).edit(termResponse);
 
