@@ -389,7 +389,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         validateForm();
         Term term = populateEntity();
         String btnText = saveButton.getText();
-        saveRecord(term);
+        SubmitData(btnText, term);
     }//GEN-LAST:event_saveButtonActionPerformed
     
     public void SubmitData(String btnText, Term term) throws HeadlessException {
