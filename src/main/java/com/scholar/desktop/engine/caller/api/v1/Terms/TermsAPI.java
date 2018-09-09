@@ -101,7 +101,35 @@ public class TermsAPI  extends AbstractAPI{
         return null;
     }
      
-     
+   
+       public TermResponse[] list(String query, Integer offset, Integer limit) {
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("terms/v1/search/" + query, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                TermResponse[] termResponse = response.readEntity(TermResponse[].class);
+                return termResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+
+       
+       
 
     /**
      *

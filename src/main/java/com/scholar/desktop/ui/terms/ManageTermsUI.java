@@ -13,7 +13,9 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
@@ -82,7 +84,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     protected void fetchData() {
         if (search != null) {
-//            fetchData(search, offset, limit);
+            fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
@@ -111,6 +113,24 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     }
 
+      protected void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
+                jLabel1.setText("Processing....");
+                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(crs);
+                repaint();
+                jLabel1.setText("Manage Classes");
+                enableNextPrevLabels();
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+
+      
     public void populateJTable(List<TermResponse> list) {
         if (list != null) {
 
@@ -375,13 +395,37 @@ public class ManageTermsUI extends javax.swing.JPanel {
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
+      public void searchQuery() {
+        // TODO add your handling code here:
+        if (!searchbox.getText().isEmpty()) {
+
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
+
+            search = searchbox.getText();
+
+            fetchData();
+
+        } else {
+            search = null;
+            jLabel1.setText("Processing....");
+            initData();
+        }
+        jLabel1.setText("Manage Terms");
+    }
+
+      
+      
+      
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
         prev();

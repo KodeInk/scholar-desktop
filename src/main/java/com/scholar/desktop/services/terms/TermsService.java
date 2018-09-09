@@ -68,6 +68,35 @@ public class TermsService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param searchQuery
+     * @param offset
+     * @param limit
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public List<TermResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<TermResponse> classResponses = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            TermResponse[] responses = termsAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                classResponses.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return classResponses;
+    }
+
+    /**
+     *
+     * @param term
+     * @param logId
+     * @return
+     * @throws IOException
+     */
     public TermResponse create(Term term, String logId) throws IOException {
         if (term != null) {
             Map classesMap = getTermMap(term);
@@ -76,6 +105,11 @@ public class TermsService extends AbstractService {
         return null;
     }
 
+    /**
+     *
+     * @param term
+     * @return
+     */
     public Map getTermMap(Term term) {
 
         Map termMap = new HashMap<>();
