@@ -107,12 +107,16 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        SchoolSetupMenuPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
+        classesPanel = new javax.swing.JPanel();
+        classes_highlight = new javax.swing.JPanel();
+        classes_menu = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        classesPanel1 = new javax.swing.JPanel();
+        classes_highlight1 = new javax.swing.JPanel();
+        classes_menu1 = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -227,7 +231,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
                 .add(jLabel1)
                 .add(18, 18, 18)
                 .add(jLabel4)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 376, Short.MAX_VALUE)
                 .add(jLabel5)
                 .add(81, 81, 81)
                 .add(jLabel6)
@@ -435,27 +439,29 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        SchoolSetupMenuPanel.setBackground(new java.awt.Color(0, 51, 51));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 102));
         jLabel9.setText("SCHOOL SETUP");
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
+        classesPanel.setBackground(new java.awt.Color(204, 204, 204));
 
-        jPanel10.setBackground(new java.awt.Color(102, 102, 0));
+        classes_highlight.setBackground(new java.awt.Color(102, 102, 0));
 
-        org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout classes_highlightLayout = new org.jdesktop.layout.GroupLayout(classes_highlight);
+        classes_highlight.setLayout(classes_highlightLayout);
+        classes_highlightLayout.setHorizontalGroup(
+            classes_highlightLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 8, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        classes_highlightLayout.setVerticalGroup(
+            classes_highlightLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel11.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel11.setPreferredSize(new java.awt.Dimension(100, 43));
+        classes_menu.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu.setPreferredSize(new java.awt.Dimension(100, 43));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -466,56 +472,118 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel11Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout classes_menuLayout = new org.jdesktop.layout.GroupLayout(classes_menu);
+        classes_menu.setLayout(classes_menuLayout);
+        classes_menuLayout.setHorizontalGroup(
+            classes_menuLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_menuLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(5, 5, 5))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel11Layout.createSequentialGroup()
+        classes_menuLayout.setVerticalGroup(
+            classes_menuLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, classes_menuLayout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel5Layout.createSequentialGroup()
-                .add(jPanel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        org.jdesktop.layout.GroupLayout classesPanelLayout = new org.jdesktop.layout.GroupLayout(classesPanel);
+        classesPanel.setLayout(classesPanelLayout);
+        classesPanelLayout.setHorizontalGroup(
+            classesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanelLayout.createSequentialGroup()
+                .add(classes_highlight, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .add(classes_menu, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        classesPanelLayout.setVerticalGroup(
+            classesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
+        classesPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        classes_highlight1.setBackground(new java.awt.Color(102, 102, 0));
+
+        org.jdesktop.layout.GroupLayout classes_highlight1Layout = new org.jdesktop.layout.GroupLayout(classes_highlight1);
+        classes_highlight1.setLayout(classes_highlight1Layout);
+        classes_highlight1Layout.setHorizontalGroup(
+            classes_highlight1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 8, Short.MAX_VALUE)
+        );
+        classes_highlight1Layout.setVerticalGroup(
+            classes_highlight1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+
+        classes_menu1.setBackground(new java.awt.Color(102, 102, 102));
+        classes_menu1.setPreferredSize(new java.awt.Dimension(100, 43));
+
+        jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Manage Classes");
+        jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel33MouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout classes_menu1Layout = new org.jdesktop.layout.GroupLayout(classes_menu1);
+        classes_menu1.setLayout(classes_menu1Layout);
+        classes_menu1Layout.setHorizontalGroup(
+            classes_menu1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_menu1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel33, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(5, 5, 5))
+        );
+        classes_menu1Layout.setVerticalGroup(
+            classes_menu1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, classes_menu1Layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jLabel33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        org.jdesktop.layout.GroupLayout classesPanel1Layout = new org.jdesktop.layout.GroupLayout(classesPanel1);
+        classesPanel1.setLayout(classesPanel1Layout);
+        classesPanel1Layout.setHorizontalGroup(
+            classesPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classesPanel1Layout.createSequentialGroup()
+                .add(classes_highlight1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classes_menu1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+        );
+        classesPanel1Layout.setVerticalGroup(
+            classesPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(classes_highlight1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classes_menu1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        );
+
+        org.jdesktop.layout.GroupLayout SchoolSetupMenuPanelLayout = new org.jdesktop.layout.GroupLayout(SchoolSetupMenuPanel);
+        SchoolSetupMenuPanel.setLayout(SchoolSetupMenuPanelLayout);
+        SchoolSetupMenuPanelLayout.setHorizontalGroup(
+            SchoolSetupMenuPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel9)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(classesPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
+        SchoolSetupMenuPanelLayout.setVerticalGroup(
+            SchoolSetupMenuPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(SchoolSetupMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel9)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .add(classesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(classesPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
@@ -549,7 +617,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel13, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .add(0, 74, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, SchoolSetupMenuPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(jPanel9Layout.createSequentialGroup()
                 .add(jLabel18)
                 .addContainerGap(169, Short.MAX_VALUE))
@@ -558,8 +626,8 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
             jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9Layout.createSequentialGroup()
                 .add(27, 27, 27)
-                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 131, Short.MAX_VALUE)
+                .add(SchoolSetupMenuPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -775,6 +843,10 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
 
     }//GEN-LAST:event_jLabel29MouseClicked
 
+    private void jLabel33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel33MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -839,6 +911,13 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel SchoolSetupMenuPanel;
+    private javax.swing.JPanel classesPanel;
+    private javax.swing.JPanel classesPanel1;
+    private javax.swing.JPanel classes_highlight;
+    private javax.swing.JPanel classes_highlight1;
+    private javax.swing.JPanel classes_menu;
+    private javax.swing.JPanel classes_menu1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -865,6 +944,7 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -878,12 +958,8 @@ public final class DashboardScreen extends javax.swing.JFrame implements Dashboa
     private javax.swing.JMenu jMenu2;
     public javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
