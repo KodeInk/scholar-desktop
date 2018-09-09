@@ -6,16 +6,13 @@
 package main.java.com.scholar.desktop.ui.terms;
 
 import java.awt.Color;
-import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
@@ -136,7 +133,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
                 List<TermResponse> termResponses = TermsService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(termResponses);
                 repaint();
-                jLabel1.setText("Manage Classes");
+                jLabel1.setText("Manage Terms");
                 enableNextPrevLabels();
                 return null;
             }
@@ -145,9 +142,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
     }
 
     public void populateJTable(List<TermResponse> list) {
+         Utilities.removeRowsFromDefaultModel(tableModel);
         if (list != null) {
-
-            Utilities.removeRowsFromDefaultModel(tableModel);
 
             list.stream().map((ur) -> {
                 Integer id = ur.getId();
