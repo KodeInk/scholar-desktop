@@ -175,7 +175,7 @@
             </Component>
             <Component class="org.jdesktop.swingx.JXDatePicker" name="startDateField">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="startDateField.setDate(Calendar.getInstance().getTime());&#xa;&#x9;startDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_YEAR_FORMAT()));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="startDateField.setDate(Calendar.getInstance().getTime());&#xa;startDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_FORMAT()));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="StudyYearComboField">
@@ -220,6 +220,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endDateFieldActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="endDateField.setDate(Calendar.getInstance().getTime());&#xa;endDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_FORMAT()));"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="termRankingField">
               <Properties>

@@ -208,7 +208,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel2.setToolTipText("");
 
         startDateField.setDate(Calendar.getInstance().getTime());
-        startDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_YEAR_FORMAT()));
+        startDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_FORMAT()));
 
         StudyYearComboField.setAutoscrolls(true);
 
@@ -224,6 +224,8 @@ public final class AddTermUI extends javax.swing.JPanel {
         jLabel5.setText(" Start Date : *");
         jLabel5.setToolTipText("");
 
+        endDateField.setDate(Calendar.getInstance().getTime());
+        endDateField.setFormats(new SimpleDateFormat( Utilities.getDATE_FORMAT()));
         endDateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endDateFieldActionPerformed(evt);
