@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.request.Term;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
@@ -33,6 +35,7 @@ public final class AddTermUI extends javax.swing.JPanel {
     private static AddTermUI instance;
     private final SchoolData schoolData;
     private List<StudyYearResponse> studyYearResponses = null;
+    private TermResponse termResponse = null;
 
     public AddTermUI(SchoolData schoolData) {
         this.schoolData = schoolData;
@@ -49,14 +52,15 @@ public final class AddTermUI extends javax.swing.JPanel {
     }
 
     public void initData() {
-        initStudyYear(schoolData);
+        initStudyYear();
     }
 
-    /**
-     *
-     * @param schoolData1
-     */
-    public final void initStudyYear(SchoolData schoolData1) {
+    public void edit(TermResponse termResponse) {
+        this.termResponse = termResponse;
+
+    }
+
+    public final void initStudyYear() {
 
         if (studyYearResponses != null) {
             populateStudyYearComboBox(studyYearResponses);
@@ -67,7 +71,7 @@ public final class AddTermUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 jLabel1.setText("Processsing...");
                 disableMandatories();
-                studyYearResponses = StudyYearService.getInstance(schoolData1).list(0,100000);
+                studyYearResponses = StudyYearService.getInstance(schoolData).list(0, 100000);
                 populateStudyYearComboBox(studyYearResponses);
                 enableMandatories();
                 jLabel1.setText("Terms Information");
@@ -165,7 +169,7 @@ public final class AddTermUI extends javax.swing.JPanel {
         }
         return instance;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -9,6 +9,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -56,6 +59,12 @@ public class TermsUI extends javax.swing.JPanel {
         }
     };
 
+     public void edit(TermResponse termResponse) {
+        jTabbedPane1.setSelectedIndex(1); 
+        AddTermUI.getInstance(schoolData).edit(termResponse);
+
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

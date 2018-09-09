@@ -6,14 +6,17 @@
 package main.java.com.scholar.desktop.ui.terms;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.streams.response.StreamResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.services.terms.TermsService;
+import main.java.com.scholar.desktop.ui.classes.ClassesUI;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
 /**
@@ -76,6 +79,8 @@ public class ManageTermsUI extends javax.swing.JPanel {
     public void initData() {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
+        searchbox.setText("");
+        search = null;
         fetchData(offset, limit);
         page = 1;
         pageCounter.setText(page.toString());
@@ -142,7 +147,7 @@ public class ManageTermsUI extends javax.swing.JPanel {
     }
 
     public void populateJTable(List<TermResponse> list) {
-         Utilities.removeRowsFromDefaultModel(tableModel);
+        Utilities.removeRowsFromDefaultModel(tableModel);
         if (list != null) {
 
             list.stream().map((ur) -> {
@@ -301,6 +306,11 @@ public class ManageTermsUI extends javax.swing.JPanel {
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -442,6 +452,36 @@ public class ManageTermsUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
+
+    Integer rowselect = 0;
+    Integer mouseClick = 0;
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        Integer row = jTable1.getSelectedRow();
+        String value = jTable1.getModel().getValueAt(row, 0).toString();
+
+        if (rowselect == row) {
+            mouseClick++;
+
+        } else {
+            mouseClick = 1;
+        }
+
+        if (mouseClick % 2 == 0) {
+
+            list.forEach(response -> {
+                if (response.getId() == Integer.parseInt(value)) {
+                    ClassesUI.getInstance(schoolData).edit(response);
+
+                }
+            });
+
+        }
+
+        rowselect = row;
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     protected void prev() {
         offset = offset - limit;
