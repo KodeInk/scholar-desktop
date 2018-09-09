@@ -5,6 +5,7 @@
  */
 package main.java.com.scholar.desktop.ui.terms;
 
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,11 +18,14 @@ import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.request.Term;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.request.Classes;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.studyyear.StudyYearService;
 import main.java.com.scholar.desktop.services.terms.TermsService;
+import main.java.com.scholar.desktop.ui.classes.AddClassUI;
 
 /**
  *
@@ -52,6 +56,7 @@ public final class AddTermUI extends javax.swing.JPanel {
     }
 
     public void initData() {
+        resetForm();
         initStudyYear();
     }
 
@@ -369,17 +374,62 @@ public final class AddTermUI extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         validateForm();
         Term term = populateEntity();
+        String btnText = saveButton.getText();
+        saveRecord(term);
 
+
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    public void SubmitData(String btnText, Term term) throws HeadlessException {
+        switch (btnText) {
+            case "SAVE":
+                saveRecord(term);
+                break;
+            case "EDIT":
+                editRecord(term);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void saveRecord(Term term) throws HeadlessException, BadRequestException {
         try {
             TermsService.getInstance(schoolData).create(term, "LOG_ID");
             JOptionPane.showMessageDialog(null, "Record saved successfully");
+            resetForm();
         } catch (IOException ex) {
             Logger.getLogger(AddTermUI.class.getName()).log(Level.SEVERE, null, ex);
             throw new BadRequestException("Sorry, something went wrong, record could not be saved");
         }
+    }
 
+    private void editRecord(Term term) throws HeadlessException {
+        try {
+            //todo: get the clas_id
+            if (this.termResponse == null) {
+                throw new BadRequestException("Could update record, missing data");
+            }
 
-    }//GEN-LAST:event_saveButtonActionPerformed
+            term.setId(termResponse.getId());
+            ClassesService.getInstance(schoolData).edit(term, "LOG_ID");
+            JOptionPane.showMessageDialog(null, "Record saved succesfully");
+
+            resetForm();
+
+        } catch (IOException ex) {
+            Logger.getLogger(AddClassUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Something went wrong, could not save class");
+        }
+    }
+
+    private void resetForm() {
+        termNameField.setText("");
+        startDateField.setDate(null);
+        endDateField.setDate(null);
+        termRankingField.setSelectedIndex(1);
+        StudyYearComboField.setSelectedIndex(1);
+    }
 
     public Term populateEntity() {
         //todo: populate Entity
