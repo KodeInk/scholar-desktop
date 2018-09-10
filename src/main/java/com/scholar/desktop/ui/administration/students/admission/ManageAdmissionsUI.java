@@ -24,7 +24,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageAdmissionsUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "BIRTH DATE", "SEX", "ADMISSION NO", "ADMISSION DATE", "TERM", "CLASS", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID","STUDY YEAR", "NAME", "D.O.B", "SEX", "ADMISSION NO", "ADMISSION DATE", "TERM", "CLASS", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
 
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
@@ -54,8 +54,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
         }
 
-        initComponents();
-        initData();
+        
 
         initComponents();
         searchbox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -114,18 +113,19 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
                 ProfileResponse profileResponse = ur.getStudent();
                 Integer id = ur.getId();
-                String name = (profileResponse.getFirstName().toUpperCase().concat(" , ").concat(profileResponse.getLastName())).toUpperCase();
-                String age = profileResponse.getDateOfBirth() != null ? new Date(profileResponse.getDateOfBirth()).toString().toUpperCase() : " - ";
+                String admin_year = ur.getAdmissionTerm().getStudy_year().toUpperCase();
+                String name = (profileResponse.getFirstName().toUpperCase().concat(" ").concat(profileResponse.getLastName())).toUpperCase();
+                String dob =  (profileResponse.getDateOfBirth() != null ? Utilities.getFullDateString(profileResponse.getDateOfBirth()) : "N/A").toUpperCase();
                 String sex = "N/A";
                 String admission_no = ur.getAdmission_no().toUpperCase();
-                String date_of_admission = (ur.getDate_of_admission() != null ? new Date(ur.getDate_of_admission()).toString() : "N/A").toUpperCase();
+                String date_of_admission = (ur.getDate_of_admission() != null ? Utilities.getFullDateString(ur.getDate_of_admission()) : "N/A").toUpperCase();
                 String admission_term = ur.getAdmissionTerm().getName().toUpperCase();
                 String admission_class = ur.getAdmissionClass().getName().toUpperCase();
                 String admission_stream = " - ";
-                String status = ur.getStatus();
-                String date_created = (ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ").toUpperCase();
+                String status = ur.getStatus().toUpperCase();
+                String date_created = (ur.getDate_created() != null ? Utilities.getFullDateString(ur.getDate_created()) : "N/A").toUpperCase(); 
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id, name, age, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
+                Object[] data = {id,admin_year, name, dob, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
 
                 tableModel.addRow(data);
             }
@@ -259,6 +259,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jTable1.setModel(tableModel);
+        jTable1.setRowHeight(20);
         jTable1.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setShowVerticalLines(false);
