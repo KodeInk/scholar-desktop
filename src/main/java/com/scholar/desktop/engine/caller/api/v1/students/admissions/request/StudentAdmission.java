@@ -15,7 +15,7 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
  * @author mover 12/30/2017
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class _StudentAdmission {
+public class StudentAdmission {
 
     private Integer id;
     private String admission_no;
@@ -29,10 +29,10 @@ public class _StudentAdmission {
     private Integer author_id;
     private Profile student;
 
-    public _StudentAdmission() {
+    public StudentAdmission() {
     }
 
-    public _StudentAdmission(Integer id) {
+    public StudentAdmission(Integer id) {
         this.id = id;
     }
 
@@ -152,7 +152,7 @@ public class _StudentAdmission {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _StudentAdmission other = (_StudentAdmission) obj;
+        final StudentAdmission other = (StudentAdmission) obj;
         if (!Objects.equals(this.admission_no, other.admission_no)) {
             return false;
         }

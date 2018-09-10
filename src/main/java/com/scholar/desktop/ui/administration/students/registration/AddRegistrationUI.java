@@ -16,7 +16,7 @@ import javax.swing.SwingWorker;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
-import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request.StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.registration.term.request._StudentTermRegistration;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;

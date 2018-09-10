@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.AdmissionsAPI;
-import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request.StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
 import main.java.com.scholar.desktop.services.profile.ProfileService;
@@ -70,7 +70,7 @@ public class AdmissionService extends AbstractService {
      * @return
      * @throws IOException
      */
-    public StudentAdmissionResponse create(_StudentAdmission studentAdmission, String logId) throws IOException {
+    public StudentAdmissionResponse create(StudentAdmission studentAdmission, String logId) throws IOException {
         if (studentAdmission != null) {
             Map userMap = getAdmissionMap(studentAdmission);
             return admissionsAPI.create(userMap, logId);
@@ -83,7 +83,7 @@ public class AdmissionService extends AbstractService {
      * @param studentAdmission
      * @return
      */
-    public Map getAdmissionMap(_StudentAdmission studentAdmission) {
+    public Map getAdmissionMap(StudentAdmission studentAdmission) {
         Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(studentAdmission.getStudent());
 
         Map studentAdmissionMap = new HashMap<>();

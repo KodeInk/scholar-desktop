@@ -16,7 +16,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.api.v1.Terms.response.TermResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profile;
-import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
+import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request.StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.studyyear.response.StudyYearResponse;
 import main.java.com.scholar.desktop.helper.exceptions.BadRequestException;
 import main.java.com.scholar.desktop.services.classes.ClassesService;
@@ -470,7 +470,7 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
         String admissionNumber = admisionNumber.getText();
         Long addmissionDate = dateOfAdmission.getDate().getTime();
 
-        _StudentAdmission studentAdmission = populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
+        StudentAdmission studentAdmission = populateEntity(firstname, middlename, lastname, studentSex, dateOfBirth, admissionNumber, admissionClass, admissionTerm, addmissionDate);
 
         try {
             AdmissionService.getInstance(schoolData).create(studentAdmission, "LOG_ID");
@@ -506,14 +506,14 @@ public class AddAdmissionsUI extends javax.swing.JPanel {
      * @param addmissionDate
      * @return
      */
-    public _StudentAdmission populateEntity(String firstname, String middlename, String lastname, String studentSex, Long dateOfBirth, String admissionNumber, Integer admissionClass, Integer admissionTerm, Long addmissionDate) {
+    public StudentAdmission populateEntity(String firstname, String middlename, String lastname, String studentSex, Long dateOfBirth, String admissionNumber, Integer admissionClass, Integer admissionTerm, Long addmissionDate) {
         Profile profile = new Profile();
         profile.setFirstName(firstname);
         profile.setMiddleName(middlename);
         profile.setLastName(lastname);
         profile.setSex(studentSex);
         profile.setDateOfBirth(dateOfBirth);
-        _StudentAdmission studentAdmission = new _StudentAdmission();
+        StudentAdmission studentAdmission = new StudentAdmission();
         studentAdmission.setStudent(profile);
         studentAdmission.setAdmission_no(admissionNumber);
         studentAdmission.setClass_id(admissionClass);
