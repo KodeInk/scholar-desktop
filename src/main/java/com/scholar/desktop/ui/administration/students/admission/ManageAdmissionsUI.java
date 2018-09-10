@@ -88,6 +88,16 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
+    
+     protected void fetchData() {
+        if (search != null) {
+//            fetchData(search, offset, limit);
+        } else {
+            fetchData(offset, limit);
+        }
+    }
+     
+     
     public void fetchData(Integer offset, Integer limit) {
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
@@ -369,14 +379,34 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
         // TODO add your handling code here:
-//        prev();
+        prev();
     }//GEN-LAST:event_prevLabelMouseClicked
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         // TODO add your handling code here:
-//        next();
+        next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
+    
+      protected void next() {
+        offset = offset + limit;
+        fetchData();
+        page++;
+        pageCounter.setText(page.toString());
+    }
+
+    protected void prev() {
+        offset = offset - limit;
+        if (offset >= 0) {
+            fetchData();
+            page--;
+            pageCounter.setText(page.toString());
+        }
+
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
