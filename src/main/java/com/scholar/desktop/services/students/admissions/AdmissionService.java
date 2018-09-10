@@ -17,8 +17,6 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.Ad
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request._StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import main.java.com.scholar.desktop.services.abstracts.AbstractService;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.limit;
-import static main.java.com.scholar.desktop.services.abstracts.Offsets.offset;
 import main.java.com.scholar.desktop.services.profile.ProfileService;
 import main.java.com.scholar.desktop.services.staff.StaffService;
 
@@ -40,17 +38,17 @@ public class AdmissionService extends AbstractService {
     }
 
     public static AdmissionService getInstance(SchoolData schoolData) {
-        if (instance == null) {
-            instance = new AdmissionService(schoolData);
-        }
+        instance = new AdmissionService(schoolData);
         return instance;
     }
 
     /**
      *
+     * @param offset
+     * @param limit
      * @return
      */
-    public List<StudentAdmissionResponse> list() {
+    public List<StudentAdmissionResponse> list(Integer offset, Integer limit) {
 
         if (list != null) {
             return list;
@@ -87,15 +85,15 @@ public class AdmissionService extends AbstractService {
      */
     public Map getAdmissionMap(_StudentAdmission studentAdmission) {
         Map profileMap = ProfileService.getInstance(schoolData).getProfileMap(studentAdmission.getStudent());
-       
+
         Map studentAdmissionMap = new HashMap<>();
         studentAdmissionMap.put("admission_no", studentAdmission.getAdmission_no());
         studentAdmissionMap.put("date_of_admission", studentAdmission.getDate_of_admission());
         studentAdmissionMap.put("term_id", studentAdmission.getTerm_id());
         studentAdmissionMap.put("stream_id", studentAdmission.getStream_id());
-        studentAdmissionMap.put("class_id", studentAdmission.getClass_id());        
-        studentAdmissionMap.put("student",profileMap);        
-         
+        studentAdmissionMap.put("class_id", studentAdmission.getClass_id());
+        studentAdmissionMap.put("student", profileMap);
+
         System.out.println("==================================");
         System.out.println(studentAdmissionMap);
         System.out.println("==================================");

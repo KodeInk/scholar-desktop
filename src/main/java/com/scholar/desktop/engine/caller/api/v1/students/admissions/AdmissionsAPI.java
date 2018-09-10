@@ -40,8 +40,7 @@ public class AdmissionsAPI extends AbstractAPI {
     }
 
     public StudentAdmissionResponse[] list(Integer offset, Integer limit) {
-        offset = getOffset(offset);
-        limit = getLimit(limit);
+        
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);

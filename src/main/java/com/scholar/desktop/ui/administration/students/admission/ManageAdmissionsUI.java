@@ -24,12 +24,17 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
  */
 public class ManageAdmissionsUI extends javax.swing.JPanel {
 
-    private static final String[] COLUMN_HEADERS = {"ID","NAME", "DATE OF BIRTH ", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
+    private static final String[] COLUMN_HEADERS = {"ID", "NAME", "DATE OF BIRTH ", "SEX", "ADMISSION NO", "DATE OF ADMISSION", "TERM ", "CLASS  ", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
 
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageAdmissionsUI instance;
     List<StudentAdmissionResponse> list = null;
+
+    private Integer page;
+    private Integer offset;
+    private Integer limit;
+    private String search = null;
 
     /**
      * Creates new form ManageAdmissions
@@ -79,13 +84,21 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
             populateJTable(list);
         }
 
+        offset = Utilities.default_offset;
+        limit = Utilities.default_limit;
+        fetchData(offset, limit);
+         page = 1;
+        pageCounter.setText(page.toString());
+    }
+
+    public void fetchData(Integer offset, Integer limit) {
         final String message = "     Processsing ...     ";
         Utilities.ShowDialogMessage(message);
 
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                list = AdmissionService.getInstance(schoolData).list();
+                list = AdmissionService.getInstance(schoolData).list(offset, limit);
 
                 populateJTable(list);
                 return null;
@@ -114,7 +127,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
                 String status = ur.getStatus();
                 String date_created = (ur.getDate_created() != null ? new Date(ur.getDate_created()).toString() : " ").toUpperCase();
                 String author = ur.getAuthor().toUpperCase();
-                Object[] data = {id,name, age, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
+                Object[] data = {id, name, age, sex, admission_no, date_of_admission, admission_term, admission_class, admission_stream, status, date_created, author};
 
                 tableModel.addRow(data);
             }
