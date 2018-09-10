@@ -5,11 +5,9 @@
  */
 package main.java.com.scholar.desktop.engine.caller.api.v1.profile.response;
 
-import com.codemovers.scholar.engine.helper.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Objects;
-import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.ProfileTypesEnum;
 
 /**
  *
@@ -18,19 +16,19 @@ import main.java.com.scholar.desktop.engine.caller.api.v1.profile.request.Profil
 @JsonInclude(Include.NON_NULL)
 public class ProfileResponse {
 
-      private Integer id;
+   private Integer id;
     private String firstName;
     private String middleName;
     private String lastName;
     private String prefix;
+    private String sex;
     private Long dateOfBirth;
     private String image;
     private String profileType;
     private Integer parentId;
     private String status;
     private Long dateCreated;
-    private Integer authorId;
-
+    private String author;
 
     public ProfileResponse() {
     }
@@ -75,6 +73,14 @@ public class ProfileResponse {
         this.prefix = prefix;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public Long getDateOfBirth() {
         return dateOfBirth;
     }
@@ -91,7 +97,13 @@ public class ProfileResponse {
         this.image = image;
     }
 
-    
+    public String getProfileType() {
+        return profileType;
+    }
+
+    public void setProfileType(String profileType) {
+        this.profileType = profileType;
+    }
 
     public Integer getParentId() {
         return parentId;
@@ -101,7 +113,13 @@ public class ProfileResponse {
         this.parentId = parentId;
     }
 
-     
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getDateCreated() {
         return dateCreated;
@@ -111,29 +129,30 @@ public class ProfileResponse {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.firstName);
-        hash = 41 * hash + Objects.hashCode(this.middleName);
-        hash = 41 * hash + Objects.hashCode(this.lastName);
-        hash = 41 * hash + Objects.hashCode(this.prefix);
-        hash = 41 * hash + Objects.hashCode(this.dateOfBirth);
-        hash = 41 * hash + Objects.hashCode(this.image);
-        hash = 41 * hash + Objects.hashCode(this.profileType);
-        hash = 41 * hash + Objects.hashCode(this.parentId);
-        hash = 41 * hash + Objects.hashCode(this.status);
-        hash = 41 * hash + Objects.hashCode(this.dateCreated);
-        hash = 41 * hash + Objects.hashCode(this.authorId);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.firstName);
+        hash = 83 * hash + Objects.hashCode(this.middleName);
+        hash = 83 * hash + Objects.hashCode(this.lastName);
+        hash = 83 * hash + Objects.hashCode(this.prefix);
+        hash = 83 * hash + Objects.hashCode(this.sex);
+        hash = 83 * hash + Objects.hashCode(this.dateOfBirth);
+        hash = 83 * hash + Objects.hashCode(this.image);
+        hash = 83 * hash + Objects.hashCode(this.profileType);
+        hash = 83 * hash + Objects.hashCode(this.parentId);
+        hash = 83 * hash + Objects.hashCode(this.status);
+        hash = 83 * hash + Objects.hashCode(this.dateCreated);
+        hash = 83 * hash + Objects.hashCode(this.author);
         return hash;
     }
 
@@ -161,46 +180,52 @@ public class ProfileResponse {
         if (!Objects.equals(this.prefix, other.prefix)) {
             return false;
         }
-        if (!Objects.equals(this.dateOfBirth, other.dateOfBirth)) {
+        if (!Objects.equals(this.sex, other.sex)) {
             return false;
         }
         if (!Objects.equals(this.image, other.image)) {
             return false;
         }
+        if (!Objects.equals(this.profileType, other.profileType)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (this.profileType != other.profileType) {
+        if (!Objects.equals(this.dateOfBirth, other.dateOfBirth)) {
             return false;
         }
         if (!Objects.equals(this.parentId, other.parentId)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (!Objects.equals(this.dateCreated, other.dateCreated)) {
-            return false;
-        }
-        return Objects.equals(this.authorId, other.authorId);
+        return Objects.equals(this.dateCreated, other.dateCreated);
     }
 
     @Override
     public String toString() {
-        return "ProfileResponse{"
-                + "id=" + id
-                + ", firstName=" + firstName
-                + ", middleName=" + middleName
-                + ", lastName=" + lastName
-                + ", prefix=" + prefix
-                + ", dateOfBirth=" + dateOfBirth
-                + ", image=" + image
-                + ", profileType=" + profileType
-                + ", parentId=" + parentId
-                + ", status=" + status
-                + ", dateCreated=" + dateCreated
-                + ", authorId=" + authorId
-                + "}";
+        return "ProfileResponse{" 
+                + "id=" + id 
+                + ", firstName=" + firstName 
+                + ", middleName=" + middleName 
+                + ", lastName=" + lastName 
+                + ", prefix=" + prefix 
+                + ", sex=" + sex 
+                + ", dateOfBirth=" + dateOfBirth 
+                + ", image=" + image 
+                + ", profileType=" + profileType 
+                + ", parentId=" + parentId 
+                + ", status=" + status 
+                + ", dateCreated=" + dateCreated 
+                + ", author=" + author 
+                + '}';
     }
+
+     
 
 }

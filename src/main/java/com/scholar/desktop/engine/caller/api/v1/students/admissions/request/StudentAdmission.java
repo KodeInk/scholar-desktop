@@ -203,7 +203,7 @@ public class StudentAdmission {
                 + ", status=" + status
                 + ", date_created=" + date_created
                 + ", author_id=" + author_id
-                + ", profile=" + student
+                + ", student=" + student
                 + "}";
     }
 
