@@ -6,17 +6,14 @@
 package main.java.com.scholar.desktop.ui.administration.students.admission;
 
 import java.awt.Color;
-import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
-import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
-import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
@@ -27,7 +24,7 @@ import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     private static final String[] COLUMN_HEADERS = {"ID", "STUDY YEAR", "NAME", "D.O.B", "SEX", "ADMISSION NO", "ADMISSION DATE", "TERM", "CLASS", "STREAM", "STATUS", "DATE CREATED", "AUTHOR"};
-
+    final String PAGE_TITLE = "Manage Admissions";
     private SchoolData schoolData = null;
     public DefaultTableModel tableModel;
     private static ManageAdmissionsUI instance;
@@ -107,7 +104,8 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
                 List<StudentAdmissionResponse> studentAdmissionResponses = AdmissionService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
                 populateJTable(studentAdmissionResponses);
                 repaint();
-                jLabel1.setText("Manage Admissions");
+
+                jLabel1.setText(PAGE_TITLE);
                 enableNextPrevLabels();
                 return null;
             }
@@ -122,7 +120,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 list = AdmissionService.getInstance(schoolData).list(offset, limit);
                 populateJTable(list);
-                jLabel1.setText("Manage Admissions ");
+                jLabel1.setText(PAGE_TITLE);
                 return null;
             }
         };
@@ -162,7 +160,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     }
 
-     protected void enableNextPrevLabels() {
+    protected void enableNextPrevLabels() {
         searchbox.setEnabled(true);
         nextLabel.setEnabled(true);
         prevLabel.setEnabled(true);
@@ -175,8 +173,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         nextLabel.setEnabled(false);
         prevLabel.setEnabled(false);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
