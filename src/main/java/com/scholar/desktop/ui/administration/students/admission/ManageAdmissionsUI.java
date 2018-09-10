@@ -104,10 +104,10 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
                 disableNextPrevLabels();
                 jLabel1.setText("Processing....");
-                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
-                populateJTable(crs);
+                List<StudentAdmissionResponse> studentAdmissionResponses = AdmissionService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(studentAdmissionResponses);
                 repaint();
-                jLabel1.setText("Manage Classes");
+                jLabel1.setText("Manage Admissions");
                 enableNextPrevLabels();
                 return null;
             }
