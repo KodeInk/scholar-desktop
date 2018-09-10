@@ -399,11 +399,11 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchboxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-//        searchQuery();
+        searchQuery();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void prevLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevLabelMouseClicked
@@ -431,6 +431,27 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
             pageCounter.setText(page.toString());
         }
 
+    }
+
+    public void searchQuery() {
+        // TODO add your handling code here:
+        if (!searchbox.getText().isEmpty()) {
+
+            offset = Utilities.default_offset;
+            limit = Utilities.default_limit;
+            page = 1;
+            pageCounter.setText(page.toString());
+
+            search = searchbox.getText();
+
+            fetchData();
+
+        } else {
+            search = null;
+            jLabel1.setText("Processing....");
+            initData();
+        }
+        jLabel1.setText("Manage Classes");
     }
 
 
