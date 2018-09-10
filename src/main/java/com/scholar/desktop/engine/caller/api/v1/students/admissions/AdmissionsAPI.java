@@ -15,6 +15,7 @@ import main.java.com.scholar.desktop.config.entities.SchoolData;
 import main.java.com.scholar.desktop.engine.caller.EngineCaller;
 import main.java.com.scholar.desktop.engine.caller.api.v1.abstracts.AbstractAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.classes.ClassesAPI;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import static main.java.com.scholar.desktop.helper.Utilities.ShowAlertMessage;
 import static main.java.com.scholar.desktop.helper.Utilities.getLimit;
@@ -40,7 +41,6 @@ public class AdmissionsAPI extends AbstractAPI {
     }
 
     public StudentAdmissionResponse[] list(Integer offset, Integer limit) {
-        
 
         Map<String, String> queryParameter = new HashMap<>();
         queryParameter.put("offset", "" + offset);
@@ -55,6 +55,32 @@ public class AdmissionsAPI extends AbstractAPI {
             case 200:
                 StudentAdmissionResponse[] addmissionResponse = response.readEntity(StudentAdmissionResponse[].class);
                 return addmissionResponse;
+            case 401:
+                ShowAlertMessage(response);
+                break;
+            default:
+                return null;
+
+        }
+
+        return null;
+    }
+
+    public StudentAdmissionResponse[] list(String query, Integer offset, Integer limit) {
+
+        Map<String, String> queryParameter = new HashMap<>();
+        queryParameter.put("offset", "" + offset);
+        queryParameter.put("limit", "" + limit);
+
+        Response response = engineCaller.get("admissions/v1/search/" + query, queryParameter);
+
+        switch (response.getStatus()) {
+            case 400:
+                ShowAlertMessage(response);
+                break;
+            case 200:
+                StudentAdmissionResponse[] studentAdmissionResponse = response.readEntity(StudentAdmissionResponse[].class);
+                return studentAdmissionResponse;
             case 401:
                 ShowAlertMessage(response);
                 break;

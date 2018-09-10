@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.AdmissionsAPI;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.request.StudentAdmission;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
@@ -63,6 +64,30 @@ public class AdmissionService extends AbstractService {
         return list;
     }
 
+    /**
+     *
+     * @param searchQuery
+     * @param offset
+     * @param limit
+     * @param logId
+     * @return
+     * @throws IOException
+     */
+    public List<StudentAdmissionResponse> search(String searchQuery, Integer offset, Integer limit, String logId) throws IOException {
+
+        List<StudentAdmissionResponse> studentAdmissionResponse = new ArrayList<>();
+        if (!searchQuery.isEmpty()) {
+            StudentAdmissionResponse[] responses = admissionsAPI.list(searchQuery, offset, limit);
+            if (responses != null) {
+                studentAdmissionResponse.addAll(Arrays.asList(responses));
+            }
+        }
+
+        return studentAdmissionResponse;
+    }
+
+       
+       
     /**
      *
      * @param studentAdmission

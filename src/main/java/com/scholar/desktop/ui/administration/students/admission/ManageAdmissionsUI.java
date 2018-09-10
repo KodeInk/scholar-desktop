@@ -12,9 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import main.java.com.scholar.desktop.config.entities.SchoolData;
+import main.java.com.scholar.desktop.engine.caller.api.v1.classes.response.ClassResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.profile.response.ProfileResponse;
 import main.java.com.scholar.desktop.engine.caller.api.v1.students.admissions.response.StudentAdmissionResponse;
 import main.java.com.scholar.desktop.helper.Utilities;
+import main.java.com.scholar.desktop.services.classes.ClassesService;
 import main.java.com.scholar.desktop.services.students.admissions.AdmissionService;
 import main.java.com.scholar.desktop.ui.helper.SimpleHeaderRenderer;
 
@@ -88,16 +90,31 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         pageCounter.setText(page.toString());
     }
 
-    
-     protected void fetchData() {
+    protected void fetchData() {
         if (search != null) {
-//            fetchData(search, offset, limit);
+            fetchData(search, offset, limit);
         } else {
             fetchData(offset, limit);
         }
     }
-     
-     
+
+    protected void fetchData(String search, Integer offset, Integer limit) {
+        SwingWorker swingWorker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                disableNextPrevLabels();
+                jLabel1.setText("Processing....");
+                List<ClassResponse> crs = ClassesService.getInstance(schoolData).search(search, offset, limit, "LOG_ID");
+                populateJTable(crs);
+                repaint();
+                jLabel1.setText("Manage Classes");
+                enableNextPrevLabels();
+                return null;
+            }
+        };
+        swingWorker.execute();
+    }
+
     public void fetchData(Integer offset, Integer limit) {
         jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
@@ -145,6 +162,21 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
 
     }
 
+     protected void enableNextPrevLabels() {
+        searchbox.setEnabled(true);
+        nextLabel.setEnabled(true);
+        prevLabel.setEnabled(true);
+        searchButton.setEnabled(true);
+    }
+
+    protected void disableNextPrevLabels() {
+        searchbox.setEnabled(false);
+        searchButton.setEnabled(false);
+        nextLabel.setEnabled(false);
+        prevLabel.setEnabled(false);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -387,8 +419,7 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         next();
     }//GEN-LAST:event_nextLabelMouseClicked
 
-    
-      protected void next() {
+    protected void next() {
         offset = offset + limit;
         fetchData();
         page++;
@@ -404,9 +435,8 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         }
 
     }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
