@@ -87,20 +87,18 @@ public class ManageAdmissionsUI extends javax.swing.JPanel {
         offset = Utilities.default_offset;
         limit = Utilities.default_limit;
         fetchData(offset, limit);
-         page = 1;
+        page = 1;
         pageCounter.setText(page.toString());
     }
 
     public void fetchData(Integer offset, Integer limit) {
-        final String message = "     Processsing ...     ";
-        Utilities.ShowDialogMessage(message);
-
+        jLabel1.setText("Processing....");
         SwingWorker swingWorker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 list = AdmissionService.getInstance(schoolData).list(offset, limit);
-
                 populateJTable(list);
+                jLabel1.setText("Manage Admissions ");
                 return null;
             }
         };
